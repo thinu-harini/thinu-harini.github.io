@@ -15,7 +15,7 @@ const Hero = () => {
       <div className={`xl:mt-12 xl:flex-row flex-col-reverse flex gap-2 overflow-hidden`}>
         <div className={`flex-[1.75]`}>
           <h1 className={`${styles.heroHeadText}`}>
-            Hii, <span className="text-[#915eff]">Thinu</span> here
+            Hi, <span className="text-[#915eff]">Thinu</span> here
           </h1>
 
           <h2 className={`${styles.heroSubText}`}>I am a&nbsp;

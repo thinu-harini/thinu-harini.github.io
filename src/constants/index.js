@@ -73,7 +73,7 @@ export const social = [
   {
     name: 'Medium',
     iconUrl: FaMediumM,
-    link: 'https://dribbble.com/thinu_harini',
+    link: 'https://medium.com/@thinu.harini',
   },
 ];
 
