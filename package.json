@@ -1,5 +1,5 @@
 {
-  "name": "3d_portfolio",
+  "name": "thinu_harini_portfolio",
   "private": true,
   "version": "0.0.0",
   "homepage": "https://thinu-harini.github.io",
@@ -14,12 +14,13 @@
   },
   "dependencies": {
     "@emailjs/browser": "^3.11.0",
-    "@react-three/drei": "^9.88.7",
-    "@react-three/fiber": "^8.15.7",
+    "@react-three/drei": "^9.97.1",
+    "@react-three/fiber": "^8.15.16",
     "framer-motion": "^10.16.4",
     "maath": "^0.10.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^5.0.1",
     "react-router-dom": "^6.17.0",
     "react-tilt": "^1.0.2",
     "react-type-animation": "^3.2.0",

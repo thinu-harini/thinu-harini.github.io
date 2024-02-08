@@ -20,13 +20,19 @@ import {
   groomelogo,
   ieee,
   texonic,
-  groome, 
+  groome,
   ichatcs,
   jobit,
   tripguide,
   crowdfunding,
   threejs,
+
 } from "../assets";
+
+import { FaLinkedin, FaBehanceSquare, FaMediumM } from 'react-icons/fa';
+import { PiDribbbleLogoFill } from "react-icons/pi";
+import { IoMail } from "react-icons/io5";
+// import { linkedin } from "../assets/icons";
 
 export const navLinks = [
   {
@@ -40,6 +46,34 @@ export const navLinks = [
   {
     id: "contact",
     title: "Contact",
+  },
+];
+
+export const social = [
+  {
+    name: 'Mail',
+    iconUrl: IoMail,
+    link: 'thinu.harini@gmail.com',
+  },
+  {
+    name: 'Linkedin',
+    iconUrl: FaLinkedin,
+    link: 'https://www.linkedin.com',
+  },
+  {
+    name: 'Dribbble',
+    iconUrl: PiDribbbleLogoFill,
+    link: 'https://dribbble.com/thinu_harini',
+  },
+  {
+    name: 'Behance',
+    iconUrl: FaBehanceSquare,
+    link: 'https://dribbble.com/thinu_harini',
+  },
+  {
+    name: 'Medium',
+    iconUrl: FaMediumM,
+    link: 'https://dribbble.com/thinu_harini',
   },
 ];
 
@@ -184,7 +218,7 @@ const projects = [
       },
     ],
     image: ichatcs,
-    source_code_link: "https://github.com/",
+    source_code_link: "https://dribbble.com/shots/13933576-Online-Concert-Ticket-Booking",
   },
   {
     name: "Food Mart - POS System",
@@ -197,7 +231,7 @@ const projects = [
       },
     ],
     image: ichatcs,
-    source_code_link: "https://github.com/",
+    source_code_link: "https://dribbble.com/shots/13933576-Online-Concert-Ticket-Booking",
   },
 ];
 

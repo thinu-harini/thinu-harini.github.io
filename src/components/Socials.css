@@ -1,0 +1,43 @@
+/* div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /* background-color: black; */
+/* } */
+
+
+.icon {
+  height: 25px;
+  width: 25px;
+  color: white;
+}
+.icon:hover {
+  color: #915eff;
+  size: 1.2rem;
+}
+
+.mail:hover {
+  color: #915eff;
+  size: 2rem;
+}
+
+.linkedin:hover {
+  color: #915eff;
+  size: 2rem;
+}
+
+.dribbble:hover {
+  color: #915eff;
+  size: 2rem;
+}
+
+.behance:hover {
+  color: #915eff;
+  size: 2rem;
+}
+
+.medium:hover {
+  color: #915eff;
+  size: 1.2rem;
+}

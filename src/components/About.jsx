@@ -41,7 +41,7 @@ const About = () => {
   return (
     <>
       <motion.div variants={textVariant()}>
-        <p className={styles.sectionSubText}>A little bit about myself</p>
+        <p className={styles.sectionSubText}>Get to know me</p>
         <h2 className={styles.sectionHeadText}>About Me.</h2>
       </motion.div>
 
@@ -49,11 +49,8 @@ const About = () => {
         variants={fadeIn("", "", 0.1, 1)}
         className='mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]'
       >
-        I'm a skilled UI/UX designer with experience in Adobe XD, Figma,
-        and proficient in usability testing, competitor analysis.
-        I'm a quick learner and collaborate closely with clients to
-        create efficient, scalable, and user-friendly solutions that solve
-        real-world problems. Let's work together to bring your ideas to life!
+        I hold a Bachelor of Science (Hons) degree in Information Technology from University of Moratuwa.
+        Here are some technologies I have been working with:
       </motion.p>
 
       <div className='mt-20 flex flex-wrap gap-10'>
