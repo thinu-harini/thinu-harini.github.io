@@ -56,7 +56,8 @@ const Hero = () => {
 
           <div className={`${styles.paddingB} flex flex-row items-start gap-4`}>
             <button className='py-6 shadow-md shadow-primary font-bold w-fit'>
-              <a className="button" href="src/assets/cv.pdf" download="cv_thinu_premachandra.pdf">
+              {/* <a className="button" href="src/assets/cv.pdf" download="cv_thinu_premachandra.pdf"> */}
+              <a className="button" href="https://drive.google.com/file/d/1sMoRZWh8Hw3RyWdPOz16HU8iiVdWUrAX/view?usp=drive_link" download="cv_thinu_premachandra.pdf" target="_blank">
                 Download Résumé
               </a>
             </button>
