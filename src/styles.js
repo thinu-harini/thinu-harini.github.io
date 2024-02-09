@@ -3,12 +3,13 @@ const styles = {
   paddingY: "sm:py-16 py-6",
   padding: "sm:px-16 px-6 sm:py-10 py-8", //padding: "sm:px-16 px-6 sm:py-16 py-10",
   paddingA: "sm:px-0 px-6 sm:py-4",
-  paddingB: "sm:py-2 py-2",
+  paddingB: "sm:py-8 py-8",
 
   heroHeadText:
-    "font-black text-white lg:text-[80px] sm:text-[60px] xs:text-[50px] text-[40px] lg:leading-[98px] mt-2",
+    "font-black text-white lg:text-[80px] sm:text-[56px] xs:text-[48px] text-[36px] lg:leading-[98px]",
+    // "font-black text-white lg:text-[80px] sm:text-[60px] xs:text-[50px] text-[40px] lg:leading-[98px]",
   heroSubText:
-    "text-white font-medium lg:text-[44px] sm:text-[44px] xs:text-[28px] text-[24px] lg:leading-[68px] mt-1",
+    "text-white font-medium lg:text-[44px] sm:text-[36px] xs:text-[24px] text-[20px] lg:leading-[68px] mt-1",
   heroContent:
     "text-secondary lg:text-[18px] sm:text-[16px] xs:text-[14px] text-[17px] lg:leading-[36px] mt-4",
   heroContentA:
