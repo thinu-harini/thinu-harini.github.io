@@ -9,19 +9,28 @@ const App = () => {
       <div className="realtive z-0 bg-primary">
         <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
           <Navbar />
-          <Hero />
         </div>
-        <About />
-        <Experience />
-        {/* <Tech /> */}
-        <Works />
         <div className="relative z-0">
-          <Contact />
+          <Hero />
+          <About />
           <StarsCanvas />
         </div>
-        <Footer />
+        <div className="relative z-0">
+          <Experience />
+          <StarsCanvas />
+        </div>
+        {/* <Tech /> */}
+        <div className="relative z-0">
+          <Works />
+          <StarsCanvas />
+        </div>
+        <div className="relative z-0">
+          <Contact />
+          <Footer />
+          <StarsCanvas />
+        </div>
+        
       </div></BrowserRouter>
-
   )
 }
 
