@@ -153,11 +153,28 @@
   /* background-color: black; */
 /* } */
 
+.social-icons {
+  display: flex;
+  align-items: baseline;
+  margin-top: 2px;
+  gap: 10px;
+}
+
+.social-icons a {
+  font-size: 26px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  color: #915eff; 
+}
+
 .logo {
   border-radius: 8.889px;
   background: #fff;
   box-shadow: 0px 10px 35px -4px rgba(67, 83, 255, 0.15),
-    0px 1.5px 4px -1px rgba(67, 83, 255, 0.2);
+    0px 1.5px 4px -1px rgba(67, 83, 255, 0.12);
 }
 
 .block-container {

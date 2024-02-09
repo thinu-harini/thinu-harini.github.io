@@ -5,7 +5,7 @@ import { styles } from '../styles';
 import { SectionWrapper } from "../hoc";
 import { ComputersCanvas } from './canvas';
 import { TypeAnimation } from 'react-type-animation';
-import Socials from './Socials';
+import SocialIcons from './SocialIcons';
 // import { socialLinks } from '../constants';
 // import { linkedin } from '../assets/linkedin.png';
 
@@ -51,7 +51,7 @@ const Hero = () => {
             <h1 className={`${styles.heroContentA} italic`}>
               Let's Connect.
             </h1>
-            <Socials />
+            <SocialIcons />
           </div>
 
           <div className={`${styles.paddingB} flex flex-row items-start gap-4`}>
