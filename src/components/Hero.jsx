@@ -6,7 +6,7 @@ import { TypeAnimation } from 'react-type-animation';
 
 import { styles } from '../styles';
 import { SectionWrapper } from "../hoc";
-import { ComputersCanvas } from './canvas';
+import { GirlCanvas } from './canvas';
 import SocialIcons from './SocialIcons';
 
 const Hero = () => {
@@ -70,7 +70,7 @@ const Hero = () => {
         variants={slideIn("up", "tween", 0.8, 1)}
         className='xl:flex-1 xl:h-auto md:h-[550px] h-[350px]'
       >
-        <ComputersCanvas />
+        <GirlCanvas />
       </motion.div>
 
       <div

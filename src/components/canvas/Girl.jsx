@@ -4,24 +4,26 @@ import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
 import CanvasLoader from "../Loader";
 
-const Computers = ({ isMobile }) => {
-  const computer = useGLTF("./cartoon_girl/scene.gltf");
+const Girl = ({ isMobile }) => {
+  const girl = useGLTF("./cartoon_girl/scene.gltf");
 
   return (
     <mesh>
       <hemisphereLight intensity={1} groundColor='black' />
-      <ambientLight intensity={0.9} />
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[5, 5, 5]} intensity={0.4} />
+      <hemisphereLight skyColor="#ffffff" groundColor="#000000" intensity={0.4} />
       <spotLight
         position={[-20, 50, 10]}
         angle={0.15}
         penumbra={1}
-        intensity={1000}
+        intensity={1}
         castShadow
-        shadow-mapSize={1024}
+        shadow-mapSize={{ width: 1024, height: 1024 }}
       />
       <pointLight intensity={1} />
       <primitive
-        object={computer.scene}
+        object={girl.scene}
         scale={isMobile ? 2.8 : 3.1} //0.8 : 4.2
         position={isMobile ? [0, -2.8, 0] : [0, -2.6, 0]}
         rotation={[0, 1, 0]}
@@ -30,7 +32,7 @@ const Computers = ({ isMobile }) => {
   );
 };
 
-const ComputersCanvas = () => {
+const GirlCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -66,7 +68,7 @@ const ComputersCanvas = () => {
         far: 200,
         position: [-4, 3, 6],
       }}
-      // camera={{ position: [-4, 3, 6], near: 0.1, far: 200, fov: 55 }}
+    // camera={{ position: [-4, 3, 6], near: 0.1, far: 200, fov: 55 }}
     >
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls
@@ -78,7 +80,7 @@ const ComputersCanvas = () => {
           enablePan={false}
         // autoRotateSpeed={2}
         />
-        <Computers isMobile={isMobile} />
+        <Girl isMobile={isMobile} />
       </Suspense>
       <Preload all />
 
@@ -86,4 +88,4 @@ const ComputersCanvas = () => {
   );
 };
 
-export default ComputersCanvas;
+export default GirlCanvas;

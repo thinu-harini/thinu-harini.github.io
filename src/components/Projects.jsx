@@ -2,7 +2,7 @@ import { Tilt } from "react-tilt";
 import { motion } from "framer-motion"
 
 import { styles } from "../styles";
-import { dribbble, github } from "../assets";
+import { dribbble} from "../assets";
 import { SectionWrapper } from "../hoc";
 import { projects } from "../constants";
 import { fadeIn, textVariant } from "../utils/motion";
@@ -66,7 +66,7 @@ const ProjectCard = ({
   );
 };
 
-const Works = () => {
+const Projects = () => {
   return (
     <>
       <motion.div variants={textVariant()}>
@@ -96,4 +96,4 @@ const Works = () => {
   )
 }
 
-export default SectionWrapper(Works, "projects")
+export default SectionWrapper(Projects, "projects")
