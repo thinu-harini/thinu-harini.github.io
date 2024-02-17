@@ -2,7 +2,6 @@ import React from "react";
 import { SectionWrapper } from "../hoc";
 import { SvgLogo } from "./logoSvg.jsx";
 import SocialIcons from './SocialIcons';
-import { styles } from '../styles';
 
 const Footer = () => {
   return (
