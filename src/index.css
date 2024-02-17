@@ -168,7 +168,7 @@
 }
 
 .social-icons a:hover {
-  color: #915eff; 
+  color: #915eff;
 }
 
 .logo {
@@ -271,16 +271,15 @@
 } */
 
 .footer {
-  display: flex;
-  /* padding: 40px 122px; */
-  justify-content: space-evenly;
+  width: 100%;
+  padding: 40px 0;
+  position: relative;
 }
 
 .footer-content {
   text-align: center;
   color: #dfd9ff;
-  padding: 80px 100PX;
-  /* background-color: #040418; */
+  padding: 0 10px;
 }
 
 @keyframes mulShdSpin {
