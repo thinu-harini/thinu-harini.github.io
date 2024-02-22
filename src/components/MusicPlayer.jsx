@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { IoVolumeMute, IoVolumeHigh } from "react-icons/io5";
-import elevenforest from '../assets/sounds/elevenforest.mp3'
+import Interstellar from '../assets/sounds/interstellar.mp3'
 
 const MusicPlayer = () => {
-  const audioRef = useRef(new Audio(elevenforest));
+  const audioRef = useRef(new Audio(Interstellar));
   audioRef.current.volume = 0.4;
   audioRef.current.loop = true;
   const [isPlayingMusic, setIsPlayingMusic] = useState(false);
