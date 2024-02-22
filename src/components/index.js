@@ -8,6 +8,7 @@ import Projects from './Projects';
 import Contact from './Contact';
 import Footer from './Footer';
 import CanvasLoader from "./Loader";
+import MusicPlayer from './MusicPlayer';
 
 export {
   Hero,
@@ -18,8 +19,9 @@ export {
   Projects,
   Contact,
   Footer,
-  EarthCanvas, 
-  BallCanvas, 
-  GirlCanvas, 
-  StarsCanvas
+  EarthCanvas,
+  BallCanvas,
+  GirlCanvas,
+  StarsCanvas,
+  MusicPlayer,
 };

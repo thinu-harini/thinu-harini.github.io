@@ -2,7 +2,7 @@ import { Tilt } from "react-tilt";
 import { motion } from "framer-motion"
 
 import { styles } from "../styles";
-import { dribbble} from "../assets";
+import { dribbble } from "../assets";
 import { SectionWrapper } from "../hoc";
 import { projects } from "../constants";
 import { fadeIn, textVariant } from "../utils/motion";
@@ -21,9 +21,9 @@ const ProjectCard = ({
         options={{
           max: 15,
           scale: 1,
-          speed:450,
+          speed: 450,
         }}
-        className='bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full'
+        className='project-card sm:w-[360px] w-full'
       >
         <div className='relative w-full h-[230px]'>
           <img
@@ -47,8 +47,8 @@ const ProjectCard = ({
         </div>
 
         <div className='mt-5'>
-          <h3 className='text-white font-bold text-[24px]'>{name}</h3>
-          <p className='mt-2 text-secondary text-[14px]'>{description}</p>
+          <h3 className={styles.experienceHeadText}>{name}</h3>
+          <p className={styles.projectContent}>{description}</p>
         </div>
 
         <div className='mt-4 flex flex-wrap gap-2'>
@@ -77,7 +77,7 @@ const Projects = () => {
       <div className='w-full flex'>
         <motion.p
           variants={fadeIn("", "", 0.1, 1)}
-          className='mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]'
+          className={`${styles.sectionContent}`}
         >
           Following projects showcases my skills and experience through
           real-world examples of my work. Each project is briefly described with

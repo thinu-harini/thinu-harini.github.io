@@ -19,6 +19,10 @@ import {
 } from "../assets";
 
 export const navLinks = [
+  // {
+  //   id: "hero",
+  //   title: "Home",
+  // },
   {
     id: "experience",
     title: "Experience",

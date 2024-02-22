@@ -15,10 +15,10 @@ const Hero = () => {
     <div className={`xl:mt-8 xl:flex-row flex-col-reverse flex gap-10 overflow-hidden`}>
       <motion.div
         variants={slideIn("left", "tween", 0.2, 1)}
-        className='flex-[1.75] bg-black-100 bg-opacity-50 px-8 py-8 rounded-2xl'
+        className={`hero-bg flex-[1.75] px-8 py-8 rounded-2xl`}
       >
         <h1 className={`${styles.heroHeadText}`}>
-          Hi, <span className="text-[#915eff]">Thinu</span> here
+          Hi, <span className="highlight-text">Thinu</span> here
         </h1>
 
         <h2 className={`${styles.heroSubText}`}>I am a&nbsp;
@@ -77,7 +77,7 @@ const Hero = () => {
         className='hidden xs:block absolute xs:bottom-15 bottom-20 w-auto flex justify-center items-center'
         style={{ left: '50%', transform: 'translateX(-50%)' }}>
         <a href='#about'>
-          <div className="w-[35px] h-[64px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2">
+          <div className="w-[35px] h-[64px] flex justify-center items-start p-2">
             <motion.dev
               animate={{
                 y: [0, 24, 0]
@@ -87,7 +87,6 @@ const Hero = () => {
                 repeat: Infinity,
                 repeatType: 'loop'
               }}
-              className="w-3 h-3 rounded-full bg-secondary mb-1"
             />
           </div>
         </a>

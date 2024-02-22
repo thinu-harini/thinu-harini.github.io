@@ -48,7 +48,7 @@ const About = () => {
 
       <motion.p
         variants={fadeIn("", "", 0.1, 1)}
-        className='mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]' // max-w-3xl 
+        className={`${styles.sectionContent}`}
       >
         I hold a Bachelor of Science (Hons) degree in Information Technology from University of Moratuwa.
         Here are some tools and technologies I have been working with:

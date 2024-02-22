@@ -1,7 +1,7 @@
 import React from "react";
 import { SectionWrapper } from "../hoc";
-import { SvgLogo } from "./logoSvg.jsx";
 import SocialIcons from './SocialIcons';
+import { styles } from "../styles";
 
 const Footer = () => {
   return (
@@ -18,7 +18,7 @@ const Footer = () => {
 
     <div className="footer">
       <div className={`flex flex-col items-center md:items-center sm:px-4 px-4 py-4`}>
-        <h1 className="py-2">
+        <h1 className={`${styles.heroContentA}, py-2`}>
           Let's Connect.
         </h1>
         <SocialIcons />

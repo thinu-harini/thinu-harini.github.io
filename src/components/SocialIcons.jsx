@@ -15,12 +15,12 @@ const SocialIcons = () => {
       <a href="https://dribbble.com/thinu_harini" target="_blank" rel="noopener noreferrer">
         <PiDribbbleLogoFill />
       </a>
-      <a href="https://www.behance.net/" target="_blank" rel="noopener noreferrer">
+      {/* <a href="https://www.behance.net/" target="_blank" rel="noopener noreferrer">
         <FaBehanceSquare />
       </a>
       <a href="https://medium.com/@thinu.harini" target="_blank" rel="noopener noreferrer">
         <FaMediumM />
-      </a>
+      </a> */}
     </div>
   );
 };
