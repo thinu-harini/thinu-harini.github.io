@@ -11,11 +11,13 @@ import SocialIcons from './SocialIcons';
 
 const Hero = () => {
   return (
-    // <div className="relative w-full h-screen mx-auto">
-    <div className={`xl:mt-8 xl:flex-row flex-col-reverse flex gap-10 overflow-hidden`}>
+    // flex-col-reverse
+    // <div className={`xl:mt-8 flex xl:flex-row gap-10 overflow-hidden`}></div>
+    <div className={`motion-container xl:mt-8 gap-10 overflow-hidden`}>
       <motion.div
         variants={slideIn("left", "tween", 0.2, 1)}
-        className={`hero-bg flex-[1.75] px-8 py-8 rounded-2xl`}
+        className={`leftDiv px-8 py-8 rounded-2xl flex-[1.75]`}
+      // className={`hero-bg flex-[1.75] px-8 py-8 rounded-2xl`}
       >
         <h1 className={`${styles.heroHeadText}`}>
           Hi, <span className="highlight-text">Thinu</span> here
@@ -24,9 +26,8 @@ const Hero = () => {
         <h2 className={`${styles.heroSubText}`}>I am a&nbsp;
           <TypeAnimation
             sequence={[
-              // Same substring at the start will only be typed out once, initially
               'UX Researcher',
-              1000, // wait 1s before replacing the word
+              1000, // wait 1s
               'UI Developer ',
               1000,
               'Creative Designer ',
@@ -39,7 +40,6 @@ const Hero = () => {
           />
         </h2>
 
-        {/* <p className='mt-4 text-[17px] max-w-3xl leading-[30px]'> */}
         <p className={`${styles.heroContent} mt-2 text-white-100`}>
           A UI/UX designer on a mission to level up experiences
           in the digital world with creative thinking and problem-solving
@@ -68,13 +68,14 @@ const Hero = () => {
 
       <motion.div
         variants={slideIn("up", "tween", 0.8, 1)}
-        className='xl:flex-1 xl:h-auto md:h-[550px] h-[350px]'
+        className={`rightDiv xl:flex-1 xl:h-auto md:h-[550px] h-[350px]`}
       >
         <GirlCanvas />
       </motion.div>
 
+      {/* scroll button */}
       <div
-        className='hidden xs:block absolute xs:bottom-15 bottom-20 w-auto flex justify-center items-center'
+        className='md:hidden absolute bottom-20 xs:bottom-15 w-auto flex justify-center items-center'
         style={{ left: '50%', transform: 'translateX(-50%)' }}>
         <a href='#about'>
           <div className="w-[35px] h-[64px] flex justify-center items-start p-2">

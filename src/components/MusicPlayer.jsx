@@ -4,14 +4,14 @@ import Interstellar from '../assets/sounds/interstellar.mp3'
 
 const MusicPlayer = () => {
   const audioRef = useRef(new Audio(Interstellar));
-  audioRef.current.volume = 0.4;
+  // audioRef.current.volume = 0.4;
   audioRef.current.loop = true;
   const [isPlayingMusic, setIsPlayingMusic] = useState(false);
 
   const handleScroll = () => {
     const scrollPosition = window.scrollY;
-    const maxVolume = 1; // Maximum volume
-    //Adjust value based on when you want to start increasing volume
+    const maxVolume = 1;
+    //Increasing volume positions
     const startDecreasingVolumeAt = window.innerWidth <= 599 ? 1000 : 800;
     const startIncreasingVolumeAt = window.innerWidth <= 599 ? 6600 : 3800;
 
@@ -23,9 +23,9 @@ const MusicPlayer = () => {
       audioRef.current.volume = 0; // Set volume to 0 when scrolling down beyond startDecreasingVolumeAt
     }
 
-    // Increase the volume when scrolling up after reaching the end of the site
+    // Increase the volume back when scrolling up
     if (scrollPosition >= startIncreasingVolumeAt) {
-      let increasingVolume = (scrollPosition - startIncreasingVolumeAt) / 200; // Adjust divisor for sensitivity
+      let increasingVolume = (scrollPosition - startIncreasingVolumeAt) / 260; // divisor used for sensitivity
       audioRef.current.volume = Math.max(0, Math.min(maxVolume, increasingVolume));
     }
   };

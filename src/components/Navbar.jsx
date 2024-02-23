@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import { styles } from '../styles';
@@ -6,7 +6,7 @@ import { navLinks } from '../constants';
 
 import { HiMenuAlt3 } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
-import { SvgLogo } from "./logoSvg.jsx";
+import { SvgLogo } from "./SvgLogo.jsx";
 import MusicPlayer from './MusicPlayer.jsx';
 import { Toggle } from "./Toggle";
 
@@ -14,6 +14,7 @@ const Navbar = ({ isDark, handleToggleChange }) => {
   const [active, setActive] = useState('');
   const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,9 +26,25 @@ const Navbar = ({ isDark, handleToggleChange }) => {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setToggle(false);
+      }
+    };
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    const handleResize = () => {
+      setToggle(false);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   return (
@@ -44,7 +61,35 @@ const Navbar = ({ isDark, handleToggleChange }) => {
           <SvgLogo className='w-28 h-auto' />
         </Link>
 
-        <ul className="list-none hidden sm:flex flex-row gap-10">
+        {/* menu button */}
+        {/* <div className='md:hidden flex flex-col md:flex-row items-end justify-end'> */}
+        <div className='md:flex-row flex items-center gap-4'>
+
+          {/* {Toggle component */}
+          <Toggle isChecked={isDark} handleChange={handleToggleChange} />
+
+          {/* Sound Button */}
+          <MusicPlayer />
+
+          <div className='md:hidden '>
+            {toggle ? (
+              <IoClose
+                size={32}
+                className={`menu-icon object-contain cursor-pointer`}
+                onClick={() => setToggle(!toggle)}
+              />
+            ) : (
+              <HiMenuAlt3
+                size={32}
+                className={`menu-icon object-contain cursor-pointer`}
+                onClick={() => setToggle(!toggle)}
+              />
+            )}
+          </div>
+        </div>
+
+        {/* Links */}
+        <ul className="list-none hidden md:flex flex-row gap-10">
           {navLinks.map((nav) => (
             <li
               key={nav.id}
@@ -56,47 +101,23 @@ const Navbar = ({ isDark, handleToggleChange }) => {
           ))}
         </ul>
 
-        {/* menu button */}
-        <div className='sm:hidden flex flex-col sm:flex-row items-end justify-end'>
-          {toggle ? (
-            <IoClose
-              size={32}
-              className={`menu-icon object-contain cursor-pointer`}
-              onClick={() => setToggle(!toggle)}
-            />
-          ) : (
-            <HiMenuAlt3
-              size={32}
-              className={`menu-icon object-contain cursor-pointer`}
-              onClick={() => setToggle(!toggle)}
-            />
-          )}
-
-          {/* dropdown menu */}
-          <div className={`${!toggle ? 'hidden' : 'flex'} dropdown-menu p-6 absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}>
-            <ul className="list-none flex justify-end items-start flex-1 flex-col gap-4">
-              {navLinks.map((nav) => (
-                <li
-                  key={nav.id}
-                  className={`nav-title ${active === nav.title ? 'nav-title-active' : 'nav-title-inactive'}`}
-                  onClick={() => {
-                    setToggle(!toggle);
-                    setActive(nav.title);
-                  }}
-                >
-                  <a href={`#${nav.id}`}>{nav.title}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* dropdown menu */}
+        <div ref={dropdownRef} className={`${!toggle ? 'hidden' : 'flex'} dropdown-menu-bg p-6 absolute top-20 right-0 mx-8 my-2 min-w-[140px] z-10 rounded-xl`}>
+          <ul className="list-none flex justify-end items-start flex-1 flex-col gap-4">
+            {navLinks.map((nav) => (
+              <li
+                key={nav.id}
+                className={`dropdown-menu ${active === nav.title ? 'nav-title-active' : 'nav-title-inactive'}`}
+                onClick={() => {
+                  setToggle(!toggle);
+                  setActive(nav.title);
+                }}
+              >
+                <a href={`#${nav.id}`}>{nav.title}</a>
+              </li>
+            ))}
+          </ul>
         </div>
-
-        {/* Sound Button */}
-        <MusicPlayer />
-
-        {/* {Toggle component */}
-        <Toggle isChecked={isDark} handleChange={handleToggleChange} />
-
       </div>
     </nav>
   );

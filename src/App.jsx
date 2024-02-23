@@ -12,6 +12,7 @@ const App = () => {
 
   const handleToggleChange = () => {
     setIsDark(!isDark);
+    document.dispatchEvent(new Event('themeChange')); // Dispatch custom event
   };
 
   return (
@@ -21,23 +22,18 @@ const App = () => {
           <SplashScreen setLoading={setLoading} />
         ) : (
           <div>
-            {/* Pass isDark and handleToggleChange to Navbar */}
             <Navbar isDark={isDark} handleToggleChange={handleToggleChange} />
 
-            <div className="relative z-0">
+            <div className="relative">
               <Hero />
-              <About />
               <StarsCanvas />
             </div>
-            <div className="relative z-0">
-              <Experience />
-              <StarsCanvas />
-            </div>
-            <div className="relative z-0">
-              <Projects />
-              <StarsCanvas />
-            </div>
-            <div className="relative z-0">
+
+            <About />
+            <Experience />
+            <Projects />
+
+            <div className="relative">
               <Contact />
               <Footer />
               <StarsCanvas />

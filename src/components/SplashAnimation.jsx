@@ -10,12 +10,11 @@ export const SplashAnimation = (props) => {
   const controls6 = useAnimation();
   const controls7 = useAnimation();
   const controls8 = useAnimation();
+  const controls9 = useAnimation();
 
   // Function to play animations in sequence
   const animateSequence = async () => {
 
-    // Pause for a moment
-    await new Promise((resolve) => setTimeout(resolve, 500));
     // Parallel animations
     await Promise.all([
       //t1 animate
@@ -38,18 +37,7 @@ export const SplashAnimation = (props) => {
       controls4.start({
         y: [0, -10],
         transition: { duration: 0.6, ease: "easeOut" }
-      }),
-      //hinu rotate
-      controls5.start({
-        y: [0, 16],
-        rotateX: 90,
-        transition: { duration: 0.6 }
-      }),
-      //arini rotate
-      controls6.start({
-        y: [0, -16],
-        rotateX: 90,
-        transition: { duration: 0.6 }
+
       }),
     ]);
 
@@ -83,6 +71,11 @@ export const SplashAnimation = (props) => {
     ]);
 
     await Promise.all([
+      //DP rotate
+      controls9.start({
+        rotateY: [90, 0, 90],
+        transition: { duration: 1.2, ease: "linear" },
+      }),
       //logo rotate back
       controls7.start({
         rotateY: [90, 0],
@@ -140,18 +133,6 @@ export const SplashAnimation = (props) => {
         y: [-10, 0],
         transition: { duration: 0.6, ease: "easeOut" }
       }),
-      //hinu rotate
-      controls5.start({
-        y: [16, 0],
-        rotateX: 0,
-        transition: { duration: 0.6 }
-      }),
-      //arini rotate
-      controls6.start({
-        y: [16, 0],
-        rotateX: 0,
-        transition: { duration: 0.6 }
-      }),
     ]);
 
     // Pause for a moment
@@ -174,6 +155,12 @@ export const SplashAnimation = (props) => {
       height={70.845}
       viewBox="0 0 142.482 70.845"
       {...props}
+      style={{
+        // "--logo-fill": "var(--light-mode-fill)",
+        "--text-fill": "var(--logo-text)",
+        "--logo-bg-fill": "var(--logo-bg)",
+        "--logo-stroke": "var(--logo-bg)",
+      }}
     >
       <defs>
         <clipPath id="clip-path">
@@ -200,6 +187,36 @@ export const SplashAnimation = (props) => {
 
       <g id="logo" transform="translate(-723 -374.668)">
 
+        //DP
+        <motion.g initial={{ rotateY: 90 }} animate={controls9}>
+          <g id="l2"
+            transform="translate(-10676 -7997.662)">
+            <circle
+              id="Ellipse_21"
+              data-name="Ellipse 21"
+              cx={35.165}
+              cy={35.165}
+              r={35.165}
+              transform="translate(11399 8372.332)"
+              style={{ fill: "var(--logo-bg-fill)" }}
+            />
+            <g
+              id="Mask_Group_19"
+              data-name="Mask Group 19"
+              transform="translate(11399 8372.332)"
+              clipPath="url(#clip-path)"
+            >
+              <image
+                id="img"
+                width={75.354}
+                height={100.413}
+                transform="translate(-5.024 -8.038)"
+                xlinkHref="dp.png"
+              />
+            </g>
+          </g>
+        </motion.g>
+
       //logo
         <motion.g id="l1Wrapper" initial={{ opacity: 0 }} animate={controls7} >
           <g id="l1" transform="translate(-977 352.668)">
@@ -210,7 +227,7 @@ export const SplashAnimation = (props) => {
               cy={35.166}
               r={35.166}
               transform="translate(1700 22)"
-              fill="#915eff"
+              style={{ fill: "var(--logo-bg-fill)" }}
             />
             <g
               id="Mask_Group_8"
@@ -256,7 +273,7 @@ export const SplashAnimation = (props) => {
               data-name="Ellipse 7"
               transform="translate(1700 22)"
               fill="none"
-              stroke="#915eff"
+              stroke="var(--logo-stroke)"
               strokeWidth={4}
             >
               <circle cx={35.166} cy={35.166} r={35.166} stroke="none" />
@@ -265,39 +282,7 @@ export const SplashAnimation = (props) => {
           </g>
         </motion.g>
 
-      //ARINI
-        <motion.g animate={controls6} >
-          <text
-            id="h2"
-            transform="translate(772.482 438.513)"
-            fill="#fff"
-            fontSize={31}
-            fontFamily="GillSansMT-Bold, Gill Sans MT"
-            fontWeight={700}
-          >
-            <tspan x={0} y={0}>
-              {"ARINI"}
-            </tspan>
-          </text>
-        </motion.g>
-
-      //hinu
-        <motion.g animate={controls5} className="logo-text">
-          <text
-            id="t2"
-            transform="translate(770.254 406.93)"
-            fill="#fff"
-            fontSize={31}
-            fontFamily="GillSansMT-Bold, Gill Sans MT"
-            fontWeight={700}
-          >
-            <tspan x={0} y={0}>
-              {"HINU"}
-            </tspan>
-          </text>
-        </motion.g>
-
-        <motion.g id="th" animate={controls8}>
+        <motion.g id="th" animate={controls8} style={{ fill: "var(--text-fill)" }}>
         //H
           <g id="h1" transform="translate(746.201 416.746)">
             <motion.g animate={controls4} >
@@ -306,27 +291,24 @@ export const SplashAnimation = (props) => {
                 data-name="Path 6"
                 d="M0,0H6.26l-.1,19.75L0,24.01Z"
                 transform="translate(18.059 0.004)"
-                fill="#fff"
               />
               <path
                 id="Path_5"
                 data-name="Path 5"
                 d="M0,0H6.26V24.01L0,20.45Z"
                 transform="translate(-0.002 0.004)"
-                fill="#fff"
               />
               <path
                 id="Path_4"
                 data-name="Path 4"
                 d="M0,0H14V4.528H0Z"
                 transform="translate(5.181 7.392)"
-                fill="#fff"
               />
             </motion.g>
           </g>
 
       //T
-          <g id="t1" transform="translate(0 10)">
+          <g id="t1" transform="translate(0 10)" style={{ fill: "var(--text-fill)" }}>
             <motion.g animate={controls3}>
               {/* <rect
                 id="Rectangle_3"
@@ -341,7 +323,6 @@ export const SplashAnimation = (props) => {
                 data-name="Path 3"
                 d="M0,17.877H3.62V30.765l-1.806.873L0,30.765Z"
                 transform="translate(756.53 371.154)"
-                fill="#fff"
               />
             </motion.g>
             <motion.g animate={controls2}>
@@ -350,7 +331,6 @@ export const SplashAnimation = (props) => {
                 data-name="Path 2"
                 d="M0,0H3.62V12.53H0Z"
                 transform="translate(756.529 379.23)"
-                fill="#fff"
               />
             </motion.g>
             <motion.g animate={controls1}>
@@ -359,7 +339,6 @@ export const SplashAnimation = (props) => {
                 data-name="Path 1"
                 d="M0-6.895H24.014v5.4H0Z"
                 transform="translate(746.201 382.433)"
-                fill="#fff"
               />
             </motion.g>
           </g>

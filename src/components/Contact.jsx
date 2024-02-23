@@ -2,35 +2,34 @@ import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 
+import Alert from '../components/Alert';
+import useAlert from '../hooks/useAlert';
+
 import { styles } from "../styles";
 import { EarthCanvas } from "./canvas";
 import { SectionWrapper } from "../hoc";
 import { slideIn } from "../utils/motion";
 
 const Contact = () => {
-  const formRef = useRef();
+  const formRef = useRef(null);
   const [form, setForm] = useState({
     name: "",
     email: "",
     message: "",
   });
-
-  const [loading, setLoading] = useState(false);
-
+  const { alert, showAlert, hideAlert } = useAlert();
+  const [isLoading, setIsLoading] = useState(false);
   const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setForm({ ...form, [name]: value }); //enable enter data
+    setForm({ ...form, [e.target.name]: e.target.value }) //enable enter data
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
+    setIsLoading(true);
 
     emailjs
       .send(
-        'service_i37d58b',
-        'template_d24x8lc',
+        import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
         {
           from_name: form.name,
           to_name: "Thinu Harini",
@@ -38,30 +37,42 @@ const Contact = () => {
           to_email: "thinu.harini@gmail.com",
           message: form.message,
         },
-        'E4FIuzhoaHuG0pSDo'
+        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
       )
-      .then(
-        () => {
-          setLoading(false);
-          alert("Thank you. I will get back to you as soon as possible.");
+      .then(() => {
+        setIsLoading(false);
+        //Success message
+        showAlert({
+          show: true,
+          text: "Thank you. I will get back to you as soon as possible.",
+          type: "success",
+        });
 
-          setForm({
-            name: "",
-            email: "",
-            message: "",
-          });
-        },
-        (error) => {
-          setLoading(false);
-          console.error(error); //console.log(error);
+        //Hide an alert
+        setTimeout(() => {
+          hideAlert();
+          setform({ name: '', email: '', message: '' });
+        }, [3000])
 
-          alert("Something went wrong. Please try again.");
-        }
-      );
-  };
+        setForm({
+          name: "",
+          email: "",
+          message: "",
+        });
+      }).catch((error) => {
+        setIsLoading(false);
+        console.log(error);
+        //Show error message
+        showAlert({
+          show: true,
+          text: "Something went wrong. Please try again.",
+          type: "danger",
+        });
+      })
+  }
 
   return (
-    <div className={`xl:mt-12 flex xl:flex-row flex-col-reverse gap-10 overflow-hidden`}>
+    <div className={`motion-container xl:mt-12 gap-10 overflow-hidden`}>
       <motion.div
         variants={slideIn("left", "tween", 0.2, 1)}
         className='contact-card'
@@ -72,17 +83,18 @@ const Contact = () => {
         <form
           ref={formRef}
           onSubmit={handleSubmit}
-          className='mt-12 flex flex-col gap-8'
+          className='mt-10 flex flex-col gap-8'
         >
           <label className='flex flex-col'>
             <span className={`${styles.contactText}`}>Your Name</span>
             <input
               type='text'
               name='name'
+              className='input-field'
+              placeholder='John Doe'
+              required
               value={form.name}
               onChange={handleChange}
-              placeholder="What's your name?"
-              className='input-field'
             />
           </label>
 
@@ -91,32 +103,33 @@ const Contact = () => {
             <input
               type='email'
               name='email'
+              className='input-field'
+              placeholder='john.doe@gmail.com'
+              required
               value={form.email}
               onChange={handleChange}
-              placeholder="What's your email?"
-              className='input-field'
             />
           </label>
 
           <label className='flex flex-col'>
             <span className={`${styles.contactText}`}>Your Message</span>
             <textarea
-              rows={7}
+              rows={3}
               name='message'
+              className='input-field'
+              placeholder='Let me know how I can help you!'
               value={form.message}
               onChange={handleChange}
-              placeholder='What do you want to say?'
-              className='input-field'
             />
           </label>
 
           <button
             type='submit'
             className='button py-3 px-8 w-fit'
+            disabled={isLoading}
           >
-            {loading ? "Sending..." : "Send Message"}
+            {isLoading ? "Sending..." : "Send Message"}
           </button>
-
         </form>
       </motion.div>
 
@@ -126,6 +139,12 @@ const Contact = () => {
       >
         <EarthCanvas />
       </motion.div>
+
+      <div className="alert">
+        {alert.show && <Alert {...alert} />}
+        {/* <Alert {...alert} /> */}
+      </div>
+
     </div>
   )
 }

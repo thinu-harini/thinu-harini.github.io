@@ -178,6 +178,12 @@ export const SvgLogo = (props) => {
       height={70.845}
       viewBox="0 0 142.482 70.845"
       {...props}
+      style={{
+        // "--logo-fill": "var(--light-mode-fill)",
+        "--text-fill": "var(--logo-text)",
+        "--logo-bg-fill": "var(--logo-bg)",
+        "--logo-stroke": "var(--logo-bg)",
+      }}
     >
       <defs>
         <clipPath id="clip-path">
@@ -215,7 +221,7 @@ export const SvgLogo = (props) => {
               cy={35.165}
               r={35.165}
               transform="translate(11399 8372.332)"
-              fill="#915eff"
+              style={{ fill: "var(--logo-bg-fill)" }}
             />
             <g
               id="Mask_Group_19"
@@ -244,7 +250,7 @@ export const SvgLogo = (props) => {
               cy={35.166}
               r={35.166}
               transform="translate(1700 22)"
-              fill="#915eff"
+              style={{ fill: "var(--logo-bg-fill)" }}
             />
             <g
               id="Mask_Group_8"
@@ -290,7 +296,7 @@ export const SvgLogo = (props) => {
               data-name="Ellipse 7"
               transform="translate(1700 22)"
               fill="none"
-              stroke="#915eff"
+              stroke="var(--logo-stroke)"
               strokeWidth={4}
             >
               <circle cx={35.166} cy={35.166} r={35.166} stroke="none" />
@@ -304,7 +310,7 @@ export const SvgLogo = (props) => {
           <text
             id="h2"
             transform="translate(772.482 438.513)"
-            fill="#fff"
+            style={{ fill: "var(--text-fill)" }}
             fontSize={31}
             fontFamily="GillSansMT-Bold, Gill Sans MT"
             fontWeight={700}
@@ -320,7 +326,7 @@ export const SvgLogo = (props) => {
           <text
             id="t2"
             transform="translate(770.254 406.93)"
-            fill="#fff"
+            style={{ fill: "var(--text-fill)" }}
             fontSize={31}
             fontFamily="GillSansMT-Bold, Gill Sans MT"
             fontWeight={700}
@@ -331,7 +337,7 @@ export const SvgLogo = (props) => {
           </text>
         </motion.g>
 
-        <motion.g id="th" animate={controls8}>
+        <motion.g id="th" animate={controls8} style={{ fill: "var(--text-fill)" }}>
         //H
           <g id="h1" transform="translate(746.201 416.746)">
             <motion.g animate={controls4} >
@@ -340,27 +346,24 @@ export const SvgLogo = (props) => {
                 data-name="Path 6"
                 d="M0,0H6.26l-.1,19.75L0,24.01Z"
                 transform="translate(18.059 0.004)"
-                fill="#fff"
               />
               <path
                 id="Path_5"
                 data-name="Path 5"
                 d="M0,0H6.26V24.01L0,20.45Z"
                 transform="translate(-0.002 0.004)"
-                fill="#fff"
               />
               <path
                 id="Path_4"
                 data-name="Path 4"
                 d="M0,0H14V4.528H0Z"
                 transform="translate(5.181 7.392)"
-                fill="#fff"
               />
             </motion.g>
           </g>
 
       //T
-          <g id="t1" transform="translate(0 10)">
+          <g id="t1" transform="translate(0 10)" style={{ fill: "var(--text-fill)" }}>
             <motion.g animate={controls3}>
               {/* <rect
                 id="Rectangle_3"
@@ -375,7 +378,6 @@ export const SvgLogo = (props) => {
                 data-name="Path 3"
                 d="M0,17.877H3.62V30.765l-1.806.873L0,30.765Z"
                 transform="translate(756.53 371.154)"
-                fill="#fff"
               />
             </motion.g>
             <motion.g animate={controls2}>
@@ -384,7 +386,6 @@ export const SvgLogo = (props) => {
                 data-name="Path 2"
                 d="M0,0H3.62V12.53H0Z"
                 transform="translate(756.529 379.23)"
-                fill="#fff"
               />
             </motion.g>
             <motion.g animate={controls1}>
@@ -393,7 +394,6 @@ export const SvgLogo = (props) => {
                 data-name="Path 1"
                 d="M0-6.895H24.014v5.4H0Z"
                 transform="translate(746.201 382.433)"
-                fill="#fff"
               />
             </motion.g>
           </g>
