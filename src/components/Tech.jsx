@@ -4,14 +4,15 @@ import { technologies } from "../constants";
 
 const Tech = () => {
   return (
-    <div className='flex flex-row flex-wrap justify-center gap-10'>
-    {technologies.map((technology) => (
-      <div className='w-24 h-24' key={technology.name}>
-        <BallCanvas icon={technology.icon} />
-      </div>
-    ))}
-  </div> 
+    <div className='ball-container flex flex-row flex-wrap justify-center gap-10'>
+      {technologies.map((technology) => (
+        <div className='ball' key={technology.name}>
+          <BallCanvas icon={technology.icon} />
+        </div>
+      ))}
+    </div>
   )
 }
 
-export default SectionWrapper(Tech, "");
+export default Tech;
+// export default SectionWrapper(Tech, "");

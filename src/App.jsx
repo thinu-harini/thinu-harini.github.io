@@ -26,7 +26,7 @@ const App = () => {
 
             <div className="relative">
               <Hero />
-              <StarsCanvas />
+              {isDark && <StarsCanvas />}
             </div>
 
             <About />
@@ -36,7 +36,7 @@ const App = () => {
             <div className="relative">
               <Contact />
               <Footer />
-              <StarsCanvas />
+              {isDark && <StarsCanvas />}
             </div>
           </div>
         )}
