@@ -69,7 +69,7 @@ const Experience = () => {
         Following are the companies I have worked with in the past:
       </motion.p>
 
-      <div className="mt-20 flex flex-col">
+      <div className="mt-10 flex flex-col">
         <VerticalTimeline>
           {experiences.map((experience, index) => (
             <ExperienceCard

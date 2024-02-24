@@ -13,6 +13,8 @@ const styles = {
     "hero-content lg:text-[18px] sm:text-[16px] xs:text-[14px] text-[17px] lg:leading-[36px] mt-4",
   heroContentA:
     "hero-content lg:text-[18px] sm:text-[16px] xs:text-[14px] text-[17px] lg:leading-[36px] mt-4",
+  neoContent:
+    "lg:text-[18px] sm:text-[16px] xs:text-[14px] text-[17px]",
 
   sectionHeadText:
     "section-head-text font-black md:text-[60px] sm:text-[50px] xs:text-[40px] text-[30px]",

@@ -1,0 +1,11 @@
+Model Information:
+* title:	Cartoon girl
+* source:	https://sketchfab.com/3d-models/cartoon-girl-a4bf221f620e49f8bc7af53e6d6a4f3c
+* author:	Ivan Norman (https://sketchfab.com/vanidza)
+
+Model License:
+* license type:	CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
+* requirements:	Author must be credited. No commercial use.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Cartoon girl" (https://sketchfab.com/3d-models/cartoon-girl-a4bf221f620e49f8bc7af53e6d6a4f3c) by Ivan Norman (https://sketchfab.com/vanidza) licensed under CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)

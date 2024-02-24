@@ -1,17 +1,15 @@
 import {
-  mobile,
-  web,
   javascript,
   html,
   css,
-  reactjs,
-  git,
   figma,
   adobexd,
+
   sab,
   groomelogo,
   ieee,
   texonic,
+
   groome,
   ichatcs,
   crowdfunding,
@@ -37,16 +35,16 @@ export const navLinks = [
   },
 ];
 
-const services = [
-  {
-    title: "UX Researcher",
-    icon: web,
-  },
-  {
-    title: "UI Designer",
-    icon: mobile,
-  },
-];
+// const services = [
+//   {
+//     title: "UX Researcher",
+//     icon: web,
+//   },
+//   {
+//     title: "UI Designer",
+//     icon: mobile,
+//   },
+// ];
 
 const technologies = [
   {
@@ -195,4 +193,4 @@ const projects = [
   },
 ];
 
-export { services, technologies, experiences, projects };
+export { technologies, experiences, projects };

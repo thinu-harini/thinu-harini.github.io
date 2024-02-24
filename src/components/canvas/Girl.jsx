@@ -1,3 +1,10 @@
+/*
+Author: Ivan Norman (https://sketchfab.com/vanidza)
+License: CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
+Source: https://sketchfab.com/3d-models/cartoon-girl-a4bf221f620e49f8bc7af53e6d6a4f3c
+Title: Cartoon girl
+*/
+
 import React, { Suspense, useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
@@ -5,7 +12,7 @@ import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 import CanvasLoader from "../Loader";
 
 const Girl = ({ isMobile }) => {
-  const girl = useGLTF("./cartoon_girl/scene.gltf");
+  const girl = useGLTF("./girl/scene.gltf");
 
   return (
     <mesh>
@@ -88,4 +95,4 @@ const GirlCanvas = () => {
   );
 };
 
-export default GirlCanvas;
+export default GirlCanvas; 

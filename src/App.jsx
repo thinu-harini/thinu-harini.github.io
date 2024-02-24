@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import useLocalStorage from 'use-local-storage';
+
 import { About, Contact, Experience, Hero, Navbar, Tech, Projects, StarsCanvas, Footer } from './components';
 import SplashScreen from './components/SplashScreen';
-import useLocalStorage from 'use-local-storage';
+import { SkyCanvas } from './components/canvas';
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -26,7 +28,7 @@ const App = () => {
 
             <div className="relative">
               <Hero />
-              {isDark && <StarsCanvas />}
+              {isDark ? <StarsCanvas /> : <SkyCanvas />}
             </div>
 
             <About />
