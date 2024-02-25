@@ -48,17 +48,12 @@ const Contact = () => {
           type: "success",
         });
 
-        //Hide an alert
+        //Hide alert and clear form
         setTimeout(() => {
           hideAlert();
           setform({ name: '', email: '', message: '' });
         }, [3000])
 
-        setForm({
-          name: "",
-          email: "",
-          message: "",
-        });
       }).catch((error) => {
         setIsLoading(false);
         console.log(error);
@@ -68,6 +63,10 @@ const Contact = () => {
           text: "Something went wrong. Please try again.",
           type: "danger",
         });
+
+        setTimeout(() => {
+          hideAlert();
+        }, [3000])
       })
   }
 

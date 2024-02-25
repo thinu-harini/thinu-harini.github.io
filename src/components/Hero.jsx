@@ -153,10 +153,8 @@ const Hero = () => {
               shadow-mapSize={{ width: 1024, height: 1024 }}
             />
 
-
             {/* <Sky isRotating={isRotating} /> */}
             <Animal
-
               position={animalPosition}
               scale={animalScale}
               rotation={animalRotation}
@@ -165,20 +163,15 @@ const Hero = () => {
               setCurrentStage={setCurrentStage}
             />
           </Suspense>
-
-
         </Canvas>
       </motion.div>
 
-
-
       {/* scroll button */}
-      <div
-        className='sm:hidden absolute bottom-20 xs:bottom-15 w-auto flex justify-center items-center'
+      <div className='absolute bottom-20 w-full flex justify-center items-center'
         style={{ left: '50%', transform: 'translateX(-50%)' }}>
         <a href='#about'>
-          <div className="w-[35px] h-[64px] flex justify-center items-start p-2">
-            <motion.dev
+          <div className="w-[35px] h-[64px] rounded-3xl border-4 border-secondary justify-center items-start p-2 hidden sm:flex">
+            <motion.div
               animate={{
                 y: [0, 24, 0]
               }}
@@ -187,11 +180,12 @@ const Hero = () => {
                 repeat: Infinity,
                 repeatType: 'loop'
               }}
+              className='w-3 h-3 rounded-full bg-secondary mb-1'
             />
           </div>
         </a>
       </div>
-      {/* </div> */}
+
     </div >
   )
 }

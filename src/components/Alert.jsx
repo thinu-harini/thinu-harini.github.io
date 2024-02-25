@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { styles } from '../styles';
 
 const Alert = ({ type, text }) => {
-  const imageSrc = type === "danger" ? "./src/assets/failed.png" : "./src/assets/alert.png";
+  // const imageSrc = type === "danger" ? "./src/assets/failed.png" : "./src/assets/alert.png";
   const bgColor = type === "danger" ? 'var(--danger-bg)' : 'var(--success-bg)';
 
   return (
