@@ -1,10 +1,3 @@
-/*
-Author: Ivan Norman (https://sketchfab.com/vanidza)
-License: CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
-Source: https://sketchfab.com/3d-models/cartoon-girl-a4bf221f620e49f8bc7af53e6d6a4f3c
-Title: Cartoon girl
-*/
-
 import { useState, Suspense } from 'react';
 import { motion } from 'framer-motion';
 
@@ -13,20 +6,19 @@ import { TypeAnimation } from 'react-type-animation';
 
 import { styles } from '../styles';
 import { SectionWrapper } from "../hoc";
-import { GirlCanvas } from './canvas';
-import SocialIcons from './SocialIcons';
 
+import SocialIcons from './SocialIcons';
 import { Canvas } from '@react-three/fiber'
 import Loader from './Loader';
-import Animal from '../models/Animal';
-import Sky from '../models/Sky';
+
+import Girl from '../models/Girl.jsx';
 import HomeInfo from '../components/HomeInfo.jsx';
 
 const Hero = () => {
   const [isRotating, setIsRotating] = useState(false);
   const [currentStage, setCurrentStage] = useState(1);
 
-  const adjustAnimalForScreenSize = () => {
+  const adjustGirlForScreenSize = () => {
     let screenScale = null;
     let screenPosition = null;
     // let screenPosition = [0, 0, 0];
@@ -53,15 +45,12 @@ const Hero = () => {
     return [screenScale, screenPosition, rotation]
   }
 
-  const [animalScale, animalPosition, animalRotation] = adjustAnimalForScreenSize();
+  const [girlScale, girlPosition, girlRotation] = adjustGirlForScreenSize();
 
   return (
     // flex-col-reverse
     // <div className={`xl:mt-8 flex xl:flex-row gap-10 overflow-hidden`}></div>
     <div className={`motion-container xl:mt-8 gap-10 overflow-hidden`}>
-      {/* <div className='absolute top-28 left-0 right-0 z-10 flex items-center justify-center'>
-        {currentStage && <HomeInfo currentStage={currentStage} />}
-      </div> */}
       <motion.div
         variants={slideIn("left", "tween", 0.2, 1)}
         className={`leftDiv px-8 py-8 rounded-2xl flex-[1.75]`}
@@ -106,7 +95,6 @@ const Hero = () => {
 
         <div className={`${styles.paddingB} flex flex-row items-start gap-4`}>
           <button>
-
             <a className="button" href="https://drive.google.com/file/d/1sMoRZWh8Hw3RyWdPOz16HU8iiVdWUrAX/view?usp=drive_link" download="cv_thinu_premachandra.pdf" target="_blank">
               Download Résumé
             </a>
@@ -154,10 +142,10 @@ const Hero = () => {
             />
 
             {/* <Sky isRotating={isRotating} /> */}
-            <Animal
-              position={animalPosition}
-              scale={animalScale}
-              rotation={animalRotation}
+            <Girl
+              position={girlPosition}
+              scale={girlScale}
+              rotation={girlRotation}
               isRotating={isRotating}
               setIsRotating={setIsRotating}
               setCurrentStage={setCurrentStage}
@@ -167,10 +155,10 @@ const Hero = () => {
       </motion.div>
 
       {/* scroll button */}
-      <div className='absolute bottom-20 w-full flex justify-center items-center'
+      <div className='absolute z-20 bottom-20 flex justify-center items-center'
         style={{ left: '50%', transform: 'translateX(-50%)' }}>
         <a href='#about'>
-          <div className="w-[35px] h-[64px] rounded-3xl border-4 border-secondary justify-center items-start p-2 hidden sm:flex">
+          <div className="scroll-button w-[35px] h-[64px] rounded-3xl border-4  justify-center items-start p-2 hidden sm:flex">
             <motion.div
               animate={{
                 y: [0, 24, 0]
@@ -180,7 +168,7 @@ const Hero = () => {
                 repeat: Infinity,
                 repeatType: 'loop'
               }}
-              className='w-3 h-3 rounded-full bg-secondary mb-1'
+              className='scroll-button-motion w-3 h-3 rounded-full mb-1'
             />
           </div>
         </a>

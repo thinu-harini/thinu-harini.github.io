@@ -6,11 +6,8 @@ export const SplashAnimation = (props) => {
   const controls2 = useAnimation();
   const controls3 = useAnimation();
   const controls4 = useAnimation();
-  const controls5 = useAnimation();
-  const controls6 = useAnimation();
   const controls7 = useAnimation();
   const controls8 = useAnimation();
-  const controls9 = useAnimation();
 
   // Function to play animations in sequence
   const animateSequence = async () => {
@@ -71,11 +68,6 @@ export const SplashAnimation = (props) => {
     ]);
 
     await Promise.all([
-      //DP rotate
-      controls9.start({
-        rotateY: [90, 0, 90],
-        transition: { duration: 1.2, ease: "linear" },
-      }),
       //logo rotate back
       controls7.start({
         rotateY: [90, 0],
@@ -151,9 +143,9 @@ export const SplashAnimation = (props) => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      width={142.482}
-      height={70.845}
-      viewBox="0 0 142.482 70.845"
+      width={70.332}
+      height={70.332}
+      viewBox="0 0 70.332 70.332"
       {...props}
       style={{
         // "--logo-fill": "var(--light-mode-fill)",
@@ -186,36 +178,6 @@ export const SplashAnimation = (props) => {
       </defs>
 
       <g id="logo" transform="translate(-723 -374.668)">
-
-        //DP
-        <motion.g initial={{ rotateY: 90 }} animate={controls9}>
-          <g id="l2"
-            transform="translate(-10676 -7997.662)">
-            <circle
-              id="Ellipse_21"
-              data-name="Ellipse 21"
-              cx={35.165}
-              cy={35.165}
-              r={35.165}
-              transform="translate(11399 8372.332)"
-              style={{ fill: "var(--logo-bg-fill)" }}
-            />
-            <g
-              id="Mask_Group_19"
-              data-name="Mask Group 19"
-              transform="translate(11399 8372.332)"
-              clipPath="url(#clip-path)"
-            >
-              <image
-                id="img"
-                width={75.354}
-                height={100.413}
-                transform="translate(-5.024 -8.038)"
-                xlinkHref="dp.png"
-              />
-            </g>
-          </g>
-        </motion.g>
 
       //logo
         <motion.g id="l1Wrapper" initial={{ opacity: 0 }} animate={controls7} >

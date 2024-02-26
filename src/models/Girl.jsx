@@ -11,13 +11,13 @@ import { useGLTF } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { a } from "@react-spring/three";
 
-import animalScene from "../assets/3d/cartoon_girl.glb";
+import girlScene from "../assets/3d/girl.glb";
 
-const Animal = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
-  const animalRef = useRef();
+const Girl = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
+  const girlRef = useRef();
 
   const { gl, viewport } = useThree();
-  const { nodes, materials } = useGLTF(animalScene);
+  const { nodes, materials } = useGLTF(girlScene);
 
   const lastX = useRef(0);
   const rotationSpeed = useRef(0);
@@ -46,7 +46,7 @@ const Animal = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
     if (isRotating) {
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       const delta = (clientX - lastX.current) / viewport.width;
-      animalRef.current.rotation.y += delta * 0.01 * Math.PI;
+      girlRef.current.rotation.y += delta * 0.01 * Math.PI;
       lastX.current = clientX;
       rotationSpeed.current = delta * 0.01 * Math.PI;
     }
@@ -55,11 +55,11 @@ const Animal = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
   const handleKeyDown = (e) => {
     if (e.key === "ArrowLeft") {
       if (!isRotating) setIsRotating(true);
-      animalRef.current.rotation.y -= 0.01 * Math.PI;
+      girlRef.current.rotation.y -= 0.01 * Math.PI;
       rotationSpeed.current = 0.0125;
     } else if (e.key === "ArrowRight") {
       if (!isRotating) setIsRotating(true);
-      animalRef.current.rotation.y += 0.01 * Math.PI;
+      girlRef.current.rotation.y += 0.01 * Math.PI;
       rotationSpeed.current = -0.0125;
     }
   }
@@ -78,10 +78,10 @@ const Animal = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
         rotationSpeed.current = 0;
       }
 
-      animalRef.current.rotation.y += rotationSpeed.current;
+      girlRef.current.rotation.y += rotationSpeed.current;
 
     } else {
-      const rotation = animalRef.current.rotation.y;
+      const rotation = girlRef.current.rotation.y;
 
       /**
        * Normalize the rotation value to ensure it stays within the range [0, 2 * Math.PI].
@@ -102,7 +102,7 @@ const Animal = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
 
       const normalizedRotation = ((rotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
 
-      // Set the current stage based on the animal's orientation
+      // Set the current stage based on the girl's orientation
       switch (true) {
         case normalizedRotation >= 0.85 && normalizedRotation <= 1.3:
           setCurrentStage(1);
@@ -124,12 +124,12 @@ const Animal = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
 
   useFrame(() => {
     const autoRotationSpeed = 0.002; // Adjust the speed of auto-rotation as needed
-    animalRef.current.rotation.y += autoRotationSpeed;
+    girlRef.current.rotation.y += autoRotationSpeed;
 
-    const rotation = animalRef.current.rotation.y;
+    const rotation = girlRef.current.rotation.y;
     const normalizedRotation = ((rotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
 
-    // Set the current stage based on the animal's orientation
+    // Set the current stage based on the girl's orientation
     switch (true) {
       case normalizedRotation >= 0.85 && normalizedRotation <= 1.3:
         setCurrentStage(1);
@@ -167,7 +167,7 @@ const Animal = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
   }, [gl, handlePointerDown, handlePointerUp, handlePointerMove])
 
   return (
-    <a.group ref={animalRef} {...props}>
+    <a.group ref={girlRef} {...props}>
       <mesh
         geometry={nodes.Object_2.geometry}
         material={materials.Girl}
@@ -177,4 +177,4 @@ const Animal = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
   );
 }
 
-export default Animal;
+export default Girl;
