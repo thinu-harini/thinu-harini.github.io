@@ -124,12 +124,12 @@ const Hero = () => {
         // }}
         >
           <Suspense fallback={<Loader />}>
-            <directionalLight position={[1, 1, 1]} intensity={2} />
-            <ambientLight intensity={0.5} />
+            <directionalLight position={[1, 1, 1]} intensity={1} />
+            <ambientLight intensity={1} />
             <hemisphereLight
-              skyColor='#b1e1ff'
-              groundColor='#000000'
-              intensity={1}
+              skyColor='#ffffff'
+              groundColor='#41bdff'
+              intensity={0.5}
             />
             <pointLight intensity={1} />
             <spotLight

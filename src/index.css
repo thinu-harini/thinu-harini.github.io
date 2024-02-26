@@ -18,6 +18,7 @@
   --primary: #ffffff;
   --secondary: #7D65FB;
   --tertiary: #e6ecfd;
+  --black-100: #fafbff;
   --black-200: #c3b6fa;
   --white-100: #f3f3f3;
   --white: #ffffff;
@@ -86,6 +87,7 @@
   --purple-grey: #aaa6c3;
   --alert-red: #ff1c42;
   --yellow: #ffea00;
+  --yellow: #41bdff;
 
   --menu-icon-color: var(--white);
   --icon-color: var(white);
