@@ -26,17 +26,20 @@
   --alert-red: #ff879b;
   --alert-blue: #9d8afb;
   --yellow: #ffea00;
+  --button-hover: #917bfe;
 
   --menu-icon-color: var(--secondary);
   --icon-color: var(--white);
   /* --icon-button-bg: var(--secondary); */
-  --icon-button-bg-hover: var(--button-hover-color);
+  --icon-button-bg-hover: var(--button-hover);
   --icon-button-active: #7a3dff;
 
   --button-bg: var(--secondary);
-  --button-bg-hover: var(--hover-color);
+  --button-bg-hover: var(--button-hover);
+  --button-bg-active: var(--icon-button-active);
   --button-border: var(--secondary);
-  --button-border-hover: var(--hover-color);
+  --button-border-hover: var(--button-hover);
+  --button-border-active: var(--secondary);
   --button-shadow: 2px 4px 6px rgba(130, 126, 156, 0.4);
 
   /* text colors */
@@ -57,7 +60,8 @@
   --scroll-button: var(--white);
 
   --nav-title: var(--secondary);
-  --dropdown-bg: #261d5b;
+  --nav-title-active: #481ba9;
+  --dropdown-bg: #281b6d;
   --dropdown-menu-content: var(--white);
 
   --toggle-bg: var(--secondary);
@@ -87,18 +91,19 @@
   --purple-grey: #aaa6c3;
   --alert-red: #ff1c42;
   --yellow: #ffea00;
-  --yellow: #41bdff;
 
   --menu-icon-color: var(--white);
   --icon-color: var(white);
   /* --icon-button-bg: var(--secondary); */
-  --icon-button-hover: #6925fd;
+  --icon-button-bg-hover: #6925fd;
   --icon-button-active: #7a3dff;
 
   --button-bg: #160a38;
   --button-bg-hover: #1f0f51;
+  --button-bg-active: #0d0521;
   --button-border: #716ada;
   --button-border-hover: #8781da;
+  --button-border-active: #6e65ec;
   --button-shadow: 2px 4px 6px rgba(5, 8, 22, 0.8);
 
   /* text colors */
@@ -119,6 +124,7 @@
   --scroll-button: var(--purple-grey);
 
   --nav-title: var(--purple-grey);
+  --nav-title-active: var(--secondary);
   --dropdown-bg: #261d5b;
   --dropdown-menu-content: var(--purple-grey);
 
@@ -162,7 +168,7 @@
 }
 
 .nav-title:active {
-  color: var(--secondary);
+  color: var(--nav-title-active);
 }
 
 .nav-title-active {
@@ -195,16 +201,15 @@
   background-color: var(--secondary);
   color: var(--icon-color);
   cursor: pointer;
-  transition: background-color 500ms ease-in-out, transform 0.3s ease-in-out;
 }
 
 .music-button:hover {
   transform: scale(1.06);
-  background-color: var(--icon-button-hover);
+  background-color: var(--icon-button-bg-hover);
 }
 
 /* .music-button:active {
-  background-color: var(--secondary);
+  background-color: var(--icon-button-active);
 } */
 
 /* Music Button Styles for larger screens */
@@ -236,7 +241,7 @@
   flex-direction: column;
   /* Stack items vertically */
 
-  @media (min-width: 768px) {
+  @media (min-width: 992px) {
     flex-direction: row;
   }
 }
@@ -244,15 +249,26 @@
 .leftDiv {
   background-color: var(--hero-background-rgba);
   transition: background-color 500ms ease-in-out;
+  /* flex: 1; */
+  max-width: 70%;
+  /* flex-basis: 175%; */
 }
 
-@media (max-width: 767px) {
+.rightDiv {
+  /* flex: 1; */
+  max-width: 30%;
+  /* flex-shrink: 1; */
+}
+
+@media (max-width: 991px) {
   .leftDiv {
     order: 1;
+    max-width: 100%;
   }
 
   .rightDiv {
     order: -1;
+    max-width: 100%;
   }
 }
 
@@ -321,6 +337,12 @@
   /* cursor: pointer; */
 }
 
+.button:active {
+  background-color: var(--button-bg-active);
+  border: 1.6px solid var(--button-border-active);
+  transition: background-color 10ms ease-in-out;
+}
+
 @keyframes slideUp {
   0% {
     transform: translateY(50%);
@@ -334,17 +356,18 @@
 }
 
 .neo-btn {
-  padding: 0.75rem 0.5rem;
+  padding: 0.5rem 0.5rem;
   border-radius: 0.375rem;
   color: #ffffff;
   background-color: var(--secondary);
   text-align: center;
   font-size: 18px;
-  width: 75%;
+  width: 80%;
   position: absolute;
   bottom: 1rem;
   left: 3rem;
   right: 0;
+  margin-top: 10px;
   margin: auto;
   display: flex;
   justify-content: center;
@@ -359,6 +382,11 @@
     font-size: 16px;
     left: 0;
   }
+
+  @media screen and (max-width: 1280px) {
+    bottom: -0.1rem;
+  }
+
 }
 
 .neo-btn::before {
@@ -373,40 +401,38 @@
 
 .neo-btn:hover {
   transform: scale(1.02);
-  background-color: var(--icon-button-hover);
+  background-color: var(--icon-button-bg-hover);
 }
 
 .icon-click-wrapper {
-  position: absolute;
-  bottom: 0.1rem;
-  right: 0.1rem;
-  display: flex;
+  display: inline-flex;
+  justify-content: flex-end;
   align-items: center;
 }
 
 .icon-click {
   color: var(--yellow);
   font-size: 22px;
-  margin-left: 1rem;
+  margin-left: 5px;
 }
 
 .icon-touch {
   color: var(--yellow);
   font-size: 18px;
-  margin-left: 1rem;
+  margin-left: 5px;
 }
 
 /* --Social Icons Styles-- */
 .social-icons {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   margin-top: 4px;
   gap: 10px;
 }
 
 .social-icons a {
   font-size: 30px;
-  color: var(--sub-text);
+  color: var(--head-text);
   text-decoration: none;
 }
 
@@ -415,7 +441,7 @@
 }
 
 .social-icons a:active {
-  color: var(--icon-button-hover);
+  color: var(--icon-button-active);
 }
 
 /* --Experience Section Styles-- */

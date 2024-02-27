@@ -10,9 +10,9 @@ const styles = {
   heroSubText:
     "hero-sub-text font-medium lg:text-[44px] sm:text-[36px] xs:text-[24px] text-[20px] lg:leading-[68px] mt-1",
   heroContent:
-    "hero-content lg:text-[18px] sm:text-[16px] xs:text-[14px] text-[17px] lg:leading-[36px] mt-4",
+    "hero-content lg:text-[18px] sm:text-[16px] xs:text-[14px] text-[17px] lg:leading-[36px] md:leading-[36px] mt-6",
   heroContentA:
-    "hero-content lg:text-[18px] sm:text-[16px] xs:text-[14px] text-[17px] lg:leading-[36px] mt-4",
+    "hero-content lg:text-[18px] sm:text-[16px] xs:text-[14px] text-[17px] lg:leading-[36px]",
   neoContent:
     "lg:text-[18px] sm:text-[16px] xs:text-[14px] text-[17px]",
 

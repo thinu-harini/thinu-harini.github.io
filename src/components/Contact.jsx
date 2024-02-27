@@ -9,8 +9,17 @@ import { styles } from "../styles";
 import { EarthCanvas } from "./canvas";
 import { SectionWrapper } from "../hoc";
 import { slideIn } from "../utils/motion";
+import { TbArrowBigUpLinesFilled } from "react-icons/tb";
 
 const Contact = () => {
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   const formRef = useRef(null);
   const [form, setForm] = useState({
     name: "",
@@ -53,6 +62,12 @@ const Contact = () => {
           hideAlert();
           setform({ name: '', email: '', message: '' });
         }, [3000])
+
+        setForm({
+          name: "",
+          email: "",
+          message: "",
+        });
 
       }).catch((error) => {
         setIsLoading(false);
@@ -142,6 +157,23 @@ const Contact = () => {
       <div className="alert">
         {alert.show && <Alert {...alert} />}
         {/* <Alert {...alert} /> */}
+      </div>
+
+      <div className='absolute z-20 bottom-20 flex justify-center items-center' style={{ left: '50%', transform: 'translateX(-50%)' }}>
+        <motion.div
+          animate={{
+            y: [0, 24, 0]
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            repeatType: 'loop',
+            ease: 'easeInOut'
+          }}
+          onClick={scrollToTop}
+        >
+          <TbArrowBigUpLinesFilled size={32} color="#fff" />
+        </motion.div>
       </div>
 
     </div>

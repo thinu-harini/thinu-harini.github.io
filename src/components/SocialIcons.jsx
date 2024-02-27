@@ -6,9 +6,6 @@ import { IoMail } from "react-icons/io5";
 const SocialIcons = () => {
   return (
     <div className="social-icons">
-      <a href="mailto:thinu.harini@gmail.com" target="_blank" rel="noopener noreferrer">
-        <IoMail />
-      </a>
       <a href="https://www.linkedin.com/in/thinu-harini/" target="_blank" rel="noopener noreferrer">
         <FaLinkedin />
       </a>
@@ -21,6 +18,9 @@ const SocialIcons = () => {
       <a href="https://medium.com/@thinu.harini" target="_blank" rel="noopener noreferrer">
         <FaMediumM />
       </a> */}
+      <a href="mailto:thinu.harini@gmail.com" target="_blank" rel="noopener noreferrer">
+        <IoMail />
+      </a>
     </div>
   );
 };

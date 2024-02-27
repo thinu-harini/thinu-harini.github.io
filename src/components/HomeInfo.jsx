@@ -2,7 +2,7 @@ import React from 'react';
 import { HiCursorClick } from "react-icons/hi";
 import { GiClick } from "react-icons/gi";
 
-const InfoBox = ({ text, link, btnText }) => {
+const InfoBox = ({ link, btnText }) => {
   const handleClick = () => {
     const targetElement = document.querySelector(link);
     if (targetElement) {
@@ -14,7 +14,6 @@ const InfoBox = ({ text, link, btnText }) => {
 
   return (
     <div className='info-box'>
-      <p className='font-medium sm:text-xl text-center'>{text}</p>
       <button className={`neo-btn`} onClick={handleClick}>
         {btnText}
         {window.innerWidth <= 767 ? (
