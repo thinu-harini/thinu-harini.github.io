@@ -13,6 +13,7 @@ import Loader from './Loader';
 
 import Girl from '../models/Girl.jsx';
 import HomeInfo from '../components/HomeInfo.jsx';
+import Bird from '../models/Bird.jsx';
 
 const Hero = () => {
   const [isRotating, setIsRotating] = useState(false);
@@ -34,8 +35,22 @@ const Hero = () => {
     return [screenScale, screenPosition, rotation]
   }
 
-  const [girlScale, girlPosition, girlRotation] = adjustGirlForScreenSize();
+  // const adjustBirdForScreenSize = () => {
+  //   let screenScale, screenPosition;
+  //   if (window.innerWidth < 768) {
+  //     screenScale = [1, 1, 1];
+  //     screenPosition = [0, 0, 0];
+  //   } else {
+  //     screenScale = [1.2, 1.2, 1.2];
+  //     screenPosition = [-0.8, -2.5, 0];
+  //   }
+  //   console.log("Screen Scale:", screenScale);
+  //   console.log("Screen Position:", screenPosition);
+  //   return [screenScale, screenPosition];
+  // };
 
+  const [girlScale, girlPosition, girlRotation] = adjustGirlForScreenSize();
+  // const [birdScale, birdPosition] = adjustBirdForScreenSize();
 
   return (
     <div className={`motion-container xl:mt-8 lg:mt-8 md:mt-8 gap-10 overflow-hidden`}>
@@ -73,7 +88,7 @@ const Hero = () => {
           the gap between user needs and business goals.
         </p>
 
-        <div className="items-center gap-4 mt-4">
+        <div className="items-center gap-4 mt-4 flex">
           <h1 className={`${styles.heroContentA} italic`}>
             Let's Connect :
           </h1>
@@ -99,7 +114,7 @@ const Hero = () => {
 
         <Canvas
           className={`w-full h-screen relative ${isRotating ? 'cursor-grabbing' : 'cursor-grab'}`}
-          camera={{ near: 0.1, far: 200, fov: 45, position: [-1, 0, 7] }}
+          camera={{ near: 0.1, far: 1000, fov: 45, position: [-1, 0, 7] }}
         >
           <Suspense fallback={<Loader />}>
             <directionalLight position={[1, 1, 1]} intensity={2} />
@@ -118,23 +133,30 @@ const Hero = () => {
               castShadow
               shadow-mapSize={{ width: 1024, height: 1024 }}
             />
-
+            {/* <Bird
+              scale={birdScale}
+              position={birdPosition}
+              // rotation={[0, 20, 0]}
+              isRotating={isRotating}
+            /> */}
             {/* <Sky isRotating={isRotating} /> */}
+
             <Girl
-              position={girlPosition}
               scale={girlScale}
+              position={girlPosition}
               rotation={girlRotation}
               isRotating={isRotating}
               setIsRotating={setIsRotating}
               setCurrentStage={setCurrentStage}
             />
+
           </Suspense>
         </Canvas>
 
       </motion.div>
 
       {/* scroll button */}
-      <div className='absolute z-20 bottom-20 flex justify-center items-center'
+      <div className='absolute z-20 bottom-12 flex justify-center items-center'
         style={{ left: '50%', transform: 'translateX(-50%)' }}>
         <a href='#about'>
           <div className="scroll-button w-[35px] h-[64px] rounded-3xl border-4  justify-center items-start p-2 hidden md:flex">

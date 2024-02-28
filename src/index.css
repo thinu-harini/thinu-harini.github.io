@@ -57,7 +57,7 @@
   --logo-text: var(--secondary);
   --logo-bg: var(--secondary);
   --hero-background-rgba: rgba(189, 206, 251, 0.6);
-  --scroll-button: var(--white);
+  --scroll-button: var(--sub-text);
 
   --nav-title: var(--secondary);
   --nav-title-active: #481ba9;

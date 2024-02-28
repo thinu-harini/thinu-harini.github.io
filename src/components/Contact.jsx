@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { Suspense, useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 
@@ -6,10 +6,13 @@ import Alert from '../components/Alert';
 import useAlert from '../hooks/useAlert';
 
 import { styles } from "../styles";
-import { EarthCanvas } from "./canvas";
 import { SectionWrapper } from "../hoc";
 import { slideIn } from "../utils/motion";
 import { TbArrowBigUpLinesFilled } from "react-icons/tb";
+
+import { Canvas } from '@react-three/fiber';
+import Loader from "../components/Loader";
+import ContactAnimal from "../models/ContactAnimal";
 
 const Contact = () => {
 
@@ -28,12 +31,25 @@ const Contact = () => {
   });
   const { alert, showAlert, hideAlert } = useAlert();
   const [isLoading, setIsLoading] = useState(false);
+  const [currentAnimation, setCurrentAnimation] = useState('Armature|Armature|pm0887_00_00_ba10_waitA01|Base Layer');
+
+  //reset the animation after form submit
+  useEffect(() => {
+    if (currentAnimation === 'Armature|Armature|pm0887_00_00_ba20_buturi01|Base Layer') {
+      const timeoutId = setTimeout(() => {
+        setCurrentAnimation('Armature|Armature|pm0887_00_00_ba10_waitA01|Base Layer');
+      }, 2000);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [currentAnimation]);
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value }) //enable enter data
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setCurrentAnimation('Armature|Armature|pm0887_00_00_ba20_buturi01|Base Layer');
 
     emailjs
       .send(
@@ -85,6 +101,9 @@ const Contact = () => {
       })
   }
 
+  const handleFocus = () => setCurrentAnimation('Armature|Armature|pm0887_00_00_ba02_roar01|Base Layer');
+  const handleBlur = () => setCurrentAnimation('Armature|Armature|pm0887_00_00_ba10_waitA01|Base Layer');
+
   return (
     <div className={`motion-container xl:mt-12 gap-10 overflow-hidden`}>
       <motion.div
@@ -109,6 +128,8 @@ const Contact = () => {
               required
               value={form.name}
               onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
             />
           </label>
 
@@ -122,6 +143,8 @@ const Contact = () => {
               required
               value={form.email}
               onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
             />
           </label>
 
@@ -134,6 +157,8 @@ const Contact = () => {
               placeholder='Let me know how I can help you!'
               value={form.message}
               onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
             />
           </label>
 
@@ -141,6 +166,8 @@ const Contact = () => {
             type='submit'
             className='button py-3 px-8 w-fit'
             disabled={isLoading}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
           >
             {isLoading ? "Sending..." : "Send Message"}
           </button>
@@ -151,7 +178,34 @@ const Contact = () => {
         variants={slideIn("right", "tween", 0.2, 1)}
         className='xl:flex-1 xl:h-auto md:h-[550px] h-[350px]'
       >
-        <EarthCanvas />
+        {/* <EarthCanvas /> */}
+        <Canvas
+          camera={{
+            position: [0, 0, 5],
+            fov: 75,
+            near: 0.1,
+            far: 1000,
+          }}
+        >
+          <directionalLight intensity={2.5} position={[0, 0, 1]} />
+          <ambientLight intensity={0.5} />
+          {/* <pointLight position={[5, 10, 0]} intensity={2} />
+          <spotLight
+            position={[10, 10, 10]}
+            angle={0.15}
+            penumbra={1}
+            intensity={2}
+          /> */}
+
+          <Suspense fallback={<Loader />}>
+            <ContactAnimal
+              currentAnimation={currentAnimation}
+              position={[0, -1, 0]}
+              rotation={[0.5, 0, 0]}
+              scale={[3.5, 3.5, 3.5]}
+            />
+          </Suspense>
+        </Canvas>
       </motion.div>
 
       <div className="alert">
