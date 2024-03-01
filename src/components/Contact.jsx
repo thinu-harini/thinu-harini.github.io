@@ -31,13 +31,13 @@ const Contact = () => {
   });
   const { alert, showAlert, hideAlert } = useAlert();
   const [isLoading, setIsLoading] = useState(false);
-  const [currentAnimation, setCurrentAnimation] = useState('Armature|Armature|pm0887_00_00_ba10_waitA01|Base Layer');
+  const [currentAnimation, setCurrentAnimation] = useState('Armature|mixamo.com|Layer0.001');
 
   //reset the animation after form submit
   useEffect(() => {
-    if (currentAnimation === 'Armature|Armature|pm0887_00_00_ba20_buturi01|Base Layer') {
+    if (currentAnimation === 'Armature|mixamo.com|Layer0.001') {
       const timeoutId = setTimeout(() => {
-        setCurrentAnimation('Armature|Armature|pm0887_00_00_ba10_waitA01|Base Layer');
+        setCurrentAnimation('Armature|mixamo.com|Layer0.001');
       }, 2000);
       return () => clearTimeout(timeoutId);
     }
@@ -49,7 +49,7 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setCurrentAnimation('Armature|Armature|pm0887_00_00_ba20_buturi01|Base Layer');
+    setCurrentAnimation('Armature|mixamo.com|Layer0.001');
 
     emailjs
       .send(
@@ -101,8 +101,8 @@ const Contact = () => {
       })
   }
 
-  const handleFocus = () => setCurrentAnimation('Armature|Armature|pm0887_00_00_ba02_roar01|Base Layer');
-  const handleBlur = () => setCurrentAnimation('Armature|Armature|pm0887_00_00_ba10_waitA01|Base Layer');
+  const handleFocus = () => setCurrentAnimation('Armature|mixamo.com|Layer0.001');
+  const handleBlur = () => setCurrentAnimation('Armature|mixamo.com|Layer0.001');
 
   return (
     <div className={`motion-container xl:mt-12 gap-10 overflow-hidden`}>
@@ -200,9 +200,9 @@ const Contact = () => {
           <Suspense fallback={<Loader />}>
             <ContactAnimal
               currentAnimation={currentAnimation}
-              position={[0, -1, 0]}
-              rotation={[0.5, 0, 0]}
-              scale={[3.5, 3.5, 3.5]}
+              position={[0, -2.5, 0]}
+              rotation={[0, 0, 0]}
+              scale={[3.2, 3.2, 3.2]}
             />
           </Suspense>
         </Canvas>

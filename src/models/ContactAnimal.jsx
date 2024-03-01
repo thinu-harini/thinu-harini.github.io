@@ -9,7 +9,7 @@ Title: Dragapult
 import React, { useEffect, useRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 
-import scene from '../assets/3d/dragon.glb'
+import scene from '../assets/3d/animation2.glb'
 
 const ContactAnimal = ({ currentAnimation, ...props }) => {
   const group = useRef();
@@ -26,104 +26,59 @@ const ContactAnimal = ({ currentAnimation, ...props }) => {
 
   return (
     <group ref={group} {...props} dispose={null}>
-      <group name="Sketchfab_Scene">
-        <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
-          <group
-            name="dragapult_with_animationfbx"
-            rotation={[Math.PI / 2, 0, 0]}
-            scale={0.01}
-          >
-            <group name="Object_2">
-              <group name="RootNode">
-                <group name="Armature" scale={50}>
-                  <group name="Object_5">
-                    <primitive object={nodes._rootJoint} />
-                    <skinnedMesh
-                      name="Object_216"
-                      geometry={nodes.Object_216.geometry}
-                      material={materials["pm0887_00_00-BodyAVco01"]}
-                      skeleton={nodes.Object_216.skeleton}
-                    />
-                    <skinnedMesh
-                      name="Object_218"
-                      geometry={nodes.Object_218.geometry}
-                      material={materials["pm0887_00_00-BodyB00"]}
-                      skeleton={nodes.Object_218.skeleton}
-                    />
-                    <skinnedMesh
-                      name="Object_219"
-                      geometry={nodes.Object_219.geometry}
-                      material={materials["pm0887_00_00-BodyB01"]}
-                      skeleton={nodes.Object_219.skeleton}
-                    />
-                    <skinnedMesh
-                      name="Object_220"
-                      geometry={nodes.Object_220.geometry}
-                      material={materials["pm0887_00_00-BEye"]}
-                      skeleton={nodes.Object_220.skeleton}
-                    />
-                    <skinnedMesh
-                      name="Object_222"
-                      geometry={nodes.Object_222.geometry}
-                      material={materials["pm0887_00_00-BodyA00"]}
-                      skeleton={nodes.Object_222.skeleton}
-                    />
-                    <skinnedMesh
-                      name="Object_223"
-                      geometry={nodes.Object_223.geometry}
-                      material={materials["pm0887_00_00-BodyAVco00"]}
-                      skeleton={nodes.Object_223.skeleton}
-                    />
-                    <skinnedMesh
-                      name="Object_224"
-                      geometry={nodes.Object_224.geometry}
-                      material={materials["pm0887_00_00-BodyA01"]}
-                      skeleton={nodes.Object_224.skeleton}
-                    />
-                    <skinnedMesh
-                      name="Object_225"
-                      geometry={nodes.Object_225.geometry}
-                      material={materials["pm0887_00_00-ALEye"]}
-                      skeleton={nodes.Object_225.skeleton}
-                    />
-                    <skinnedMesh
-                      name="Object_226"
-                      geometry={nodes.Object_226.geometry}
-                      material={materials["pm0887_00_00-AREye"]}
-                      skeleton={nodes.Object_226.skeleton}
-                    />
-                    <skinnedMesh
-                      name="Object_228"
-                      geometry={nodes.Object_228.geometry}
-                      material={materials["pm0887_00_00-BodyB00"]}
-                      skeleton={nodes.Object_228.skeleton}
-                    />
-                    <skinnedMesh
-                      name="Object_229"
-                      geometry={nodes.Object_229.geometry}
-                      material={materials["pm0887_00_00-BodyB01"]}
-                      skeleton={nodes.Object_229.skeleton}
-                    />
-                    <skinnedMesh
-                      name="Object_230"
-                      geometry={nodes.Object_230.geometry}
-                      material={materials["pm0887_00_00-CEye"]}
-                      skeleton={nodes.Object_230.skeleton}
-                    />
-                    <group name="Object_215" scale={50} />
-                    <group name="Object_217" scale={50} />
-                    <group name="Object_221" scale={50} />
-                    <group name="Object_227" scale={50} />
-                  </group>
-                </group>
-                <group name="pm0887_00_00_TailSkin" scale={50} />
-                <group name="pm0887_00_00_BodyBSkin" scale={50} />
-                <group name="pm0887_00_00_BodyASkin" scale={50} />
-                <group name="pm0887_00_00_BodyCSkin" scale={50} />
-              </group>
-            </group>
+      <group name="Scene">
+        <group name="animation2glb">
+          <group name="Armature" rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+            <skinnedMesh
+              name="girl_body"
+              geometry={nodes.girl_body.geometry}
+              material={materials["skin color.001"]}
+              skeleton={nodes.girl_body.skeleton}
+            />
+            <skinnedMesh
+              name="hair_base"
+              geometry={nodes.hair_base.geometry}
+              material={materials["hair base color"]}
+              skeleton={nodes.hair_base.skeleton}
+            />
+            <skinnedMesh
+              name="shirt"
+              geometry={nodes.shirt.geometry}
+              material={materials["shirt color"]}
+              skeleton={nodes.shirt.skeleton}
+            />
+            <skinnedMesh
+              name="shoes"
+              geometry={nodes.shoes.geometry}
+              material={materials["shoe color"]}
+              skeleton={nodes.shoes.skeleton}
+            />
+            <skinnedMesh
+              name="trouser"
+              geometry={nodes.trouser.geometry}
+              material={materials["trouser color"]}
+              skeleton={nodes.trouser.skeleton}
+            />
+            <skinnedMesh
+              name="tummy_cloth"
+              geometry={nodes.tummy_cloth.geometry}
+              material={materials["tummycloth color"]}
+              skeleton={nodes.tummy_cloth.skeleton}
+            />
+            <primitive object={nodes.mixamorigHips} />
           </group>
         </group>
+        <group name="AmbientLight" />
+        <directionalLight
+          name="DirectionalLight"
+          intensity={2}
+          decay={2}
+          position={[5, 10, 7.5]}
+        >
+          <group position={[0, 0, -1]} />
+        </directionalLight>
+        <group name="HemisphereLight" position={[0, 10, 0]} />
+        <pointLight name="PointLight" intensity={1} decay={2} />
       </group>
     </group>
   );

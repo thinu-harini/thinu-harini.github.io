@@ -11,7 +11,7 @@ import { useGLTF } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { a } from "@react-spring/three";
 
-import girlScene from "../assets/3d/girl.glb";
+import girlScene from "../assets/3d/animation2.glb";
 
 const Girl = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
   const girlRef = useRef();
@@ -168,11 +168,66 @@ const Girl = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
 
   return (
     <a.group ref={girlRef} {...props}>
-      <mesh
+      {/* <mesh
         geometry={nodes.Object_2.geometry}
         material={materials.Girl}
         rotation={[-Math.PI / 2, 0, 0]}
-      />
+      /> */}
+      <group name="Scene">
+        <group name="animation2glb">
+          <group name="Armature" rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+            <skinnedMesh
+              name="girl_body"
+              geometry={nodes.girl_body.geometry}
+              material={materials["skin color.001"]}
+              skeleton={nodes.girl_body.skeleton}
+            />
+            <skinnedMesh
+              name="hair_base"
+              geometry={nodes.hair_base.geometry}
+              material={materials["hair base color"]}
+              skeleton={nodes.hair_base.skeleton}
+            />
+            <skinnedMesh
+              name="shirt"
+              geometry={nodes.shirt.geometry}
+              material={materials["shirt color"]}
+              skeleton={nodes.shirt.skeleton}
+            />
+            <skinnedMesh
+              name="shoes"
+              geometry={nodes.shoes.geometry}
+              material={materials["shoe color"]}
+              skeleton={nodes.shoes.skeleton}
+            />
+            <skinnedMesh
+              name="trouser"
+              geometry={nodes.trouser.geometry}
+              material={materials["trouser color"]}
+              skeleton={nodes.trouser.skeleton}
+            />
+            <skinnedMesh
+              name="tummy_cloth"
+              geometry={nodes.tummy_cloth.geometry}
+              material={materials["tummycloth color"]}
+              skeleton={nodes.tummy_cloth.skeleton}
+            />
+            <primitive object={nodes.mixamorigHips} />
+          </group>
+        </group>
+        <group name="AmbientLight" />
+        <directionalLight
+          name="DirectionalLight"
+          intensity={2}
+          decay={2}
+          position={[5, 10, 7.5]}
+        >
+          <group position={[0, 0, -1]} />
+        </directionalLight>
+        <group name="HemisphereLight" position={[0, 10, 0]} />
+        <pointLight name="PointLight" intensity={1} decay={2} />
+      </group>
+
     </a.group>
   );
 }

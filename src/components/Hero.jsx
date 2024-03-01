@@ -29,7 +29,7 @@ const Hero = () => {
       screenPosition = [0, -2.55, 0];
     } else {
       screenScale = [4, 4, 4];
-      screenPosition = [1, -3.8, -4];
+      screenPosition = [0.55, -3.8, -4];
     }
 
     return [screenScale, screenPosition, rotation]
