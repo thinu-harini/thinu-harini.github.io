@@ -10,14 +10,17 @@ import { useEffect, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { a } from "@react-spring/three";
+import { useGirlGLTF } from "../components/SharedGlb";
 
-import girlScene from "../assets/3d/animation2.glb";
+// import girlScene from "../assets/3d/4.glb";
+
 
 const Girl = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
   const girlRef = useRef();
 
   const { gl, viewport } = useThree();
-  const { nodes, materials } = useGLTF(girlScene);
+  // const { nodes, materials } = useGLTF(girlScene);
+  const { nodes, materials } = useGirlGLTF();
 
   const lastX = useRef(0);
   const rotationSpeed = useRef(0);
@@ -174,18 +177,18 @@ const Girl = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
         rotation={[-Math.PI / 2, 0, 0]}
       /> */}
       <group name="Scene">
-        <group name="animation2glb">
+        <group name="girlglb">
           <group name="Armature" rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
             <skinnedMesh
-              name="girl_body"
-              geometry={nodes.girl_body.geometry}
-              material={materials["skin color.001"]}
-              skeleton={nodes.girl_body.skeleton}
+              name="body"
+              geometry={nodes.body.geometry}
+              material={materials["skin color"]}
+              skeleton={nodes.body.skeleton}
             />
             <skinnedMesh
               name="hair_base"
               geometry={nodes.hair_base.geometry}
-              material={materials["hair base color"]}
+              material={materials["hair color"]}
               skeleton={nodes.hair_base.skeleton}
             />
             <skinnedMesh
@@ -197,7 +200,7 @@ const Girl = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
             <skinnedMesh
               name="shoes"
               geometry={nodes.shoes.geometry}
-              material={materials["shoe color"]}
+              material={materials["light hair color "]}
               skeleton={nodes.shoes.skeleton}
             />
             <skinnedMesh
@@ -206,28 +209,10 @@ const Girl = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
               material={materials["trouser color"]}
               skeleton={nodes.trouser.skeleton}
             />
-            <skinnedMesh
-              name="tummy_cloth"
-              geometry={nodes.tummy_cloth.geometry}
-              material={materials["tummycloth color"]}
-              skeleton={nodes.tummy_cloth.skeleton}
-            />
             <primitive object={nodes.mixamorigHips} />
           </group>
         </group>
-        <group name="AmbientLight" />
-        <directionalLight
-          name="DirectionalLight"
-          intensity={2}
-          decay={2}
-          position={[5, 10, 7.5]}
-        >
-          <group position={[0, 0, -1]} />
-        </directionalLight>
-        <group name="HemisphereLight" position={[0, 10, 0]} />
-        <pointLight name="PointLight" intensity={1} decay={2} />
       </group>
-
     </a.group>
   );
 }

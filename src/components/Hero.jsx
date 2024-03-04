@@ -28,7 +28,7 @@ const Hero = () => {
       screenScale = [2.4, 2.4, 2.4];
       screenPosition = [0, -2.55, 0];
     } else {
-      screenScale = [4, 4, 4];
+      screenScale = [3.8, 3.8, 3.8];
       screenPosition = [0.55, -3.8, -4];
     }
 

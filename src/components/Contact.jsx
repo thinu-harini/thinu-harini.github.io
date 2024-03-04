@@ -31,13 +31,13 @@ const Contact = () => {
   });
   const { alert, showAlert, hideAlert } = useAlert();
   const [isLoading, setIsLoading] = useState(false);
-  const [currentAnimation, setCurrentAnimation] = useState('Armature|mixamo.com|Layer0.001');
+  const [currentAnimation, setCurrentAnimation] = useState('idle');
 
   //reset the animation after form submit
   useEffect(() => {
-    if (currentAnimation === 'Armature|mixamo.com|Layer0.001') {
+    if (currentAnimation === 'thankful') {
       const timeoutId = setTimeout(() => {
-        setCurrentAnimation('Armature|mixamo.com|Layer0.001');
+        setCurrentAnimation('idle');
       }, 2000);
       return () => clearTimeout(timeoutId);
     }
@@ -49,7 +49,7 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setCurrentAnimation('Armature|mixamo.com|Layer0.001');
+    setCurrentAnimation('thankful');
 
     emailjs
       .send(
@@ -101,8 +101,8 @@ const Contact = () => {
       })
   }
 
-  const handleFocus = () => setCurrentAnimation('Armature|mixamo.com|Layer0.001');
-  const handleBlur = () => setCurrentAnimation('Armature|mixamo.com|Layer0.001');
+  const handleFocus = () => setCurrentAnimation('idle');
+  const handleBlur = () => setCurrentAnimation('idle');
 
   return (
     <div className={`motion-container xl:mt-12 gap-10 overflow-hidden`}>

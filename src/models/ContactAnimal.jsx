@@ -8,12 +8,15 @@ Title: Dragapult
 
 import React, { useEffect, useRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
+import { useContactAnimalGLTF } from "../components/SharedGlb";
 
-import scene from '../assets/3d/animation2.glb'
+// import { useContactAnimalGLTF } from "./components/SharedGlb";
+// import scene from '../assets/3d/6.glb'
 
 const ContactAnimal = ({ currentAnimation, ...props }) => {
   const group = useRef();
-  const { nodes, materials, animations } = useGLTF(scene);
+  // const { nodes, materials, animations } = useGLTF(scene);
+  const { nodes, materials, animations } = useContactAnimalGLTF();
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
@@ -27,18 +30,18 @@ const ContactAnimal = ({ currentAnimation, ...props }) => {
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Scene">
-        <group name="animation2glb">
+        <group name="girlglb">
           <group name="Armature" rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
             <skinnedMesh
-              name="girl_body"
-              geometry={nodes.girl_body.geometry}
-              material={materials["skin color.001"]}
-              skeleton={nodes.girl_body.skeleton}
+              name="body"
+              geometry={nodes.body.geometry}
+              material={materials["skin color"]}
+              skeleton={nodes.body.skeleton}
             />
             <skinnedMesh
               name="hair_base"
               geometry={nodes.hair_base.geometry}
-              material={materials["hair base color"]}
+              material={materials["hair color"]}
               skeleton={nodes.hair_base.skeleton}
             />
             <skinnedMesh
@@ -50,7 +53,7 @@ const ContactAnimal = ({ currentAnimation, ...props }) => {
             <skinnedMesh
               name="shoes"
               geometry={nodes.shoes.geometry}
-              material={materials["shoe color"]}
+              material={materials["light hair color "]}
               skeleton={nodes.shoes.skeleton}
             />
             <skinnedMesh
@@ -59,26 +62,9 @@ const ContactAnimal = ({ currentAnimation, ...props }) => {
               material={materials["trouser color"]}
               skeleton={nodes.trouser.skeleton}
             />
-            <skinnedMesh
-              name="tummy_cloth"
-              geometry={nodes.tummy_cloth.geometry}
-              material={materials["tummycloth color"]}
-              skeleton={nodes.tummy_cloth.skeleton}
-            />
             <primitive object={nodes.mixamorigHips} />
           </group>
         </group>
-        <group name="AmbientLight" />
-        <directionalLight
-          name="DirectionalLight"
-          intensity={2}
-          decay={2}
-          position={[5, 10, 7.5]}
-        >
-          <group position={[0, 0, -1]} />
-        </directionalLight>
-        <group name="HemisphereLight" position={[0, 10, 0]} />
-        <pointLight name="PointLight" intensity={1} decay={2} />
       </group>
     </group>
   );
