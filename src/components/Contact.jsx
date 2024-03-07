@@ -12,7 +12,7 @@ import { TbArrowBigUpLinesFilled } from "react-icons/tb";
 
 import { Canvas } from '@react-three/fiber';
 import Loader from "../components/Loader";
-import ContactAnimal from "../models/ContactAnimal";
+import Girl from "../models/Girl.jsx";
 
 const Contact = () => {
 
@@ -178,7 +178,6 @@ const Contact = () => {
         variants={slideIn("right", "tween", 0.2, 1)}
         className='xl:flex-1 xl:h-auto md:h-[550px] h-[350px]'
       >
-        {/* <EarthCanvas /> */}
         <Canvas
           camera={{
             position: [0, 0, 5],
@@ -187,21 +186,20 @@ const Contact = () => {
             far: 1000,
           }}
         >
-          <directionalLight intensity={2.5} position={[0, 0, 1]} />
-          <ambientLight intensity={0.5} />
-          {/* <pointLight position={[5, 10, 0]} intensity={2} />
-          <spotLight
-            position={[10, 10, 10]}
-            angle={0.15}
-            penumbra={1}
-            intensity={2}
-          /> */}
+          <directionalLight position={[1, 1, 1]} intensity={2} />
+          <ambientLight intensity={1} />
+          <hemisphereLight
+            skyColor='#b1e1ff'
+            groundColor='#000000'
+            intensity={0.5}
+          />
+          <pointLight position={[1, 1, 1]} intensity={1} />
 
           <Suspense fallback={<Loader />}>
-            <ContactAnimal
+            <Girl
               currentAnimation={currentAnimation}
-              position={[0, -2.5, 0]}
-              rotation={[0, 0, 0]}
+              position={[0, -3, 0]}
+              rotation={[-0.1, 0.2, 0]}
               scale={[3.2, 3.2, 3.2]}
             />
           </Suspense>
