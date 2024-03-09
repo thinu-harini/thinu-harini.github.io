@@ -10,8 +10,9 @@ import { SectionWrapper } from "../hoc";
 import SocialIcons from './SocialIcons';
 import { Canvas } from '@react-three/fiber'
 import Loader from './Loader';
+import HeroGirl from '../models/HeroGirl';
 
-import Girl from '../models/Girl.jsx';
+
 
 const Hero = () => {
   const [currentAnimation, setCurrentAnimation] = useState('wave');
@@ -19,10 +20,10 @@ const Hero = () => {
   const adjustGirlForScreenSize = () => {
     let screenScale = null;
     let screenPosition = null;
-    let rotation = [0, -0.1, 0];
+    let rotation = [-0.1, -0.1, 0];
 
     if (window.innerWidth < 768) {
-      screenScale = [2.4, 2.4, 2.4];
+      screenScale = [2.5, 2.5, 2.5];
       screenPosition = [0, -2.5, 0];
     } else {
       screenScale = [4, 4, 4];
@@ -101,19 +102,11 @@ const Hero = () => {
             <hemisphereLight
               skyColor='#b1e1ff'
               groundColor='#000000'
-              intensity={0.5}
+              intensity={1}
             />
-            <pointLight position={[1, 1, 1]} intensity={1} />
-            {/* <spotLight
-              position={[0, 50, 10]}
-              angle={0.15}
-              penumbra={1}
-              intensity={2}
-              castShadow
-              shadow-mapSize={{ width: 1024, height: 1024 }}
-            /> */}
+            <pointLight position={[0, 0, 0]} intensity={1} />
 
-            <Girl
+            <HeroGirl
               currentAnimation={currentAnimation}
               scale={girlScale}
               position={girlPosition}

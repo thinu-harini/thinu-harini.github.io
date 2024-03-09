@@ -33,6 +33,23 @@ const Contact = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentAnimation, setCurrentAnimation] = useState('idle');
 
+  const adjustGirlForScreenSize = () => {
+    let screenScale = null;
+    let screenPosition = null;
+    let rotation = [-0.1, -0.1, 0];
+
+    if (window.innerWidth < 768) {
+      screenScale = [2.5, 2.5, 2.5];
+      screenPosition = [0, -2.5, 0];
+    } else {
+      screenScale = [4, 4, 4];
+      screenPosition = [0.55, -3.8, -4];
+    }
+
+    return [screenScale, screenPosition, rotation]
+  }
+  const [girlScale, girlPosition, girlRotation] = adjustGirlForScreenSize();
+
   //reset the animation after form submit
   useEffect(() => {
     if (currentAnimation === 'thankful') {
@@ -76,7 +93,6 @@ const Contact = () => {
         //Hide alert and clear form
         setTimeout(() => {
           hideAlert();
-          setform({ name: '', email: '', message: '' });
         }, [3000])
 
         setForm({
@@ -179,12 +195,14 @@ const Contact = () => {
         className='xl:flex-1 xl:h-auto md:h-[550px] h-[350px]'
       >
         <Canvas
-          camera={{
-            position: [0, 0, 5],
-            fov: 75,
-            near: 0.1,
-            far: 1000,
-          }}
+
+          camera={{ near: 0.1, far: 1000, fov: 45, position: [-1, 0, 7] }}
+        // camera={{
+        //   position: [0, 0, 5],
+        //   fov: 75,
+        //   near: 0.1,
+        //   far: 1000,
+        // }}
         >
           <directionalLight position={[1, 1, 1]} intensity={2} />
           <ambientLight intensity={1} />
@@ -193,14 +211,17 @@ const Contact = () => {
             groundColor='#000000'
             intensity={0.5}
           />
-          <pointLight position={[1, 1, 1]} intensity={1} />
+
+          <pointLight position={[-1, 0.5, 1]} intensity={1} />
+          <pointLight position={[-1, -2, 1]} intensity={1} />
 
           <Suspense fallback={<Loader />}>
+
             <Girl
               currentAnimation={currentAnimation}
-              position={[0, -3, 0]}
-              rotation={[-0.1, 0.2, 0]}
-              scale={[3.2, 3.2, 3.2]}
+              scale={girlScale}
+              position={girlPosition}
+              rotation={girlRotation}
             />
           </Suspense>
         </Canvas>
