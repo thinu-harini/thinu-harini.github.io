@@ -9,8 +9,7 @@ import { styles } from "../styles";
 import { motion } from 'framer-motion';
 
 import moon from '../assets/moon.png';
-// import mountains_behind from '../assets/mountains_behind.png';
-import mountains_front from '../assets/mountains_front.png';
+import mountains from '../assets/mountains.png';
 import girl from '../assets/girl.png';
 import { useEffect } from "react";
 
@@ -18,13 +17,13 @@ const Home = () => {
   useEffect(() => {
     const handleScroll = () => {
       let moonElement = document.getElementById('moon');
-      let mountainsFrontElement = document.getElementById('mountains_front');
-      // let mountainsBehindElement = document.getElementById('mountains_behind');
+      let mountainsElement = document.getElementById('mountains');
+      let hometextElement = document.getElementById('hometext');
 
       let value = window.scrollY;
       moonElement.style.top = value * 1.05 + 'px';
-      mountainsFrontElement.style.top = value * 0 + 'px';
-      // mountainsBehindElement.style.top = value * 0.5 + 'px';
+      mountainsElement.style.top = value * 0 + 'px';
+      hometextElement.style.marginRight = value * 4 + 'px';
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -35,14 +34,13 @@ const Home = () => {
   }, []);
 
   return (
-    <section>
+    <section className="relative">
       <div className="homesection" >
         <img src={moon} className="moon" id="moon" alt="Moon" />
-        {/* <img src={mountains_behind} className="mountains_behind" id="mountains_behind" alt="Mountains Behind" /> */}
-        <img src={mountains_front} className="mountains_front" id="mountains_front" alt="Mountains Front" />
+        <img src={mountains} className="mountains" id="mountains" alt="Mountains" />
 
-        <div className="hometext" >
-          <h2 className={`${styles.heroHeadText}`}>
+        <div className="hometext" id="hometext" >
+          <h2 className={`${styles.homeText}`}>
             <TypeAnimation
               sequence={['Hello World!']}
               wrapper="span"
@@ -53,9 +51,8 @@ const Home = () => {
         </div>
 
       </div >
-      <img src={girl} className="girl" id="girl" alt="girl" />
-
-    </section >
+      <img src={girl} className="girl" id="girl" alt="Girl" />
+    </section>
   )
 }
 

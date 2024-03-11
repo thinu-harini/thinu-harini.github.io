@@ -39,40 +39,40 @@ const HeroGirl = ({ ...props }) => {
         setTimeout(startWaveAnimation, 10000);
       }
     };
-
     // Start the initial wave animation
     startWaveAnimation();
-
     // Clean up the timeout on component unmount
     return () => clearTimeout();
   }, [actions]);
 
-  const handleMouseMove = (event) => {
-    if (window.innerWidth > 768) {
+  //touch event and mouse event handling
+  const handlePointerMove = (event) => {
+    const pointerEvent = event.touches ? event.touches[0] : event;
 
-      const { clientX, clientY } = event;
+    const { clientX, clientY } = pointerEvent;
 
-      const canvasBounds = gl.domElement.getBoundingClientRect();
-      const mouse = new THREE.Vector2(
-        ((clientX - canvasBounds.left) / canvasBounds.width) * 2 - 1,
-        -((clientY - canvasBounds.top) / canvasBounds.height) * 2 + 1
-      );
+    const canvasBounds = gl.domElement.getBoundingClientRect();
+    const mouse = new THREE.Vector2(
+      ((clientX - canvasBounds.left) / canvasBounds.width) * 2 - 1,
+      -((clientY - canvasBounds.top) / canvasBounds.height) * 2 + 1
+    );
 
-      const raycaster = new THREE.Raycaster();
-      raycaster.setFromCamera(mouse, camera);
+    const raycaster = new THREE.Raycaster();
+    raycaster.setFromCamera(mouse, camera);
 
-      const intersection = new THREE.Vector3();
-      raycaster.ray.intersectPlane(new THREE.Plane().setFromNormalAndCoplanarPoint(new THREE.Vector3(0, 0, 1), target.current.position), intersection);
+    const intersection = new THREE.Vector3();
+    raycaster.ray.intersectPlane(new THREE.Plane().setFromNormalAndCoplanarPoint(new THREE.Vector3(0, 0, 1), target.current.position), intersection);
 
-      target.current.position.copy(intersection);
-    }
+    target.current.position.copy(intersection);
   };
 
   useEffect(() => {
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handlePointerMove);
+    window.addEventListener('touchmove', handlePointerMove);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mousemove', handlePointerMove);
+      window.removeEventListener('touchmove', handlePointerMove);
     };
   }, []);
 

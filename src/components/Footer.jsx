@@ -1,22 +1,38 @@
 import React from "react";
-import { SectionWrapper } from "../hoc";
-import SocialIcons from './SocialIcons';
 import { styles } from "../styles";
+import { motion } from "framer-motion";
+import SocialIcons from './SocialIcons';
+import { TbArrowBigUpLinesFilled } from "react-icons/tb";
 
 const Footer = () => {
-  return (
-    // <div className="footer rounded-2xl" style={{ backgroundColor: '#ffffff05' }}>
-    //   <div className={`flex flex-col items-center md:flex-row md:justify-between md:items-center md:px-12 px-4 py-7`}>
-    //     <SvgLogo className={`mb-6 md:mb-0`} />
-    //     <div className="text-center md:text-right md:mt-2">
-    //       <h1 className="hidden md:block" style={{ fontStyle: 'italic' }}>
-    //         Let's Connect.
-    //       </h1>
-    //       <SocialIcons />
-    //     </div>
-    //   </div>
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
+  return (
     <div className="footer">
+
+      <div className='relative bottom-6 flex justify-center items-center' style={{ left: '50%', transform: 'translateX(-50%)', cursor: 'pointer' }}>
+        <motion.div
+          animate={{
+            y: [0, 24, 0]
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            repeatType: 'loop',
+            ease: 'easeInOut'
+          }}
+          onClick={scrollToTop}
+        >
+          <TbArrowBigUpLinesFilled size={32} color="#fff" />
+        </motion.div>
+      </div>
+
       <div className={`flex flex-col items-center md:items-center md:px-4 px-4 py-4`}>
         <h1 className={`${styles.heroContentA}, py-2`}>
           Let's Connect.
@@ -32,4 +48,3 @@ const Footer = () => {
 }
 
 export default Footer;
-// export default SectionWrapper(Footer, "footer");

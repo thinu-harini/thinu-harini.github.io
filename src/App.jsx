@@ -4,7 +4,7 @@ import useLocalStorage from 'use-local-storage';
 
 import { About, Contact, Experience, Hero, Navbar, Tech, Projects, StarsCanvas, Footer, Home } from './components';
 import SplashScreen from './components/SplashScreen';
-import { CloudsCanvas } from './components/canvas';
+import { SkyCanvas } from './components/canvas';
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -28,10 +28,11 @@ const App = () => {
 
             <div className="relative">
               <Home />
+              <Hero />
               {/* {isDark && <CloudsCanvas />} */}
-              {isDark ? <StarsCanvas /> : <CloudsCanvas />}
+              {isDark ? <StarsCanvas /> : <SkyCanvas />}
             </div>
-            <Hero />
+
             <About />
             <Experience />
             <Projects />
@@ -39,7 +40,7 @@ const App = () => {
             <div className="relative">
               <Contact />
               <Footer />
-              {isDark && <StarsCanvas />}
+              {isDark ? <StarsCanvas /> : <SkyCanvas />}
             </div>
           </div>
         )}

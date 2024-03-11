@@ -5,6 +5,8 @@ const styles = {
   paddingA: "sm:px-0 px-6 sm:py-4",
   paddingB: "sm:py-8 py-8",
 
+  homeText:
+    "hero-head-text font-black lg:text-[68px] sm:text-[56px] xs:text-[48px] text-[36px] lg:leading-[98px]",
   heroHeadText:
     "hero-head-text font-black lg:text-[80px] sm:text-[56px] xs:text-[48px] text-[36px] lg:leading-[98px]",
   heroSubText:
