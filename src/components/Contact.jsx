@@ -195,7 +195,6 @@ const Contact = () => {
         className='xl:flex-1 xl:h-auto md:h-[550px] h-[350px]'
       >
         <Canvas
-
           camera={{ near: 0.1, far: 1000, fov: 45, position: [-1, 0, 7] }}
         // camera={{
         //   position: [0, 0, 5],

@@ -1,4 +1,5 @@
 import { BallCanvas, StarsCanvas } from './canvas';
+import Home from './Home';
 import Hero from './Hero';
 import Navbar from './Navbar';
 import About from './About';
@@ -11,6 +12,7 @@ import CanvasLoader from "./Loader";
 import MusicPlayer from './MusicPlayer';
 
 export {
+  Home,
   Hero,
   Navbar,
   About,

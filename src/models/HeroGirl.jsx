@@ -42,22 +42,24 @@ const HeroGirl = ({ currentAnimation, ...props }) => {
   }, [actions, currentAnimation]);
 
   const handleMouseMove = (event) => {
+    if (window.innerWidth > 768) {
 
-    const { clientX, clientY } = event;
+      const { clientX, clientY } = event;
 
-    const canvasBounds = gl.domElement.getBoundingClientRect();
-    const mouse = new THREE.Vector2(
-      ((clientX - canvasBounds.left) / canvasBounds.width) * 2 - 1,
-      -((clientY - canvasBounds.top) / canvasBounds.height) * 2 + 1
-    );
+      const canvasBounds = gl.domElement.getBoundingClientRect();
+      const mouse = new THREE.Vector2(
+        ((clientX - canvasBounds.left) / canvasBounds.width) * 2 - 1,
+        -((clientY - canvasBounds.top) / canvasBounds.height) * 2 + 1
+      );
 
-    const raycaster = new THREE.Raycaster();
-    raycaster.setFromCamera(mouse, camera);
+      const raycaster = new THREE.Raycaster();
+      raycaster.setFromCamera(mouse, camera);
 
-    const intersection = new THREE.Vector3();
-    raycaster.ray.intersectPlane(new THREE.Plane().setFromNormalAndCoplanarPoint(new THREE.Vector3(0, 0, 1), target.current.position), intersection);
+      const intersection = new THREE.Vector3();
+      raycaster.ray.intersectPlane(new THREE.Plane().setFromNormalAndCoplanarPoint(new THREE.Vector3(0, 0, 1), target.current.position), intersection);
 
-    target.current.position.copy(intersection);
+      target.current.position.copy(intersection);
+    }
   };
 
   useEffect(() => {

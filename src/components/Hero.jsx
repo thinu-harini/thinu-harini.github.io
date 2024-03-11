@@ -12,8 +12,6 @@ import { Canvas } from '@react-three/fiber'
 import Loader from './Loader';
 import HeroGirl from '../models/HeroGirl';
 
-
-
 const Hero = () => {
   const [currentAnimation, setCurrentAnimation] = useState('wave');
 
@@ -118,32 +116,11 @@ const Hero = () => {
 
           </Suspense>
         </Canvas>
-
       </motion.div>
-
-      {/* scroll button */}
-      <div className='absolute z-20 bottom-12 flex justify-center items-center'
-        style={{ left: '50%', transform: 'translateX(-50%)' }}>
-        <a href='#about'>
-          <div className="scroll-button w-[35px] h-[64px] rounded-3xl border-4  justify-center items-start p-2 hidden md:flex">
-            <motion.div
-              animate={{
-                y: [0, 24, 0]
-              }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                repeatType: 'loop'
-              }}
-              className='scroll-button-motion w-3 h-3 rounded-full mb-1'
-            />
-          </div>
-        </a>
-      </div>
 
     </div >
   )
 }
 
 // export default Hero;
-export default SectionWrapper(Hero, "home");
+export default SectionWrapper(Hero, "hero");

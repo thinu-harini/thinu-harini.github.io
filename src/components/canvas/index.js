@@ -1,5 +1,5 @@
 import BallCanvas from "./Ball";
 import StarsCanvas from "./Stars";
-import SkyCanvas from "./Sky";
+import CloudsCanvas from "./Clouds";
 
-export { BallCanvas, StarsCanvas, SkyCanvas };
+export { BallCanvas, StarsCanvas, CloudsCanvas };

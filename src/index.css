@@ -234,6 +234,74 @@
   }
 }
 
+/* --Home Section Styles-- */
+
+.homesection {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  /* padding: 100px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.homesection::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(to top, var(--primary), transparent);
+  z-index: 10;
+}
+
+.homesection img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.moon {
+  mix-blend-mode: screen;
+}
+
+.mountains_front {
+  z-index: 2;
+}
+
+.hometext {
+  position: absolute;
+  color: var(--head-text);
+  z-index: 1;
+  transform: translateY(-80%);
+}
+
+.girl {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+
+@media (max-width: 767px) {
+  .girl {
+    width: 60%;
+    max-width: 300px;
+  }
+}
+
+@media (min-width: 768px) {
+  .girl {
+    width: 15%;
+  }
+}
+
 /* --Hero Section Styles-- */
 
 .motion-container {

@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import useLocalStorage from 'use-local-storage';
 
-import { About, Contact, Experience, Hero, Navbar, Tech, Projects, StarsCanvas, Footer } from './components';
+import { About, Contact, Experience, Hero, Navbar, Tech, Projects, StarsCanvas, Footer, Home } from './components';
 import SplashScreen from './components/SplashScreen';
-import { SkyCanvas } from './components/canvas';
+import { CloudsCanvas } from './components/canvas';
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -27,10 +27,11 @@ const App = () => {
             <Navbar isDark={isDark} handleToggleChange={handleToggleChange} />
 
             <div className="relative">
-              <Hero />
-              {isDark ? <StarsCanvas /> : <SkyCanvas />}
+              <Home />
+              {/* {isDark && <CloudsCanvas />} */}
+              {isDark ? <StarsCanvas /> : <CloudsCanvas />}
             </div>
-
+            <Hero />
             <About />
             <Experience />
             <Projects />
