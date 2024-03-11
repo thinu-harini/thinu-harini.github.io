@@ -268,7 +268,10 @@
 
 .moon {
   mix-blend-mode: screen;
+  will-change: mix-blend-mode;
 }
+
+
 
 .mountains_front {
   z-index: 2;

@@ -13,7 +13,7 @@ import girlScene from '../assets/3d/girl.glb';
 import { useSkinnedMeshClone } from '../hooks/skinnedMeshClone';
 import Eyes from './Eyes';
 
-const HeroGirl = ({ currentAnimation, ...props }) => {
+const HeroGirl = ({ ...props }) => {
   const girlRef = useRef();
   const target = useRef(new THREE.Object3D());
 
@@ -25,21 +25,27 @@ const HeroGirl = ({ currentAnimation, ...props }) => {
   const { actions } = useAnimations(animations, girlRef);
 
   useEffect(() => {
-    Object.values(actions).forEach((action) => action.stop());
+    const startWaveAnimation = () => {
+      Object.values(actions).forEach((action) => action.stop());
 
-    if (actions[currentAnimation]) {
-      const animationAction = actions[currentAnimation];
+      if (actions['wave']) {
+        const animationAction = actions['wave'];
 
-      if (currentAnimation === 'wave') {
-        // If the animation is 'wave', set it to loop once
+        // Set 'wave' animation to loop once
         animationAction.reset().play().setLoop(THREE.LoopOnce);
         animationAction.clampWhenFinished = true;
-      } else {
-        // For other animations, play normally without LoopOnce
-        animationAction.reset().play();
+
+        // Schedule the next wave animation after 30 seconds
+        setTimeout(startWaveAnimation, 10000);
       }
-    }
-  }, [actions, currentAnimation]);
+    };
+
+    // Start the initial wave animation
+    startWaveAnimation();
+
+    // Clean up the timeout on component unmount
+    return () => clearTimeout();
+  }, [actions]);
 
   const handleMouseMove = (event) => {
     if (window.innerWidth > 768) {

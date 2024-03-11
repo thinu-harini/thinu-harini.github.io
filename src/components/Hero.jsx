@@ -1,4 +1,4 @@
-import { useState, Suspense } from 'react';
+import { Suspense } from 'react';
 import { motion } from 'framer-motion';
 
 import { slideIn } from "../utils/motion";
@@ -13,7 +13,6 @@ import Loader from './Loader';
 import HeroGirl from '../models/HeroGirl';
 
 const Hero = () => {
-  const [currentAnimation, setCurrentAnimation] = useState('wave');
 
   const adjustGirlForScreenSize = () => {
     let screenScale = null;
@@ -105,7 +104,6 @@ const Hero = () => {
             <pointLight position={[0, 0, 0]} intensity={1} />
 
             <HeroGirl
-              currentAnimation={currentAnimation}
               scale={girlScale}
               position={girlPosition}
               rotation={girlRotation}
