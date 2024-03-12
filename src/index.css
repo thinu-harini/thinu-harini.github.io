@@ -320,7 +320,7 @@
   bottom: 0;
   width: 100%;
   height: 20px;
-  background: linear-gradient(to top, var(--parallax_color), transparent);
+  /* background: linear-gradient(to top, var(--parallax_color), transparent); */
   z-index: 10;
 }
 
