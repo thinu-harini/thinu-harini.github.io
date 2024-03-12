@@ -54,7 +54,7 @@
 
   --background-color: var(--primary);
   --splash-screen-bg-color: var(--primary);
-  --parallax_color: #ded6c9;
+  --parallax_color: #fff;
 
   --logo-text: var(--secondary);
   --logo-bg: var(--secondary);
@@ -147,10 +147,66 @@
 }
 
 .sky-canvas {
-  background: linear-gradient(to bottom, #a694ff, #ffc9a3, #ffffff, #ffffff);
+  background: linear-gradient(to bottom, #ffffff, #a694ff, #937ff8, #826afb, #8972ff, #a694ff, #ffffff);
+  overflow: hidden;
 }
 
 /* #ffc9a3, a3dfff  */
+.cloud {
+  /* position: absolute; */
+  top: 50%;
+  height: auto;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.cloud1 {
+  animation: moveCloud1 20s linear infinite alternate;
+  left: 0;
+  width: 600px;
+}
+
+.cloud2 {
+  animation: moveCloud2 25s linear infinite alternate;
+  right: 0;
+  width: 500px;
+}
+
+.cloud3 {
+  animation: moveCloud1 23s linear infinite alternate;
+  left: 0;
+  width: 600px;
+}
+
+.cloud4 {
+  animation: moveCloud2 28s linear infinite alternate;
+  right: 0;
+  width: 500px;
+}
+
+@keyframes moveCloud1 {
+  from {
+    transform: translateX(-30vw);
+    /* Start from the right edge of the viewport */
+  }
+
+  to {
+    transform: translateX(100vw);
+    /* Move cloud2 to the left edge of the viewport */
+  }
+}
+
+@keyframes moveCloud2 {
+  from {
+    transform: translateX(100vw);
+    /* Start from the right edge of the viewport */
+  }
+
+  to {
+    transform: translateX(-30vw);
+    /* Move cloud2 to the left edge of the viewport */
+  }
+}
 
 .bg {
   background-color: var(--primary);
@@ -288,7 +344,6 @@
 
 .hometext {
   position: absolute;
-  color: var(--head-text);
   z-index: 1;
   transform: translateY(-80%);
 }

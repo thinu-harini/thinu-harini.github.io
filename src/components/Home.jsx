@@ -36,8 +36,8 @@ const Home = () => {
   return (
     <section className="relative">
       <div className="homesection" >
-        <img src={moon} className="moon" id="moon" alt="Moon" />
-        <img src={mountains} className="mountains" id="mountains" alt="Mountains" />
+        <img src={moon} className="moon" id="moon" />
+        <img src={mountains} className="mountains" id="mountains" />
 
         <div className="hometext" id="hometext" >
           <h2 className={`${styles.homeText}`}>
@@ -51,7 +51,7 @@ const Home = () => {
         </div>
 
       </div >
-      <img src={girl} className="girl" id="girl" alt="Girl" />
+      <img src={girl} className="girl" id="girl" />
     </section>
   )
 }

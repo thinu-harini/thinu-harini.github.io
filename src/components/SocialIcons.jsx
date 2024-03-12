@@ -18,7 +18,7 @@ const SocialIcons = () => {
       <a href="https://medium.com/@thinu.harini" target="_blank" rel="noopener noreferrer">
         <FaMediumM />
       </a> */}
-      <a href="mailto:thinu.harini@gmail.com" target="_blank" rel="noopener noreferrer">
+      <a href="mailto:thinu.harini@gmail.com" rel="noopener noreferrer">
         <IoMail />
       </a>
     </div>

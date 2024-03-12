@@ -28,6 +28,11 @@ const App = () => {
 
             <div className="relative">
               <Home />
+              {/* {isDark && <CloudsCanvas />} */}
+              {isDark ? <StarsCanvas /> : <SkyCanvas />}
+            </div>
+
+            <div className="relative">
               <Hero />
               {/* {isDark && <CloudsCanvas />} */}
               {isDark ? <StarsCanvas /> : <SkyCanvas />}

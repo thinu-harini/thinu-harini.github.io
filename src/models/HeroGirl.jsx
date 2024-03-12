@@ -39,15 +39,18 @@ const HeroGirl = ({ ...props }) => {
         setTimeout(startWaveAnimation, 10000);
       }
     };
+
     // Start the initial wave animation
     startWaveAnimation();
+
     // Clean up the timeout on component unmount
     return () => clearTimeout();
   }, [actions]);
 
-  const handlePointerMove = (event) => {
-    // Check if the event is a mouse event
-    if (event.type === 'mousemove') {
+  const handleMouseMove = (event) => {
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth > 768) {
       const { clientX, clientY } = event;
 
       const canvasBounds = gl.domElement.getBoundingClientRect();
@@ -63,20 +66,17 @@ const HeroGirl = ({ ...props }) => {
       raycaster.ray.intersectPlane(new THREE.Plane().setFromNormalAndCoplanarPoint(new THREE.Vector3(0, 0, 1), target.current.position), intersection);
 
       target.current.position.copy(intersection);
+    } else {
+      // Setting a fixed position for smaller screens
+      target.current.position.set(-1, 1, 5);
     }
   };
 
   useEffect(() => {
-    window.addEventListener('mousemove', handlePointerMove);
-
-    // Remove the touch event listener for touch screens
-    if ('ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0) {
-      window.removeEventListener('touchmove', handlePointerMove);
-    }
+    window.addEventListener('mousemove', handleMouseMove);
 
     return () => {
-      window.removeEventListener('mousemove', handlePointerMove);
-      window.removeEventListener('touchmove', handlePointerMove);
+      window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
 
@@ -132,4 +132,4 @@ const HeroGirl = ({ ...props }) => {
   );
 };
 
-export default HeroGirl;
+export default HeroGirl; 
