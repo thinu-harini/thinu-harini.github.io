@@ -60,7 +60,7 @@ const Home = () => {
           </a>
         </div> */}
 
-        <div className='z-10 flex justify-center items-center' style={{ cursor: 'pointer' }}>
+        <div className='z-10 justify-center items-center' style={{ cursor: 'pointer' }}>
           <a href='#hero'>
             <div className="scroll-down-button mt-10">
               <motion.div
