@@ -35,16 +35,20 @@ export const navLinks = [
   },
 ];
 
-// const services = [
-//   {
-//     title: "UX Researcher",
-//     icon: web,
-//   },
-//   {
-//     title: "UI Designer",
-//     icon: mobile,
-//   },
-// ];
+const education = [
+  {
+    degree: "Bachelor of Science (Hons.) in Information Technology",
+    place: "University of Moratuwa",
+  },
+  {
+    degree: "Comprehensive Master Java Developer Professional Program",
+    place: "Institute of Java and Software Engineering",
+  },
+  {
+    degree: "G.C.E. Advanced Level - Science Stream",
+    place: "R/Ferguson High School",
+  },
+];
 
 const technologies = [
   {
@@ -193,4 +197,4 @@ const projects = [
   },
 ];
 
-export { technologies, experiences, projects };
+export { education, technologies, experiences, projects };

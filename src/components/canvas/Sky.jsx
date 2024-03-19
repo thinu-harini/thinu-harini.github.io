@@ -13,8 +13,6 @@ const SkyCanvas = () => {
         <img src={cloud} className="cloud2" />
         <img src={cloud} className="cloud3" />
         <img src={cloud} className="cloud4" />
-        <img src={cloud} className="cloud1" />
-        <img src={cloud} className="cloud2" />
       </div>
     </div>
   );

@@ -12,6 +12,7 @@ import moon from '../assets/moon.png';
 import mountains from '../assets/mountains.png';
 import girl from '../assets/girl.png';
 import { useEffect } from "react";
+import { FaAnglesDown } from "react-icons/fa6";
 
 const Home = () => {
   useEffect(() => {
@@ -39,6 +40,46 @@ const Home = () => {
         <img src={moon} className="moon" id="moon" />
         <img src={mountains} className="mountains" id="mountains" />
 
+        {/* scroll button */}
+        {/* <div className='absolute z-20 bottom-80 flex justify-center items-center'
+          style={{ left: '50%', transform: 'translateX(-50%)' }}>
+          <a href='#about'>
+            <div className="scroll-button w-[35px] h-[64px] rounded-3xl border-4  justify-center items-start p-2 hidden md:flex">
+              <motion.div
+                animate={{
+                  y: [0, 24, 0]
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  repeatType: 'loop'
+                }}
+                className='scroll-button-motion w-3 h-3 rounded-full mb-1'
+              />
+            </div>
+          </a>
+        </div> */}
+
+        <div className='z-10 flex justify-center items-center' style={{ cursor: 'pointer' }}>
+          <a href='#hero'>
+            <div className="scroll-down-button mt-10">
+              <motion.div
+                animate={{
+                  y: [0, 24, 0]
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  repeatType: 'loop',
+                  ease: 'easeInOut'
+                }}
+              >
+                <FaAnglesDown size={40} />
+              </motion.div>
+            </div>
+          </a>
+        </div>
+
         <div className="hometext" id="hometext" >
           <h2 className={`${styles.homeText}`}>
             <TypeAnimation
@@ -49,10 +90,11 @@ const Home = () => {
             />
           </h2>
         </div>
-
       </div >
       <img src={girl} className="girl" id="girl" />
-    </section>
+
+    </section >
+
   )
 }
 

@@ -12,18 +12,21 @@ const styles = {
   heroSubText:
     "hero-sub-text font-medium lg:text-[44px] sm:text-[36px] xs:text-[24px] text-[20px] lg:leading-[68px] mt-1",
   heroContent:
-    "hero-content lg:text-[18px] sm:text-[16px] xs:text-[14px] text-[17px] lg:leading-[36px] md:leading-[36px] mt-6",
+    "hero-content lg:text-[18px] sm:text-[16px] xs:text-[16px] text-[17px] lg:leading-[36px] md:leading-[36px] mt-6",
   heroContentA:
     "hero-content lg:text-[18px] sm:text-[16px] xs:text-[14px] text-[17px] lg:leading-[36px]",
-  neoContent:
-    "lg:text-[18px] sm:text-[16px] xs:text-[14px] text-[17px]",
 
   sectionHeadText:
     "section-head-text font-black md:text-[60px] sm:text-[50px] xs:text-[40px] text-[30px]",
   sectionSubText:
     "section-sub-text font-medium sm:text-[18px] text-[14px] uppercase tracking-wider",
   sectionContent:
-    "section-content mt-4 text-[17px] max-w-3xl leading-[30px]",
+    "section-content mt-4 lg:text-[18px] sm:text-[17px] xs:text-[16px] text-[17px] max-w-3xl leading-[30px]",
+
+  aboutTopic:
+    "hero-sub-text font-medium lg:text-[20px] sm:text-[18px] xs:text-[16px] text-[18px] lg:leading-[30px]",
+  aboutContent:
+    "hero-sub-text lg:text-[18px] sm:text-[16px] xs:text-[16px] text-[17px] max-w-3xl leading-[30px]",
 
   experienceHeadText:
     "hero-head-text font-bold text-[24px]",
@@ -36,7 +39,7 @@ const styles = {
     "section-content text-[14px] mt-2",
 
   contactText:
-    "hero-sub-text font-medium mb-4",
+    "hero-content font-medium mb-4",
 };
 
 export { styles };

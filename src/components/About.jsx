@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
 
@@ -6,38 +6,24 @@ import { styles } from "../styles";
 import { fadeIn, textVariant } from "../utils/motion";
 import { SectionWrapper } from "../hoc";
 import Tech from './Tech';
+import { education } from "../constants";
 
-// const ServiceCard = ({ index, title, icon }) => {
-//   return (
-//     <Tilt className='xs:w-[250px] w-full'>
-//       <motion.div
-//         variants={fadeIn("up", "spring", index * 0.5, 0.75)}
-//         className='w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card'
-//       >
-//         <div
-//           options={{
-//             max: 45,
-//             scale: 1,
-//             speed: 450,
-//           }}
-//           className='bg-tertiary rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col'
-//         >
-//           <img
-//             src={icon}
-//             alt='web-development'
-//             className='w-16 h-16 object-contain'
-//           />
-
-//           <h3 className="text-white text-[20px] font-bold text-center">
-//             {title}
-//           </h3>
-//         </div>
-//       </motion.div>
-//     </Tilt>
-//   )
-// }
+const EducationInfo = ({ degree, place }) => {
+  return (
+    <div className='mt-5 slideIn'>
+      <h3 className={styles.aboutTopic}>{degree}</h3>
+      <p className={styles.aboutContent}>{place}</p>
+    </div>
+  );
+};
 
 const About = () => {
+  const [selectedTab, setSelectedTab] = useState("Education"); // Initial tab
+
+  const handleTabChange = (tab) => {
+    setSelectedTab(tab);
+  };
+
   return (
     <>
       <motion.div variants={textVariant()}>
@@ -45,22 +31,48 @@ const About = () => {
         <h2 className={styles.sectionHeadText}>About Me.</h2>
       </motion.div>
 
-      <motion.p
-        variants={fadeIn("", "", 0.1, 1)}
-        className={`${styles.sectionContent}`}
-      >
-        I hold a Bachelor of Science (Hons) degree in Information Technology from University of Moratuwa.
-        Here are some tools and technologies I have been working with:
-      </motion.p>
+      <div className="tabs mt-6">
+        <button
+          className={selectedTab === "Education" ? "active" : ""}
+          onClick={() => handleTabChange("Education")}
+        >
+          Education
+        </button>
+        <button
+          className={selectedTab === "Skills" ? "active" : ""}
+          onClick={() => handleTabChange("Skills")}
+        >
+          Skills
+        </button>
+      </div>
 
-      <Tech />
+      {selectedTab === "Education" ? (
 
-      {/* <div className='mt-20 flex flex-wrap gap-10'>
-        {services.map((service, index) => (
-          <ServiceCard key={service.title} index={index} {...service} />
-        ))}
-      </div> */}
+        <div className={'slideIn'}>
 
+          {/* <div className='flex flex-wrap gap-7'> */}
+          {education.map((edu, index) => (
+            <EducationInfo
+              key={`education-${index}`}
+              degree={edu.degree}
+              place={edu.place}
+            />
+          ))}
+          {/* </div> */}
+        </div >
+
+      ) : (
+
+        <div className={'slideIn'}>
+          {/* <p className={`${styles.sectionContent}`}>
+            By working in different projects, I have gained proficiency in different tools.
+            Here are some tools and technologies I have been working with. You can find the
+            relevant projects I have done with these tools and technologies in projects section.
+          </p> */}
+          <Tech />
+        </div>
+
+      )}
     </>
   )
 }

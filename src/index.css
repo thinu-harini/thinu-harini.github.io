@@ -44,7 +44,7 @@
 
   /* text colors */
   --head-text: #5E5688;
-  --sub-text: #877EB8;
+  --sub-text: #6d6698;
   --hero-content-text: #4c527e;
   --section-sub-text: var(--secondary);
   --section-content: #877EB8;
@@ -147,7 +147,7 @@
 }
 
 .sky-canvas {
-  background: linear-gradient(to bottom, #ffffff, #a694ff, #937ff8, #826afb, #8972ff, #a694ff, #ffffff);
+  background: linear-gradient(to bottom, #ffffff, #a694ff, #826afb, #a694ff, #ffffff);
   overflow: hidden;
 }
 
@@ -163,25 +163,25 @@
 .cloud1 {
   animation: moveCloud1 20s linear infinite alternate;
   left: 0;
-  width: 600px;
+  width: 800px;
 }
 
 .cloud2 {
   animation: moveCloud2 25s linear infinite alternate;
   right: 0;
-  width: 500px;
+  width: 700px;
 }
 
 .cloud3 {
   animation: moveCloud1 23s linear infinite alternate;
   left: 0;
-  width: 600px;
+  width: 800px;
 }
 
 .cloud4 {
   animation: moveCloud2 28s linear infinite alternate;
   right: 0;
-  width: 500px;
+  width: 700px;
 }
 
 @keyframes moveCloud1 {
@@ -370,6 +370,10 @@
   }
 }
 
+.scroll-down-button {
+  color: var(--head-text);
+}
+
 /* --Hero Section Styles-- */
 
 .motion-container {
@@ -384,16 +388,14 @@
 
 .leftDiv {
   background-color: var(--hero-background-rgba);
+  backdrop-filter: blur(5px);
   transition: background-color 500ms ease-in-out;
-  /* flex: 1; */
   max-width: 70%;
-  /* flex-basis: 175%; */
+  /* box-shadow: 0 10px 10px var(--primary); */
 }
 
 .rightDiv {
-  /* flex: 1; */
   max-width: 30%;
-  /* flex-shrink: 1; */
 }
 
 @media (max-width: 991px) {
@@ -408,13 +410,13 @@
   }
 }
 
-.scroll-button {
+/* .scroll-button {
   border-color: var(--scroll-button);
 }
 
 .scroll-button-motion {
   background-color: var(--scroll-button);
-}
+} */
 
 /* --Text Styles-- */
 .hero-head-text {
@@ -479,7 +481,7 @@
   transition: background-color 10ms ease-in-out;
 }
 
-@keyframes slideUp {
+/* @keyframes slideUp {
   0% {
     transform: translateY(50%);
     opacity: 0;
@@ -489,9 +491,9 @@
     transform: translateY(0);
     opacity: 1;
   }
-}
+} */
 
-.neo-btn {
+/* .neo-btn {
   padding: 0.5rem 0.5rem;
   border-radius: 0.375rem;
   color: #ffffff;
@@ -538,9 +540,9 @@
 .neo-btn:hover {
   transform: scale(1.02);
   background-color: var(--icon-button-bg-hover);
-}
+} */
 
-.icon-click-wrapper {
+/* .icon-click-wrapper {
   display: inline-flex;
   justify-content: flex-end;
   align-items: center;
@@ -556,7 +558,7 @@
   color: var(--yellow);
   font-size: 18px;
   margin-left: 5px;
-}
+} */
 
 /* --Social Icons Styles-- */
 .social-icons {
@@ -580,6 +582,45 @@
   color: var(--icon-button-active);
 }
 
+/* About Section Styles */
+
+.tabs {
+  display: flex;
+}
+
+.tabs button {
+  background-color: transparent;
+  color: var(--head-text);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.tabs button.active {
+  background-color: var(--secondary);
+  color: #fff;
+  font-weight: 600;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slideIn {
+  animation: slideIn 0.5s ease-in-out forwards;
+}
+
 /* --Experience Section Styles-- */
 .experience-card {
   background-color: var(--tertiary);
@@ -598,8 +639,9 @@
 
 /* --Contact Section Styles-- */
 .contact-card {
-  background-color: var(--tertiary);
-  flex: 0.75;
+  background-color: var(--hero-background-rgba);
+  backdrop-filter: blur(10px);
+  flex: 1;
   padding: 2rem;
   border-radius: 1rem;
   transition: background-color 500ms ease-in-out;

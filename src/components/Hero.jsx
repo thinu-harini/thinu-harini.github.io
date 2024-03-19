@@ -24,7 +24,7 @@ const Hero = () => {
       screenPosition = [0, -2.5, 0];
     } else {
       screenScale = [4, 4, 4];
-      screenPosition = [0.55, -3.8, -4];
+      screenPosition = [1, -3.8, -4];
     }
 
     return [screenScale, screenPosition, rotation]
@@ -85,7 +85,7 @@ const Hero = () => {
       </motion.div>
 
       <motion.div
-        variants={slideIn("bottom", "tween", 0.8, 1)}
+        variants={slideIn("up", "tween", 0.8, 1)}
         className={`rightDiv xl:flex-1 xl:h-auto md:h-[600px] h-[450px]`}
       >
 

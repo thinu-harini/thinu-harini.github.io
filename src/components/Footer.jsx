@@ -2,7 +2,7 @@ import React from "react";
 import { styles } from "../styles";
 import { motion } from "framer-motion";
 import SocialIcons from './SocialIcons';
-import { TbArrowBigUpLinesFilled } from "react-icons/tb";
+import { FaAnglesUp } from "react-icons/fa6";
 
 const Footer = () => {
 
@@ -29,7 +29,7 @@ const Footer = () => {
           }}
           onClick={scrollToTop}
         >
-          <TbArrowBigUpLinesFilled size={32} color="#fff" />
+          <FaAnglesUp size={32} color="#fff" />
         </motion.div>
       </div>
 
