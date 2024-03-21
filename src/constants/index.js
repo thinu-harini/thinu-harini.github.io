@@ -75,10 +75,9 @@ const technologies = [
 
 const experiences = [
   {
+    tab_name: "Groome",
     title: "UI/UX Designer",
     company_name: "Groome Digital",
-    icon: groomelogo,
-    iconBg: "#FFFFFF",
     date: "Oct 2022 - Oct 2023",
     points: [
       "Individually designed booking and team management platform targeted on beauty and wellness industry ensuring both functionality and aesthetic appeal.",
@@ -87,32 +86,28 @@ const experiences = [
     ],
   },
   {
+    tab_name: "IEEE",
     title: "Web Developer",
     company_name: "IEEE SL Inspire",
-    icon: ieee,
-    iconBg: "#FFF9F9",
     date: "May 2021 - Aug 2022",
     points: [
       "Responsible for developing and maintaining the website, troubleshoot issues, implement updates, and ensure that the website consistently reflected the dynamic nature of the organization.",
     ],
   },
   {
+    tab_name: "Texonic",
     title: "UI/UX Engineer Intern",
     company_name: "Texonic Information System Pvt Ltd",
-    icon: texonic,
-    iconBg: "#FFFFFF",
     date: "Aug 2020 - Feb 2021",
     points: [
-      "Worked as sole UX/UI engineer for a range of projects collaborated with cross - functional teams to deliver tailored design solution for clients across diverse industries.",
       "Worked as sole UX/UI engineer for a range of projects collaborated with cross - functional teams to deliver tailored design solution for clients across diverse industries.",
       "Redesigned existing systems by improving overall user experience by identifying UX issues and proposing design recommendations result in increment of user engagement and satisfaction."
     ],
   },
   {
+    tab_name: "Share a Book",
     title: "Creative Designer",
     company_name: "Share a Book",
-    icon: sab,
-    iconBg: "#E6DEDD",
     date: "April 2020 - June 2020",
     points: [
       "Responsible for brand identity design from concept to execution.",

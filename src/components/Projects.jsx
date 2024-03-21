@@ -48,7 +48,7 @@ const ProjectCard = ({
 
         <div className='mt-5'>
           <h3 className={styles.experienceHeadText}>{name}</h3>
-          <p className={styles.projectContent}>{description}</p>
+          <p className={styles.cardContent}>{description}</p>
         </div>
 
         <div className='mt-4 flex flex-wrap gap-2'>
@@ -74,7 +74,7 @@ const Projects = () => {
         <h2 className={styles.sectionHeadText}>Projects.</h2>
       </motion.div>
 
-      <div className='w-full flex'>
+      {/* <div className='w-full flex'>
         <motion.p
           variants={fadeIn("", "", 0.1, 1)}
           className={`${styles.sectionContent}`}
@@ -85,9 +85,9 @@ const Projects = () => {
           ability to solve complex problems, work with different technologies,
           and manage projects effectively.
         </motion.p>
-      </div>
+      </div> */}
 
-      <div className='mt-20 flex flex-wrap gap-7'>
+      <div className='mt-10 flex flex-wrap gap-7'>
         {projects.map((project, index) => (
           <ProjectCard key={`project-${index}`} index={index} {...project} />
         ))}

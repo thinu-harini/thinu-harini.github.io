@@ -24,19 +24,19 @@ const styles = {
     "section-content mt-4 lg:text-[18px] sm:text-[17px] xs:text-[16px] text-[17px] max-w-3xl leading-[30px]",
 
   aboutTopic:
-    "hero-sub-text font-medium lg:text-[20px] sm:text-[18px] xs:text-[16px] text-[18px] lg:leading-[30px]",
+    "hero-sub-text font-medium lg:text-[20px] sm:text-[17px] xs:text-[16px] text-[17px] lg:leading-[30px]",
   aboutContent:
-    "hero-sub-text lg:text-[18px] sm:text-[16px] xs:text-[16px] text-[17px] max-w-3xl leading-[30px]",
+    "hero-sub-text lg:text-[18px] sm:text-[16px] xs:text-[16px] text-[16px] max-w-3xl leading-[30px]",
 
   experienceHeadText:
     "hero-head-text font-bold text-[24px]",
   experienceSubText:
-    "section-sub-text font-semibold text-[16px]",
-  experienceContent:
-    "hero-content text-[14px] pl-1 tracking-wider",
+    "experience-sub-text font-semibold text-[18px] uppercase tracking-wider",
+  experienceDate:
+    "card-content font-medium italic lg:text-[15px text-[14px]",
 
-  projectContent:
-    "section-content text-[14px] mt-2",
+  cardContent:
+    "card-content lg:text-[15px] text-[14px] mt-3",
 
   contactText:
     "hero-content font-medium mb-4",

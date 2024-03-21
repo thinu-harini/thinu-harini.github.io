@@ -10,9 +10,16 @@ import { education } from "../constants";
 
 const EducationInfo = ({ degree, place }) => {
   return (
-    <div className='mt-5 slideIn'>
-      <h3 className={styles.aboutTopic}>{degree}</h3>
-      <p className={styles.aboutContent}>{place}</p>
+    <div className='slideIn'>
+      <ul className='bullet'>
+        <li>
+          <span className="bullet-marker"></span>
+          <div className="mt-4">
+            <h3 className={styles.aboutTopic}>{degree}</h3>
+            <p className={styles.aboutContent}>{place}</p>
+          </div>
+        </li>
+      </ul>
     </div>
   );
 };
@@ -31,7 +38,7 @@ const About = () => {
         <h2 className={styles.sectionHeadText}>About Me.</h2>
       </motion.div>
 
-      <div className="tabs mt-6">
+      <div className="tab_button mt-6 mb-6">
         <button
           className={selectedTab === "Education" ? "active" : ""}
           onClick={() => handleTabChange("Education")}
@@ -50,7 +57,6 @@ const About = () => {
 
         <div className={'slideIn'}>
 
-          {/* <div className='flex flex-wrap gap-7'> */}
           {education.map((edu, index) => (
             <EducationInfo
               key={`education-${index}`}
@@ -58,7 +64,7 @@ const About = () => {
               place={edu.place}
             />
           ))}
-          {/* </div> */}
+
         </div >
 
       ) : (

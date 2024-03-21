@@ -48,6 +48,8 @@
   --hero-content-text: #4c527e;
   --section-sub-text: var(--secondary);
   --section-content: #877EB8;
+  --experience-sub-text: var(--secondary);
+  --card-content: #877EB8;
   --text-hover: #5233ed;
   --placeholder-text: #b7bcdf;
   --alert-text: #2d314a;
@@ -91,6 +93,7 @@
   --white-100: #f3f3f3;
   --white: #ffffff;
   --purple-grey: #aaa6c3;
+  --purple-grey-lighter: #dad6f5;
   --alert-red: #ff1c42;
   --yellow: #ffea00;
 
@@ -114,6 +117,8 @@
   --hero-content-text: var(--white-100);
   --section-sub-text: var(--purple-grey);
   --section-content: var(--purple-grey);
+  --experience-sub-text: var(--secondary);
+  --card-content: var(--purple-grey-lighter);
   --text-hover: #ffffff;
   --placeholder-text: var(--purple-grey);
   --alert-text: var(--white);
@@ -449,6 +454,15 @@
   transition: color 500ms ease-in-out;
 }
 
+.experience-sub-text {
+  color: var(--experience-sub-text);
+}
+
+.card-content {
+  color: var(--card-content);
+  transition: color 500ms ease-in-out;
+}
+
 .highlight-text {
   color: var(--secondary);
   transition: color 500ms ease-in-out;
@@ -584,11 +598,11 @@
 
 /* About Section Styles */
 
-.tabs {
+.tab_button {
   display: flex;
 }
 
-.tabs button {
+.tab_button button {
   background-color: transparent;
   color: var(--head-text);
   border: none;
@@ -599,10 +613,44 @@
   font-weight: 500;
 }
 
-.tabs button.active {
+.tab_button button.active {
   background-color: var(--secondary);
   color: #fff;
   font-weight: 600;
+}
+
+.bullet {
+  list-style-type: none;
+}
+
+.bullet li {
+  position: relative;
+  padding-left: 20px;
+}
+
+.bullet-marker {
+  position: absolute;
+  top: 20%;
+  left: 0;
+  background-color: var(--secondary);
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 50%;
+  animation: moveUp 4s infinite alternate;
+}
+
+@keyframes moveUp {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
 }
 
 @keyframes slideIn {
@@ -622,10 +670,103 @@
 }
 
 /* --Experience Section Styles-- */
-.experience-card {
-  background-color: var(--tertiary);
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tab {
+  background-color: transparent;
   color: var(--head-text);
-  transition: background-color 500ms ease-in-out, color 500ms ease-in-out;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.tab.active {
+  background-color: var(--secondary);
+  color: #fff;
+  font-weight: 600;
+}
+
+.experience-slider-container {
+  display: flex;
+  overflow-x: auto;
+  /* overflow: hidden; */
+  -webkit-overflow-scrolling: touch;
+  /* Enable smooth scrolling on iOS */
+  width: 100%;
+  /* Set a fixed width to enable scrolling */
+}
+
+.experience-slider {
+  display: inline-flex;
+  flex-direction: row;
+  transition: transform 0.5s ease;
+  width: 100%;
+}
+
+.experience-card {
+  flex: 0 0 auto;
+  background-color: var(--tertiary);
+  padding: 2rem;
+  margin-right: 20px;
+  border-radius: 1rem;
+  border-width: 2px;
+  border-color: var(--secondary);
+  transition: background-color 500ms ease-in-out, transform 0.5s ease;
+  transform: scale(0.95);
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .experience-card {
+    width: calc(50% - 20px);
+    /* On larger screens, two cards should be shown side by side */
+  }
+
+  .experience-card.active {
+    transform: scale(0.99);
+    z-index: 1;
+  }
+}
+
+@media (max-width: 767px) {
+  .experience-card {
+    width: 100%;
+    /* margin-right: 0; */
+  }
+
+}
+
+.experience-card.active {
+  opacity: 1;
+}
+
+.experience_bullets {
+  list-style-type: none;
+}
+
+.experience_bullets li {
+  position: relative;
+  padding-left: 20px;
+}
+
+.experience_bullets-marker {
+  position: absolute;
+  left: 0;
+  top: 10%;
+  width: 0.5em;
+  height: 0.5em;
+  background-color: var(--secondary);
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
 /* --Project Section Styles-- */
@@ -633,6 +774,8 @@
   background-color: var(--tertiary);
   padding: 1.25rem;
   border-radius: 1rem;
+  border-width: 1px;
+  border-color: var(--secondary);
   width: 100%;
   transition: background-color 500ms ease-in-out;
 }
