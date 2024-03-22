@@ -641,7 +641,7 @@
   border-width: 1px;
   border-color: var(--card_border);
   transition: background-color 500ms ease-in-out, transform 0.5s ease;
-  transform: scale(0.90);
+  transform: scale(0.95);
   opacity: 0.5;
   cursor: pointer;
 }
@@ -653,7 +653,7 @@
   }
 
   .experience-card.active {
-    transform: scale(0.95);
+    /* transform: scale(1); */
     z-index: 1;
   }
 }
@@ -690,6 +690,26 @@
   background-color: var(--secondary);
   border-radius: 50%;
   margin-right: 10px;
+}
+
+.carousel-indicator {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.indicator-line {
+  width: 30px;
+  height: 4px;
+  border-radius: 10px;
+  background-color: var(--purple-grey);
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.indicator-line.active {
+  background-color: var(--secondary);
 }
 
 /* --Project Section Styles-- */

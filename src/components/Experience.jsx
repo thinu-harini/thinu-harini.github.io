@@ -125,6 +125,17 @@ const Experience = () => {
           ))}
         </div>
       </div>
+
+      {/* Carousel Indicator */}
+      <div className="carousel-indicator">
+        {experiences.map((experience, index) => (
+          <div
+            key={index}
+            className={`indicator-line ${activeTab === index ? 'active' : ''}`}
+            onClick={() => handleCardClick(index)}
+          />
+        ))}
+      </div>
     </div>
   );
 };
