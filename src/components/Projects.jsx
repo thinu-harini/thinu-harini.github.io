@@ -73,12 +73,13 @@ const ProjectCard = ({
 };
 
 const Projects = () => {
+
   return (
-    <div>
-      <motion.div variants={textVariant()}>
+    <>
+      <div>
         <p className={styles.sectionSubText}>My Work</p>
         <h2 className={styles.sectionHeadText}>Projects.</h2>
-      </motion.div>
+      </div>
 
       {/* <div className='w-full flex'>
 //         <motion.p
@@ -95,11 +96,11 @@ const Projects = () => {
 
       <div className='mt-10 flex flex-wrap gap-7'>
         {projects.map((project, index) => (
-          <ProjectCard key={`project-${index}`} index={index} {...project} />
+          <ProjectCard key={`project-${index}`} {...project} />
         ))}
       </div>
 
-    </div>
+    </>
   );
 };
 
