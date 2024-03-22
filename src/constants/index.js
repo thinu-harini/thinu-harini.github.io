@@ -5,11 +5,6 @@ import {
   figma,
   adobexd,
 
-  sab,
-  groomelogo,
-  ieee,
-  texonic,
-
   groome,
   ichatcs,
   crowdfunding,
@@ -168,6 +163,19 @@ const projects = [
     name: "Sapro Mart",
     description:
       "Online retail platform that connects any type of whole sellers and retailers in Sri Lanka to its users based on location.",
+    tags: [
+      {
+        name: "Adobe XD",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: ichatcs,
+    source_code_link: "https://dribbble.com/shots/13933576-Online-Concert-Ticket-Booking",
+  },
+  {
+    name: "Food Mart - POS System",
+    description:
+      " an innovative Point of Sale system designed exclusively for restaurants, designed to streamline order management based on distinct sections and diverse locations.",
     tags: [
       {
         name: "Adobe XD",
