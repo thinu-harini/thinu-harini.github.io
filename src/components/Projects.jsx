@@ -1,9 +1,9 @@
 import React from 'react';
-import { motion } from "framer-motion"
-import { styles } from "../styles";
-import { projects } from "../constants";
-import { SectionWrapper } from "../hoc";
-import { fadeIn, textVariant } from "../utils/motion";
+import { motion } from 'framer-motion';
+import { styles } from '../styles';
+import { projects } from '../constants';
+import { SectionWrapper } from '../hoc';
+import { fadeIn, textVariant } from '../utils/motion';
 import { dribbble } from "../assets";
 
 const ProjectCard = ({
@@ -81,25 +81,27 @@ const Projects = () => {
       </motion.div>
 
       {/* <div className='w-full flex'>
-        <motion.p
-          variants={fadeIn("", "", 0.1, 1)}
-          className={`${styles.sectionContent}`}
-        >
-          Following projects showcases my skills and experience through
-          real-world examples of my work. Each project is briefly described with
-          links to case studies and live demos in it. It reflects my
-          ability to solve complex problems, work with different technologies,
-          and manage projects effectively.
-        </motion.p>
-      </div> */}
+//         <motion.p
+//           variants={fadeIn("", "", 0.1, 1)}
+//           className={`${styles.sectionContent}`}
+//         >
+//           Following projects showcases my skills and experience through
+//           real-world examples of my work. Each project is briefly described with
+//           links to case studies and live demos in it. It reflects my
+//           ability to solve complex problems, work with different technologies,
+//           and manage projects effectively.
+//         </motion.p>
+//       </div> */}
 
-      <div className='mt-6 flex flex-wrap gap-7'>
+      <div className='mt-10 flex flex-wrap gap-7'>
         {projects.map((project, index) => (
           <ProjectCard key={`project-${index}`} index={index} {...project} />
         ))}
       </div>
+
     </div>
-  )
-}
+  );
+};
 
 export default SectionWrapper(Projects, "projects")
+
