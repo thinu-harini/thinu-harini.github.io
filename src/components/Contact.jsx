@@ -116,7 +116,7 @@ const Contact = () => {
     <div className={`motion-container xl:mt-12 gap-10 overflow-hidden`}>
       <motion.div
         variants={slideIn("left", "tween", 0.2, 1)}
-        className='contact-card'
+        className='contact-left-div'
       >
         <p className={`${styles.sectionSubText}`}>Get in touch</p>
         <h3 className={`${styles.sectionHeadText}`}>Contact.</h3>
@@ -184,7 +184,7 @@ const Contact = () => {
 
       <motion.div
         variants={slideIn("up", "tween", 0.2, 1)}
-        className='xl:flex-1 xl:h-auto md:h-[550px] h-[350px]'
+        className='contact-right-div xl:flex-1 xl:h-auto md:h-[550px] h-[350px]'
       >
         <Canvas
           camera={{ near: 0.1, far: 1000, fov: 45, position: [-1, 0, 7] }}

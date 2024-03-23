@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types'; // Import PropTypes for type-checking
 import { SplashAnimation } from './SplashAnimation';
+import { styles } from '../styles';
 
 const SplashScreen = ({ setLoading }) => {
-  const [theme, setTheme] = useState('light'); // Set your desired background color here
+  const [theme, setTheme] = useState('light');
+  const [dots, setDots] = useState('');
 
   useEffect(() => {
-    // Simulate an asynchronous operation (e.g., fetching data)
+    // Simulate an asynchronous operation
     const fetchData = async () => {
-      // Simulate a delay (replace this with your actual data fetching logic)
+      // Simulate a delay 
       await new Promise((resolve) => setTimeout(resolve, 2400));
-      setLoading(false); // Set loading to false when your data is ready
+      setLoading(false); // Set loading to false when data is ready
     };
 
     fetchData();
@@ -45,9 +47,38 @@ const SplashScreen = ({ setLoading }) => {
     };
   }, [theme]);
 
+  // dots animation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDots((prev) => {
+        switch (prev) {
+          case '':
+            return '.';
+          case '.':
+            return '..';
+          case '..':
+            return '...';
+          case '...':
+            return '';
+          default:
+            return '.';
+        }
+      });
+    }, 500);
+
+    // Cleanup
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="splash-screen">
-      <SplashAnimation />
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <SplashAnimation />
+        <div style={{ margin: '10px 0' }}></div>
+        <p className={`${styles.experienceSubText}`}>
+          Loading{dots}
+        </p>
+      </div>
     </div>
   );
 };

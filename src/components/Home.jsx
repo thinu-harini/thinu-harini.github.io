@@ -2,6 +2,7 @@
 https://www.freepik.com/free-vector/mountains-cleft-view-from-bottom-night-scenery-landscape-with-high-rocks-full-moon-with-stars-glowing-peaks_13194970.htm#page=1&query=Scene&position=38"
 Image by upklyak
 on Freepik
+Girl image by Thinu Harini
 */
 
 import { TypeAnimation } from "react-type-animation";
@@ -39,26 +40,6 @@ const Home = () => {
       <div className="homesection" >
         <img src={moon} className="moon" id="moon" />
         <img src={mountains} className="mountains" id="mountains" />
-
-        {/* scroll button */}
-        {/* <div className='absolute z-20 bottom-80 flex justify-center items-center'
-          style={{ left: '50%', transform: 'translateX(-50%)' }}>
-          <a href='#about'>
-            <div className="scroll-button w-[35px] h-[64px] rounded-3xl border-4  justify-center items-start p-2 hidden md:flex">
-              <motion.div
-                animate={{
-                  y: [0, 24, 0]
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  repeatType: 'loop'
-                }}
-                className='scroll-button-motion w-3 h-3 rounded-full mb-1'
-              />
-            </div>
-          </a>
-        </div> */}
 
         <div className='z-10 justify-center items-center' style={{ cursor: 'pointer' }}>
           <a href='#hero'>

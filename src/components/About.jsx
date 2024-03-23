@@ -10,14 +10,11 @@ import { education } from "../constants";
 
 const EducationInfo = ({ degree, place }) => {
   return (
-    <div className='slideIn'>
-      <ul className='bullet'>
+    <div>
+      <ul className='bullet mt-4'>
         <li>
-          <span className="bullet-marker"></span>
-          <div className="mt-4">
-            <h3 className={styles.aboutTopic}>{degree}</h3>
-            <p className={styles.aboutContent}>{place}</p>
-          </div>
+          <h3 className={styles.aboutTopic}>{degree}</h3>
+          <p className={styles.aboutContent}>{place}</p>
         </li>
       </ul>
     </div>
@@ -55,8 +52,7 @@ const About = () => {
 
       {selectedTab === "Education" ? (
 
-        <div className={'slideIn'}>
-
+        <div>
           {education.map((edu, index) => (
             <EducationInfo
               key={`education-${index}`}
@@ -64,7 +60,6 @@ const About = () => {
               place={edu.place}
             />
           ))}
-
         </div >
 
       ) : (

@@ -24,6 +24,25 @@ const Navbar = ({ isDark, handleToggleChange }) => {
       } else {
         setScrolled(false);
       }
+
+      // Check if scrolled to the top of the page
+      if (scrollTop === 0) {
+        setActive('');
+        return;
+      }
+
+      // Finding the section in view
+      let found = false;
+      for (let i = navLinks.length - 1; i >= 0; i--) {
+        const section = document.getElementById(navLinks[i].id);
+        if (section && !found) {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= 100) {
+            setActive(navLinks[i].id);
+            found = true;
+          }
+        }
+      }
     };
 
     const handleClickOutside = (event) => {
@@ -62,7 +81,6 @@ const Navbar = ({ isDark, handleToggleChange }) => {
         </Link>
 
         {/* menu button */}
-        {/* <div className='md:hidden flex flex-col md:flex-row items-end justify-end'> */}
         <div className='md:flex-row flex items-center gap-4'>
 
           {/* {Toggle component */}
@@ -93,13 +111,13 @@ const Navbar = ({ isDark, handleToggleChange }) => {
           {navLinks.map((nav) => (
             <li
               key={nav.id}
-              className={`nav-title ${active === nav.title ? 'nav-title-active' : 'nav-title-inactive'}`}
-              onClick={() => setActive(nav.title)}
+              className={`nav-title ${active === nav.id ? 'nav-title-active' : 'nav-title-inactive'}`}
             >
               <a href={`#${nav.id}`}>{nav.title}</a>
             </li>
           ))}
         </ul>
+
 
         {/* dropdown menu */}
         <div ref={dropdownRef} className={`${!toggle ? 'hidden' : 'flex'} dropdown-menu-bg p-6 absolute top-20 right-0 mx-8 my-2 min-w-[140px] z-10 rounded-xl`}>
@@ -107,10 +125,10 @@ const Navbar = ({ isDark, handleToggleChange }) => {
             {navLinks.map((nav) => (
               <li
                 key={nav.id}
-                className={`dropdown-menu ${active === nav.title ? 'nav-title-active' : 'nav-title-inactive'}`}
+                className={`dropdown-menu ${active === nav.id ? 'text-blue-500' : 'text-gray-500'}`}
                 onClick={() => {
                   setToggle(!toggle);
-                  setActive(nav.title);
+                  // setActive(nav.title);
                 }}
               >
                 <a href={`#${nav.id}`}>{nav.title}</a>

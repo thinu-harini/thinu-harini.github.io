@@ -99,7 +99,6 @@ const Experience = () => {
                 {experience.company_name}
               </p>
 
-
               <ul className='experience_bullets'>
                 {experience.points.map((point, index) => (
                   <li
@@ -120,7 +119,6 @@ const Experience = () => {
               >
                 {experience.date}
               </p>
-
             </motion.div>
           ))}
         </div>
