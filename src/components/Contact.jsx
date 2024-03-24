@@ -34,7 +34,7 @@ const Contact = () => {
       screenScale = [3, 3, 3];
       screenPosition = [0, -2.5, 0];
     } else {
-      screenScale = [4, 4, 4];
+      screenScale = [4.4, 4.4, 4.4];
       screenPosition = [0.55, -3.8, -4];
     }
 
