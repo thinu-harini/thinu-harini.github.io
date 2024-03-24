@@ -123,7 +123,6 @@ const projects = [
     tags: [
       {
         name: "Adobe XD",
-        color: "pink-text-gradient",
       },
     ],
     image: groome,
@@ -136,7 +135,6 @@ const projects = [
     tags: [
       {
         name: "Adobe XD",
-        color: "pink-text-gradient",
       },
     ],
     image: ichatcs,
@@ -149,15 +147,9 @@ const projects = [
     tags: [
       {
         name: "Adobe XD",
-        color: "pink-text-gradient",
       },
       {
         name: "Java",
-        color: "orange-text-gradient",
-      },
-      {
-        name: "Android Studio",
-        color: "green-text-gradient",
       },
     ],
     image: crowdfunding,
@@ -170,7 +162,6 @@ const projects = [
     tags: [
       {
         name: "Adobe XD",
-        color: "pink-text-gradient",
       },
     ],
     image: ichatcs,
@@ -183,7 +174,6 @@ const projects = [
     tags: [
       {
         name: "Adobe XD",
-        color: "pink-text-gradient",
       },
     ],
     image: ichatcs,
@@ -196,7 +186,6 @@ const projects = [
     tags: [
       {
         name: "Adobe XD",
-        color: "pink-text-gradient",
       },
     ],
     image: ichatcs,

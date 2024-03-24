@@ -4,11 +4,27 @@ import { styles } from '../styles';
 import { experiences } from '../constants';
 import { SectionWrapper } from '../hoc';
 import { fadeIn, textVariant } from '../utils/motion';
-
+import { TbSquareRoundedArrowLeftFilled, TbSquareRoundedArrowRightFilled } from "react-icons/tb";
 const Experience = () => {
   const [activeTab, setActiveTab] = useState(0);
   const sliderRef = useRef(null);
   const touchStartX = useRef(null);
+
+  const handlePrevCard = () => {
+    const newActiveTab = activeTab - 1;
+    if (newActiveTab >= 0) {
+      setActiveTab(newActiveTab);
+      scrollToCard(newActiveTab);
+    }
+  };
+
+  const handleNextCard = () => {
+    const newActiveTab = activeTab + 1;
+    if (newActiveTab < experiences.length) {
+      setActiveTab(newActiveTab);
+      scrollToCard(newActiveTab);
+    }
+  };
 
   //swiping for small screens
   const handleTouchStart = (event) => {
@@ -38,7 +54,7 @@ const Experience = () => {
   const scrollToCard = (index) => {
     if (sliderRef.current) {
       const cardWidth = sliderRef.current.querySelector('.experience-card').offsetWidth;
-      const marginWidth = 20;
+      const marginWidth = 0;
       const scrollLeft = (index * (cardWidth + marginWidth));
       sliderRef.current.scrollTo({
         left: scrollLeft,
@@ -76,7 +92,7 @@ const Experience = () => {
       </div>
 
       <div
-        className='experience-slider-container'
+        className='experience-slider-container relative overflow-hidden'
         ref={sliderRef}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
@@ -123,6 +139,23 @@ const Experience = () => {
           ))}
         </div>
       </div>
+
+      {/* Arrow buttons */}
+      <button
+        className="arrow-icon absolute top-1/2 left-4"
+        onClick={handlePrevCard}
+        disabled={activeTab === 0}
+      >
+        <TbSquareRoundedArrowLeftFilled />
+      </button>
+
+      <button
+        className="arrow-icon absolute top-1/2 right-4"
+        onClick={handleNextCard}
+        disabled={activeTab === experiences.length - 1}
+      >
+        <TbSquareRoundedArrowRightFilled />
+      </button>
 
       {/* Carousel Indicator */}
       <div className="carousel-indicator">

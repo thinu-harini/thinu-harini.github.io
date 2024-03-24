@@ -27,6 +27,7 @@
   --alert-blue: #9d8afb;
   --yellow: #ffea00;
   --button-hover: #917bfe;
+  --tag-color: #7D65FB;
 
   --menu-icon-color: var(--secondary);
   --icon-color: var(--white);
@@ -97,6 +98,7 @@
   --purple-grey-lighter: #dad6f5;
   --alert-red: #ff1c42;
   --yellow: #ffea00;
+  --tag-color: #b8aaff;
 
   --menu-icon-color: var(--white);
   --icon-color: var(white);
@@ -589,7 +591,8 @@
   flex: 0 0 auto;
   background-color: var(--tertiary);
   padding: 2rem;
-  margin-right: 20px;
+  /* margin-right: 10px;
+  margin-left: 10px; */
   border-radius: 1rem;
   border-width: 1px;
   border-color: var(--card_border);
@@ -601,7 +604,8 @@
 
 @media (min-width: 768px) {
   .experience-card {
-    width: calc(50% - 20px);
+    width: calc(50%);
+    /* width: calc(50% - 20px); */
     /* two cards should be shown side by side */
   }
 
@@ -645,6 +649,20 @@
   background-color: var(--secondary);
   border-radius: 50%;
   margin-right: 10px;
+}
+
+.arrow-icon {
+  color: var(--secondary);
+  font-size: 44px;
+}
+
+.arrow-icon:hover:not(:disabled) {
+  color: var(--button-hover);
+  font-size: 46px;
+}
+
+.arrow-icon:disabled {
+  color: var(--purple-grey);
 }
 
 .carousel-indicator {
@@ -708,12 +726,12 @@
 
 @media (max-width: 991px) {
   .contact-left-div {
-    order: 1;
+    order: -1;
     max-width: 100%;
   }
 
   .contact-right-div {
-    order: -1;
+    order: 1;
     max-width: 100%;
   }
 }
@@ -905,6 +923,14 @@
   background: -webkit-linear-gradient(to right,
       #cd2f66,
       #E6447D);
+}
+
+.purple-gradient {
+  background: #7D65FB;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right,
+      #7D65FB,
+      #503abd);
 }
 
 .violet-gradient {

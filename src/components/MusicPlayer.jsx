@@ -12,8 +12,8 @@ const MusicPlayer = () => {
     const scrollPosition = window.scrollY;
     const maxVolume = 1;
     //Increasing volume positions
-    const startDecreasingVolumeAt = window.innerWidth <= 599 ? 1800 : 1400;
-    const startIncreasingVolumeAt = window.innerWidth <= 599 ? 6800 : 4600;
+    const startDecreasingVolumeAt = window.innerWidth <= 767 ? 1800 : 1400;
+    const startIncreasingVolumeAt = window.innerWidth <= 767 ? 6200 : 3600;
 
     // Decrease the volume when scrolling down
     if (scrollPosition < startDecreasingVolumeAt) {

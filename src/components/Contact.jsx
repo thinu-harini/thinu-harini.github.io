@@ -7,7 +7,7 @@ import useAlert from '../hooks/useAlert';
 
 import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
-import { slideIn } from "../utils/motion";
+import { slideIn, textVariant } from "../utils/motion";
 
 import { Canvas } from '@react-three/fiber';
 import Loader from "../components/Loader";
@@ -31,7 +31,7 @@ const Contact = () => {
     let rotation = [-0.1, -0.1, 0];
 
     if (window.innerWidth < 768) {
-      screenScale = [2.5, 2.5, 2.5];
+      screenScale = [3, 3, 3];
       screenPosition = [0, -2.5, 0];
     } else {
       screenScale = [4, 4, 4];
@@ -110,119 +110,126 @@ const Contact = () => {
   }
 
   const handleFocus = () => setCurrentAnimation('idle');
-  const handleBlur = () => setCurrentAnimation('idle');
+  const handleBlur = () => setCurrentAnimation('thankful');
 
   return (
-    <div className={`motion-container xl:mt-12 gap-10 overflow-hidden`}>
-      <motion.div
-        variants={slideIn("left", "tween", 0.2, 1)}
-        className='contact-left-div'
-      >
+    <div>
+      <motion.div variants={textVariant()}>
         <p className={`${styles.sectionSubText}`}>Get in touch</p>
         <h3 className={`${styles.sectionHeadText}`}>Contact.</h3>
+      </motion.div>
 
-        <form
-          ref={formRef}
-          onSubmit={handleSubmit}
-          className='mt-10 flex flex-col gap-8'
+      <div className={`motion-container xl:mt-8 mt-6 gap-10 overflow-hidden`}>
+        <motion.div
+          variants={slideIn("left", "tween", 0.2, 1)}
+          className='contact-left-div'
         >
-          <label className='flex flex-col'>
-            <span className={`${styles.contactText}`}>Your Name</span>
-            <input
-              type='text'
-              name='name'
-              className='input-field'
-              placeholder='John Doe'
-              required
-              value={form.name}
-              onChange={handleChange}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-            />
-          </label>
+          {/* <p className={`${styles.sectionSubText}`}>Get in touch</p>
+          <h3 className={`${styles.sectionHeadText}`}>Contact.</h3> */}
 
-          <label className='flex flex-col'>
-            <span className={`${styles.contactText}`}>Your email</span>
-            <input
-              type='email'
-              name='email'
-              className='input-field'
-              placeholder='john.doe@gmail.com'
-              required
-              value={form.email}
-              onChange={handleChange}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-            />
-          </label>
-
-          <label className='flex flex-col'>
-            <span className={`${styles.contactText}`}>Your Message</span>
-            <textarea
-              rows={3}
-              name='message'
-              className='input-field'
-              placeholder='Let me know how I can help you!'
-              value={form.message}
-              onChange={handleChange}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-            />
-          </label>
-
-          <button
-            type='submit'
-            className='button py-3 px-8 w-fit'
-            disabled={isLoading}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
+          <form
+            ref={formRef}
+            onSubmit={handleSubmit}
+            className='flex flex-col gap-8'
           >
-            {isLoading ? "Sending..." : "Send Message"}
-          </button>
-        </form>
-      </motion.div>
+            <label className='flex flex-col'>
+              <span className={`${styles.contactText}`}>Your Name</span>
+              <input
+                type='text'
+                name='name'
+                className='input-field'
+                placeholder='John Doe'
+                required
+                value={form.name}
+                onChange={handleChange}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+              />
+            </label>
 
-      <motion.div
-        variants={slideIn("up", "tween", 0.2, 1)}
-        className='contact-right-div xl:flex-1 xl:h-auto md:h-[550px] h-[350px]'
-      >
-        <Canvas
-          camera={{ near: 0.1, far: 1000, fov: 45, position: [-1, 0, 7] }}
-        // camera={{
-        //   position: [0, 0, 5],
-        //   fov: 75,
-        //   near: 0.1,
-        //   far: 1000,
-        // }}
+            <label className='flex flex-col'>
+              <span className={`${styles.contactText}`}>Your email</span>
+              <input
+                type='email'
+                name='email'
+                className='input-field'
+                placeholder='john.doe@gmail.com'
+                required
+                value={form.email}
+                onChange={handleChange}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+              />
+            </label>
+
+            <label className='flex flex-col'>
+              <span className={`${styles.contactText}`}>Your Message</span>
+              <textarea
+                rows={3}
+                name='message'
+                className='input-field'
+                placeholder='Let me know how I can help you!'
+                value={form.message}
+                onChange={handleChange}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+              />
+            </label>
+
+            <button
+              type='submit'
+              className='button py-3 px-8 w-fit'
+              disabled={isLoading}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+            >
+              {isLoading ? "Sending..." : "Send Message"}
+            </button>
+          </form>
+        </motion.div>
+
+        <motion.div
+          variants={slideIn("up", "tween", 0.2, 1)}
+          className='contact-right-div xl:flex-1 xl:h-auto md:h-[550px] h-[350px]'
         >
-          <directionalLight position={[1, 1, 1]} intensity={2} />
-          <ambientLight intensity={1} />
-          <hemisphereLight
-            skyColor='#b1e1ff'
-            groundColor='#000000'
-            intensity={0.5}
-          />
-
-          <pointLight position={[-1, 0.5, 1]} intensity={1} />
-          <pointLight position={[-1, -2, 1]} intensity={1} />
-
-          <Suspense fallback={<Loader />}>
-
-            <Girl
-              currentAnimation={currentAnimation}
-              scale={girlScale}
-              position={girlPosition}
-              rotation={girlRotation}
+          <Canvas
+            camera={{ near: 0.1, far: 1000, fov: 45, position: [-1, 0, 7] }}
+          // camera={{
+          //   position: [0, 0, 5],
+          //   fov: 75,
+          //   near: 0.1,
+          //   far: 1000,
+          // }}
+          >
+            <directionalLight position={[1, 1, 1]} intensity={2} />
+            <ambientLight intensity={1} />
+            <hemisphereLight
+              skyColor='#b1e1ff'
+              groundColor='#000000'
+              intensity={0.5}
             />
-          </Suspense>
-        </Canvas>
-      </motion.div>
 
-      <div className="alert">
-        {alert.show && <Alert {...alert} />}
-        {/* <Alert {...alert} /> */}
+            <pointLight position={[-1, 0.5, 1]} intensity={1} />
+            <pointLight position={[-1, -2, 1]} intensity={1} />
+
+            <Suspense fallback={<Loader />}>
+
+              <Girl
+                currentAnimation={currentAnimation}
+                scale={girlScale}
+                position={girlPosition}
+                rotation={girlRotation}
+              />
+            </Suspense>
+          </Canvas>
+        </motion.div>
+
+        <div className="alert">
+          {alert.show && <Alert {...alert} />}
+          {/* <Alert {...alert} /> */}
+        </div>
+
       </div>
-
     </div>
   )
 }
