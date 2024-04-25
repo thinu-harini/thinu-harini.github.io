@@ -1,6 +1,8 @@
+/* Music: Solas x Interstellar by Gabriel Albuquerque */
+
 import React, { useEffect, useRef, useState } from 'react';
 import { IoVolumeMute, IoVolumeHigh } from "react-icons/io5";
-import Interstellar from '../assets/sounds/interstellar.mp3'
+import Interstellar from '../assets/sounds/Interstellar.mp3'
 
 const MusicPlayer = () => {
   const audioRef = useRef(new Audio(Interstellar));

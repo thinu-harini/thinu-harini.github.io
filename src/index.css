@@ -591,21 +591,19 @@
   flex: 0 0 auto;
   background-color: var(--tertiary);
   padding: 2rem;
-  /* margin-right: 10px;
-  margin-left: 10px; */
   border-radius: 1rem;
   border-width: 1px;
   border-color: var(--card_border);
   transition: background-color 500ms ease-in-out, transform 0.5s ease;
-  transform: scale(0.95);
   opacity: 0.5;
   cursor: pointer;
+  margin: 20px;
 }
 
 @media (min-width: 768px) {
   .experience-card {
-    width: calc(50%);
-    /* width: calc(50% - 20px); */
+    /* width: calc(50%); */
+    width: calc(50% - 40px);
     /* two cards should be shown side by side */
   }
 

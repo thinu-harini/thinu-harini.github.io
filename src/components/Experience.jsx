@@ -5,6 +5,7 @@ import { experiences } from '../constants';
 import { SectionWrapper } from '../hoc';
 import { fadeIn, textVariant } from '../utils/motion';
 import { TbSquareRoundedArrowLeftFilled, TbSquareRoundedArrowRightFilled } from "react-icons/tb";
+
 const Experience = () => {
   const [activeTab, setActiveTab] = useState(0);
   const sliderRef = useRef(null);
@@ -54,7 +55,7 @@ const Experience = () => {
   const scrollToCard = (index) => {
     if (sliderRef.current) {
       const cardWidth = sliderRef.current.querySelector('.experience-card').offsetWidth;
-      const marginWidth = 0;
+      const marginWidth = 40;
       const scrollLeft = (index * (cardWidth + marginWidth));
       sliderRef.current.scrollTo({
         left: scrollLeft,
