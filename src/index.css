@@ -278,15 +278,6 @@
   cursor: pointer;
 }
 
-.music-button:hover {
-  transform: scale(1.06);
-  background-color: var(--icon-button-bg-hover);
-}
-
-.music-button:active {
-  background-color: var(--icon-button-active);
-}
-
 /* Music Button Styles for larger screens */
 @media screen and (min-width: 768px) {
   .music-button {
@@ -297,6 +288,15 @@
     right: 18px;
     font-size: 24px;
     /* box-shadow: var(--button-shadow); */
+  }
+
+  .music-button:hover {
+    transform: scale(1.06);
+    background-color: var(--icon-button-bg-hover);
+  }
+
+  .music-button:active {
+    background-color: var(--icon-button-active);
   }
 }
 
