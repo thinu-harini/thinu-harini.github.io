@@ -115,6 +115,14 @@ const experiences = [
   },
 ];
 
+// tab names for smaller screens
+export const tabNamesForSmallScreens = [
+  "03.",
+  "02.",
+  "01.",
+  "00."
+];
+
 const projects = [
   {
     name: "Groome - Booking and Team Management Platform",

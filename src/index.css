@@ -283,9 +283,9 @@
   background-color: var(--icon-button-bg-hover);
 }
 
-/* .music-button:active {
+.music-button:active {
   background-color: var(--icon-button-active);
-} */
+}
 
 /* Music Button Styles for larger screens */
 @media screen and (min-width: 768px) {

@@ -1,7 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { styles } from '../styles';
-import { experiences } from '../constants';
+import { experiences, tabNamesForSmallScreens } from '../constants';
 import { SectionWrapper } from '../hoc';
 import { fadeIn, textVariant } from '../utils/motion';
 import { TbSquareRoundedArrowLeftFilled, TbSquareRoundedArrowRightFilled } from "react-icons/tb";
@@ -9,6 +9,17 @@ const Experience = () => {
   const [activeTab, setActiveTab] = useState(0);
   const sliderRef = useRef(null);
   const touchStartX = useRef(null);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Check initial screen size
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handlePrevCard = () => {
     const newActiveTab = activeTab - 1;
@@ -84,18 +95,33 @@ const Experience = () => {
       </motion.div>
 
       <div className="tabs mt-6 mb-6">
-        {experiences.map((experience, index) => (
-          <div
-            key={index}
-            className={`tab ${activeTab === index ? 'active' : ''}`}
-            onClick={() => {
-              setActiveTab(index);
-              scrollToCard(index);
-            }}
-          >
-            {experience.tab_name}
-          </div>
-        ))}
+        {isSmallScreen ? (
+          tabNamesForSmallScreens.map((tabName, index) => (
+            <div
+              key={index}
+              className={`tab ${activeTab === index ? 'active' : ''}`}
+              onClick={() => {
+                setActiveTab(index);
+                scrollToCard(index);
+              }}
+            >
+              {tabName}
+            </div>
+          ))
+        ) : (
+          experiences.map((experience, index) => (
+            <div
+              key={index}
+              className={`tab ${activeTab === index ? 'active' : ''}`}
+              onClick={() => {
+                setActiveTab(index);
+                scrollToCard(index);
+              }}
+            >
+              {experience.tab_name}
+            </div>
+          ))
+        )}
       </div>
 
       <div
