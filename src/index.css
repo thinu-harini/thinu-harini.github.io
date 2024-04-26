@@ -597,7 +597,6 @@
   transition: background-color 500ms ease-in-out, transform 0.5s ease;
   opacity: 0.5;
   cursor: pointer;
-  margin: 20px;
 }
 
 @media (min-width: 768px) {
@@ -605,6 +604,7 @@
     /* width: calc(50%); */
     width: calc(50% - 40px);
     /* two cards should be shown side by side */
+    margin: 20px;
   }
 
   .experience-card.active {
@@ -615,7 +615,11 @@
 
 @media (max-width: 767px) {
   .experience-card {
+    /* width: calc(100% - 40px); */
     width: 100%;
+    /* margin: 20px; */
+    /* margin-right: 20px; */
+    /* margin-left: 20px; */
   }
 }
 

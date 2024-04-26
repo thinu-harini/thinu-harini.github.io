@@ -5,7 +5,6 @@ import { experiences } from '../constants';
 import { SectionWrapper } from '../hoc';
 import { fadeIn, textVariant } from '../utils/motion';
 import { TbSquareRoundedArrowLeftFilled, TbSquareRoundedArrowRightFilled } from "react-icons/tb";
-
 const Experience = () => {
   const [activeTab, setActiveTab] = useState(0);
   const sliderRef = useRef(null);
@@ -38,7 +37,7 @@ const Experience = () => {
     const touchEndX = event.changedTouches[0].clientX;
     const touchDifference = touchEndX - touchStartX.current;
 
-    if (Math.abs(touchDifference) > 50) { // Adjust this threshold as needed
+    if (Math.abs(touchDifference) > 50) { // threshold
       const direction = touchDifference > 0 ? -1 : 1;
       const newActiveTab = activeTab + direction;
 
@@ -51,12 +50,19 @@ const Experience = () => {
     touchStartX.current = null;
   };
 
-  //scrolling for large screens
+  //scrolling 
   const scrollToCard = (index) => {
     if (sliderRef.current) {
       const cardWidth = sliderRef.current.querySelector('.experience-card').offsetWidth;
-      const marginWidth = 40;
-      const scrollLeft = (index * (cardWidth + marginWidth));
+      let scrollLeft;
+
+      if (window.innerWidth < 768) { // Small screens
+        scrollLeft = index * cardWidth;
+      } else { // Large screens
+        const marginWidth = 40;
+        scrollLeft = index * (cardWidth + marginWidth);
+      }
+
       sliderRef.current.scrollTo({
         left: scrollLeft,
         behavior: 'smooth',
