@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { styles } from '../styles';
 import { navLinks } from '../constants';
@@ -15,6 +15,7 @@ const Navbar = ({ isDark, handleToggleChange }) => {
   const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const dropdownRef = useRef(null);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,6 +67,13 @@ const Navbar = ({ isDark, handleToggleChange }) => {
     };
   }, []);
 
+  const handleClick = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <nav className={`${styles.paddingX} w-full flex items-center py-4 fixed top-0 z-20 ${scrolled ? "nav-bg" : "bg-transparent"}`}>
       <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
@@ -113,11 +121,18 @@ const Navbar = ({ isDark, handleToggleChange }) => {
               key={nav.id}
               className={`nav-title ${active === nav.id ? 'nav-title-active' : 'nav-title-inactive'}`}
             >
-              <a href={`#${nav.id}`}>{nav.title}</a>
+
+              {location.pathname === '/' ? (
+                // If on home page, use regular anchor links
+                <a href={`#${nav.id}`} onClick={() => handleClick(nav.id)}>{nav.title}</a>
+              ) : (
+                // If on other pages, use React Router's Link components
+                <Link to={`/${nav.id}`} onClick={() => handleClick(nav.id)}>{nav.title}</Link>
+              )}
+
             </li>
           ))}
         </ul>
-
 
         {/* dropdown menu */}
         <div ref={dropdownRef} className={`${!toggle ? 'hidden' : 'flex'} dropdown-menu-bg p-6 absolute top-20 right-0 mx-8 my-2 min-w-[140px] z-10 rounded-xl`}>
@@ -131,7 +146,13 @@ const Navbar = ({ isDark, handleToggleChange }) => {
                   // setActive(nav.title);
                 }}
               >
-                <a href={`#${nav.id}`}>{nav.title}</a>
+                {/* <a href={`#${nav.id}`}>{nav.title}</a> */}
+
+                {location.pathname === '/' ? (
+                  <a href={`#${nav.id}`} onClick={() => handleClick(nav.id)}>{nav.title}</a>
+                ) : (
+                  <Link to={`/${nav.id}`} onClick={() => handleClick(nav.id)}>{nav.title}</Link>
+                )}
               </li>
             ))}
           </ul>

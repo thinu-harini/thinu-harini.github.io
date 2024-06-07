@@ -66,6 +66,7 @@
 
   --nav-title: var(--card-content);
   --nav-title-active: var(--secondary);
+  --nav-shadow: rgba(139, 133, 155, 0.5);
   --dropdown-bg: #281b6d;
   --dropdown-menu-content: var(--white);
 
@@ -88,6 +89,7 @@
 
   /* color-scheme:  */
   --primary: #050816;
+  /* #171923; */
   --secondary: #7D65FB;
   --tertiary: #151030;
   --black-100: #1e183f;
@@ -138,6 +140,7 @@
 
   --nav-title: var(--purple-grey);
   --nav-title-active: var(--secondary);
+  --nav-shadow: rgba(28, 22, 58, 0.5);
   --dropdown-bg: #261d5b;
   --dropdown-menu-content: var(--purple-grey);
 
@@ -156,11 +159,13 @@
 }
 
 .sky-canvas {
-  background: linear-gradient(to bottom, #ffffff, #a694ff, #826afb, #a694ff, #ffffff);
+  background: linear-gradient(to bottom, #ffffff, #d5d2ff, #b5b1fe, #d5d2ff, #ffffff);
+  /* background: linear-gradient(to bottom, #ffffff, #a694ff, #826afb, #a694ff, #ffffff); */
   overflow: hidden;
 }
 
 /* #ffc9a3, a3dfff  */
+
 .cloud {
   /* position: absolute; */
   top: 50%;
@@ -229,7 +234,8 @@
 /* --Navbar Section Styles-- */
 .nav-bg {
   background-color: var(--primary);
-  transition: background-color 500ms ease-in-out;
+  transition: background-color 100ms ease-in-out;
+  box-shadow: 0 4px 6px var(--nav-shadow);
 }
 
 .nav-title {

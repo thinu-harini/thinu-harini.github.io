@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import useLocalStorage from 'use-local-storage';
 
-import { About, Contact, Experience, Hero, Navbar, Tech, Projects, StarsCanvas, Footer, Home } from './components';
 import SplashScreen from './components/SplashScreen';
-import { SkyCanvas } from './components/canvas';
+import { SkyCanvas, StarsCanvas } from './components/canvas';
+import { About, Contact, Experience, Hero, Navbar, Tech, Projects, Footer, Home } from './components';
+import { Groome } from './pages';
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -26,28 +27,43 @@ const App = () => {
           <div>
             <Navbar isDark={isDark} handleToggleChange={handleToggleChange} />
 
-            <div className="relative">
-              <Home />
-              <Hero />
-              {/* {isDark && <CloudsCanvas />} */}
-              {isDark ? <StarsCanvas /> : <SkyCanvas />}
-            </div>
+            <Routes>
+              <Route path="/" element={<HomePage isDark={isDark} />}>
+                <Route index element={<Home />} />
+                <Route path="/hero" element={<Hero />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/experience" element={<Experience />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/footer" element={<Footer />} />
+              </Route>
 
-
-
-            <About />
-            <Experience />
-            <Projects />
-
-            <div className="relative">
-              <Contact />
-              <Footer />
-              {isDark ? <StarsCanvas /> : <SkyCanvas />}
-            </div>
+              <Route path="/case-study-groome" element={<Groome />} />
+            </Routes>
           </div>
         )}
       </div>
     </BrowserRouter>
+  );
+};
+
+const HomePage = ({ isDark }) => {
+  return (
+    <React.Fragment>
+      <div className="relative">
+        <Home />
+        <Hero />
+        {isDark ? <StarsCanvas /> : <SkyCanvas />}
+      </div>
+      <About />
+      <Experience />
+      <Projects />
+      <div className="relative">
+        <Contact />
+        <Footer />
+        {isDark ? <StarsCanvas /> : <SkyCanvas />}
+      </div>
+    </React.Fragment>
   );
 };
 

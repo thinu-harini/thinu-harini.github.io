@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { styles } from '../styles';
 import { projects } from '../constants';
@@ -21,19 +22,6 @@ const ProjectCard = ({
           alt='project_image'
           className='w-full h-full object-cover rounded-2xl'
         />
-
-        <div className='absolute inset-0 flex justify-end m-3 card-img_hover'>
-          <div
-            onClick={() => window.open(source_code_link, "_blank")}
-            className='purple-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer'
-          >
-            <img
-              src={dribbble}
-              alt='source code'
-              className='w-2/3 h-2/3 object-contain'
-            />
-          </div>
-        </div>
       </div>
 
       <div className='mt-5'>
@@ -52,6 +40,27 @@ const ProjectCard = ({
           </p>
         ))}
       </div>
+
+      {/* <div className='absolute inset-0 flex justify-end m-3 card-img_hover'> */}
+      <div className='flex justify-end mb-3 card-img_hover'>
+        {/* <div
+          onClick={() => window.open(source_code_link, "_blank")}
+          className='purple-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer'
+        > */}
+
+        <Link
+          to={source_code_link}
+          className='purple-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer'
+        >
+          <img
+            src={dribbble}
+            alt='source code'
+            className='w-2/3 h-2/3 object-contain'
+          />
+        </Link>
+
+      </div>
+
     </div >
   );
 };

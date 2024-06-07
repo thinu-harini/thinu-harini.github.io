@@ -12,7 +12,7 @@ import {
 } from "../assets";
 
 export const navLinks = [
-  // {
+  // { 
   //   id: "hero",
   //   title: "Home",
   // },
@@ -134,7 +134,7 @@ const projects = [
       },
     ],
     image: groome,
-    source_code_link: "https://dribbble.com/shots/22048836-Booking-platform-for-salons-Client-Version-Landing-Page",
+    source_code_link: "/case-study-groome",
   },
   {
     name: "iChatCS",
