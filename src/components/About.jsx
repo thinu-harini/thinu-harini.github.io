@@ -64,12 +64,12 @@ const About = () => {
           <p className={`${styles.aboutContent} mb-4`}>
             I am a graduate from University of Moratuwa in Information Technology.
           </p>
-          <p className={`${styles.aboutContent} mb-4`}>
+          {/* <p className={`${styles.aboutContent} mb-4`}>
             I originally started off as a Computer Science major during undergrad, but quickly realized that I was fascinated by the 'Why' behind the code I was writing. This led me to exploring the field of UX, and after a few projects and freelance work, I fell in love with the art of problem solving.
           </p>
           <p className={`${styles.aboutContent} mb-4`}>
             I like to think of myself as a full-stack product designer who can lead a project from research & design to the prototyping phase to ensure a smooth developer handoff.
-          </p>
+          </p> */}
         </div >
 
       ) : (
