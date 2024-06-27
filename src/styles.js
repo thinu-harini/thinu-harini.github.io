@@ -27,7 +27,7 @@ const styles = {
   aboutTopic:
     "hero-sub-text font-medium lg:text-[20px] sm:text-[17px] xs:text-[16px] text-[17px] lg:leading-[30px]",
   aboutContent:
-    "content lg:text-[16px] sm:text-[16px] xs:text-[24px] text-[16px] lg:leading-[26px] max-w-3xl mt-4",
+    "content lg:text-[18px] sm:text-[16px] xs:text-[16px] text-[17px] xs:leading-[32px] md:leading-[36px] lg:leading-[36px] max-w-3xl",
 
   contactText:
     "hero-content font-medium lg:text-[16px] sm:text-[16px] xs:text-[24px] text-[16px] lg:leading-[26px]",

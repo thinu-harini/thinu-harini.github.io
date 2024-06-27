@@ -85,22 +85,9 @@ const Projects = () => {
   return (
     <>
       <div>
-        <p className={styles.sectionSubText}>My Work</p>
+        {/* <p className={styles.sectionSubText}>My Work</p> */}
         <h2 className={styles.sectionHeadText}>Projects.</h2>
       </div>
-
-      {/* <div className='w-full flex'>
-//         <motion.p
-//           variants={fadeIn("", "", 0.1, 1)}
-//           className={`${styles.sectionContent}`}
-//         >
-//           Following projects showcases my skills and experience through
-//           real-world examples of my work. Each project is briefly described with
-//           links to case studies and live demos in it. It reflects my
-//           ability to solve complex problems, work with different technologies,
-//           and manage projects effectively.
-//         </motion.p>
-//       </div> */}
 
       <div className='mt-10 flex flex-wrap gap-7'>
         {projects.map((project, index) => (

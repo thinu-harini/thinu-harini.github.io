@@ -31,7 +31,7 @@ const About = () => {
   return (
     <>
       <motion.div variants={textVariant()}>
-        <p className={`${styles.sectionSubText}`}>Get to know me</p>
+        {/* <p className={`${styles.sectionSubText}`}>Get to know me</p> */}
         <h2 className={`${styles.sectionHeadText}`}>About Me.</h2>
       </motion.div>
 
@@ -61,23 +61,20 @@ const About = () => {
             />
           ))} */}
 
-          <p className={`${styles.aboutContent}`}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-            sed do eiusmod tempor incididunt ut labore et dolore magna
-            aliqua.  Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-            sed do eiusmod tempor incididunt ut labore et dolore magna
-            aliqua.
+          <p className={`${styles.aboutContent} mb-4`}>
+            I am a graduate from University of Moratuwa in Information Technology.
+          </p>
+          <p className={`${styles.aboutContent} mb-4`}>
+            I originally started off as a Computer Science major during undergrad, but quickly realized that I was fascinated by the 'Why' behind the code I was writing. This led me to exploring the field of UX, and after a few projects and freelance work, I fell in love with the art of problem solving.
+          </p>
+          <p className={`${styles.aboutContent} mb-4`}>
+            I like to think of myself as a full-stack product designer who can lead a project from research & design to the prototyping phase to ensure a smooth developer handoff.
           </p>
         </div >
 
       ) : (
 
         <div className={'slideIn'}>
-          {/* <p className={`${styles.sectionContent}`}>
-            By working in different projects, I have gained proficiency in different tools.
-            Here are some tools and technologies I have been working with. You can find the
-            relevant projects I have done with these tools and technologies in projects section.
-          </p> */}
           <Tech />
         </div>
 

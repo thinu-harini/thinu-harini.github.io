@@ -111,7 +111,7 @@ const Contact = () => {
   return (
     <div>
       <motion.div variants={textVariant()}>
-        <p className={`${styles.sectionSubText}`}>Get in touch</p>
+        {/* <p className={`${styles.sectionSubText}`}>Get in touch</p> */}
         <h3 className={`${styles.sectionHeadText}`}>Contact.</h3>
       </motion.div>
 
