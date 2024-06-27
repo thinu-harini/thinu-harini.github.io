@@ -94,7 +94,7 @@ const Experience = () => {
         <h2 className={styles.sectionHeadText}>Work Experience.</h2>
       </motion.div>
 
-      <div className="tabs mt-6 mb-6">
+      <div className={`${styles.heroContent} tabs mt-6 mb-6`}>
         {isSmallScreen ? (
           tabNamesForSmallScreens.map((tabName, index) => (
             <div
@@ -137,14 +137,11 @@ const Experience = () => {
               className={`experience-card ${activeTab === index ? 'active' : ''}`}
               onClick={() => handleCardClick(index)}
             >
-              <h3 className={`${styles.experienceHeadText}`}>
+              <h3 className={`${styles.contentHeadText}`}>
                 {experience.title}
               </h3>
 
-              <p
-                className={`${styles.experienceSubText}`}
-                style={{ margin: 0 }}
-              >
+              <p className={`${styles.contentSubText}`}>
                 {experience.company_name}
               </p>
 
@@ -152,7 +149,7 @@ const Experience = () => {
                 {experience.points.map((point, index) => (
                   <li
                     key={index}
-                    className={`${styles.cardContent}`}
+                    className={`${styles.content}`}
                   >
                     <span className="experience_bullets-marker"></span>
                     <div>
@@ -163,8 +160,8 @@ const Experience = () => {
               </ul>
 
               <p
-                className={`${styles.experienceDate}`}
-                style={{ marginTop: 20 }}
+                className={`${styles.content}`}
+                style={{ fontWeight: '500', fontStyle: 'italic' }}
               >
                 {experience.date}
               </p>

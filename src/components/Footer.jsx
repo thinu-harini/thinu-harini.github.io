@@ -16,7 +16,7 @@ const Footer = () => {
   return (
     <div className="footer">
 
-      <div className='relative bottom-6 flex justify-center items-center' style={{ left: '50%', transform: 'translateX(-50%)', cursor: 'pointer' }}>
+      <div className='scroll-down-button relative bottom-6 flex justify-center items-center' style={{ left: '50%', transform: 'translateX(-50%)', cursor: 'pointer' }}>
         <motion.div
           animate={{
             y: [0, 24, 0]
@@ -29,20 +29,22 @@ const Footer = () => {
           }}
           onClick={scrollToTop}
         >
-          <FaAnglesUp size={32} color="#fff" />
+          <FaAnglesUp size={32} />
         </motion.div>
       </div>
 
       <div className={`flex flex-col items-center md:items-center md:px-4 px-4 py-4`}>
-        <h1 className={`${styles.heroContentA}, py-2`}>
+        <h1 className={`${styles.heroContent}, py-2`}>
           Let's Connect.
         </h1>
         <SocialIcons />
       </div>
-      <div className="footer-content text-center mt-4">
+
+      <div className={`${styles.content} footer-content text-center mt-4`}>
         Designed and built by Thinu Harini <br />
         &#169; thinu-harini.github.io | All rights reserved
       </div>
+
     </div>
   )
 }

@@ -78,14 +78,14 @@ const Contact = () => {
         //Success message
         showAlert({
           show: true,
-          text: "Thank you. I will get back to you as soon as possible.",
+          // text: "Thank you. I will get back to you as soon as possible.",
           type: "success",
         });
 
         //Hide alert and clear form
         setTimeout(() => {
           hideAlert();
-        }, [3000])
+        }, [4000])
 
         setForm({
           name: "",
@@ -99,13 +99,9 @@ const Contact = () => {
         //Show error message
         showAlert({
           show: true,
-          text: "Something went wrong. Please try again.",
+          // text: "Failed to send your message. Please try again or email me directly.",
           type: "danger",
         });
-
-        setTimeout(() => {
-          hideAlert();
-        }, [3000])
       })
   }
 
@@ -124,20 +120,17 @@ const Contact = () => {
           variants={slideIn("left", "tween", 0.2, 1)}
           className='contact-left-div'
         >
-          {/* <p className={`${styles.sectionSubText}`}>Get in touch</p>
-          <h3 className={`${styles.sectionHeadText}`}>Contact.</h3> */}
-
           <form
             ref={formRef}
             onSubmit={handleSubmit}
             className='flex flex-col gap-8'
           >
             <label className='flex flex-col'>
-              <span className={`${styles.contactText}`}>Your Name</span>
+              <span className={`${styles.contactText} mb-4`}>Your Name</span>
               <input
                 type='text'
                 name='name'
-                className='input-field'
+                className={`${styles.contactText} input-field`}
                 placeholder='John Doe'
                 required
                 value={form.name}
@@ -148,11 +141,11 @@ const Contact = () => {
             </label>
 
             <label className='flex flex-col'>
-              <span className={`${styles.contactText}`}>Your email</span>
+              <span className={`${styles.contactText} mb-4`}>Your email</span>
               <input
                 type='email'
                 name='email'
-                className='input-field'
+                className={`${styles.contactText} input-field`}
                 placeholder='john.doe@gmail.com'
                 required
                 value={form.email}
@@ -163,11 +156,11 @@ const Contact = () => {
             </label>
 
             <label className='flex flex-col'>
-              <span className={`${styles.contactText}`}>Your Message</span>
+              <span className={`${styles.contactText} mb-4`}>Your Message</span>
               <textarea
                 rows={3}
                 name='message'
-                className='input-field'
+                className={`${styles.contactText} input-field`}
                 placeholder='Let me know how I can help you!'
                 value={form.message}
                 onChange={handleChange}
@@ -225,7 +218,7 @@ const Contact = () => {
         </motion.div>
 
         <div className="alert">
-          {alert.show && <Alert {...alert} />}
+          {alert.show && <Alert {...alert} hideAlert={hideAlert} />}
           {/* <Alert {...alert} /> */}
         </div>
 

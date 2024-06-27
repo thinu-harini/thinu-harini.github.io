@@ -11,7 +11,7 @@ import * as THREE from 'three';
 
 import girlScene from '../assets/3d/girl.glb';
 import { useSkinnedMeshClone } from '../hooks/skinnedMeshClone';
-import Eyes from './Eyes';
+// import Eyes from './Eyes';
 
 const HeroGirl = ({ ...props }) => {
   const girlRef = useRef();

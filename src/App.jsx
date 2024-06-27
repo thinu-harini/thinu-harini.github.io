@@ -4,7 +4,7 @@ import useLocalStorage from 'use-local-storage';
 
 import SplashScreen from './components/SplashScreen';
 import { SkyCanvas, StarsCanvas } from './components/canvas';
-import { About, Contact, Experience, Hero, Navbar, Tech, Projects, Footer, Home } from './components';
+import { About, Contact, Experience, Hero, Navbar, Tech, Projects, Footer } from './components';
 import { Groome } from './pages';
 
 const App = () => {
@@ -29,8 +29,8 @@ const App = () => {
 
             <Routes>
               <Route path="/" element={<HomePage isDark={isDark} />}>
-                <Route index element={<Home />} />
-                <Route path="/hero" element={<Hero />} />
+                <Route index element={<Hero />} />
+                <Route path="/home" element={<Hero />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/experience" element={<Experience />} />
                 <Route path="/projects" element={<Projects />} />
@@ -51,7 +51,6 @@ const HomePage = ({ isDark }) => {
   return (
     <React.Fragment>
       <div className="relative">
-        <Home />
         <Hero />
         {isDark ? <StarsCanvas /> : <SkyCanvas />}
       </div>

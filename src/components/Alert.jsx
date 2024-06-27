@@ -2,8 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion';
 import { styles } from '../styles';
 
-const Alert = ({ type, text }) => {
-  // const imageSrc = type === "danger" ? "./src/assets/failed.png" : "./src/assets/alert.png";
+const Alert = ({ type, hideAlert }) => {
   const bgColor = type === "danger" ? 'var(--danger-bg)' : 'var(--success-bg)';
 
   return (
@@ -17,7 +16,7 @@ const Alert = ({ type, text }) => {
       <div
         className='p-4 rounded-lg shadow-lg flex flex-col items-center'
         style={{
-          width: '260px',
+          width: '280px',
           height: 'auto',
           backgroundColor: bgColor,
           color: `var(--${type}-topic)`,
@@ -26,20 +25,29 @@ const Alert = ({ type, text }) => {
         role='alert'
       >
 
-        {/* <img
-          src={imageSrc}
-          alt={type}
-          className='w-48 h-48 mt-4 mb-4'
-          style={{ marginTop: '-6rem' }}
-        /> */}
-
-        <p className={`${type === "danger" ? "text-red" : "text-blue"} mb-4 uppercase font-semibold `}>
+        <p className={`${styles.content} mt-2 mb-2 uppercase font-semibold`}>
           {type === "danger" ? "Error!" : "Success"}
         </p>
 
-        <p className={`${styles.experienceContent}`} style={{ color: 'var(--alert-content)', textAlign: 'center' }}>
-          {text}
+        <p
+          className={`${styles.content}`}
+          style={{ color: 'var(--alert-text)', textAlign: 'center' }}
+        >
+          {type === "danger" ? (
+            <>
+              Failed to send your message. Please try again or <a href="mailto:thinu.harini@gmail.com" className="alert-link">email me directly.</a>
+            </>
+          ) : (
+            <>
+              Thank you. I will get back to you as soon as possible.
+            </>
+          )}
         </p>
+
+        {type === "danger" && (
+          <button onClick={hideAlert} className="alert-button mt-6 mb-2">Close</button>
+
+        )}
 
       </div>
     </motion.div>

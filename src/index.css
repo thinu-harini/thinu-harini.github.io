@@ -17,13 +17,14 @@
   /* color-scheme:  */
   --primary: #ffffff;
   --secondary: #7D65FB;
+
   --tertiary: #e6ecfd;
   --black-100: #fafbff;
   --black-200: #c3b6fa;
   --white-100: #f3f3f3;
   --white: #ffffff;
   --purple-grey: #aaa6c3;
-  --alert-red: #ff879b;
+  --alert-red: #FD2F6D;
   --alert-blue: #9d8afb;
   --yellow: #ffea00;
   --button-hover: #917bfe;
@@ -49,11 +50,12 @@
   --hero-content-text: #4c527e;
   --section-sub-text: var(--secondary);
   --section-content: #877EB8;
-  --experience-sub-text: var(--secondary);
-  --card-content: #877EB8;
+  --content-sub-text: var(--secondary);
+  --content: #5E5688;
   --text-hover: #917bfe;
   --placeholder-text: #b7bcdf;
-  --alert-text: #222539;
+  --alert-text: #ffffff;
+  --alert-button-text: #4c527e;
 
   --background-color: var(--primary);
   --splash-screen-bg-color: var(--primary);
@@ -64,7 +66,7 @@
   --hero-background-rgba: rgba(208, 220, 253, 0.6);
   --scroll-button: var(--sub-text);
 
-  --nav-title: var(--card-content);
+  --nav-title: var(--content);
   --nav-title-active: var(--secondary);
   --nav-shadow: rgba(139, 133, 155, 0.5);
   --dropdown-bg: #281b6d;
@@ -76,12 +78,11 @@
   /* alert popup */
   --danger-bg: var(--alert-red);
   --success-bg: var(--alert-blue);
-  --danger-topic: var(--alert-text);
-  --success-topic: var(--alert-text);
-  --alert-content: var(--alert-text);
+  --alert-button-hover: #ffffffdc;
+  --alert-button-active: #ffffffad;
 
   --card_border: #917bfe00;
-  --card-hover-shadow: var(--card-content);
+  --card-hover-shadow: var(--content);
 }
 
 [data-theme='dark'] {
@@ -98,7 +99,7 @@
   --white: #ffffff;
   --purple-grey: #aaa6c3;
   --purple-grey-lighter: #dad6f5;
-  --alert-red: #ff1c42;
+  --alert-red: #FD2F6D;
   --yellow: #ffea00;
   --tag-color: #b8aaff;
 
@@ -122,8 +123,8 @@
   --hero-content-text: var(--white-100);
   --section-sub-text: var(--purple-grey);
   --section-content: var(--purple-grey);
-  --experience-sub-text: var(--secondary);
-  --card-content: var(--purple-grey-lighter);
+  --content-sub-text: var(--secondary);
+  --content: var(--purple-grey-lighter);
   --text-hover: #ffffff;
   --placeholder-text: var(--purple-grey);
   --alert-text: var(--white);
@@ -150,12 +151,18 @@
   /* alert popup */
   --danger-bg: var(--alert-red);
   --success-bg: var(--secondary);
-  --danger-topic: var(--white-100);
-  --success-topic: var(--white-100);
-  --alert-content: var(--white-100);
 
   --card_border: var(--secondary);
   --card-hover-shadow: var(--alert-blue);
+}
+
+.square-before::before {
+  content: '';
+  display: inline-block;
+  width: 0.4em;
+  height: 0.8em;
+  background-color: var(--secondary);
+  margin-right: 8px;
 }
 
 .sky-canvas {
@@ -239,10 +246,8 @@
 }
 
 .nav-title {
-  font-size: 18px;
   font-weight: 500;
   cursor: pointer;
-  /* text-shadow: 0px 0px 20px var(--primary); */
 }
 
 .nav-title:hover {
@@ -263,7 +268,6 @@
 
 .dropdown-menu {
   color: var(--dropdown-menu-content);
-  font-size: 18px;
   font-weight: 500;
   cursor: pointer;
 }
@@ -456,12 +460,12 @@
   transition: color 500ms ease-in-out;
 }
 
-.experience-sub-text {
-  color: var(--experience-sub-text);
+.content-sub-text {
+  color: var(--content-sub-text);
 }
 
-.card-content {
-  color: var(--card-content);
+.content {
+  color: var(--content);
   transition: color 500ms ease-in-out;
 }
 
@@ -474,21 +478,16 @@
   padding: 16px 24px;
   background-color: var(--button-bg);
   color: white;
-  font-weight: bold;
+  font-weight: 600;
   border: 1px solid var(--button-border);
   border-radius: 6px;
   box-shadow: var(--button-shadow);
-  /* cursor: pointer; */
   transition: background-color 100ms ease-in-out;
 }
 
 .button:hover {
-  padding: 16px 24px;
   background: var(--button-bg-hover);
-  color: white;
   border: 1.6px solid var(--button-border-hover);
-  border-radius: 6px;
-  /* cursor: pointer; */
 }
 
 .button:active {
@@ -519,6 +518,14 @@
   color: var(--icon-button-active);
 }
 
+.scroll-button {
+  border-color: var(--scroll-button);
+}
+
+.scroll-button-motion {
+  background-color: var(--scroll-button);
+}
+
 /* About Section Styles */
 
 .tab_button {
@@ -532,7 +539,6 @@
   border-radius: 8px;
   padding: 10px 20px;
   cursor: pointer;
-  font-size: 18px;
   font-weight: 500;
 }
 
@@ -568,7 +574,6 @@
   border-radius: 8px;
   padding: 10px 20px;
   cursor: pointer;
-  font-size: 18px;
   font-weight: 500;
 }
 
@@ -710,6 +715,7 @@
   border-color: var(--card_border);
   width: 100%;
   transition: background-color 500ms ease-in-out;
+  cursor: pointer;
 }
 
 @media (min-width: 768px) {
@@ -720,6 +726,33 @@
     box-shadow: 0 2px 15px var(--card-hover-shadow);
     /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
   }
+}
+
+.project-button {
+  display: flex;
+  background-color: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 10%;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.project-button:hover {
+  background-color: var(--secondary);
+  transform: scale(1.06);
+}
+
+.project-button:active {
+  background-color: var(--icon-button-active);
+}
+
+.project-button-icon {
+  color: var(--head-text);
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
 }
 
 /* --Contact Section Styles-- */
@@ -761,6 +794,44 @@
   }
 }
 
+.alert-link {
+  color: var(--white);
+  text-decoration: underline;
+  font-style: italic;
+  display: block;
+  /* appear on a new line */
+}
+
+.alert-link:hover {
+  color: var(--content);
+}
+
+.alert-link:active {
+  color: var(--secondary);
+}
+
+.alert-button {
+  padding: 12px 24px;
+  background-color: var(--white);
+  color: var(--alert-button-text);
+  font-weight: bold;
+  border-radius: 6px;
+  box-shadow: var(--button-shadow);
+  transition: background-color 100ms ease-in-out;
+}
+
+.alert-button:hover {
+  background-color: var(--alert-button-hover);
+  color: var(--alert-button-text);
+  border-radius: 6px;
+  box-shadow: var(--button-shadow);
+}
+
+.alert-button:active {
+  background-color: var(--alert-button-active);
+}
+
+
 .input-field {
   background-color: var(--black-100);
   padding: 1rem 1.5rem;
@@ -769,7 +840,6 @@
   border-color: none;
   outline: none;
   border: none;
-  font-weight: 500;
   transition: background-color 500ms ease-in-out;
 }
 

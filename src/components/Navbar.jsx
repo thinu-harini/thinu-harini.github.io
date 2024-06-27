@@ -75,7 +75,7 @@ const Navbar = ({ isDark, handleToggleChange }) => {
   };
 
   return (
-    <nav className={`${styles.paddingX} w-full flex items-center py-4 fixed top-0 z-20 ${scrolled ? "nav-bg" : "bg-transparent"}`}>
+    <nav className={`${styles.paddingX} ${styles.heroContent} w-full flex items-center py-4 fixed top-0 z-20 ${scrolled ? "nav-bg" : "bg-transparent"}`}>
       <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
         <Link
           to="/"
@@ -135,7 +135,7 @@ const Navbar = ({ isDark, handleToggleChange }) => {
         </ul>
 
         {/* dropdown menu */}
-        <div ref={dropdownRef} className={`${!toggle ? 'hidden' : 'flex'} dropdown-menu-bg p-6 absolute top-20 right-0 mx-8 my-2 min-w-[140px] z-10 rounded-xl`}>
+        <div ref={dropdownRef} className={`${styles.heroContent} ${!toggle ? 'hidden' : 'flex'} dropdown-menu-bg p-6 absolute top-20 right-0 mx-8 my-2 min-w-[140px] z-10 rounded-xl`}>
           <ul className="list-none flex justify-end items-start flex-1 flex-col gap-4">
             {navLinks.map((nav) => (
               <li

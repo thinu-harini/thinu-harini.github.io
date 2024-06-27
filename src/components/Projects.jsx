@@ -5,14 +5,17 @@ import { styles } from '../styles';
 import { projects } from '../constants';
 import { SectionWrapper } from '../hoc';
 import { fadeIn, textVariant } from '../utils/motion';
-import { dribbble } from "../assets";
+
+import { PiDribbbleLogoFill } from "react-icons/pi";
+import { HiNewspaper } from "react-icons/hi2";
 
 const ProjectCard = ({
   name,
   description,
   tags,
   image,
-  source_code_link,
+  case_study_link,
+  ui_link,
 }) => {
   return (
     <div className='project-card md:w-[360px] w-full'>
@@ -25,40 +28,52 @@ const ProjectCard = ({
       </div>
 
       <div className='mt-5'>
-        <h3 className={styles.experienceHeadText}>{name}</h3>
-        <p className={styles.cardContent}>{description}</p>
+        <h3 className={styles.contentHeadText}>{name}</h3>
+        <p className={styles.content}>{description}</p>
       </div>
 
       <div className='mt-4 flex flex-wrap gap-2'>
         {tags.map((tag) => (
           <p
             key={`${name}-${tag.name}`}
-            className={`text-[14px]`}
-            style={{ color: 'var(--tag-color)' }}
+            className={styles.content}
+            style={{ color: 'var(--tag-color)', margin: 0 }}
           >
             #{tag.name}
           </p>
         ))}
+
       </div>
 
-      {/* <div className='absolute inset-0 flex justify-end m-3 card-img_hover'> */}
-      <div className='flex justify-end mb-3 card-img_hover'>
-        {/* <div
-          onClick={() => window.open(source_code_link, "_blank")}
-          className='purple-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer'
-        > */}
+      <div className='flex gap-2 mt-2 justify-end'>
 
-        <Link
-          to={source_code_link}
-          className='purple-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer'
-        >
-          <img
-            src={dribbble}
-            alt='source code'
-            className='w-2/3 h-2/3 object-contain'
-          />
-        </Link>
+        {/* case study link - conditionally render */}
+        {case_study_link && (
+          <Link
+            to={case_study_link}
+            className='project-button'
+          >
+            <HiNewspaper
+              alt='case study'
+              className='project-button-icon object-contain'
+              onClick={() => setToggle(!toggle)}
+            />
+          </Link>
+        )}
 
+        {/* dribbble link - conditionally render */}
+        {ui_link && (
+          <Link
+            to={ui_link}
+            className='project-button'
+          >
+            <PiDribbbleLogoFill
+              alt='prototype'
+              className='project-button-icon object-contain'
+              onClick={() => setToggle(!toggle)}
+            />
+          </Link>
+        )}
       </div>
 
     </div >
@@ -92,7 +107,6 @@ const Projects = () => {
           <ProjectCard key={`project-${index}`} {...project} />
         ))}
       </div>
-
     </>
   );
 };

@@ -12,14 +12,14 @@ import {
 } from "../assets";
 
 export const navLinks = [
-  // { 
-  //   id: "hero",
-  //   title: "Home",
-  // },
   {
-    id: "about",
-    title: "About",
+    id: "home",
+    title: "Home",
   },
+  // {
+  //   id: "about",
+  //   title: "About",
+  // },
   {
     id: "experience",
     title: "Experience",
@@ -125,33 +125,35 @@ export const tabNamesForSmallScreens = [
 
 const projects = [
   {
-    name: "Groome - Booking and Team Management Platform",
+    name: "Groome",
     description:
-      "Booking and team management platform targeted on beauty and wellness industry",
+      "A platform to book appointments and and manage the team targeted on beauty and wellness industry.",
     tags: [
       {
         name: "Adobe XD",
       },
     ],
     image: groome,
-    source_code_link: "/case-study-groome",
+    case_study_link: "/case-study-groome",
+    ui_link: "/case-study-groome",
   },
   {
     name: "iChatCS",
     description:
-      "A platform designed for companies across various industries to effortlessly connect their dedicated agents with their clients",
+      "A platform designed for companies across various industries to effortlessly connect their dedicated agents with their clients.",
     tags: [
       {
         name: "Adobe XD",
       },
     ],
     image: ichatcs,
-    source_code_link: "https://github.com/",
+    // case_study_link: "/case-study-groome",
+    ui_link: "https://github.com/",
   },
   {
-    name: "Crowd Funding Based Event Management System",
+    name: "Event Planning System",
     description:
-      "A project that is developed for crowd funding - based event organizing to understand the fan base for a particular event.",
+      "A project that is developed for crowd funding - based event management to understand the fan base for a particular event.",
     tags: [
       {
         name: "Adobe XD",
@@ -161,43 +163,34 @@ const projects = [
       },
     ],
     image: crowdfunding,
-    source_code_link: "https://dribbble.com/shots/13933576-Online-Concert-Ticket-Booking",
+    // case_study_link: "/case-study-groome",
+    ui_link: "https://dribbble.com/shots/13933576-Online-Concert-Ticket-Booking",
   },
   {
     name: "Sapro Mart",
     description:
-      "Online retail platform that connects any type of whole sellers and retailers in Sri Lanka to its users based on location.",
+      "An online retail platform that connects any type of whole sellers and retailers in Sri Lanka to its users based on location.",
     tags: [
       {
         name: "Adobe XD",
       },
     ],
     image: ichatcs,
-    source_code_link: "https://dribbble.com/shots/13933576-Online-Concert-Ticket-Booking",
+    case_study_link: "/case-study-groome",
+    ui_link: "https://dribbble.com/shots/13933576-Online-Concert-Ticket-Booking",
   },
   {
     name: "Food Mart - POS System",
     description:
-      " an innovative Point of Sale system designed exclusively for restaurants, designed to streamline order management based on distinct sections and diverse locations.",
+      "A Point of Sale system designed exclusively for restaurants to streamline order management based on distinct sections and diverse locations.",
     tags: [
       {
         name: "Adobe XD",
       },
     ],
     image: ichatcs,
-    source_code_link: "https://dribbble.com/shots/13933576-Online-Concert-Ticket-Booking",
-  },
-  {
-    name: "Food Mart - POS System",
-    description:
-      " an innovative Point of Sale system designed exclusively for restaurants, designed to streamline order management based on distinct sections and diverse locations.",
-    tags: [
-      {
-        name: "Adobe XD",
-      },
-    ],
-    image: ichatcs,
-    source_code_link: "https://dribbble.com/shots/13933576-Online-Concert-Ticket-Booking",
+    // case_study_link: "/case-study-groome",
+    ui_link: "https://dribbble.com/shots/13933576-Online-Concert-Ticket-Booking",
   },
 ];
 

@@ -12,6 +12,8 @@ import { Canvas } from '@react-three/fiber'
 import Loader from './Loader';
 import HeroGirl from '../models/HeroGirl';
 
+import { FaAnglesDown } from "react-icons/fa6";
+
 const Hero = () => {
 
   const adjustGirlForScreenSize = () => {
@@ -59,7 +61,7 @@ const Hero = () => {
           />
         </h2>
 
-        <p className={`${styles.heroContent}`}>
+        <p className={`${styles.heroContent} mt-6`}>
           A UI/UX designer on a mission to level up experiences
           in the digital world with creative thinking and problem-solving
           characteristics and strengths like effective communication.
@@ -69,19 +71,20 @@ const Hero = () => {
         </p>
 
         <div className="items-center gap-4 mt-4 flex">
-          <h1 className={`${styles.heroContentA} italic`}>
+          <h1 className={`${styles.heroContent} italic`}>
             Let's Connect :
           </h1>
           <SocialIcons />
         </div>
 
-        <div className={`${styles.paddingB} flex-row items-start gap-4`}>
+        <div className={`${styles.paddingB} ${styles.heroContent} flex-row items-start gap-4`}>
           <button>
-            <a className="button" href="https://drive.google.com/file/d/1sMoRZWh8Hw3RyWdPOz16HU8iiVdWUrAX/view?usp=drive_link" download="cv_thinu_premachandra.pdf" target="_blank">
-              Download Résumé
+            <a className="button" href="https://drive.google.com/file/d/1RYFG573_ciYfX3PbBi4RoAHWWK94Jp-B/view?usp=sharing" download="cv_thinu_premachandra.pdf" target="_blank">
+              My Résumé
             </a>
           </button>
         </div>
+
       </motion.div>
 
       <motion.div
@@ -116,9 +119,52 @@ const Hero = () => {
         </Canvas>
       </motion.div>
 
+      {/* arrow scroll */}
+      {/* <div
+        className='hidden xs:block absolute xs:bottom-15 bottom-20 w-auto flex z-10 justify-center items-center'
+        style={{ left: '50%', transform: 'translateX(-50%)', cursor: 'pointer' }}>
+        <a href='#about'>
+          <div className="scroll-down-button mt-10">
+            <motion.div
+              animate={{
+                y: [0, 24, 0]
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                repeatType: 'loop',
+                ease: 'easeInOut'
+              }}
+            >
+              <FaAnglesDown size={40} />
+            </motion.div>
+          </div>
+        </a>
+      </div> */}
+
+      {/* scroll button */}
+      <div
+        className='absolute z-20 bottom-12 w-auto flex justify-center items-center'
+        style={{ left: '50%', transform: 'translateX(-50%)', cursor: 'pointer' }}>
+        <a href='#about'>
+          <div className="scroll-button w-[35px] h-[64px] rounded-3xl border-4 justify-center items-start p-2 hidden md:flex">
+            <motion.div
+              animate={{
+                y: [0, 24, 0]
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                repeatType: 'loop',
+              }}
+              className='scroll-button-motion w-3 h-3 rounded-full mb-1'
+            />
+          </div>
+        </a>
+      </div>
+
     </div >
   )
 }
 
-// export default Hero;
-export default SectionWrapper(Hero, "hero");
+export default SectionWrapper(Hero, "home");

@@ -13,8 +13,8 @@ const EducationInfo = ({ degree, place }) => {
     <div>
       <ul className='bullet mt-4'>
         <li>
-          <h3 className={styles.aboutTopic}>{degree}</h3>
-          <p className={styles.aboutContent}>{place}</p>
+          <h3 className={`${styles.aboutTopic}`}>{degree}</h3>
+          <p className={`${styles.heroContent}`}>{place}</p>
         </li>
       </ul>
     </div>
@@ -31,11 +31,11 @@ const About = () => {
   return (
     <>
       <motion.div variants={textVariant()}>
-        <p className={styles.sectionSubText}>Get to know me</p>
-        <h2 className={styles.sectionHeadText}>About Me.</h2>
+        <p className={`${styles.sectionSubText}`}>Get to know me</p>
+        <h2 className={`${styles.sectionHeadText}`}>About Me.</h2>
       </motion.div>
 
-      <div className="tab_button mt-6 mb-6">
+      <div className={`${styles.heroContent} tab_button mt-6 mb-6`}>
         <button
           className={selectedTab === "Education" ? "active" : ""}
           onClick={() => handleTabChange("Education")}
@@ -53,13 +53,21 @@ const About = () => {
       {selectedTab === "Education" ? (
 
         <div>
-          {education.map((edu, index) => (
+          {/* {education.map((edu, index) => (
             <EducationInfo
               key={`education-${index}`}
               degree={edu.degree}
               place={edu.place}
             />
-          ))}
+          ))} */}
+
+          <p className={`${styles.aboutContent}`}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua.  Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua.
+          </p>
         </div >
 
       ) : (
