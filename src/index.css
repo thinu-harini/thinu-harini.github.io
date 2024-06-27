@@ -89,16 +89,17 @@
   /* Dark theme styles */
 
   /* color-scheme:  */
-  --primary: #0a0e23;
+  --primary: #181a24;
   /* #050816; */
   /* #171923; */
   /* #1c2034; */
   /* #16182a; */
   /* #131624 */
   /* #1a1a2f */
-  --secondary: #6876ef;
+  --secondary: #5e76ff;
   /* #7D65FB; */
-  /* #5e70fc; */
+  /* #5e76ff; */
+  /* #6876ef; */
   --tertiary: #151030;
   --black-100: #1e183f;
   --black-200: #090325;
