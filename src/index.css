@@ -15,7 +15,7 @@
 
 :root {
   /* color-scheme:  */
-  --primary: #0f1228;
+  --primary: #ffffff;
   --secondary: #5e76ff;
 
   --tertiary: #e6ecfd;
@@ -89,7 +89,7 @@
   /* Dark theme styles */
 
   /* color-scheme:  */
-  --primary: #11131c;
+  --primary: #151827;
   /* #050816; */
   /* #171923; */
   /* #1c2034; */
@@ -97,6 +97,7 @@
   /* #131624 */
   /* #1a1a2f */
   /* #181a24; */
+  /* #11131c; */
   --secondary: #5e76ff;
   /* #7D65FB; */
   /* #5e76ff; */
