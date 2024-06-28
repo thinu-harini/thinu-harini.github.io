@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-
 import { styles } from '../styles';
 import { navLinks } from '../constants';
 
@@ -16,6 +15,15 @@ const Navbar = ({ isDark, handleToggleChange }) => {
   const [scrolled, setScrolled] = useState(false);
   const dropdownRef = useRef(null);
   const location = useLocation();
+
+  const sectionColors = {
+    home: 'bg1',
+    about: 'bg2',
+    experience: 'bg2',
+    projects: 'bg2',
+    contact: 'bg1',
+    footer: 'bg1',
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,15 +42,21 @@ const Navbar = ({ isDark, handleToggleChange }) => {
 
       // Finding the section in view
       let found = false;
-      for (let i = navLinks.length - 1; i >= 0; i--) {
-        const section = document.getElementById(navLinks[i].id);
+      const sectionIds = Object.keys(sectionColors);
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sectionIds[i]);
         if (section && !found) {
           const rect = section.getBoundingClientRect();
           if (rect.top <= 100) {
-            setActive(navLinks[i].id);
+            setActive(sectionIds[i]);
+            document.body.className = sectionColors[sectionIds[i]];
             found = true;
           }
         }
+      }
+
+      if (!found) {
+        document.body.className = sectionClasses.home;
       }
     };
 
@@ -73,6 +87,16 @@ const Navbar = ({ isDark, handleToggleChange }) => {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  //background color change based on light dark mode
+  useEffect(() => {
+    document.body.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  }, [isDark]);
+
+  useEffect(() => {
+    // Ensure the body color of home is set on initial load
+    document.body.className = sectionColors.home;
+  }, []);
 
   return (
     <nav className={`${styles.paddingX} ${styles.heroContent} w-full flex items-center py-4 fixed top-0 z-20 ${scrolled ? "nav-bg" : "bg-transparent"}`}>

@@ -75,7 +75,7 @@ const SplashScreen = ({ setLoading }) => {
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <SplashAnimation />
         <div style={{ margin: '10px 0' }}></div>
-        <p className={`${styles.experienceSubText}`}>
+        <p className={`${styles.contentSubText}`}>
           Loading{dots}
         </p>
       </div>

@@ -20,7 +20,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <div data-theme={isDark ? "dark" : ""} className='bg relative z-0'>
+      <div data-theme={isDark ? "dark" : ""} className='relative z-0'>
         {loading ? (
           <SplashScreen setLoading={setLoading} />
         ) : (
@@ -50,18 +50,14 @@ const App = () => {
 const HomePage = ({ isDark }) => {
   return (
     <React.Fragment>
-      <div className='bgsky relative z-0'>
+      <div className="relative">
         <Hero />
         {isDark ? <StarsCanvas /> : <SkyCanvas />}
       </div>
-      <div className="transition-sky-to-bg"></div>
-      <div className='bg relative z-0'>
-        <About />
-        <Experience />
-        <Projects />
-      </div>
-      <div className="transition-bg-to-sky"></div>
-      <div className='bgsky relative z-0'>
+      <About />
+      <Experience />
+      <Projects />
+      <div className="relative">
         <Contact />
         <Footer />
         {isDark ? <StarsCanvas /> : <SkyCanvas />}
