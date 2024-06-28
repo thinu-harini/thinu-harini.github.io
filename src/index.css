@@ -89,21 +89,14 @@
   /* Dark theme styles */
 
   /* color-scheme:  */
-  --primary: #151827;
-  /* #050816; */
-  /* #171923; */
-  /* #1c2034; */
-  /* #16182a; */
+  --primary: #131624;
+  /* old one #050816 */
+  /* #151827; */
   /* #131624 */
-  /* #1a1a2f */
-  /* #181a24; */
-  /* #11131c; */
   --secondary: #6682fe;
   /* #7D65FB; */
-  /* #5e76ff; */
-  /* #827DFE; */
-  /* #5e7bfc; */
-  --tertiary: #151030;
+  --tertiary: #050816;
+  /* #151030; */
   --black-100: #1e183f;
   --black-200: #090325;
   --white-100: #f3f3f3;
@@ -178,11 +171,8 @@
 
 .sky-canvas {
   background: linear-gradient(to bottom, #ffffff, #d5d2ff, #b5b1fe, #d5d2ff, #ffffff);
-  /* background: linear-gradient(to bottom, #ffffff, #a694ff, #826afb, #a694ff, #ffffff); */
   overflow: hidden;
 }
-
-/* #ffc9a3, a3dfff  */
 
 .cloud {
   /* position: absolute; */
@@ -240,9 +230,25 @@
   }
 }
 
+.bgsky {
+  background-color: var(--tertiary);
+  transition: background-color 500ms ease-in-out;
+}
+
 .bg {
   background-color: var(--primary);
   transition: background-color 500ms ease-in-out;
+}
+
+/* Transitional section styles */
+.transition-sky-to-bg {
+  height: 100px;
+  background: linear-gradient(to bottom, var(--tertiary), var(--primary));
+}
+
+.transition-bg-to-sky {
+  height: 100px;
+  background: linear-gradient(to bottom, var(--primary), var(--tertiary));
 }
 
 .splash-screen {
@@ -251,7 +257,7 @@
 
 /* --Navbar Section Styles-- */
 .nav-bg {
-  background-color: var(--primary);
+  background-color: var(--tertiary);
   transition: background-color 100ms ease-in-out;
   box-shadow: 0 4px 6px var(--nav-shadow);
 }

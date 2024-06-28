@@ -120,7 +120,7 @@ const Hero = () => {
       </motion.div>
 
       {/* arrow scroll */}
-      {/* <div
+      <div
         className='hidden xs:block absolute xs:bottom-15 bottom-20 w-auto flex z-10 justify-center items-center'
         style={{ left: '50%', transform: 'translateX(-50%)', cursor: 'pointer' }}>
         <a href='#about'>
@@ -140,10 +140,10 @@ const Hero = () => {
             </motion.div>
           </div>
         </a>
-      </div> */}
+      </div>
 
       {/* scroll button */}
-      <div
+      {/* <div
         className='absolute z-20 bottom-12 w-auto flex justify-center items-center'
         style={{ left: '50%', transform: 'translateX(-50%)', cursor: 'pointer' }}>
         <a href='#about'>
@@ -161,7 +161,7 @@ const Hero = () => {
             />
           </div>
         </a>
-      </div>
+      </div> */}
 
     </div >
   )

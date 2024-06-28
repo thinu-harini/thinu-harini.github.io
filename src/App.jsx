@@ -50,14 +50,18 @@ const App = () => {
 const HomePage = ({ isDark }) => {
   return (
     <React.Fragment>
-      <div className="relative">
+      <div className='bgsky relative z-0'>
         <Hero />
         {isDark ? <StarsCanvas /> : <SkyCanvas />}
       </div>
-      <About />
-      <Experience />
-      <Projects />
-      <div className="relative">
+      <div className="transition-sky-to-bg"></div>
+      <div className='bg relative z-0'>
+        <About />
+        <Experience />
+        <Projects />
+      </div>
+      <div className="transition-bg-to-sky"></div>
+      <div className='bgsky relative z-0'>
         <Contact />
         <Footer />
         {isDark ? <StarsCanvas /> : <SkyCanvas />}
