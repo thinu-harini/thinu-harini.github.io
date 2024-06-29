@@ -26,6 +26,7 @@
   --black-200: #c3b6fa;
   --white-100: #f3f3f3;
   --white: #ffffff;
+  --white-grey: #009e12;
   --purple-grey: #aaa6c3;
   --alert-red: #FD2F6D;
   --alert-blue: #9d8afb;
@@ -33,10 +34,10 @@
   --tag-color: #7D65FB;
 
   --menu-icon-color: var(--accent);
-  --icon-color: var(--white);
+  --icon-color: #181923;
   /* --icon-button-bg: var(--accent); */
   --icon-button-bg-hover: var(--accent-light);
-  --icon-button-active: var(--accent-dark);
+  --icon-button-bg-active: var(--accent-dark);
 
   --button-bg: var(--accent);
   --button-bg-hover: var(--accent-light);
@@ -45,6 +46,7 @@
   --button-border-hover: var(--accent-light);
   --button-border-active: var(--accent-dark);
   --button-shadow: 2px 4px 6px rgba(130, 126, 156, 0.4);
+  --button-text: var(--alert-red);
 
   /* text colors */
   --head-text: #5E5688;
@@ -68,8 +70,10 @@
   --hero-background-rgba: rgba(208, 220, 253, 0.6);
   --scroll-button: var(--sub-text);
 
-  --nav-title: var(--content);
-  --nav-title-active: var(--accent);
+  --nav-text: var(--white-grey);
+  --nav-text-hover: var(--white);
+  /* --nav-title: var(--content); */
+  /* --nav-title-active: var(--accent); */
   --nav-shadow: rgba(139, 133, 155, 0.5);
   --dropdown-bg: #281b6d;
   --dropdown-menu-content: var(--white);
@@ -92,18 +96,23 @@
 
   /* color-scheme:  */
   --primary: #181923;
-  --accent: #6675fb;
+  --accent: #6e7cfb;
   /* #6b86ff; */
   /* #6b7aff; */
   --secondary: #212434;
 
-  --accent-light: #7790ff;
-  --accent-dark: #5c79f9;
+  --accent-light: #7d8afc;
+  --accent-dark: #5b6bff;
+
+  --secondary-dark: #151830;
 
   --black-100: #1e183f;
   --black-200: #090325;
   --white-100: #f3f3f3;
   --white: #ffffff;
+  --white-grey: #dad6f5;
+  --white-grey-darker: #aaa6c3;
+
   --purple-grey: #aaa6c3;
   --purple-grey-lighter: #dad6f5;
   --alert-red: #FD2F6D;
@@ -111,29 +120,30 @@
   --tag-color: #b8aaff;
 
   --menu-icon-color: var(--white);
-  --icon-color: var(--white);
+  --icon-color: var(--primary);
   /* --icon-button-bg: var(--accent); */
   --icon-button-bg-hover: var(--accent-light);
-  --icon-button-active: var(--accent-dark);
+  --icon-button-bg-active: var(--accent-dark);
 
-  --button-bg: #160a38;
-  --button-bg-hover: #1f0f51;
-  --button-bg-active: #0d0521;
-  --button-border: #716ada;
-  --button-border-hover: #8781da;
-  --button-border-active: #6e65ec;
+  --button-bg: var(--accent);
+  --button-bg-hover: var(--accent-light);
+  --button-bg-active: var(--accent-dark);
+  /* --button-border: var(--accent-light); */
+  /* --button-border-hover: #8781da; */
+  /* --button-border-active: #6e65ec; */
   --button-shadow: 2px 4px 6px rgba(5, 8, 22, 0.8);
+  --button-text: var(--primary);
 
   /* text colors */
   --head-text: #ffffff;
   --sub-text: #ffffff;
   --hero-content-text: var(--white-100);
-  --section-sub-text: var(--purple-grey);
-  --section-content: var(--purple-grey);
-  --content-sub-text: var(--accent);
-  --content: var(--purple-grey-lighter);
+  --section-sub-text: var(--white-grey);
+  --section-content: var(--white-grey);
+  --content-sub-text: var(--accent-light);
+  --content: var(--white-grey);
   --text-hover: #ffffff;
-  --placeholder-text: var(--purple-grey);
+  --placeholder-text: var(--white-grey-darker);
   --alert-text: var(--white);
 
   --background-color: var(--primary);
@@ -143,12 +153,17 @@
   --logo-text: var(--white);
   --logo-bg: var(--accent);
   /* --hero-background-rgba: rgba(16, 13, 37, 0.5); */
-  --hero-background-rgba: rgba(27, 21, 62, 0.5);
+  --hero-background-rgba: rgba(49, 55, 90, 0.5);
   --scroll-button: var(--purple-grey);
+  --field-bg: #1f2236;
+  /* #31375a; */
 
-  --nav-title: var(--purple-grey);
-  --nav-title-active: var(--accent);
-  --nav-shadow: rgba(28, 22, 58, 0.5);
+  --nav-text: var(--white-grey);
+  --nav-text-hover: var(--white);
+  /* --nav-title: var(--purple-grey); */
+  /* --nav-title-active: var(--accent); */
+  --nav-shadow: rgba(9, 10, 13, 0.5);
+
   --dropdown-bg: #261d5b;
   --dropdown-menu-content: var(--purple-grey);
 
@@ -258,19 +273,19 @@ body {
 }
 
 .nav-title:hover {
-  color: var(--text-hover);
+  color: var(--nav-text-hover);
 }
 
 .nav-title:active {
-  color: var(--nav-title-active);
+  color: var(--accent);
 }
 
 .nav-title-active {
-  color: var(--nav-title-active);
+  color: var(--accent-light);
 }
 
 .nav-title-inactive {
-  color: var(--nav-title);
+  color: var(--nav-text);
 }
 
 .dropdown-menu {
@@ -313,7 +328,7 @@ body {
   }
 
   .music-button:active {
-    background-color: var(--icon-button-active);
+    background-color: var(--icon-button-bg-active);
   }
 }
 
@@ -484,9 +499,9 @@ body {
 .button {
   padding: 16px 24px;
   background-color: var(--button-bg);
-  color: white;
+  color: var(--button-text);
   font-weight: 600;
-  border: 1px solid var(--button-border);
+  /* border: 1px solid var(--button-border); */
   border-radius: 6px;
   box-shadow: var(--button-shadow);
   transition: background-color 100ms ease-in-out;
@@ -494,7 +509,7 @@ body {
 
 .button:hover {
   background: var(--button-bg-hover);
-  border: 1.6px solid var(--button-border-hover);
+  /* border: 1.6px solid var(--button-border-hover); */
 }
 
 .button:active {
@@ -522,7 +537,7 @@ body {
 }
 
 .social-icons a:active {
-  color: var(--icon-button-active);
+  color: var(--icon-button-bg-active);
 }
 
 .scroll-button {
@@ -551,7 +566,7 @@ body {
 
 .tab_button button.active {
   background-color: var(--accent);
-  color: #fff;
+  color: var(--button-text);
   font-weight: 600;
 }
 
@@ -586,7 +601,7 @@ body {
 
 .tab.active {
   background-color: var(--accent);
-  color: #fff;
+  color: var(--button-text);
   font-weight: 600;
 }
 
@@ -610,10 +625,8 @@ body {
   background-color: var(--secondary);
   padding: 2rem;
   border-radius: 1rem;
-  border-width: 1px;
-  border-color: var(--card_border);
   transition: background-color 500ms ease-in-out, transform 0.5s ease;
-  opacity: 0.5;
+  /* opacity: 0.5; */
   cursor: pointer;
 }
 
@@ -648,7 +661,9 @@ body {
 }
 
 .experience-card.active {
-  opacity: 1;
+  /* opacity: 1; */
+  border-width: 1px;
+  border-color: var(--card_border);
 }
 
 .experience_bullets {
@@ -678,12 +693,17 @@ body {
 }
 
 .arrow-icon:hover:not(:disabled) {
-  color: var(--button-hover);
+  color: var(--accent-light);
+  font-size: 46px;
+}
+
+.arrow-icon:active:not(:disabled) {
+  color: var(--accent-dark);
   font-size: 46px;
 }
 
 .arrow-icon:disabled {
-  color: var(--purple-grey);
+  color: var(--white-grey-darker);
 }
 
 @media (max-width: 767px) {
@@ -703,7 +723,7 @@ body {
   width: 30px;
   height: 4px;
   border-radius: 10px;
-  background-color: var(--purple-grey);
+  background-color: var(--white-grey-darker);
   margin: 0 5px;
   cursor: pointer;
 }
@@ -752,7 +772,7 @@ body {
 }
 
 .project-button:active {
-  background-color: var(--icon-button-active);
+  background-color: var(--icon-button-bg-active);
 }
 
 .project-button-icon {
@@ -777,6 +797,22 @@ body {
 
 .contact-right-div {
   max-width: 40%;
+}
+
+.input-field {
+  background-color: var(--field-bg);
+  padding: 1rem 1.5rem;
+  color: var(--head-text);
+  border-radius: 0.5rem;
+  border-color: none;
+  outline: none;
+  border: none;
+  transition: background-color 500ms ease-in-out;
+}
+
+.input-field::placeholder {
+  color: var(--placeholder-text);
+  transition: color 500ms ease-in-out;
 }
 
 @media (max-width: 991px) {
@@ -838,22 +874,6 @@ body {
   background-color: var(--alert-button-active);
 }
 
-
-.input-field {
-  background-color: var(--black-100);
-  padding: 1rem 1.5rem;
-  color: var(--head-text);
-  border-radius: 0.5rem;
-  border-color: none;
-  outline: none;
-  border: none;
-  transition: background-color 500ms ease-in-out;
-}
-
-.input-field::placeholder {
-  color: var(--placeholder-text);
-  transition: color 500ms ease-in-out;
-}
 
 .hash-span {
   margin-top: -100px;
@@ -924,17 +944,26 @@ body {
   z-index: 1000;
 }
 
+/* light mode moon icon */
 .toggle+label .dark-icon {
+  color: var(--icon-color);
   margin-left: 2.15em;
 }
 
+/* light mode sun icon */
 .toggle+label .light-icon {
-  color: #050816;
+  color: var(--icon-color);
   margin-left: 0.46em;
 }
 
+/* dark mode sun icon */
 .toggle:checked+label .light-icon {
-  color: #ffffff;
+  color: var(--icon-color);
+}
+
+/* dark mode moon icon */
+.toggle:checked+label .dark-icon {
+  color: #ffea00;
 }
 
 /* --Toggle styles for larger screens-- */
