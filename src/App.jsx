@@ -20,7 +20,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <div data-theme={isDark ? "dark" : ""} className='relative z-0'>
+      <div data-theme={isDark ? "dark" : ""} className='bg relative z-0'>
         {loading ? (
           <SplashScreen setLoading={setLoading} />
         ) : (
