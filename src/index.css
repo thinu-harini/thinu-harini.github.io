@@ -89,14 +89,16 @@
 [data-theme='dark'] {
 
   /* color-scheme:  */
-  --primary: #131624;
+  --primary: #1b2037;
   /* old one #050816 */
   /* #151827; */
   /* #131624 */
-  --secondary: #758efd;
+  --secondary: #6b86ff;
   /* #7D65FB; */
-  --tertiary: #0b0f22;
+  /* #758efd */
+  --tertiary: #1b2031;
   /* #151030; */
+  /* #1b2037 */
   --black-100: #1e183f;
   --black-200: #090325;
   --white-100: #f3f3f3;
