@@ -91,9 +91,10 @@
 [data-theme='dark'] {
 
   /* color-scheme:  */
-  --primary: #1a1d29;
-  --accent: #6b7aff;
+  --primary: #181923;
+  --accent: #6675fb;
   /* #6b86ff; */
+  /* #6b7aff; */
   --secondary: #212434;
 
   --accent-light: #7790ff;
