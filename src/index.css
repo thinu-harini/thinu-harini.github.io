@@ -97,15 +97,21 @@
   /* color-scheme:  */
   --accent: #7d8dff;
   /* --primary: #1c1f36; */
-  --primary: #151623;
-  --secondary: #202442;
+  /* --primary: #151623; */
+
+  /* --primary: #1c1e32;
+  --secondary: #202442; */
+
+  --primary: #1B1E34;
+  --secondary: #202441;
+
   /* --primary: #181923; */
   /* --secondary: #212434; */
 
-  --accent-light: #AAB4FF;
-  --accent-dark: #6677fd;
+  --accent-light: #A5AFF8;
+  --accent-dark: #5b6efe;
 
-  --secondary-dark: #12141d;
+  --secondary-dark: #25294b;
 
   --black-100: #1e183f;
   --black-200: #090325;
