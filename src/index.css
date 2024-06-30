@@ -95,16 +95,14 @@
 [data-theme='dark'] {
 
   /* color-scheme:  */
-  --primary: #181923;
+  --primary: #202442;
   --accent: #7d8dff;
-  /* #7d8aff; */
-  /* #7d83ff; */
-  --secondary: #212434;
+  --secondary: #2D325A;
 
-  --accent-light: #919cff;
-  --accent-dark: #5b6bff;
+  --accent-light: #AAB4FF;
+  --accent-dark: #6677fd;
 
-  --secondary-dark: #151830;
+  --secondary-dark: #12141d;
 
   --black-100: #1e183f;
   --black-200: #090325;
@@ -115,12 +113,12 @@
 
   --purple-grey: #aaa6c3;
   --purple-grey-lighter: #dad6f5;
-  --alert-red: #FD2F6D;
+  --alert-red: #FD6785;
   --yellow: #ffea00;
-  --tag-color: #b8aaff;
+  --tag-color: var(--accent-light);
 
   --menu-icon-color: var(--white);
-  --icon-color: var(--primary);
+  --icon-color: #000;
   /* --icon-button-bg: var(--accent); */
   --icon-button-bg-hover: var(--accent-light);
   --icon-button-bg-active: var(--accent-dark);
@@ -132,7 +130,7 @@
   /* --button-border-hover: #8781da; */
   /* --button-border-active: #6e65ec; */
   --button-shadow: 2px 4px 6px rgba(5, 8, 22, 0.8);
-  --button-text: var(--primary);
+  --button-text: #000;
 
   /* text colors */
   --head-text: #ffffff;
@@ -144,7 +142,7 @@
   --content: var(--white-grey);
   --text-hover: #ffffff;
   --placeholder-text: var(--white-grey-darker);
-  --alert-text: var(--white);
+  --alert-text: #000;
 
   --background-color: var(--primary);
   --splash-screen-bg-color: var(--secondary);
@@ -164,8 +162,8 @@
   /* --nav-title-active: var(--accent); */
   --nav-shadow: rgba(9, 10, 13, 0.5);
 
-  --dropdown-bg: #261d5b;
-  --dropdown-menu-content: var(--purple-grey);
+  --dropdown-bg: var(--secondary-dark);
+  --dropdown-menu-content: var(--white-grey);
 
   --toggle-bg: var(--accent);
   --toggle-fg: var(--primary);
@@ -277,11 +275,11 @@ body {
 }
 
 .nav-title:active {
-  color: var(--accent);
+  color: var(--accent-dark);
 }
 
 .nav-title-active {
-  color: var(--accent-light);
+  color: var(--accent);
 }
 
 .nav-title-inactive {
@@ -757,22 +755,12 @@ body {
 
 .project-button {
   display: flex;
-  background-color: none;
   width: 2.5rem;
   height: 2.5rem;
-  border-radius: 10%;
+  /* border-radius: 10%; */
   justify-content: center;
   align-items: center;
   cursor: pointer;
-}
-
-.project-button:hover {
-  background-color: var(--accent);
-  transform: scale(1.06);
-}
-
-.project-button:active {
-  background-color: var(--icon-button-bg-active);
 }
 
 .project-button-icon {
@@ -780,6 +768,16 @@ body {
   width: 80%;
   height: 80%;
   object-fit: contain;
+}
+
+.project-button-icon:hover {
+  color: var(--accent);
+  transform: scale(1.1);
+}
+
+.project-button-icon:active {
+  color: var(--accent-dark);
+  transform: scale(1.1);
 }
 
 /* --Contact Section Styles-- */
