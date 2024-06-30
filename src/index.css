@@ -95,9 +95,11 @@
 [data-theme='dark'] {
 
   /* color-scheme:  */
-  --accent: #7d8dff;
-  --primary: #1b1c29;
-  --secondary: #1c1f32;
+  /* --accent: #7d8dff; */
+  --accent: #7583FF;
+
+  --primary: #1C1F36;
+  --secondary: #202442;
   /* --primary: #181923; */
   /* --secondary: #212434; */
 
