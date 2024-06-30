@@ -102,8 +102,12 @@
   /* --primary: #1c1e32;
   --secondary: #202442; */
 
-  --primary: #1B1E34;
-  --secondary: #202441;
+  /* this good */
+  /* --primary: #1B1E34;
+  --secondary: #202441; */
+
+  --primary: #191C30;
+  --secondary: #232848;
 
   /* --primary: #181923; */
   /* --secondary: #212434; */
