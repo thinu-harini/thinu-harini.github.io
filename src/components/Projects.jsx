@@ -37,7 +37,7 @@ const ProjectCard = ({
           <p
             key={`${name}-${tag.name}`}
             className={styles.content}
-            style={{ color: 'var(--tag-color)', margin: 0 }}
+            style={{ color: 'var(--content)', margin: 0 }}
           >
             #{tag.name}
           </p>

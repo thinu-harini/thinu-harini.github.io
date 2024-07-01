@@ -180,9 +180,9 @@ export const SvgLogo = (props) => {
       {...props}
       style={{
         // "--logo-fill": "var(--light-mode-fill)",
-        "--text-fill": "var(--logo-text)",
-        "--logo-bg-fill": "var(--logo-bg)",
-        "--logo-stroke": "var(--logo-bg)",
+        "--text-fill": "var(--accent)",
+        "--logo-bg-fill": "var(--accent)",
+        "--logo-stroke": "var(--accent)",
       }}
     >
       <defs>

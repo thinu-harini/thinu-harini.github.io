@@ -27,7 +27,7 @@ const SplashScreen = ({ setLoading }) => {
 
     // Function to determine the background color based on the theme
     const getBackgroundColor = () => {
-      return theme === 'dark' ? '#050816' : '#ffffff';
+      return theme === 'dark' ? '#171A2C' : '#ffffff';
     };
 
     // Initial update
