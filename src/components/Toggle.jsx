@@ -12,10 +12,13 @@ export const Toggle = ({ handleChange, isChecked }) => {
         className="toggle"
         onChange={handleChange}
         checked={isChecked}
+        aria-label={isChecked ? "Switch to light mode" : "Switch to dark mode"}
       />
       <label htmlFor="check">
         <FaSun className="light-icon" />
-        <IoMoon className="dark-icon" /></label>
+        <IoMoon className="dark-icon" />
+        <span className="sr-only">{isChecked ? "Switch to light mode" : "Switch to dark mode"}</span>
+      </label>
     </div>
   );
 };

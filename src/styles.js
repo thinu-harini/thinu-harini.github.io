@@ -4,14 +4,14 @@ const styles = {
   padding: "sm:px-16 px-6 sm:py-10 py-8",
 
   heroHeadText:
-    "head-text font-black lg:text-[80px] sm:text-[56px] xs:text-[48px] text-[36px] lg:leading-[100px]",
+    "head-text font-black lg:text-[64px] sm:text-[52px] xs:text-[48px] text-[36px] lg:leading-[100px]",
   heroSubText:
-    "sub-text font-medium lg:text-[44px] sm:text-[36px] xs:text-[24px] text-[20px] leading-[30px] lg:leading-[40px]",
+    "sub-text font-medium lg:text-[34px] sm:text-[32px] xs:text-[24px] text-[20px] leading-[30px] lg:leading-[40px]",
   heroContent:
     "hero-content lg:text-[18px] sm:text-[16px] xs:text-[16px] text-[17px] leading-[28px] xs:leading-[32px] lg:leading-[36px]",
 
   sectionHeadText:
-    "head-text font-black md:text-[60px] sm:text-[50px] xs:text-[40px] text-[30px]",
+    "head-text font-bold md:text-[48px] sm:text-[50px] xs:text-[40px] text-[30px]",
   // sectionSubText:
   //   "section-sub-text font-medium sm:text-[18px] text-[14px] uppercase tracking-wider",
 
@@ -20,7 +20,7 @@ const styles = {
   contentSubText:
     "sub-text font-semibold text-[18px] uppercase tracking-wider mt-1",
   content:
-    "content lg:text-[16px] sm:text-[16px] xs:text-[24px] text-[16px] lg:leading-[26px] mt-4",
+    "content lg:text-[16px] sm:text-[16px] xs:text-[16px] text-[16px] lg:leading-[26px] mt-4",
 
   splashScreenText:
     "font-semibold text-[18px] uppercase tracking-wider mt-1",
@@ -31,7 +31,7 @@ const styles = {
     "content lg:text-[18px] sm:text-[16px] xs:text-[16px] text-[17px] xs:leading-[32px] md:leading-[36px] lg:leading-[36px] max-w-3xl",
 
   contactText:
-    "content font-medium lg:text-[16px] sm:text-[16px] xs:text-[24px] text-[16px] lg:leading-[26px]",
+    "content font-medium lg:text-[16px] sm:text-[16px] xs:text-[16px] text-[16px] lg:leading-[26px]",
 
   caseStudyTopicText:
     "head-text font-bold lg:text-[38px] sm:text-[36px] xs:text-[20px] text-[20px] lg:leading-[68px]",
@@ -40,6 +40,9 @@ const styles = {
   caseStudyContent:
     "content lg:text-[20px] sm:text-[16px] xs:text-[16px] text-[16px] leading-[38px]",
   // max- w - 3xl
+
+  buttonText:
+    "hero-content lg:text-[17px] sm:text-[16px] xs:text-[16px] text-[17px]",
 };
 
 export { styles };

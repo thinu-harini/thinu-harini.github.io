@@ -9,6 +9,7 @@ import HexagonCanvas from './HexagonCanvas';
 import CanvasLoader from "./CanvasLoader";
 import MusicPlayer from './MusicPlayer';
 import Navbar from './Navbar';
+import ScrollToTop from './ScrollToTop';
 import SocialIcons from './SocialIcons';
 // import ReactComponent from './SplashAnimation';
 import SplashScreen from './SplashScreen';
@@ -28,6 +29,7 @@ export {
   CanvasLoader,
   MusicPlayer,
   Navbar,
+  ScrollToTop,
   SocialIcons,
   // ReactComponent,
   SplashScreen,

@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import useLocalStorage from 'use-local-storage';
 
 import SplashScreen from './components/SplashScreen';
-import { Footer, Navbar } from './components';
+import { Navbar, ScrollToTop } from './components';
 import Home from './pages/Home';
 import About from './pages/About';
 import Projects from './pages/Projects';
@@ -33,13 +33,13 @@ const App = () => {
         ) : (
           <div>
             <Navbar isDark={isDark} handleToggleChange={handleToggleChange} />
-
+            <ScrollToTop />
             <Routes>
               <Route path="/" element={<Home isDark={isDark} />} />
-              <Route path="/projects" element={<Projects />} />
               <Route path="/about" element={<About />} />
+              <Route path="/projects" element={<Projects />} />
               <Route path="/writings" element={<Writings />} />
-              <Route path="/Contact" element={<Contact />} />
+              <Route path="/contact" element={<Contact />} />
               <Route path="/groome-case-study" element={<Groome />} />
             </Routes>
           </div>

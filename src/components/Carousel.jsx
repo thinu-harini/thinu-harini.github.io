@@ -18,7 +18,7 @@ const adjustGirlForScreenSize = () => {
   if (window.innerWidth < 768) {
     screenScale = [2.2, 2.2, 2.2];
     screenPosition = [-0.1, -2.2, 1];
-  } else if (aspectRatio < 1.5) {
+  } else if (aspectRatio < 1.5) { //min 992
     screenScale = [2.6, 2.6, 2.6];
     screenPosition = [0.2, -3, -2];
   } else {

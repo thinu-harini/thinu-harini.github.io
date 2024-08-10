@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 
 import { styles } from "../styles";
-import { fadeIn, textVariant } from "../utils/motion";
+import { textVariant } from "../utils/motion";
 import { SectionWrapper } from "../hoc";
 import Tech from './Tech';
 import { education } from "../constants";
@@ -25,7 +25,7 @@ const Education = () => {
   return (
     <>
       <motion.div variants={textVariant()}>
-        <h2 className={`${styles.sectionHeadText}`}>Education.</h2>
+        <h1 className={`${styles.sectionHeadText}`}>Education.</h1>
       </motion.div>
 
       <div>

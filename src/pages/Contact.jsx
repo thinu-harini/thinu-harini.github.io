@@ -7,8 +7,6 @@ import useAlert from '../hooks/useAlert';
 
 import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
-import { slideIn, textVariant } from "../utils/motion";
-
 import { Canvas } from '@react-three/fiber';
 import CanvasLoader from "../components/CanvasLoader.jsx";
 import ContactGirlModel from "../models/ContactGirl.jsx";
@@ -39,7 +37,7 @@ const Contact = () => {
 
   //reset the animation after form submit
   useEffect(() => {
-    if (currentAnimation === 'cheer') {
+    if (currentAnimation === 'cheer' || currentAnimation === 'sad') {
       const timeoutId = setTimeout(() => {
         setCurrentAnimation('idle');
       }, 1500);
@@ -50,10 +48,10 @@ const Contact = () => {
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value }) //enable enter data
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setCurrentAnimation('cheer');
 
     emailjs
       .send(
@@ -72,6 +70,7 @@ const Contact = () => {
       .then(() => {
         setIsLoading(false);
         //Success message
+        setCurrentAnimation('cheer');
         showAlert({
           show: true,
           // text: "Thank you. I will get back to you as soon as possible.",
@@ -79,13 +78,14 @@ const Contact = () => {
         });
 
         //Hide alert and clear form
-        setTimeout(() => { hideAlert(); }, [4000])
+        setTimeout(() => { hideAlert(); }, 4000);
         setForm({ name: "", email: "", message: "", });
 
       }).catch((error) => {
         setIsLoading(false);
         console.log(error);
         //Show error message
+        setCurrentAnimation('sad');
         showAlert({
           show: true,
           // text: "Failed to send your message. Please try again or email me directly.",
@@ -95,18 +95,17 @@ const Contact = () => {
   }
 
   const handleFocus = () => setCurrentAnimation('idle');
-  const handleBlur = () => setCurrentAnimation('cheer');
+  const handleBlur = () => setCurrentAnimation('idle');
 
   return (
     <div>
-      <motion.div>
+      <div className='sm:mt-12 mt-12'>
         {/* <p className={`${styles.sectionSubText}`}>Get in touch</p> */}
-        <h2 className={`${styles.sectionHeadText}`}>Contact.</h2>
-      </motion.div>
+        <h1 className={`${styles.sectionHeadText}`}>Contact.</h1>
+      </div>
 
-      <div className={`motion-container xl:mt-8 mt-6 gap-10 overflow-hidden`}>
+      <div className={`motion-container xl:mt-0 mt-6 gap-10 overflow-hidden`}>
         <motion.div
-          variants={slideIn("left", "tween", 0.2, 1)}
           className='contact-left-div'
         >
           <form
@@ -115,7 +114,7 @@ const Contact = () => {
             className='flex flex-col gap-8'
           >
             <label className='flex flex-col'>
-              <span className={`${styles.contactText} mb-4`}>Your Name</span>
+              <span className={`${styles.contactText} xl:mb-2 mb-2`}>Your Name</span>
               <input
                 type='text'
                 name='name'
@@ -130,7 +129,7 @@ const Contact = () => {
             </label>
 
             <label className='flex flex-col'>
-              <span className={`${styles.contactText} mb-4`}>Your email</span>
+              <span className={`${styles.contactText} xl:mb-2 mb-2`}>Your email</span>
               <input
                 type='email'
                 name='email'
@@ -145,12 +144,13 @@ const Contact = () => {
             </label>
 
             <label className='flex flex-col'>
-              <span className={`${styles.contactText} mb-4`}>Your Message</span>
+              <span className={`${styles.contactText} xl:mb-2 mb-2`}>Your Message</span>
               <textarea
                 rows={3}
                 name='message'
                 className={`${styles.contactText} input-field`}
                 placeholder='Let me know how I can help you!'
+                required
                 value={form.message}
                 onChange={handleChange}
                 onFocus={handleFocus}
@@ -160,18 +160,18 @@ const Contact = () => {
 
             <button
               type='submit'
-              className='button py-3 px-8 w-fit'
+              className={`${styles.buttonText} button w-fit`}
               disabled={isLoading}
               onFocus={handleFocus}
               onBlur={handleBlur}
             >
               {isLoading ? "Sending..." : "Send Message"}
             </button>
+
           </form>
         </motion.div>
 
         <motion.div
-          variants={slideIn("up", "tween", 0.2, 1)}
           className='contact-right-div xl:flex-1 xl:h-auto md:h-[550px] h-[350px]'
         >
           <Canvas
@@ -184,7 +184,7 @@ const Contact = () => {
               groundColor='#000000'
               intensity={0.5}
             />
-            <pointLight position={[-1, 0.5, 1]} intensity={1} />
+            <pointLight position={[0, 0.5, 1]} intensity={0.5} />
             <pointLight position={[-1, -2, 1]} intensity={1} />
 
             <Suspense fallback={<CanvasLoader />}>

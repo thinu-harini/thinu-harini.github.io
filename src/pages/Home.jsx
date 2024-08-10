@@ -17,9 +17,9 @@ const Home = ({ isDark }) => {
         <Carousel />
       </div>
 
-      {/* <div className="hexagon-canvas">
+      <div className="hexagon-canvas">
         <HexagonCanvas />
-      </div> */}
+      </div>
     </div>
   );
 };

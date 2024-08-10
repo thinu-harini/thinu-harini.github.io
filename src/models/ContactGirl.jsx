@@ -16,8 +16,10 @@ const ContactGirlModel = ({ currentAnimation, ...props }) => {
   const { actions } = useAnimations(animations, girlRef);
 
   useEffect(() => {
+    // Stop all animations
     Object.values(actions).forEach((action) => action.stop());
 
+    // Play the animation based on currentAnimation prop
     if (actions[currentAnimation]) {
       actions[currentAnimation].play();
     }

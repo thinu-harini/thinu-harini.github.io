@@ -22,7 +22,7 @@ const Hero = () => {
 
     if (window.innerWidth < 768) {
       screenScale = [2.5, 2.5, 2.5];
-      screenPosition = [0, -2.5, 0];
+      screenPosition = [0.1, -2.5, 0];
     }
     else {
       screenScale = [4, 4, 4];
@@ -33,16 +33,16 @@ const Hero = () => {
   const [girlScale, girlPosition, girlRotation] = adjustGirlForScreenSize();
 
   return (
-    <div className={`motion-container xl:mt-8 lg:mt-8 md:mt-8 gap-10 overflow-hidden`}>
+    <div className={`motion-container xl:mt-18 lg:mt-16 md:mt-10 gap-10 overflow-hidden`}>
       <motion.div
         // variants={slideIn("up", "tween", 0.2, 1)}
-        className={`left-div px-8 py-8 rounded-2xl md:h-auto h-auto`}
+        className={`left-div px-10 py-8 rounded-2xl md:h-auto h-auto`}
       >
         <h1 className={`${styles.heroHeadText}`}>
           Hi, <span className="highlight-text">Thinu</span> here
         </h1>
 
-        <p className={`${styles.heroSubText}`}>I am a&nbsp;
+        <p className={`${styles.heroSubText}`}>A&nbsp;
           <TypeAnimation
             sequence={[
               'UX Researcher',
@@ -60,29 +60,24 @@ const Hero = () => {
         </p>
 
         <p className={`${styles.heroContent} mt-6`}>
-          A UI/UX designer on a mission to level up experiences
+          I am a UI/UX designer on a mission to level up experiences
           in the digital world with creative thinking and problem-solving
-          characteristics and strengths like effective communication.
-          Equipped with qualitative and quantitative research armors,
+          characteristics.
           I play the missions creating seamless interactions that bridge
           the gap between user needs and business goals.
         </p>
 
-        <div className={`${styles.heroContent} flex-row items-start mt-8`}>
-          <button>
-            <Link to="/contact" className="button">
-              Say Hello
-            </Link>
-          </button>
+        <div className={`${styles.buttonText} flex-row items-start mt-6`}>
+          <Link to="/contact" className="button">
+            Contact
+          </Link>
 
-          <button>
-            <a className="button" href="https://drive.google.com/file/d/1RYFG573_ciYfX3PbBi4RoAHWWK94Jp-B/view?usp=sharing" download="cv_thinu_premachandra.pdf" target="_blank">
-              Résumé
-            </a>
-          </button>
+          <a className="button" href="https://drive.google.com/file/d/1RYFG573_ciYfX3PbBi4RoAHWWK94Jp-B/view?usp=sharing" download="cv_thinu_premachandra.pdf" target="_blank">
+            Résumé
+          </a>
         </div>
 
-        <div className="items-center gap-4 flex mt-12 mb-0">
+        <div className="items-center gap-4 flex mt-8 mb-0">
           <p className={`${styles.heroContent}`}>
             Let's Connect :
           </p>

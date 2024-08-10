@@ -3,8 +3,9 @@ import { motion } from 'framer-motion';
 import { styles } from '../styles';
 import { experiences, tabNamesForSmallScreens } from '../constants';
 import { SectionWrapper } from '../hoc';
-import { fadeIn, textVariant } from '../utils/motion';
+import { textVariant } from '../utils/motion';
 import { TbSquareRoundedArrowLeftFilled, TbSquareRoundedArrowRightFilled } from "react-icons/tb";
+import Footer from './Footer';
 const Experience = () => {
   const [activeTab, setActiveTab] = useState(0);
   const sliderRef = useRef(null);
@@ -67,9 +68,9 @@ const Experience = () => {
       const cardWidth = sliderRef.current.querySelector('.experience-card').offsetWidth;
       let scrollLeft;
 
-      if (window.innerWidth < 768) { // Small screens
+      if (window.innerWidth < 768) {
         scrollLeft = index * cardWidth;
-      } else { // Large screens
+      } else {
         const marginWidth = 40;
         scrollLeft = index * (cardWidth + marginWidth);
       }
@@ -91,10 +92,10 @@ const Experience = () => {
     <div>
       <motion.div variants={textVariant()}>
         {/* <p className={styles.sectionSubText}>My Journey So Far</p> */}
-        <h2 className={styles.sectionHeadText}>Work Experience.</h2>
+        <h1 className={styles.sectionHeadText}>Work Experience.</h1>
       </motion.div>
 
-      <div className={`${styles.heroContent} tabs mt-6 mb-6`}>
+      <div className={`${styles.buttonText} tabs mt-6 mb-6`}>
         {isSmallScreen ? (
           tabNamesForSmallScreens.map((tabName, index) => (
             <div
@@ -137,9 +138,9 @@ const Experience = () => {
               className={`experience-card ${activeTab === index ? 'active' : ''}`}
               onClick={() => handleCardClick(index)}
             >
-              <p className={`${styles.contentHeadText}`}>
+              <h2 className={`${styles.contentHeadText}`}>
                 {experience.title}
-              </p>
+              </h2>
 
               <h3 className={`${styles.contentSubText}`}>
                 {experience.company_name}
@@ -172,17 +173,21 @@ const Experience = () => {
 
       {/* Arrow buttons */}
       <button
-        className="arrow-icon absolute top-1/2 left-4"
+        className="arrow-icon absolute left-4"
+        style={{ top: '40%' }}
         onClick={handlePrevCard}
         disabled={activeTab === 0}
+        aria-label="Previous Slide"
       >
         <TbSquareRoundedArrowLeftFilled />
       </button>
 
       <button
-        className="arrow-icon absolute top-1/2 right-4"
+        className="arrow-icon absolute right-4"
+        style={{ top: '40%' }}
         onClick={handleNextCard}
         disabled={activeTab === experiences.length - 1}
+        aria-label="Next Slide"
       >
         <TbSquareRoundedArrowRightFilled />
       </button>
@@ -197,6 +202,7 @@ const Experience = () => {
           />
         ))}
       </div>
+      <Footer />
     </div>
   );
 };

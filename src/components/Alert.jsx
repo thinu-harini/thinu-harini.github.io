@@ -11,10 +11,10 @@ const Alert = ({ type, hideAlert }) => {
       animate={{ y: 0 }}
       exit={{ y: '-5vh' }}
       transition={{ type: 'tween', ease: 'easeIn', duration: 0.2 }}
-      className='fixed top-32 left-0 right-0 flex justify-center items-center'
+      className='fixed top-32 left-0 right-0 flex justify-center'
     >
       <div
-        className='p-4 rounded-lg shadow-lg flex flex-col items-center'
+        className='rounded-lg shadow-lg flex flex-col items-center p-4'
         style={{
           width: '280px',
           height: 'auto',
@@ -25,7 +25,8 @@ const Alert = ({ type, hideAlert }) => {
         role='alert'
       >
 
-        <p className={`${styles.content} mt-2 mb-2 uppercase font-semibold`}>
+        <p className={`${styles.content} uppercase font-semibold`}
+          style={{ color: 'var(--alert-text)' }}>
           {type === "danger" ? "Error!" : "Success"}
         </p>
 
@@ -45,8 +46,7 @@ const Alert = ({ type, hideAlert }) => {
         </p>
 
         {type === "danger" && (
-          <button onClick={hideAlert} className="alert-button mt-6 mb-2">Close</button>
-
+          <button onClick={hideAlert} className="alert-button mt-6 mb-4">Close</button>
         )}
 
       </div>

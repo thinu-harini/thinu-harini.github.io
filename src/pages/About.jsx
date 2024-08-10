@@ -1,13 +1,13 @@
 import React from 'react';
-import { Hero, Education, Experience, Footer } from '../components';
+import { Hero, Education, Experience } from '../components';
 
 const About = () => {
+
   return (
     <React.Fragment>
       <Hero />
       <Education />
       <Experience />
-      <Footer />
     </React.Fragment>
   );
 };

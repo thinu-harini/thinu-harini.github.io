@@ -34,6 +34,14 @@ export const navLinks = [
   },
 ];
 
+export const menuLinks = [
+  { id: "home", title: "Home", path: "/" },
+  { id: "about", title: "About", path: "/about" },
+  { id: "projects", title: "Projects", path: "/projects" },
+  { id: "writings", title: "Writings", path: "/writings" },
+  { id: "contact", title: "Contact", path: "/contact" },
+];
+
 export const carouselItems = [
   {
     title: "PROJECTS",
@@ -145,10 +153,10 @@ export const experiences = [
 
 // tab names for smaller screens
 export const tabNamesForSmallScreens = [
+  "04.",
   "03.",
   "02.",
-  "01.",
-  "00."
+  "01."
 ];
 
 export const projects = [
@@ -162,8 +170,9 @@ export const projects = [
       },
     ],
     image: groome,
+    alt: "Groome project thumbnail",
     case_study_link: "/groome-case-study",
-    ui_link: "/groome-case-study",
+    dribbble_link: "https://dribbble.com/shots/22100589-Booking-platform-for-salons-Business-Version-Help-Center",
   },
   {
     name: "iChatCS",
@@ -175,8 +184,7 @@ export const projects = [
       },
     ],
     image: ichatcs,
-    // case_study_link: "/case-study-groome",
-    ui_link: "https://github.com/",
+    alt: "iChatCS project thumbnail",
   },
   {
     name: "Event Planning System",
@@ -191,8 +199,8 @@ export const projects = [
       },
     ],
     image: crowdfunding,
-    // case_study_link: "/case-study-groome",
-    ui_link: "https://dribbble.com/shots/13933576-Online-Concert-Ticket-Booking",
+    alt: "ApeEvents project thumbnail",
+    dribbble_link: "https://dribbble.com/shots/13933576-Online-Concert-Ticket-Booking",
   },
   {
     name: "Sapro Mart",
@@ -204,8 +212,7 @@ export const projects = [
       },
     ],
     image: ichatcs,
-    case_study_link: "/case-study-groome",
-    ui_link: "https://dribbble.com/shots/13933576-Online-Concert-Ticket-Booking",
+    alt: "Sapro Mart project thumbnail",
   },
   {
     name: "Food Mart - POS System",
@@ -217,8 +224,8 @@ export const projects = [
       },
     ],
     image: ichatcs,
-    // case_study_link: "/case-study-groome",
-    ui_link: "https://dribbble.com/shots/13933576-Online-Concert-Ticket-Booking",
+    alt: "Food Mart project thumbnail",
+    dribbble_link: "https://dribbble.com/shots/22142425-POS-System-Login",
   },
 ];
 
@@ -227,6 +234,7 @@ export const writings = [
     name: "Groome",
     description:
       "A platform to book appointments and and manage the team targeted on beauty and wellness industry.",
+    alt: "Blog thumbnail",
     tags: [
       {
         name: "Adobe XD",

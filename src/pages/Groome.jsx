@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 
 import { styles } from "../styles";
@@ -7,9 +7,6 @@ import { SectionWrapper } from "../hoc";
 
 const Groome = () => {
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
   return (
 
     <div className={`mt-12`}>

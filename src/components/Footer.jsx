@@ -17,7 +17,7 @@ const Footer = () => {
   return (
     <div className="footer">
 
-      <div className='scroll-down-button relative bottom-6 flex justify-center items-center' style={{ left: '50%', transform: 'translateX(-50%)', cursor: 'pointer' }}>
+      <div className='scroll-up-button relative bottom-6 flex justify-center items-center py-6' style={{ left: '50%', transform: 'translateX(-50%)', cursor: 'pointer' }}>
         <motion.div
           animate={{
             y: [0, 24, 0]
@@ -34,24 +34,22 @@ const Footer = () => {
         </motion.div>
       </div>
 
-      <div className={`flex flex-col items-center md:items-center md:px-4 px-4 py-4`}>
-        <button>
-          <Link to="/contact" className="button">
-            Say Hello
-          </Link>
-        </button>
+      <div className={`flex flex-col items-center md:items-center`}>
+        <Link to="/contact" className={`${styles.buttonText} button`} >
+          Contact
+        </Link>
 
-        <p className={`${styles.heroContent}, py-2`}>
-          Let's Connect.
-        </p>
-        <SocialIcons />
+        <div className={`flex flex-row gap-4 mt-8`}>
+          <p className={`${styles.heroContent}`}>Let's Connect :</p>
+          <SocialIcons />
+        </div>
+
       </div>
 
-      <div className={`${styles.content} footer-content text-center mt-4`}>
+      <div className={`${styles.content} footer-content text-center mt-8`}>
         Designed and built by Thinu Harini <br />
         &#169; thinu-harini.github.io | All rights reserved
       </div>
-
     </div>
   )
 }
