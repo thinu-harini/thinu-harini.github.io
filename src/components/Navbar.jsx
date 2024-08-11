@@ -8,9 +8,9 @@ import { HiMenu } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
 import { SvgLogo } from "./SvgLogo.jsx";
 import MusicPlayer from "./MusicPlayer.jsx";
-import { Toggle } from "./Toggle";
+import ThemeSwitcher from './ThemeSwitcher.jsx';
 
-const Navbar = ({ isDark, handleToggleChange }) => {
+const Navbar = ({ handleThemeChange, isDark }) => {
   const [menuOpen, setMenuOpen] = useState(false); // manages the state of the dropdown menu (open/closed)
   const [scrolled, setScrolled] = useState(false); // determines if the page has been scrolled down
   const dropdownRef = useRef(null); // detects outside clicks of dropdown menu
@@ -62,24 +62,16 @@ const Navbar = ({ isDark, handleToggleChange }) => {
 
           <div className='md:flex-row flex items-center gap-4'>
 
-            {/* {Toggle and MusicPlayer */}
-            <Toggle isChecked={isDark} handleChange={handleToggleChange} />
+            {/* {ThemeSwitcher and MusicPlayer */}
             <MusicPlayer />
+            <ThemeSwitcher handleThemeChange={handleThemeChange} isDark={isDark} />
 
             {/* menu button */}
-            <div className='md:hidden'>
+            <div className='menu-button md:hidden'>
               {menuOpen ? (
-                <IoClose
-                  size={32}
-                  className="menu-icon object-contain cursor-pointer"
-                  onClick={toggleMenu}
-                />
+                <IoClose onClick={toggleMenu} />
               ) : (
-                <HiMenu
-                  size={32}
-                  className="menu-icon object-contain cursor-pointer"
-                  onClick={toggleMenu}
-                />
+                <HiMenu onClick={toggleMenu} />
               )}
             </div>
           </div>

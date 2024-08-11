@@ -16,6 +16,7 @@ import SplashScreen from './SplashScreen';
 // import SvgLogo from './SvgLogo';
 import Tech from './Tech';
 // import Toggle from './Toggle';
+import ThemeSwitcher from './ThemeSwitcher';
 
 export {
   Alert,
@@ -35,5 +36,6 @@ export {
   SplashScreen,
   // SvgLogo,
   Tech,
-  // Toggle,
+  //Toggle,
+  ThemeSwitcher,
 };

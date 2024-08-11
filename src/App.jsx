@@ -19,20 +19,20 @@ const App = () => {
   const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [isDark, setIsDark] = useLocalStorage("isDark", preference);
 
-  // Function to toggle dark mode
-  const handleToggleChange = () => {
+  // dark mode - light mode function
+  const handleThemeChange = () => {
     setIsDark(!isDark);
     document.dispatchEvent(new Event('themeChange')); // Dispatch custom event
   };
 
   return (
     <BrowserRouter>
-      <div data-theme={isDark ? "dark" : ""} className='bg relative z-0'>
+      <div data-theme={isDark ? 'dark' : ''} className='bg relative z-0'>
         {loading ? (
           <SplashScreen setLoading={setLoading} />
         ) : (
           <div>
-            <Navbar isDark={isDark} handleToggleChange={handleToggleChange} />
+            <Navbar handleThemeChange={handleThemeChange} isDark={isDark} />
             <ScrollToTop />
             <Routes>
               <Route path="/" element={<Home isDark={isDark} />} />
