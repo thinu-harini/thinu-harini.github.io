@@ -47,7 +47,10 @@ const Navbar = ({ isDark, handleToggleChange }) => {
 
   return (
     <>
-      <nav className={`${styles.paddingX} ${styles.heroContent} w-full flex items-center py-4 fixed top-0 z-20 ${scrolled ? "nav-bg" : "bg-transparent"}`}>
+      <nav
+        className={`${styles.paddingX} ${styles.heroContent} w-full flex items-center py-4 fixed top-0 z-20 ${scrolled ? "nav-bg" : "bg-transparent"}`}
+        style={{ height: '90px' }}
+      >
         <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
           <Link
             to="/"
