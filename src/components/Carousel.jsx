@@ -212,7 +212,8 @@ const Carousel = () => {
             <CarouselCard
               title={item.title}
               subtitle={item.subtitle}
-              paragraph={item.paragraph}
+              list={item.list}
+              // image={item.image}
               link={item.link}
             />
           </div>
