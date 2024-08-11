@@ -68,7 +68,7 @@ const Hero = () => {
         </p>
 
         <div className={`${styles.buttonText} flex-row items-start mt-6`}>
-          <Link to="/contact" className="button">
+          <Link to="/contact" className="button mr-2">
             Contact
           </Link>
 

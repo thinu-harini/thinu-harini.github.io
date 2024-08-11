@@ -4,6 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 * {
   margin: 0;
   padding: 0;
@@ -165,8 +166,8 @@ body {
 }
 
 .day-bg {
-  background: linear-gradient(to bottom, #ffde96, #fda4d3, #a890ff, #819fff, #819fff, #819fff, #819fff);
-  /* background: linear-gradient(to bottom, #ffffff, #819fff, #819fff); */
+  /* background: linear-gradient(to bottom, #ffde96, #fda4d3, #a890ff, #819fff, #819fff, #819fff, #819fff); */
+  background: linear-gradient(to bottom, #ffffff, #819fff, #819fff);
   overflow: hidden;
   transition: background-color 500ms ease-in-out;
 }
@@ -263,25 +264,32 @@ body {
 
 /* --Music Button Styles-- */
 .music-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  border: none;
+  outline: none;
   background-color: var(--accent);
   color: var(--black);
   cursor: pointer;
+  box-shadow: inset 10px 0 10px rgba(209, 209, 255, 0.509), inset -12px 0 10px rgba(0, 0, 54, 0.322);
 }
 
 /* Music Button Styles for larger screens */
 @media screen and (min-width: 768px) {
   .music-button {
     position: fixed;
-    padding: 12px;
-    border-radius: 8px;
     bottom: 18px;
     right: 18px;
-    font-size: 24px;
-    box-shadow: var(--button-shadow);
+    width: 56px;
+    height: 60px;
+    font-size: 26px;
+
   }
 
   .music-button:hover {
-    transform: scale(1.06);
     background-color: var(--accent-light);
   }
 
@@ -290,16 +298,12 @@ body {
   }
 }
 
-/* .music-button:focus {
-  outline: none;
-} */
-
 /* Music Button Styles for smaller screens */
 @media screen and (max-width: 767px) {
   .music-button {
-    padding: 8px;
-    border-radius: 24px;
-    font-size: 18px;
+    width: 44px;
+    height: 48px;
+    font-size: 20px;
   }
 }
 
@@ -427,8 +431,8 @@ body {
 @media (min-width: 768px) {
   .button-container {
     position: absolute;
-    bottom: 16px;
-    left: 16px;
+    bottom: 18px;
+    left: 18px;
     transform: none;
     z-index: 4;
     /* No transform for larger screens */

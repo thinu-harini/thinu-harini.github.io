@@ -58,8 +58,8 @@
     "extras": {
       "author": "Paul (https://sketchfab.com/paul_paul_paul)",
       "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
-      "source": "https://sketchfab.com/3d-models/free-skybox-rooftops-futuristic-city-9b65d7f199a74f1dadef76a438244502",
-      "title": "FREE - SkyBox Rooftops Futuristic City"
+      "source": "https://sketchfab.com/3d-models/free-skybox-anime-sky-56a60c1d1e8b44eabff138374f996d8f",
+      "title": "FREE - SkyBox Anime Sky"
     },
     "generator": "Sketchfab-15.29.0",
     "version": "2.0"
@@ -94,9 +94,15 @@
       "uri": "scene.bin"
     }
   ],
+  "extensionsRequired": [
+    "KHR_materials_pbrSpecularGlossiness"
+  ],
+  "extensionsUsed": [
+    "KHR_materials_pbrSpecularGlossiness"
+  ],
   "images": [
     {
-      "uri": "textures/Scene_-_Root_baseColor.jpeg"
+      "uri": "textures/Scene_-_Root_diffuse.jpeg"
     }
   ],
   "materials": [
@@ -109,14 +115,26 @@
       "emissiveTexture": {
         "index": 0
       },
-      "name": "Scene_-_Root",
-      "pbrMetallicRoughness": {
-        "baseColorTexture": {
-          "index": 0
-        },
-        "metallicFactor": 0.0,
-        "roughnessFactor": 0.6
-      }
+      "extensions": {
+        "KHR_materials_pbrSpecularGlossiness": {
+          "diffuseFactor": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "diffuseTexture": {
+            "index": 0
+          },
+          "glossinessFactor": 0.4,
+          "specularFactor": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "name": "Scene_-_Root"
     }
   ],
   "meshes": [
@@ -183,7 +201,7 @@
         0.0,
         1.0
       ],
-      "name": "8e7aa65c2d9542b29f81ede25dd6954f.fbx"
+      "name": "7421f569dc814a35afbc2a2c7392fadf.fbx"
     },
     {
       "children": [

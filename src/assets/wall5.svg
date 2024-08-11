@@ -1,0 +1,268 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="640" viewBox="0 0 1920 640">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" y1="0.068" x2="0.5" y2="0.688" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#131325"/>
+      <stop offset="1" stop-color="#000018"/>
+    </linearGradient>
+    <filter id="Polygon_287">
+      <feOffset dx="6" dy="6" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feFlood flood-opacity="0.671" result="color"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur"/>
+      <feComposite operator="in" in="color"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <filter id="Polygon_295">
+      <feOffset dx="6" dy="6" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur-2"/>
+      <feFlood flood-opacity="0.671" result="color-2"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur-2"/>
+      <feComposite operator="in" in="color-2"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <filter id="Polygon_282">
+      <feOffset dx="6" dy="6" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur-3"/>
+      <feFlood flood-opacity="0.671" result="color-3"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur-3"/>
+      <feComposite operator="in" in="color-3"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <filter id="Polygon_296">
+      <feOffset dx="6" dy="6" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur-4"/>
+      <feFlood flood-opacity="0.671" result="color-4"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur-4"/>
+      <feComposite operator="in" in="color-4"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <filter id="Polygon_283">
+      <feOffset dx="6" dy="6" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur-5"/>
+      <feFlood flood-opacity="0.671" result="color-5"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur-5"/>
+      <feComposite operator="in" in="color-5"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <filter id="Polygon_292">
+      <feOffset dx="6" dy="6" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur-6"/>
+      <feFlood flood-opacity="0.671" result="color-6"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur-6"/>
+      <feComposite operator="in" in="color-6"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <filter id="Polygon_286">
+      <feOffset dx="6" dy="6" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur-7"/>
+      <feFlood flood-opacity="0.671" result="color-7"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur-7"/>
+      <feComposite operator="in" in="color-7"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <filter id="Polygon_299">
+      <feOffset dx="6" dy="6" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur-8"/>
+      <feFlood flood-opacity="0.671" result="color-8"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur-8"/>
+      <feComposite operator="in" in="color-8"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <filter id="Polygon_284">
+      <feOffset dx="6" dy="6" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur-9"/>
+      <feFlood flood-opacity="0.671" result="color-9"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur-9"/>
+      <feComposite operator="in" in="color-9"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <filter id="Polygon_293">
+      <feOffset dx="6" dy="6" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur-10"/>
+      <feFlood flood-opacity="0.671" result="color-10"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur-10"/>
+      <feComposite operator="in" in="color-10"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <filter id="Polygon_285">
+      <feOffset dx="6" dy="6" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur-11"/>
+      <feFlood flood-opacity="0.671" result="color-11"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur-11"/>
+      <feComposite operator="in" in="color-11"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <filter id="Polygon_294">
+      <feOffset dx="6" dy="6" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur-12"/>
+      <feFlood flood-opacity="0.671" result="color-12"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur-12"/>
+      <feComposite operator="in" in="color-12"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <filter id="Polygon_288">
+      <feOffset dx="6" dy="6" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur-13"/>
+      <feFlood flood-opacity="0.671" result="color-13"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur-13"/>
+      <feComposite operator="in" in="color-13"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <filter id="Polygon_291">
+      <feOffset dx="6" dy="6" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur-14"/>
+      <feFlood flood-opacity="0.671" result="color-14"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur-14"/>
+      <feComposite operator="in" in="color-14"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <filter id="Polygon_281">
+      <feOffset dx="6" dy="6" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur-15"/>
+      <feFlood flood-opacity="0.671" result="color-15"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur-15"/>
+      <feComposite operator="in" in="color-15"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <filter id="Polygon_297">
+      <feOffset dx="6" dy="6" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur-16"/>
+      <feFlood flood-opacity="0.671" result="color-16"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur-16"/>
+      <feComposite operator="in" in="color-16"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <filter id="Polygon_289">
+      <feOffset dx="6" dy="6" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur-17"/>
+      <feFlood flood-opacity="0.671" result="color-17"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur-17"/>
+      <feComposite operator="in" in="color-17"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <filter id="Polygon_290">
+      <feOffset dx="6" dy="6" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur-18"/>
+      <feFlood flood-opacity="0.671" result="color-18"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur-18"/>
+      <feComposite operator="in" in="color-18"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <filter id="Polygon_280">
+      <feOffset dx="6" dy="6" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur-19"/>
+      <feFlood flood-opacity="0.671" result="color-19"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur-19"/>
+      <feComposite operator="in" in="color-19"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <filter id="Polygon_298">
+      <feOffset dx="6" dy="6" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10" result="blur-20"/>
+      <feFlood flood-opacity="0.671" result="color-20"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur-20"/>
+      <feComposite operator="in" in="color-20"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <filter id="Polygon_279" x="238.25" y="408.5" width="265.943" height="235" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5" result="blur-21"/>
+      <feFlood flood-color="#e1ddff" flood-opacity="0.459"/>
+      <feComposite operator="in" in2="blur-21"/>
+    </filter>
+    <filter id="Polygon_279-2" x="238.25" y="408.5" width="265.943" height="235" filterUnits="userSpaceOnUse">
+      <feOffset dx="-3" dy="-3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="6" result="blur-22"/>
+      <feFlood flood-color="#b2b7ff" result="color-21"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur-22"/>
+      <feComposite operator="in" in="color-21"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-wall_2">
+      <rect width="1920" height="640"/>
+    </clipPath>
+  </defs>
+  <g id="wall_2" data-name="wall – 2" clip-path="url(#clip-wall_2)">
+    <path id="Exclusion_12" data-name="Exclusion 12" d="M-20412.764,9100h-94.475a10.02,10.02,0,0,1-8.648-4.989L-20559.92,9019h-1347.16l3.18-5.487a10.045,10.045,0,0,0,0-10.026l-47.213-81.5a10.015,10.015,0,0,0-8.648-4.989h-94.475a10.029,10.029,0,0,0-8.654,4.989l-47.207,81.5a10.036,10.036,0,0,0,0,10.026l3.178,5.486H-22196v-24h-38.232a10.028,10.028,0,0,1-4.994-1.334,10,10,0,0,1-3.662-3.652l-47.205-81.5a10.013,10.013,0,0,1,0-10.024l47.205-81.5a10.009,10.009,0,0,1,3.662-3.651,10.017,10.017,0,0,1,4.994-1.334H-22196v-20h-38.232a9.995,9.995,0,0,1-4.994-1.337,10.064,10.064,0,0,1-3.662-3.652l-47.205-81.5a10.023,10.023,0,0,1,0-10.024l47.205-81.5a10.027,10.027,0,0,1,3.662-3.652,9.995,9.995,0,0,1,4.994-1.337H-22196v-20h-38.232a10.017,10.017,0,0,1-4.994-1.334,10.009,10.009,0,0,1-3.662-3.651l-47.205-81.5a10.023,10.023,0,0,1,0-10.024l47.205-81.5a10,10,0,0,1,3.662-3.652,10.028,10.028,0,0,1,4.994-1.334H-22196v-25h90.24l-4.336,7.486a10.025,10.025,0,0,0,0,10.025l47.207,81.5a10.035,10.035,0,0,0,8.654,4.99h94.475a10.014,10.014,0,0,0,8.648-4.99l47.213-81.5a10.025,10.025,0,0,0,0-10.025l-4.336-7.486h-197.525l42.871-74.011a10.034,10.034,0,0,1,8.654-4.989h94.475a10.015,10.015,0,0,1,8.648,4.989l42.877,74.01h1349.473l-4.336,7.486a10.034,10.034,0,0,0,0,10.025l47.213,81.5a10.021,10.021,0,0,0,8.648,4.99h94.475a10.024,10.024,0,0,0,8.65-4.99l47.211-81.5a10.015,10.015,0,0,0,0-10.025l-4.336-7.486h-197.525l42.877-74.011a10.02,10.02,0,0,1,8.648-4.989h94.475a10.02,10.02,0,0,1,8.65,4.989l42.875,74.01H-20276v25h-52.236a10.024,10.024,0,0,0-4.994,1.335,10.043,10.043,0,0,0-3.66,3.649l-47.207,81.5a10.03,10.03,0,0,0,0,10.023l47.207,81.5a10.043,10.043,0,0,0,3.66,3.649,10.017,10.017,0,0,0,4.994,1.334H-20276v20h-52.236a10,10,0,0,0-4.994,1.337,10.059,10.059,0,0,0-3.66,3.652l-47.207,81.5a10.034,10.034,0,0,0,0,10.025l47.207,81.5a10.051,10.051,0,0,0,3.66,3.652,10.011,10.011,0,0,0,4.994,1.337H-20276v20h-52.236a10.017,10.017,0,0,0-4.994,1.334,10.043,10.043,0,0,0-3.66,3.649l-47.207,81.5a10.03,10.03,0,0,0,0,10.023l47.207,81.5a10.043,10.043,0,0,0,3.66,3.649,10.024,10.024,0,0,0,4.994,1.335H-20276v24h-84.082l3.18-5.487a10.036,10.036,0,0,0,0-10.026l-47.211-81.5a10.016,10.016,0,0,0-8.65-4.989h-94.475a10.015,10.015,0,0,0-8.648,4.989l-47.213,81.5a10.045,10.045,0,0,0,0,10.026l3.18,5.486h199.838l-44.031,76.014A10.02,10.02,0,0,1-20412.764,9100Zm-274.473-288a10.03,10.03,0,0,0-8.654,4.983l-47.207,81.5a10.03,10.03,0,0,0,0,10.023l47.207,81.5a10.031,10.031,0,0,0,8.654,4.984h94.475a10.012,10.012,0,0,0,8.648-4.984l47.213-81.5a10.04,10.04,0,0,0,0-10.023l-47.213-81.5a10.011,10.011,0,0,0-8.648-4.983Zm-1188,0a10.02,10.02,0,0,0-8.654,4.983l-47.207,81.5a10.03,10.03,0,0,0,0,10.023l47.207,81.5a10.021,10.021,0,0,0,8.654,4.984h94.469a10.026,10.026,0,0,0,5-1.335,10.006,10.006,0,0,0,3.66-3.649l47.205-81.5a10.021,10.021,0,0,0,0-10.023l-47.205-81.5a10.043,10.043,0,0,0-3.66-3.649,10.019,10.019,0,0,0-5-1.334ZM-22196,8995h56.236a10.021,10.021,0,0,0,8.654-4.984l47.207-81.5a10.021,10.021,0,0,0,0-10.023l-47.207-81.5a10.02,10.02,0,0,0-8.654-4.983H-22196l0,183Zm1688.764-283a10.021,10.021,0,0,0-8.648,4.99l-47.213,81.5a10.036,10.036,0,0,0,0,10.026l47.213,81.5a10.019,10.019,0,0,0,8.648,4.99h94.475a10.019,10.019,0,0,0,8.65-4.99l47.211-81.5a10.026,10.026,0,0,0,0-10.026l-47.211-81.5a10.022,10.022,0,0,0-8.65-4.99Zm-1547,0a10.035,10.035,0,0,0-8.654,4.99l-47.207,81.5a10.026,10.026,0,0,0,0,10.026l47.207,81.5a10.033,10.033,0,0,0,8.654,4.99h94.475a10.014,10.014,0,0,0,8.648-4.99l47.213-81.5a10.036,10.036,0,0,0,0-10.026l-47.213-81.5a10.014,10.014,0,0,0-8.648-4.99ZM-22196,8609l0,183h56.234a10.024,10.024,0,0,0,8.654-4.989l47.207-81.5a10.025,10.025,0,0,0,0-10.025l-47.207-81.5a10.024,10.024,0,0,0-8.654-4.989Zm1508.766,0a10.029,10.029,0,0,0-8.654,4.989l-47.207,81.5a10.034,10.034,0,0,0,0,10.025l47.207,81.5a10.034,10.034,0,0,0,8.654,4.989h94.475a10.015,10.015,0,0,0,8.648-4.989l47.213-81.5a10.044,10.044,0,0,0,0-10.025l-47.213-81.5a10.015,10.015,0,0,0-8.648-4.989Zm-1188,0a10.024,10.024,0,0,0-8.654,4.989l-47.207,81.5a10.034,10.034,0,0,0,0,10.025l47.207,81.5a10.024,10.024,0,0,0,8.654,4.989h94.469a10.013,10.013,0,0,0,5-1.337,10.051,10.051,0,0,0,3.66-3.652l47.205-81.5a10.025,10.025,0,0,0,0-10.025l-47.205-81.5a10.029,10.029,0,0,0-3.66-3.652,10.013,10.013,0,0,0-5-1.337Zm1368-102a10.019,10.019,0,0,0-8.648,4.99l-47.213,81.5a10.036,10.036,0,0,0,0,10.026l47.213,81.5a10.019,10.019,0,0,0,8.648,4.99h94.475a10.019,10.019,0,0,0,8.65-4.99l47.211-81.5a10.026,10.026,0,0,0,0-10.026l-47.211-81.5a10.019,10.019,0,0,0-8.65-4.99Zm-1547,0a10.033,10.033,0,0,0-8.654,4.99l-47.207,81.5a10.026,10.026,0,0,0,0,10.026l47.207,81.5a10.033,10.033,0,0,0,8.654,4.99h94.475a10.014,10.014,0,0,0,8.648-4.99l47.213-81.5a10.036,10.036,0,0,0,0-10.026l-47.213-81.5a10.014,10.014,0,0,0-8.648-4.99ZM-22196,8406l0,183h56.234a10.02,10.02,0,0,0,8.654-4.983l47.207-81.5a10.021,10.021,0,0,0,0-10.023l-47.207-81.5a10.021,10.021,0,0,0-8.654-4.984Zm1508.766,0a10.031,10.031,0,0,0-8.654,4.984l-47.207,81.5a10.03,10.03,0,0,0,0,10.023l47.207,81.5a10.03,10.03,0,0,0,8.654,4.983h94.475a10.011,10.011,0,0,0,8.648-4.983l47.213-81.5a10.04,10.04,0,0,0,0-10.023l-47.213-81.5a10.012,10.012,0,0,0-8.648-4.984Zm-1188,0a10.021,10.021,0,0,0-8.654,4.984l-47.207,81.5a10.03,10.03,0,0,0,0,10.023l47.207,81.5a10.02,10.02,0,0,0,8.654,4.983h94.469a10.019,10.019,0,0,0,5-1.334,10.043,10.043,0,0,0,3.66-3.649l47.205-81.5a10.021,10.021,0,0,0,0-10.023l-47.205-81.5a10.006,10.006,0,0,0-3.66-3.649,10.026,10.026,0,0,0-5-1.335Zm-84.527,694h-94.475a10.034,10.034,0,0,1-8.654-4.989L-22106.92,9019h199.84l-44.033,76.014A10.015,10.015,0,0,1-21959.762,9100Zm1726-105H-20276l0-183h42.232a10.02,10.02,0,0,1,8.654,4.985l47.207,81.5a10.023,10.023,0,0,1,0,10.024l-47.207,81.5A10.019,10.019,0,0,1-20233.766,8995Zm0-203H-20276l0-183h42.232a10.024,10.024,0,0,1,8.654,4.989l47.207,81.5a10.023,10.023,0,0,1,0,10.024l-47.207,81.5A10.024,10.024,0,0,1-20233.766,8792Zm0-203H-20276l0-183h42.232a10.019,10.019,0,0,1,8.654,4.986l47.207,81.5a10.023,10.023,0,0,1,0,10.024l-47.207,81.5A10.02,10.02,0,0,1-20233.766,8589Z" transform="translate(22196 -8381)" fill="url(#linear-gradient)"/>
+    <g id="Group_292" data-name="Group 292">
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Polygon_287)">
+        <path id="Polygon_287-2" data-name="Polygon 287" d="M153.236,0a10,10,0,0,1,8.653,4.988l47.208,81.5a10,10,0,0,1,0,10.024l-47.208,81.5A10,10,0,0,1,153.236,183H58.764a10,10,0,0,1-8.653-4.988L2.9,96.512a10,10,0,0,1,0-10.024l47.208-81.5A10,10,0,0,1,58.764,0Z" transform="translate(-97 25)" fill="#fff"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Polygon_295)">
+        <path id="Polygon_295-2" data-name="Polygon 295" d="M153.236,0a10,10,0,0,1,8.653,4.988l47.208,81.5a10,10,0,0,1,0,10.024l-47.208,81.5A10,10,0,0,1,153.236,183H58.764a10,10,0,0,1-8.653-4.988L2.9,96.512a10,10,0,0,1,0-10.024l47.208-81.5A10,10,0,0,1,58.764,0Z" transform="translate(1450 25)" fill="#fff"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Polygon_282)">
+        <path id="Polygon_282-2" data-name="Polygon 282" d="M153.236,0a10,10,0,0,1,8.653,4.988l47.208,81.5a10,10,0,0,1,0,10.024l-47.208,81.5A10,10,0,0,1,153.236,183H58.764a10,10,0,0,1-8.653-4.988L2.9,96.512a10,10,0,0,1,0-10.024l47.208-81.5A10,10,0,0,1,58.764,0Z" transform="translate(262 25)" fill="#fff"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Polygon_296)">
+        <path id="Polygon_296-2" data-name="Polygon 296" d="M153.236,0a10,10,0,0,1,8.653,4.988l47.208,81.5a10,10,0,0,1,0,10.024l-47.208,81.5A10,10,0,0,1,153.236,183H58.764a10,10,0,0,1-8.653-4.988L2.9,96.512a10,10,0,0,1,0-10.024l47.208-81.5A10,10,0,0,1,58.764,0Z" transform="translate(1809 25)" fill="#fff"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Polygon_283)">
+        <path id="Polygon_283-2" data-name="Polygon 283" d="M153.236,0a10,10,0,0,1,8.653,4.988l47.208,81.5a10,10,0,0,1,0,10.024l-47.208,81.5A10,10,0,0,1,153.236,183H58.764a10,10,0,0,1-8.653-4.988L2.9,96.512a10,10,0,0,1,0-10.024l47.208-81.5A10,10,0,0,1,58.764,0Z" transform="translate(83 126)" fill="#fff"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Polygon_292)">
+        <path id="Polygon_292-2" data-name="Polygon 292" d="M153.236,0a10,10,0,0,1,8.653,4.988l47.208,81.5a10,10,0,0,1,0,10.024l-47.208,81.5A10,10,0,0,1,153.236,183H58.764a10,10,0,0,1-8.653-4.988L2.9,96.512a10,10,0,0,1,0-10.024l47.208-81.5A10,10,0,0,1,58.764,0Z" transform="translate(1630 126)" fill="#fff"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Polygon_286)">
+        <path id="Polygon_286-2" data-name="Polygon 286" d="M153.236,0a10,10,0,0,1,8.653,4.988l47.208,81.5a10,10,0,0,1,0,10.024l-47.208,81.5A10,10,0,0,1,153.236,183H58.764a10,10,0,0,1-8.653-4.988L2.9,96.512a10,10,0,0,1,0-10.024l47.208-81.5A10,10,0,0,1,58.764,0Z" transform="translate(83 -79)" fill="#fff"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Polygon_299)">
+        <path id="Polygon_299-2" data-name="Polygon 299" d="M153.236,0a10,10,0,0,1,8.653,4.988l47.208,81.5a10,10,0,0,1,0,10.024l-47.208,81.5A10,10,0,0,1,153.236,183H58.764a10,10,0,0,1-8.653-4.988L2.9,96.512a10,10,0,0,1,0-10.024l47.208-81.5A10,10,0,0,1,58.764,0Z" transform="translate(1630 -79)" fill="#fff"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Polygon_284)">
+        <path id="Polygon_284-2" data-name="Polygon 284" d="M153.236,0a10,10,0,0,1,8.653,4.988l47.208,81.5a10,10,0,0,1,0,10.024l-47.208,81.5A10,10,0,0,1,153.236,183H58.764a10,10,0,0,1-8.653-4.988L2.9,96.512a10,10,0,0,1,0-10.024l47.208-81.5A10,10,0,0,1,58.764,0Z" transform="translate(83 331)" fill="#fff"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Polygon_293)">
+        <path id="Polygon_293-2" data-name="Polygon 293" d="M153.236,0a10,10,0,0,1,8.653,4.988l47.208,81.5a10,10,0,0,1,0,10.024l-47.208,81.5A10,10,0,0,1,153.236,183H58.764a10,10,0,0,1-8.653-4.988L2.9,96.512a10,10,0,0,1,0-10.024l47.208-81.5A10,10,0,0,1,58.764,0Z" transform="translate(1630 331)" fill="#fff"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Polygon_285)">
+        <path id="Polygon_285-2" data-name="Polygon 285" d="M153.236,0a10,10,0,0,1,8.653,4.988l47.208,81.5a10,10,0,0,1,0,10.024l-47.208,81.5A10,10,0,0,1,153.236,183H58.764a10,10,0,0,1-8.653-4.988L2.9,96.512a10,10,0,0,1,0-10.024l47.208-81.5A10,10,0,0,1,58.764,0Z" transform="translate(83 536)" fill="#fff"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Polygon_294)">
+        <path id="Polygon_294-2" data-name="Polygon 294" d="M153.236,0a10,10,0,0,1,8.653,4.988l47.208,81.5a10,10,0,0,1,0,10.024l-47.208,81.5A10,10,0,0,1,153.236,183H58.764a10,10,0,0,1-8.653-4.988L2.9,96.512a10,10,0,0,1,0-10.024l47.208-81.5A10,10,0,0,1,58.764,0Z" transform="translate(1630 536)" fill="#fff"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Polygon_288)">
+        <path id="Polygon_288-2" data-name="Polygon 288" d="M153.236,0a10,10,0,0,1,8.653,4.988l47.208,81.5a10,10,0,0,1,0,10.024l-47.208,81.5A10,10,0,0,1,153.236,183H58.764a10,10,0,0,1-8.653-4.988L2.9,96.512a10,10,0,0,1,0-10.024l47.208-81.5A10,10,0,0,1,58.764,0Z" transform="translate(-97 228)" fill="#fff"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Polygon_291)">
+        <path id="Polygon_291-2" data-name="Polygon 291" d="M153.236,0a10,10,0,0,1,8.653,4.988l47.208,81.5a10,10,0,0,1,0,10.024l-47.208,81.5A10,10,0,0,1,153.236,183H58.764a10,10,0,0,1-8.653-4.988L2.9,96.512a10,10,0,0,1,0-10.024l47.208-81.5A10,10,0,0,1,58.764,0Z" transform="translate(1450 228)" fill="#fff"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Polygon_281)">
+        <path id="Polygon_281-2" data-name="Polygon 281" d="M153.236,0a10,10,0,0,1,8.653,4.988l47.208,81.5a10,10,0,0,1,0,10.024l-47.208,81.5A10,10,0,0,1,153.236,183H58.764a10,10,0,0,1-8.653-4.988L2.9,96.512a10,10,0,0,1,0-10.024l47.208-81.5A10,10,0,0,1,58.764,0Z" transform="translate(262 228)" fill="#fff"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Polygon_297)">
+        <path id="Polygon_297-2" data-name="Polygon 297" d="M153.236,0a10,10,0,0,1,8.653,4.988l47.208,81.5a10,10,0,0,1,0,10.024l-47.208,81.5A10,10,0,0,1,153.236,183H58.764a10,10,0,0,1-8.653-4.988L2.9,96.512a10,10,0,0,1,0-10.024l47.208-81.5A10,10,0,0,1,58.764,0Z" transform="translate(1809 228)" fill="#fff"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Polygon_289)">
+        <path id="Polygon_289-2" data-name="Polygon 289" d="M153.236,0a10,10,0,0,1,8.653,4.988l47.208,81.5a10,10,0,0,1,0,10.024l-47.208,81.5A10,10,0,0,1,153.236,183H58.764a10,10,0,0,1-8.653-4.988L2.9,96.512a10,10,0,0,1,0-10.024l47.208-81.5A10,10,0,0,1,58.764,0Z" transform="translate(-97 431)" fill="#fff"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Polygon_290)">
+        <path id="Polygon_290-2" data-name="Polygon 290" d="M153.236,0a10,10,0,0,1,8.653,4.988l47.208,81.5a10,10,0,0,1,0,10.024l-47.208,81.5A10,10,0,0,1,153.236,183H58.764a10,10,0,0,1-8.653-4.988L2.9,96.512a10,10,0,0,1,0-10.024l47.208-81.5A10,10,0,0,1,58.764,0Z" transform="translate(1450 431)" fill="#fff"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Polygon_280)">
+        <path id="Polygon_280-2" data-name="Polygon 280" d="M153.236,0a10,10,0,0,1,8.653,4.988l47.208,81.5a10,10,0,0,1,0,10.024l-47.208,81.5A10,10,0,0,1,153.236,183H58.764a10,10,0,0,1-8.653-4.988L2.9,96.512a10,10,0,0,1,0-10.024l47.208-81.5A10,10,0,0,1,58.764,0Z" transform="translate(262 431)" fill="#fff"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Polygon_298)">
+        <path id="Polygon_298-2" data-name="Polygon 298" d="M153.236,0a10,10,0,0,1,8.653,4.988l47.208,81.5a10,10,0,0,1,0,10.024l-47.208,81.5A10,10,0,0,1,153.236,183H58.764a10,10,0,0,1-8.653-4.988L2.9,96.512a10,10,0,0,1,0-10.024l47.208-81.5A10,10,0,0,1,58.764,0Z" transform="translate(1809 431)" fill="#fff"/>
+      </g>
+    </g>
+    <g data-type="innerShadowGroup">
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Polygon_279)">
+        <g id="Polygon_279-3" data-name="Polygon 279" transform="translate(250.25 420.5)" fill="none">
+          <path d="M172.331,0a8,8,0,0,1,6.934,4.01l54.382,94.5a8,8,0,0,1,0,7.98l-54.382,94.5a8,8,0,0,1-6.934,4.01H63.612a8,8,0,0,1-6.934-4.01L2.3,106.49a8,8,0,0,1,0-7.98L56.678,4.01A8,8,0,0,1,63.612,0Z" stroke="none"/>
+          <path d="M 63.61216735839844 4 C 62.18533325195312 4 60.85690307617188 4.768203735351562 60.145263671875 6.004867553710938 L 5.763168334960938 100.5048980712891 C 5.054977416992188 101.7354965209961 5.054977416992188 103.2644653320312 5.763198852539062 104.4951019287109 L 60.14517211914062 198.9950714111328 C 60.85687255859375 200.2317657470703 62.185302734375 201 63.61210632324219 201 L 172.3310394287109 201 C 173.7578735351562 201 175.0863037109375 200.2317657470703 175.7979736328125 198.9951019287109 L 230.1800384521484 104.4951019287109 C 230.8882293701172 103.2644653320312 230.8882293701172 101.7355346679688 230.1800079345703 100.5048675537109 L 175.7979736328125 6.004867553710938 C 175.0863342285156 4.768203735351562 173.7579040527344 4 172.3310699462891 4 L 63.61216735839844 4 M 63.61216735839844 0 L 172.3310699462891 0 C 175.1932067871094 0 177.8373413085938 1.529037475585938 179.2649078369141 4.009765625 L 233.6469421386719 98.509765625 C 235.0684967041016 100.9800033569336 235.0684967041016 104.0199966430664 233.6469421386719 106.490234375 L 179.2649078369141 200.9902038574219 C 177.8373413085938 203.4709320068359 175.1932067871094 205 172.3310394287109 205 L 63.61210632324219 205 C 60.74996948242188 205 58.10586547851562 203.4709320068359 56.67826843261719 200.9902038574219 L 2.2962646484375 106.4901962280273 C 0.8747100830078125 104.0199661254883 0.8747100830078125 100.9800033569336 2.2962646484375 98.509765625 L 56.67832946777344 4.009765625 C 58.10589599609375 1.529037475585938 60.75 0 63.61216735839844 0 Z" stroke="none" fill="#9ca9ff"/>
+        </g>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Polygon_279-2)">
+        <g id="Polygon_279-4" data-name="Polygon 279" transform="translate(250.25 420.5)" fill="#fff">
+          <path d="M172.331,0a8,8,0,0,1,6.934,4.01l54.382,94.5a8,8,0,0,1,0,7.98l-54.382,94.5a8,8,0,0,1-6.934,4.01H63.612a8,8,0,0,1-6.934-4.01L2.3,106.49a8,8,0,0,1,0-7.98L56.678,4.01A8,8,0,0,1,63.612,0Z" stroke="none"/>
+          <path d="M 63.61216735839844 4 C 62.18533325195312 4 60.85690307617188 4.768203735351562 60.145263671875 6.004867553710938 L 5.763168334960938 100.5048980712891 C 5.054977416992188 101.7354965209961 5.054977416992188 103.2644653320312 5.763198852539062 104.4951019287109 L 60.14517211914062 198.9950714111328 C 60.85687255859375 200.2317657470703 62.185302734375 201 63.61210632324219 201 L 172.3310394287109 201 C 173.7578735351562 201 175.0863037109375 200.2317657470703 175.7979736328125 198.9951019287109 L 230.1800384521484 104.4951019287109 C 230.8882293701172 103.2644653320312 230.8882293701172 101.7355346679688 230.1800079345703 100.5048675537109 L 175.7979736328125 6.004867553710938 C 175.0863342285156 4.768203735351562 173.7579040527344 4 172.3310699462891 4 L 63.61216735839844 4 M 63.61216735839844 0 L 172.3310699462891 0 C 175.1932067871094 0 177.8373413085938 1.529037475585938 179.2649078369141 4.009765625 L 233.6469421386719 98.509765625 C 235.0684967041016 100.9800033569336 235.0684967041016 104.0199966430664 233.6469421386719 106.490234375 L 179.2649078369141 200.9902038574219 C 177.8373413085938 203.4709320068359 175.1932067871094 205 172.3310394287109 205 L 63.61210632324219 205 C 60.74996948242188 205 58.10586547851562 203.4709320068359 56.67826843261719 200.9902038574219 L 2.2962646484375 106.4901962280273 C 0.8747100830078125 104.0199661254883 0.8747100830078125 100.9800033569336 2.2962646484375 98.509765625 L 56.67832946777344 4.009765625 C 58.10589599609375 1.529037475585938 60.75 0 63.61216735839844 0 Z" stroke="none"/>
+        </g>
+      </g>
+      <g id="Polygon_279-5" data-name="Polygon 279" transform="translate(250.249 420.5)" fill="none">
+        <path d="M172.331,0a8,8,0,0,1,6.934,4.01l54.382,94.5a8,8,0,0,1,0,7.98l-54.382,94.5a8,8,0,0,1-6.934,4.01H63.612a8,8,0,0,1-6.934-4.01L2.3,106.49a8,8,0,0,1,0-7.98L56.678,4.01A8,8,0,0,1,63.612,0Z" stroke="none"/>
+        <path d="M 63.61216735839844 4 C 62.18533325195312 4 60.85690307617188 4.768203735351562 60.145263671875 6.004867553710938 L 5.763168334960938 100.5048980712891 C 5.054977416992188 101.7354965209961 5.054977416992188 103.2644653320312 5.763198852539062 104.4951019287109 L 60.14517211914062 198.9950714111328 C 60.85687255859375 200.2317657470703 62.185302734375 201 63.61210632324219 201 L 172.3310394287109 201 C 173.7578735351562 201 175.0863037109375 200.2317657470703 175.7979736328125 198.9951019287109 L 230.1800384521484 104.4951019287109 C 230.8882293701172 103.2644653320312 230.8882293701172 101.7355346679688 230.1800079345703 100.5048675537109 L 175.7979736328125 6.004867553710938 C 175.0863342285156 4.768203735351562 173.7579040527344 4 172.3310699462891 4 L 63.61216735839844 4 M 63.61216735839844 0 L 172.3310699462891 0 C 175.1932067871094 0 177.8373413085938 1.529037475585938 179.2649078369141 4.009765625 L 233.6469421386719 98.509765625 C 235.0684967041016 100.9800033569336 235.0684967041016 104.0199966430664 233.6469421386719 106.490234375 L 179.2649078369141 200.9902038574219 C 177.8373413085938 203.4709320068359 175.1932067871094 205 172.3310394287109 205 L 63.61210632324219 205 C 60.74996948242188 205 58.10586547851562 203.4709320068359 56.67826843261719 200.9902038574219 L 2.2962646484375 106.4901962280273 C 0.8747100830078125 104.0199661254883 0.8747100830078125 100.9800033569336 2.2962646484375 98.509765625 L 56.67832946777344 4.009765625 C 58.10589599609375 1.529037475585938 60.75 0 63.61216735839844 0 Z" stroke="none" fill="#9ca9ff"/>
+      </g>
+    </g>
+  </g>
+</svg>
