@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -66,7 +65,7 @@
   /* --menu-icon-color: var(--accent); */
   /* --icon-color: var(--black); */
 
-  --nav-text: var(--accent-dark);
+  --nav-text: var(--grey-300);
   --nav-text-hover: var(--grey-400);
   --nav-text-active: var(--accent-darker);
   --nav-shadow: rgba(92, 99, 155, 0.2);
@@ -210,10 +209,10 @@ body {
   position: fixed;
   display: flex;
   flex-direction: column;
-  top: 92px;
+  top: 90px;
   right: -60%;
   width: 60%;
-  height: calc(100vh - 92px);
+  height: calc(100vh - 90px);
   padding-left: 40px;
   padding-right: 40px;
   padding-bottom: 40px;
@@ -342,16 +341,33 @@ body {
   overflow: hidden;
 }
 
-.wall-layer {
+/* .roof-layer {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 80vh;
+  height: 90px;
   z-index: 1;
 }
 
-.wall-with-windows {
+.roof-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+} */
+
+.wall-layer {
+  position: absolute;
+  /* top: 90px; */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80vh;
+  /* height: calc(80vh - 90px); */
+  z-index: 1;
+}
+
+.wall-bg {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -364,6 +380,69 @@ body {
   width: 100%;
   height: 100%;
   z-index: 3;
+}
+
+.overlay-message {
+  position: fixed;
+  color: var(--white-400);
+  text-align: center;
+  padding: 16px;
+  font-size: 16px;
+  z-index: 12;
+  display: none;
+  animation: slideInFromBottom 0.8s ease-in forwards;
+}
+
+@media (min-width: 768px) {
+  .desktop-message {
+    bottom: 10px;
+    /* top: 45px; */
+    width: 30%;
+    display: block;
+    background-color: #07003ec8;
+    border-radius: 8px;
+  }
+}
+
+@media (max-width: 767px) {
+  .mobile-message {
+    top: 95px;
+    width: 80%;
+    display: block;
+  }
+}
+
+@keyframes slideInFromBottom {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (min-width: 768px) {
+  .button-container {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    transform: none;
+    z-index: 4;
+    /* No transform for larger screens */
+  }
+}
+
+@media (max-width: 767px) {
+  .button-container {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    z-index: 4;
+  }
 }
 
 /* hexagon floor  */
@@ -462,18 +541,18 @@ body {
 }
 
 .slide-content {
+  position: relative;
   width: 100%;
   height: 100%;
   text-align: left;
-  padding: 14px;
+  padding: 20px;
   user-select: none;
 }
 
 .slide-content h1,
-.slide-content h2,
 .slide-content p {
   color: var(--accent);
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .slide-content h1 {
@@ -482,7 +561,6 @@ body {
 
 .slide-content p {
   font-size: medium;
-  font-weight: 500;
 }
 
 /* --Hero Section Styles-- */
@@ -523,7 +601,6 @@ body {
 .button {
   display: inline-block;
   padding: 16px 24px;
-  margin-right: 12px;
   background-color: var(--button-bg);
   color: var(--button-text);
   font-weight: 600;
@@ -1139,5 +1216,62 @@ body {
       0em 2.5em 0 0em rgba(255, 255, 255, 0.2),
       -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.5),
       -2.6em 0em 0 0em rgba(255, 255, 255, 0.7), -1.8em -1.8em 0 0em #ffffff;
+  }
+}
+
+
+.cloud {
+  /* position: absolute; */
+  top: 50%;
+  height: auto;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.cloud1 {
+  animation: moveCloud1 20s linear infinite alternate;
+  left: 0;
+  width: 600px;
+}
+
+.cloud2 {
+  animation: moveCloud2 25s linear infinite alternate;
+  right: 0;
+  width: 700px;
+}
+
+.cloud3 {
+  animation: moveCloud1 23s linear infinite alternate;
+  left: 0;
+  width: 600px;
+}
+
+.cloud4 {
+  animation: moveCloud2 28s linear infinite alternate;
+  right: 0;
+  width: 700px;
+}
+
+@keyframes moveCloud1 {
+  from {
+    transform: translateX(-30vw);
+    /* Start from the right edge of the viewport */
+  }
+
+  to {
+    transform: translateX(100vw);
+    /* Move cloud2 to the left edge of the viewport */
+  }
+}
+
+@keyframes moveCloud2 {
+  from {
+    transform: translateX(100vw);
+    /* Start from the right edge of the viewport */
+  }
+
+  to {
+    transform: translateX(-30vw);
+    /* Move cloud2 to the left edge of the viewport */
   }
 }

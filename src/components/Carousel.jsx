@@ -6,7 +6,7 @@ import CanvasLoader from "./CanvasLoader.jsx";
 import HomeGirlModel from "../models/HomeGirl.jsx";
 import CarouselCard from '../components/CarouselCard';
 import { carouselItems } from "../constants";
-import SocialIcons from './SocialIcons.jsx';
+import { styles } from '../styles.js';
 
 const adjustGirlForScreenSize = () => {
   let screenScale = null;
@@ -42,6 +42,7 @@ const initializeSlides = (slides, angle) => {
 
 const Carousel = () => {
   const [girlScale, girlPosition, girlRotation] = adjustGirlForScreenSize();
+  const [messageVisible, setMessageVisible] = useState(true);
   const carouselStageRef = useRef(null);
   const slidesRef = useRef([]);
   const dragStartX = useRef(0);
@@ -114,11 +115,13 @@ const Carousel = () => {
 
     // Event handler for mouse wheel scrolling
     const handleScroll = throttle((event) => {
+      if (messageVisible) setMessageVisible(false);
       event.deltaY > 0 ? handleNext() : handlePrev();
     }, 600);
 
     // Handle pointer events(mouse or touch)
     const handleDragStart = (event) => {
+      if (messageVisible) setMessageVisible(false);
       isDragging.current = true;
       dragStartX.current = event.clientX || event.touches[0].clientX;
       lastDragX.current = dragStartX.current;
@@ -157,6 +160,7 @@ const Carousel = () => {
 
     // Handle keydown events
     const handleKeyDown = throttle((event) => {
+      if (messageVisible) setMessageVisible(false);
       if (event.key === 'ArrowRight') handleNext();
       else if (event.key === 'ArrowLeft') handlePrev();
     }, 800);
@@ -186,8 +190,12 @@ const Carousel = () => {
     };
   }, [angle, sensitivity]);
 
-  const handleDoubleClick = (link) => {
-    navigate(link);
+  // const handleDoubleClick = (link) => {
+  //   navigate(link);
+  // };
+
+  const handleSlideClick = (link) => {
+    navigate(link); // Use navigate to change routes
   };
 
   return (
@@ -198,7 +206,8 @@ const Carousel = () => {
             className="slide"
             key={i}
             ref={(el) => (slidesRef.current[i] = el)}
-            onDoubleClick={() => handleDoubleClick(item.link)}
+            onClick={() => handleSlideClick(item.link)}
+          // onDoubleClick={() => handleDoubleClick(item.link)}
           >
             <CarouselCard
               title={item.title}
@@ -237,13 +246,22 @@ const Carousel = () => {
           </Canvas>
         </div>
 
-        {/* <div>
-          <button>
-            <Link to="/contact" className="contact-button">
-              Say Hello
-            </Link>
-          </button>
-        </div> */}
+        {messageVisible && (
+          <>
+            <div className={`${styles.contentSubText} overlay-message desktop-message`}>
+              <p>
+                Scroll or use arrow keys to explore
+              </p>
+            </div>
+
+            <div className={`${styles.contentSubText} overlay-message mobile-message`}>
+              <p>
+                Swipe to explore
+              </p>
+            </div>
+          </>
+        )}
+
       </div>
     </div>
   );

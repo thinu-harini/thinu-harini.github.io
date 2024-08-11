@@ -1,25 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NightCanvas, DayCanvas } from '../components/canvas';
 import Carousel from '../components/Carousel';
 import { HexagonCanvas } from '../components';
-import wall from '../assets/home_wallpaper.svg';
+import wall from '../assets/wall5.svg';
+import roof from '../assets/roof.svg';
+import { Link } from 'react-router-dom';
+import { styles } from '../styles';
 
 const Home = ({ isDark }) => {
+
   return (
     <div className="home-container">
       {isDark ? <NightCanvas /> : <DayCanvas />}
-      {/* Wall layer with SVG mask for windows */}
+
+      {/* <div className="roof-layer">
+        <img src={roof} alt="roof_image" className="roof-bg" />
+      </div> */}
+
       <div className="wall-layer">
-        <img src={wall} alt="Wall with Windows" className="wall-with-windows" />
+        <img src={wall} alt="wall_image" className="wall-bg" />
       </div>
 
       <div className="home-content">
         <Carousel />
+
+        <div className='button-container'>
+          <Link to="/contact" className={`${styles.buttonText} button`} >
+            Contact
+          </Link>
+        </div>
+
       </div>
 
       <div className="hexagon-canvas">
         <HexagonCanvas />
       </div>
+
     </div>
   );
 };
