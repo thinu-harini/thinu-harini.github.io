@@ -10,6 +10,7 @@ import { SectionWrapper } from "../hoc";
 import { Canvas } from '@react-three/fiber';
 import CanvasLoader from "../components/CanvasLoader.jsx";
 import ContactGirlModel from "../models/ContactGirl.jsx";
+import { textVariant } from "../utils/motion.js";
 
 const Contact = () => {
 
@@ -99,10 +100,13 @@ const Contact = () => {
 
   return (
     <div>
-      <div className='sm:mt-12 mt-12'>
+      <motion.div
+        variants={textVariant()}
+        className='sm:mt-12 mt-12'
+      >
         {/* <p className={`${styles.sectionSubText}`}>Get in touch</p> */}
         <h1 className={`${styles.sectionHeadText}`}>Contact.</h1>
-      </div>
+      </motion.div>
 
       <div className={`motion-container xl:mt-0 mt-6 gap-10 overflow-hidden`}>
         <motion.div
