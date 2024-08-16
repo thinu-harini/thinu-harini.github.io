@@ -51,7 +51,7 @@ const Writings = () => {
     <>
       <motion.div
         variants={textVariant()}
-        className='sm:mt-12 mt-12'
+        className='sm:mt-12 mt-16'
       >
         <h1 className={styles.sectionHeadText}>Writings.</h1>
       </motion.div>

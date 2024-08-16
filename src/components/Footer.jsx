@@ -15,7 +15,7 @@ const Footer = () => {
   };
 
   return (
-    <div className="footer">
+    <div id="footer" className="footer">
 
       <div className='scroll-up-button relative bottom-6 flex justify-center items-center py-6' style={{ left: '50%', transform: 'translateX(-50%)', cursor: 'pointer' }}>
         <motion.div

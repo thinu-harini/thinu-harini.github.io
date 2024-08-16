@@ -14,7 +14,7 @@ const Experience = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 768);
+      setIsSmallScreen(window.innerWidth < 992);
     };
 
     window.addEventListener('resize', handleResize);
@@ -68,7 +68,7 @@ const Experience = () => {
       const cardWidth = sliderRef.current.querySelector('.experience-card').offsetWidth;
       let scrollLeft;
 
-      if (window.innerWidth < 768) {
+      if (window.innerWidth < 992) {
         scrollLeft = index * cardWidth;
       } else {
         const marginWidth = 40;

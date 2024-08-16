@@ -9,12 +9,16 @@ import { IoClose } from "react-icons/io5";
 import { SvgLogo } from "./SvgLogo.jsx";
 import MusicPlayer from "./MusicPlayer.jsx";
 import ThemeSwitcher from './ThemeSwitcher.jsx';
+import AccessibilityMenu from './AccessibilityMenu.jsx';
+import { useAccessibility } from './AccessibilityContext.jsx';
 
 const Navbar = ({ handleThemeChange, isDark }) => {
   const [menuOpen, setMenuOpen] = useState(false); // manages the state of the dropdown menu (open/closed)
   const [scrolled, setScrolled] = useState(false); // determines if the page has been scrolled down
   const dropdownRef = useRef(null); // detects outside clicks of dropdown menu
   const location = useLocation();
+
+  const toggleMenu = () => setMenuOpen(!menuOpen);
 
   // Adjusts the scrolled state based on scroll position
   useEffect(() => {
@@ -43,18 +47,24 @@ const Navbar = ({ handleThemeChange, isDark }) => {
     };
   }, []);
 
-  const toggleMenu = () => setMenuOpen(prev => !prev);
+  const { toggleDyslexiaFont } = useAccessibility();
+  // const { zoomIn } = useAccessibility();
+  // const { zoomOut } = useAccessibility();
+  const { toggleLargeFont } = useAccessibility();
+  const { toggleBigCursor } = useAccessibility();
+
 
   return (
     <>
       <nav
+        id="navbar"
         className={`${styles.paddingX} ${styles.heroContent} w-full flex items-center py-4 fixed top-0 z-20 ${scrolled ? "nav-bg" : "bg-transparent"}`}
         style={{ height: '90px' }}
       >
         <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
           <Link
             to="/"
-            className='flex items-center gap-2'
+            className='flex items-center gap-2 custom-pointer'
             onClick={() => window.scrollTo(0, 0)}
           >
             <SvgLogo className='w-28 h-auto' />
@@ -63,15 +73,25 @@ const Navbar = ({ handleThemeChange, isDark }) => {
           <div className='md:flex-row flex items-center gap-4'>
 
             {/* {ThemeSwitcher and MusicPlayer */}
-            <MusicPlayer />
+            <AccessibilityMenu
+              toggleDyslexiaFont={toggleDyslexiaFont}
+              // zoomIn={zoomIn}
+              // zoomOut={zoomOut}
+              toggleLargeFont={toggleLargeFont}
+              toggleBigCursor={toggleBigCursor}
+              handleThemeChange={handleThemeChange}
+              isDark={isDark}
+            />
             <ThemeSwitcher handleThemeChange={handleThemeChange} isDark={isDark} />
+            <MusicPlayer />
+
 
             {/* menu button */}
-            <div className='menu-button md:hidden'>
+            <div className='menu-button md:hidden' onClick={toggleMenu}>
               {menuOpen ? (
-                <IoClose onClick={toggleMenu} />
+                <IoClose className="menu-icon" />
               ) : (
-                <HiMenu onClick={toggleMenu} />
+                <HiMenu className="menu-icon" />
               )}
             </div>
           </div>
@@ -83,7 +103,7 @@ const Navbar = ({ handleThemeChange, isDark }) => {
                 key={nav.id}
                 className={`nav-title ${location.pathname === nav.path ? 'nav-title-active' : 'nav-title-inactive'}`}
               >
-                <Link to={nav.path}>{nav.title}</Link>
+                <Link to={nav.path} className="custom-pointer">{nav.title}</Link>
               </li>
             ))}
           </ul>
@@ -91,7 +111,10 @@ const Navbar = ({ handleThemeChange, isDark }) => {
       </nav>
 
       {/* Small devices - side menu */}
-      <div ref={dropdownRef} className={`menu ${menuOpen ? 'open' : ''} ${styles.heroContent}`}>
+      <div
+        id="nav-menu"
+        ref={dropdownRef}
+        className={`menu ${menuOpen ? 'open' : ''} ${styles.heroContent}`}>
 
         <ul className="list-none">
           {menuLinks.map((nav) => (
@@ -100,7 +123,7 @@ const Navbar = ({ handleThemeChange, isDark }) => {
               className={`menu-content ${location.pathname === nav.path ? 'nav-title-active' : 'nav-title-inactive'}`}
               onClick={() => setMenuOpen(false)}
             >
-              <Link to={nav.path}>{nav.title}</Link>
+              <Link to={nav.path} className="custom-pointer">{nav.title}</Link>
             </li>
           ))}
         </ul>

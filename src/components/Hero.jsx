@@ -75,6 +75,7 @@ const Hero = () => {
           <a className="button" href="https://drive.google.com/file/d/1RYFG573_ciYfX3PbBi4RoAHWWK94Jp-B/view?usp=sharing" download="cv_thinu_premachandra.pdf" target="_blank">
             Résumé
           </a>
+          {/* <Tech /> */}
         </div>
 
         <div className="items-center gap-4 flex mt-8 mb-0">
@@ -113,6 +114,7 @@ const Hero = () => {
             />
 
           </Suspense>
+
         </Canvas>
       </motion.div>
 

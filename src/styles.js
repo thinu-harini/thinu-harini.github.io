@@ -39,7 +39,6 @@ const styles = {
     "sub-text font-bold lg:text-[28px] sm:text-[26px] xs:text-[16px] text-[16px] lg:leading-[68px] mt-4",
   caseStudyContent:
     "content lg:text-[20px] sm:text-[16px] xs:text-[16px] text-[16px] leading-[38px]",
-  // max- w - 3xl
 
   buttonText:
     "hero-content lg:text-[17px] sm:text-[16px] xs:text-[16px] text-[17px]",

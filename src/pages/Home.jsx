@@ -13,9 +13,9 @@ const Home = ({ isDark }) => {
     <div className="home-container">
       {isDark ? <NightCanvas /> : <DayCanvas />}
 
-      {/* <div className="roof-layer">
+      <div className="roof-layer">
         <img src={roof} alt="roof_image" className="roof-bg" />
-      </div> */}
+      </div>
 
       <div className="wall-layer">
         <img src={wall} alt="wall_image" className="wall-bg" />

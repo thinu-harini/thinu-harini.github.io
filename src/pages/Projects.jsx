@@ -9,6 +9,7 @@ import { SectionWrapper } from '../hoc';
 import { PiDribbbleLogoFill } from "react-icons/pi";
 import { HiNewspaper } from "react-icons/hi2";
 import { Footer } from '../components';
+import ProgressBar from '../components/ProgressBar';
 
 const ProjectCard = ({
   name,
@@ -20,8 +21,8 @@ const ProjectCard = ({
   dribbble_link,
 }) => {
   return (
-    <div className='project-card md:w-[360px] w-full'>
-      <div className='relative w-full h-[230px]'>
+    <div className='project-card'>
+      <div className='relative w-full h-64 md:h-56'>
         <img
           src={image}
           alt={alt}
@@ -89,16 +90,17 @@ const Projects = () => {
 
   return (
     <>
+      <ProgressBar />
       <div>
         <motion.div
           variants={textVariant()}
-          className='sm:mt-12 mt-12'
+          className='sm:mt-12 mt-16'
         >
           {/* <p className={styles.sectionSubText}>My Work</p> */}
           <h1 className={styles.sectionHeadText}>Projects.</h1>
         </motion.div>
 
-        <div className='mt-10 flex flex-wrap gap-7'>
+        <div className='mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7'>
           {projects.map((project, index) => (
             <ProjectCard key={`project-${index}`} {...project} />
           ))}

@@ -1,3 +1,3 @@
-export { Girl } from "./Girl";
-export { HeroGirl } from "./HeroGirl";
+export { ContactGirlModel } from "./ContactGirl";
+export { HeroGirlModel } from "./HeroGirl";
 export { HomeGirlModel } from "./HomeGirl";
