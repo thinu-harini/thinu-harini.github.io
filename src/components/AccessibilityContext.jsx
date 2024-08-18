@@ -5,38 +5,34 @@ const AccessibilityContext = createContext();
 
 export const AccessibilityProvider = ({ children }) => {
   const [isDyslexiaFont, setIsDyslexiaFont] = useState(false);
-  const [zoomLevel, setZoomLevel] = useState(1); // Initial zoom level (1 = 100%)
   const [isBigCursor, setIsBigCursor] = useState(false); // New state for big cursor
 
   const [synth, setSynth] = useState(window.speechSynthesis);
   const [currentUtterance, setCurrentUtterance] = useState(null);
   const [isReading, setIsReading] = useState(false); // Track reading status
   const [rate, setRate] = useState(1); // Default rate
-
+  const [highlightEnabled, setHighlightEnabled] = useState(true);
+  const [textToRead, setTextToRead] = useState('');
+  const [isPaused, setIsPaused] = useState(false);
+  const [isScreenReaderExpanded, setIsScreenReaderExpanded] = useState(false);
+  const [selectedVoice, setSelectedVoice] = useState(null);
   const location = useLocation();
+
+  const [isDesaturated, setIsDesaturated] = useState(false);
+  const [highlightLinks, setHighlightLinks] = useState(false);
 
   const toggleDyslexiaFont = () => {
     setIsDyslexiaFont(prev => !prev);
-  };
-
-  const zoomIn = () => {
-    setZoomLevel(prev => Math.min(prev + 0.1, 1.5)); // Max zoom level (150%)
-  };
-
-  const zoomOut = () => {
-    setZoomLevel(prev => Math.max(prev - 0.1, 0.5)); // Min zoom level (50%)
   };
 
   const toggleBigCursor = () => {
     setIsBigCursor(prev => !prev);
   };
 
-
   // Screen Reader
 
   // Helper function to get text excluding specific elements
   const getFilteredText = () => {
-    // Get the filtered text excluding specific elements
     const bodyText = document.body.innerText;
     const excludedElements = ['navbar', 'footer', 'nav-menu', 'accessibility-menu'];
 
@@ -53,106 +49,141 @@ export const AccessibilityProvider = ({ children }) => {
     return filteredText;
   };
 
-
-  // const startReading = (text, rateOverride = rate) => {
-  //   if (synth) {
-  //     const utterance = new SpeechSynthesisUtterance(text);
-  //     utterance.rate = rateOverride; // Use the provided rate or default rate
-  //     setCurrentUtterance(utterance);
-  //     synth.speak(utterance);
-  //     setIsReading(true); // Set reading status
-  //   }
-  // };
-
-  const startReading = (text, rateOverride = rate) => {
+  const announceMessage = (message) => {
     if (synth) {
-      // First, announce
-      const activationMessage = new SpeechSynthesisUtterance('Screen Reader Enabled');
-      activationMessage.rate = rateOverride;
+      const announcement = new SpeechSynthesisUtterance(message);
+      announcement.rate = rate; // Use the current rate
+      announcement.voice = selectedVoice;
+      synth.speak(announcement);
+    }
+  };
 
-      // Create a new utterance for the main content
-      const mainUtterance = new SpeechSynthesisUtterance(text);
-      mainUtterance.rate = rateOverride; // Use the provided rate or default rate
-
-      // Queue the activation message and then the main content
-      synth.speak(activationMessage);
-      activationMessage.onend = () => {
-        synth.speak(mainUtterance);
-      };
-
-      setCurrentUtterance(mainUtterance); // Set the current utterance to the main content
-      setIsReading(true); // Set reading status
+  const startReading = (text, rateOverride = 1) => {
+    if (synth) {
+      if (!isReading) {
+        announceMessage('Screen Reader Enabled. You can click on the area you want to be read');
+      }
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = rateOverride;
+      utterance.voice = selectedVoice;
+      utterance.onend = () => setIsReading(false);
+      synth.speak(utterance);
+      setCurrentUtterance(utterance);
+      setTextToRead(text);
+      setIsReading(true);
+      setIsPaused(false);
     }
   };
 
   const stopReading = () => {
-    if (synth && currentUtterance) {
+    if (synth) {
       synth.cancel();
       setCurrentUtterance(null);
-      setIsReading(false); // Set reading status
+      setIsReading(false);
+      setIsPaused(false);
+      clearHighlight();
     }
   };
 
+  const togglePauseResume = () => {
+    if (isReading) {
+      if (isPaused) {
+        synth.resume();
+        setIsPaused(false);
+      } else {
+        synth.pause();
+        setIsPaused(true);
+      }
+    }
+  };
 
-  // const stopReading = () => {
-  //   if (synth) {
-  //     // Announce "Screen Reader Disabled" message
-  //     const deactivationMessage = new SpeechSynthesisUtterance('Screen Reader Disabled');
-  //     deactivationMessage.rate = rate;
+  const adjustRate = (newRate) => {
+    setRate(newRate);
+    if (synth.speaking) {
+      synth.cancel();
+      const text = getFilteredText();
+      announceMessage('Playback rate adjusted.');
+      startReading(text, newRate); // Directly restart reading
+    } else {
+      announceMessage('Playback rate adjusted.');
+    }
+  };
 
-  //     // Speak the deactivation message and then cancel the current speech
-  //     synth.speak(deactivationMessage);
-  //     deactivationMessage.onend = () => {
-  //       synth.cancel();
-  //       setCurrentUtterance(null);
-  //       setIsReading(false);
-  //     };
-  //   }
-  // };
+  const startReadingFromElement = (elementId) => {
+    if (!isReading) {
+      return;
+    }
+    clearHighlight(); // Clear previous highlights
+    highlightElement(elementId); // Highlight the new element
+    if (synth) {
+      const element = document.getElementById(elementId);
+      if (element) {
+        const text = element.innerText;
+        if (currentUtterance) synth.cancel(); // Stop any ongoing speech
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = rate;
+        synth.speak(utterance);
+        setCurrentUtterance(utterance);
+        setIsReading(true);
+      }
+    }
+  };
+
+  // highlight option
+  const highlightElement = (elementId) => {
+    if (highlightEnabled) {
+      const element = document.getElementById(elementId);
+      if (element) {
+        element.classList.add('highlight');
+      }
+    }
+  };
+
+  const clearHighlight = () => {
+    const highlightedElements = document.querySelectorAll('.highlight');
+    highlightedElements.forEach(el => el.classList.remove('highlight'));
+  };
+
+  const getVoices = () => {
+    return synth.getVoices();
+  };
+
+  const setVoice = (voice) => {
+    if (voice && synth) {
+      if (currentUtterance) {
+        synth.cancel(); // Cancel current speech
+      }
+      const utterance = new SpeechSynthesisUtterance(textToRead); // Use the current text
+      utterance.voice = voice;
+      utterance.rate = rate; // Apply the current rate
+      utterance.onend = () => setIsReading(false);
+      synth.speak(utterance);
+      setCurrentUtterance(utterance);
+    }
+  };
+
+  //Toggle reading
+  const toggleReading = () => {
+    if (isReading) {
+      stopReading(); // Stop reading
+    } else {
+      startReading(getFilteredText()); // Start reading
+    }
+  };
+
+  // Toggle Highlight
+  const toggleHighlight = () => {
+    setHighlightEnabled(prev => !prev);
+    if (!highlightEnabled) {
+      clearHighlight(); // Ensure highlight is cleared if turning off
+    }
+  };
 
   // Cleanup on component unmount or when navigating away
   useEffect(() => {
-    // Stop reading when location changes (i.e., user navigates to a different page)
     stopReading();
+    setIsScreenReaderExpanded(false);
   }, [location]);
-
-  // toggle Reading function
-  const toggleReading = () => {
-    const text = getFilteredText(); // Get the updated filtered text
-    if (isReading) {
-      stopReading();
-    } else {
-      startReading(text);
-    }
-  };
-
-  const increaseSpeed = () => {
-    setRate(prev => {
-      const newRate = Math.min(prev + 0.5, 2);
-      if (isReading) {
-        stopReading(); // Stop current speech
-        const text = getFilteredText(); // Recalculate text
-        startReading(text, newRate); // Restart with updated rate and text
-      }
-      return newRate;
-    });
-  };
-
-  const decreaseSpeed = () => {
-    setRate(prev => {
-      const newRate = Math.max(prev - 0.2, 0.5); // Minimum rate limit
-      if (isReading) {
-        stopReading(); // Stop current speech
-        const text = getFilteredText(); // Recalculate text
-        startReading(text, newRate); // Restart with updated rate and text
-      }
-      return newRate;
-    });
-  };
-
-  useEffect(() => {
-    console.log('Current rate:', rate); // Debugging output
-  }, [rate]);
 
   //Dyslexia friendly
   useEffect(() => {
@@ -163,10 +194,6 @@ export const AccessibilityProvider = ({ children }) => {
     }
   }, [isDyslexiaFont]);
 
-  useEffect(() => {
-    document.body.style.zoom = zoomLevel;
-  }, [zoomLevel]);
-
   // Apply big cursor style conditionally
   useEffect(() => {
     if (isBigCursor) {
@@ -176,18 +203,58 @@ export const AccessibilityProvider = ({ children }) => {
     }
   }, [isBigCursor]);
 
+  // Toggle desaturation
+  const toggleDesaturation = () => {
+    setIsDesaturated(prev => !prev);
+  };
+
+  // Apply desaturation style conditionally
+  useEffect(() => {
+    if (isDesaturated) {
+      document.body.classList.add('desaturated');
+    } else {
+      document.body.classList.remove('desaturated');
+    }
+  }, [isDesaturated]);
+
+  //highlight links
+  // Toggle link highlighting
+  const toggleHighlightLinks = () => {
+    setHighlightLinks(prev => !prev);
+  };
+
+  // Apply link highlighting
+  useEffect(() => {
+    const links = document.querySelectorAll('a');
+    if (highlightLinks) {
+      links.forEach(link => link.classList.add('highlight-link'));
+    } else {
+      links.forEach(link => link.classList.remove('highlight-link'));
+    }
+  }, [highlightLinks]);
+
   return (
     <AccessibilityContext.Provider value={{
       isDyslexiaFont,
       toggleDyslexiaFont,
-      zoomIn,
-      zoomOut,
       isBigCursor,
       toggleBigCursor,
+      isReading,
       toggleReading,
-      increaseSpeed,
-      decreaseSpeed,
-      isReading
+      isPaused,
+      togglePauseResume,
+      rate,
+      adjustRate,
+      startReadingFromElement,
+      toggleHighlight,
+      highlightEnabled,
+      setVoice,
+      getVoices,
+      setIsScreenReaderExpanded,
+      isDesaturated,
+      toggleDesaturation,
+      highlightLinks,
+      toggleHighlightLinks,
     }}>
       {children}
     </AccessibilityContext.Provider>

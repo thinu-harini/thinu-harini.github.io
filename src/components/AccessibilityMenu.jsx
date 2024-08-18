@@ -1,122 +1,223 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useAccessibility } from './AccessibilityContext';
-import { IoAccessibility, IoMoon } from "react-icons/io5";
+import { IoAccessibility, IoClose, IoMoon } from "react-icons/io5";
 import { PiCursorFill } from "react-icons/pi";
-import { FaBookReader } from 'react-icons/fa';
+import { FaBookReader, FaHighlighter, FaLink, FaPause, FaPlay } from 'react-icons/fa';
 import { RiUserVoiceFill } from 'react-icons/ri';
-import { TiMinus, TiPlus } from 'react-icons/ti'; import { FaMagnifyingGlassMinus, FaMagnifyingGlassPlus } from 'react-icons/fa6';
-;
+import { styles } from '../styles';
+import { MdInvertColors, MdOutlineInvertColors } from 'react-icons/md';
 
 const AccessibilityMenu = ({ handleThemeChange, isDark }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScreenReaderExpanded, setIsScreenReaderExpanded] = useState(false); // New state for managing expansion
+  const menuRef = useRef(null);
+  const [voices, setVoices] = useState([]);
+  const [selectedVoice, setSelectedVoice] = useState(null);
 
   const {
     isDyslexiaFont,
     toggleDyslexiaFont,
-    zoomIn,
-    zoomOut,
     isBigCursor,
     toggleBigCursor,
-    toggleReading,
-    increaseSpeed,
-    decreaseSpeed,
     isReading,
+    toggleReading,
+    rate,
+    adjustRate,
+    isPaused,
+    togglePauseResume,
+    getVoices,
+    setVoice,
+    highlightEnabled,
+    toggleHighlight,
+    setIsScreenReaderExpanded,
+    isDesaturated,
+    toggleDesaturation,
+    highlightLinks,
+    toggleHighlightLinks,
   } = useAccessibility();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const isDyslexiaActive = isDyslexiaFont;
-  const isZoomInActive = false; // Add logic to manage active state
-  const isZoomOutActive = false; // Add logic to manage active state
-
-  const isBigCursorActive = false; // Add logic to manage active state
+  const isBigCursorActive = isBigCursor;
+  const isDesaturatedActive = isDesaturated;
 
   const handleScreenReaderToggle = () => {
     toggleReading();
     setIsScreenReaderExpanded(prev => !prev);
   };
 
-  const handleSpeedChange = (e) => {
-    e.stopPropagation(); // Prevent click event from affecting the read aloud button
+  const handleRateChange = (e) => {
+    const newRate = parseFloat(e.target.value);
+    adjustRate(newRate);
   };
 
+  const handleHighlightToggle = (e) => {
+    e.stopPropagation();
+    toggleHighlight();
+  };
+
+  useEffect(() => {
+    const loadVoices = () => {
+      const availableVoices = getVoices();
+      console.log('Available Voices:', availableVoices);
+      setVoices(availableVoices);
+      if (availableVoices.length > 0) {
+        setSelectedVoice(availableVoices[0]); // Set default voice
+      }
+    };
+
+    loadVoices();
+    speechSynthesis.onvoiceschanged = loadVoices;
+  }, [getVoices]);
+
+  const handleVoiceChange = (event) => {
+    const selectedVoiceName = event.target.value;
+    const voice = voices.find(v => v.name === selectedVoiceName);
+    if (voice) {
+      setVoice(voice); // Set the new voice and handle cancellation of current speech
+    }
+  };
+
+  const handleHighlightLinksToggle = (e) => {
+    e.stopPropagation();
+    toggleHighlightLinks(); // Toggle link highlighting
+  };
+
+  useEffect(() => {
+    // Debugging: Print the currently selected voice
+    console.log('Selected Voice:', selectedVoice);
+  }, [selectedVoice]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
-    <div id='accessibility-menu' className="accessibility-menu-container">
+    <div id='accessibility-menu' ref={menuRef}>
       <button
         className={`accessibility-menu-button ${isMenuOpen ? 'open' : ''}`}
         onClick={toggleMenu}
         aria-label="Accessibility Options"
       >
-        <IoAccessibility className="icon" />
+        {isMenuOpen ? (
+          <IoClose className="icon" />
+        ) : (
+          <IoAccessibility className="icon" />
+        )}
       </button>
+
       {isMenuOpen && (
-        <div className="accessibility-features">
+        <div className="accessibility-features-groups">
+          <div className="accessibility-features">
+            <button
+              className={`accessibility-feature-button ${isDyslexiaActive ? 'active' : ''}`}
+              onClick={toggleDyslexiaFont}
+            >
+              <FaBookReader />
+              <div className={styles.buttonText}>Dyslexia Friendly</div>
+            </button>
 
-          <button
-            className={`accessibility-feature-button ${isDyslexiaActive ? 'active' : ''}`}
-            onClick={toggleDyslexiaFont}
-          >
-            <FaBookReader />
-            <span>Dyslexia Friendly</span>
-            {/* {isDyslexiaFont ? 'Disable Dyslexia Font' : 'Enable Dyslexia Font'} */}
-          </button>
+            <button
+              className={`accessibility-feature-button ${isBigCursorActive ? 'active' : ''}`}
+              onClick={toggleBigCursor}
+            >
+              <PiCursorFill />
+              <div className={styles.buttonText}>Big Cursor</div>
+            </button>
 
-          <button
-            className={`accessibility-feature-button ${isBigCursorActive ? 'active' : ''}`}
-            onClick={toggleBigCursor}
-          >
-            <PiCursorFill />
-            <span>Big Cursor</span>
-          </button>
+            <button
+              className={`accessibility-feature-button ${highlightLinks ? 'active' : ''}`} // New button
+              onClick={handleHighlightLinksToggle}
+            >
+              <FaLink />
+              <div className={styles.buttonText}>Highlight Links</div>
+            </button>
 
-          <button className="accessibility-feature-button"
-            onClick={zoomIn}
-          >
-            <FaMagnifyingGlassPlus />
-            <span>Zoom In</span>
-          </button>
+            <button
+              className={`accessibility-feature-button ${isDesaturatedActive ? 'active' : ''}`}
+              onClick={toggleDesaturation}
+            >
+              <MdOutlineInvertColors />
+              <div className={styles.buttonText}>Desaturation</div>
+            </button>
 
-          <button
-            className="accessibility-feature-button"
-            onClick={zoomOut}
-          >
-            <FaMagnifyingGlassMinus />
-            <span>Zoom Out</span>
-          </button>
+            <button
+              className={`accessibility-feature-button ${isDark ? 'active' : ''}`}
+              onClick={handleThemeChange}
+            >
+              <IoMoon />
+              <div className={styles.buttonText}>Dark Mode</div>
+            </button>
+          </div>
 
-          <button
-            className={`accessibility-feature-button ${isDark ? 'active' : ''}`}
-            onClick={handleThemeChange}
-          >
-            <IoMoon />
-            <span>Dark Mode</span>
-          </button>
+          <div className="screen-reader-section">
 
+            <button
+              className={`screen-reader-button ${isReading ? 'active' : ''}`}
+              onClick={handleScreenReaderToggle}
+            >
+              <RiUserVoiceFill />
+              <div className={styles.buttonText}>Screen Reader</div>
+            </button>
 
-          <button
-            className={`accessibility-feature-button ${isReading ? 'active' : ''}`}
-            onClick={handleScreenReaderToggle}
-          >
-            <RiUserVoiceFill />
-            <span>Screen Reader</span>
-            {isReading && isScreenReaderExpanded && (
-              <div className="screen-reader-options">
-                <button
-                  onClick={(e) => { increaseSpeed(); handleSpeedChange(e); }}
-                  className="screen-reader-option">
-                  <TiPlus />
-                </button>
-                Speed
-                <button
-                  onClick={(e) => { decreaseSpeed(); handleSpeedChange(e); }}
-                  className="screen-reader-option">
-                  <TiMinus />
-                </button>
+            {isReading && (
+              <div className='flex flex-col gap-4'>
+                <div className="screen-reader-options">
+                  <button
+                    onClick={togglePauseResume}
+                    className={`screen-reader-option ${isPaused ? 'resume' : 'pause'}`}
+                  >
+                    {isPaused ? (
+                      <FaPlay />
+                    ) : (
+                      <FaPause />
+                    )}
+                  </button>
+
+                  <div className='flex flex-col items-center'>
+                    <label htmlFor="rate-slider" className={styles.buttonText}>Playback Rate: {rate.toFixed(1)}</label>
+                    <input
+                      type="range"
+                      id="rate-slider"
+                      min="0.5"
+                      max="2"
+                      step="0.1"
+                      value={rate}
+                      onChange={handleRateChange}
+                      className="rate-slider"
+                    />
+                  </div>
+
+                  <button
+                    onClick={handleHighlightToggle}
+                    className={`screen-reader-option ${highlightEnabled ? 'active' : ''}`}
+                  >
+                    <FaHighlighter />
+                  </button>
+                </div>
+
+                <select
+                  className={`${styles.buttonText} custom-select`}
+                  onChange={handleVoiceChange}
+                  value={selectedVoice ? selectedVoice.name : ''}>
+                  {voices.map(voice => (
+                    <option key={voice.name} value={voice.name}>
+                      {voice.name}
+                    </option>
+                  ))}
+                </select>
               </div>
             )}
-          </button>
+          </div>
         </div>
       )}
     </div>
@@ -124,4 +225,3 @@ const AccessibilityMenu = ({ handleThemeChange, isDark }) => {
 };
 
 export default AccessibilityMenu;
-

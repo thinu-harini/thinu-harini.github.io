@@ -5,6 +5,7 @@ import { SectionWrapper } from "../hoc";
 import NavPane from "../components/NavigationPane";
 import Minimap from "../components/Minimap";
 import ProgressBar from "../components/ProgressBar";
+import { useAccessibility } from "../components/AccessibilityContext";
 
 const Groome = () => {
   const contentRef = useRef(null);
@@ -15,7 +16,7 @@ const Groome = () => {
   //   { id: 'design', title: 'Design Process' },
   //   { id: 'iterations', title: 'Design Iterations' }
   // ];
-
+  const { startReadingFromElement } = useAccessibility();
 
   return (
     <div>
@@ -32,7 +33,6 @@ const Groome = () => {
             Groome
           </h1>
         </div>
-
 
         <p className={`${styles.contentSubText} mb-10`} >
           A Booking and Team Management Platform
@@ -75,7 +75,7 @@ const Groome = () => {
           </p>
         </div>
 
-        <div className="mt-10">
+        <div className="mt-10" id="project-overview" onClick={() => startReadingFromElement('project-overview')}>
           <h2
             className={`${styles.caseStudyTopicText}`}
 
@@ -93,10 +93,9 @@ const Groome = () => {
           </p>
         </div>
 
-        <div className="mt-10" >
+        <div className="mt-10" id="problem" onClick={() => startReadingFromElement('problem')}>
           <h2
             className={`${styles.caseStudyTopicText}`}
-
           >
             Exploring The Problem
           </h2>
@@ -134,13 +133,12 @@ const Groome = () => {
           </p>
         </div>
 
-        <div className="mt-10">
-          <h3
-            lassName={`${styles.caseStudyTopicText}`}
-
+        <div className="mt-10" id="design-process" onClick={() => startReadingFromElement('design-process')}>
+          <h2
+            className={`${styles.caseStudyTopicText}`}
           >
             Design Process
-          </h3>
+          </h2>
 
           <h3
             className={`${styles.caseStudySubTopicText} square-before`}
@@ -172,7 +170,7 @@ const Groome = () => {
           </p>
         </div>
 
-        <div className="mt-10">
+        <div className="mt-10" id="design-iterations" onClick={() => startReadingFromElement('design-iterations')}>
           <h3
             className={`${styles.caseStudyTopicText}`}
 
@@ -202,3 +200,4 @@ const Groome = () => {
 };
 
 export default SectionWrapper(Groome, "Groome");
+

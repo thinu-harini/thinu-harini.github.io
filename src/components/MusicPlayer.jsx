@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { IoVolumeMute, IoVolumeHigh } from "react-icons/io5";
 import Interstellar from '../assets/sounds/Interstellar.mp3'
+import { MdMusicNote, MdMusicOff } from 'react-icons/md';
 
 const MusicPlayer = () => {
   const audioRef = useRef(new Audio(Interstellar));
@@ -28,9 +29,9 @@ const MusicPlayer = () => {
       title={isPlayingMusic ? "Mute music" : "Play music"}
     >
       {isPlayingMusic ? (
-        <IoVolumeHigh />
+        <MdMusicOff />
       ) : (
-        <IoVolumeMute />
+        <MdMusicNote />
       )}
     </button>
   );

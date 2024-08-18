@@ -41,7 +41,7 @@ const styles = {
     "content lg:text-[20px] sm:text-[16px] xs:text-[16px] text-[16px] leading-[38px]",
 
   buttonText:
-    "hero-content lg:text-[17px] sm:text-[16px] xs:text-[16px] text-[17px]",
+    "lg:text-[17px] sm:text-[16px] xs:text-[16px] text-[17px]",
 };
 
 export { styles };

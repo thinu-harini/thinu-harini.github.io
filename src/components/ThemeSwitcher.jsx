@@ -8,11 +8,9 @@ const ThemeSwitcher = ({ isDark, handleThemeChange }) => {
       className="theme-switch"
       onClick={handleThemeChange}
       aria-label="Toggle dark mode"
-    // aria-label={isChecked ? "Switch to light mode" : "Switch to dark mode"}
     >
-      <FaSun className={`icon ${isDark ? 'hidden' : ''}`} />
-      <IoMoon className={`icon ${isDark ? '' : 'hidden'}`} />
-      {/* <span className="sr-only">{isChecked ? "Switch to light mode" : "Switch to dark mode"}</span> */}
+      <IoMoon className={`icon ${isDark ? 'hidden' : ''}`} />
+      <FaSun className={`icon ${isDark ? '' : 'hidden'}`} />
     </button>
   );
 };
