@@ -10,7 +10,6 @@ import { SvgLogo } from "./SvgLogo.jsx";
 import MusicPlayer from "./MusicPlayer.jsx";
 import ThemeSwitcher from './ThemeSwitcher.jsx';
 import AccessibilityMenu from './AccessibilityMenu.jsx';
-import { useAccessibility } from './AccessibilityContext.jsx';
 
 const Navbar = ({ handleThemeChange, isDark }) => {
   const [menuOpen, setMenuOpen] = useState(false); // manages the state of the dropdown menu (open/closed)
@@ -47,13 +46,6 @@ const Navbar = ({ handleThemeChange, isDark }) => {
     };
   }, []);
 
-  const { toggleDyslexiaFont } = useAccessibility();
-  // const { zoomIn } = useAccessibility();
-  // const { zoomOut } = useAccessibility();
-  const { toggleLargeFont } = useAccessibility();
-  const { toggleBigCursor } = useAccessibility();
-
-
   return (
     <>
       <nav
@@ -74,11 +66,11 @@ const Navbar = ({ handleThemeChange, isDark }) => {
 
             {/* {ThemeSwitcher and MusicPlayer */}
             <AccessibilityMenu
-              toggleDyslexiaFont={toggleDyslexiaFont}
+              // toggleDyslexiaFont={toggleDyslexiaFont}
               // zoomIn={zoomIn}
               // zoomOut={zoomOut}
-              toggleLargeFont={toggleLargeFont}
-              toggleBigCursor={toggleBigCursor}
+              // toggleLargeFont={toggleLargeFont}
+              // toggleBigCursor={toggleBigCursor}
               handleThemeChange={handleThemeChange}
               isDark={isDark}
             />

@@ -9,20 +9,20 @@ import { useAccessibility } from "../components/AccessibilityContext";
 
 const Groome = () => {
   const contentRef = useRef(null);
-  // const { isLargeFont } = useAccessibility();
-  // const sections = [
-  //   { id: 'overview', title: 'Project Overview' },
-  //   { id: 'problem', title: 'Exploring The Problem' },
-  //   { id: 'design', title: 'Design Process' },
-  //   { id: 'iterations', title: 'Design Iterations' }
-  // ];
+
+  const sections = [
+    { id: 'project-overview', title: 'Project Overview' },
+    { id: 'problem', title: 'Exploring The Problem' },
+    { id: 'design-process', title: 'Design Process' },
+    { id: 'iterations-iterations', title: 'Design Iterations' }
+  ];
   const { startReadingFromElement } = useAccessibility();
 
   return (
     <div>
       <ProgressBar />
       <Minimap contentRef={contentRef} mode="proportional" />
-      {/* <NavPane /> */}
+      <NavPane sections={sections} />
       {/* <Minimap sections={sections} /> */}
       <div ref={contentRef}>
         <div className='sm:mt-12 mt-16'>

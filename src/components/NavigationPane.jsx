@@ -1,12 +1,11 @@
-// components/Minimap.js
 import React from 'react';
-// import { Link } from 'react-scroll';
-import { sections } from './sections'; // Assume this file contains section data
-import { Link } from 'react-router-dom';
+import { Link } from 'react-scroll';
+import { sections } from './sections';
+// import { Link } from 'react-router-dom';
 
 const NavPane = () => {
   return (
-    <div className="fixed right-0 top-0 w-48 bg-gray-800 text-white p-4 h-full overflow-y-auto">
+    <div className="navPane overflow-y-auto">
       <h3 className="text-lg font-semibold">Navigation</h3>
       <ul className="mt-4">
         {sections.map((section, index) => (
@@ -15,7 +14,7 @@ const NavPane = () => {
               to={section.id}
               smooth={true}
               duration={500}
-              className="cursor-pointer hover:underline"
+              className="navPaneContent"
             >
               {section.title}
             </Link>

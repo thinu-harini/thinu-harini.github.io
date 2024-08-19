@@ -2,13 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useAccessibility } from './AccessibilityContext';
 import { IoAccessibility, IoClose, IoMoon } from "react-icons/io5";
 import { PiCursorFill } from "react-icons/pi";
-import { FaBookReader, FaHighlighter, FaLink, FaPause, FaPlay } from 'react-icons/fa';
+import { FaAdjust, FaBookReader, FaHighlighter, FaLink, FaPause, FaPlay } from 'react-icons/fa';
 import { RiUserVoiceFill } from 'react-icons/ri';
 import { styles } from '../styles';
-import { MdInvertColors, MdOutlineInvertColors } from 'react-icons/md';
+import { MdOutlineInvertColors } from 'react-icons/md';
 
-const AccessibilityMenu = ({ handleThemeChange, isDark }) => {
+const AccessibilityMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isContrastExpanded, setIsContrastExpanded] = useState(false);
   const menuRef = useRef(null);
   const [voices, setVoices] = useState([]);
   const [selectedVoice, setSelectedVoice] = useState(null);
@@ -29,13 +30,21 @@ const AccessibilityMenu = ({ handleThemeChange, isDark }) => {
     highlightEnabled,
     toggleHighlight,
     setIsScreenReaderExpanded,
-    isDesaturated,
-    toggleDesaturation,
     highlightLinks,
     toggleHighlightLinks,
+    isHighContrast,
+    toggleHighContrast,
+    isDark,
+    toggleDarkMode,
+    isDesaturated,
+    toggleDesaturation,
+    contrastTheme,
+    toggleContrastTheme,
+    resetContrastTheme,
   } = useAccessibility();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const toggleContrast = () => setIsContrastExpanded(!isContrastExpanded);
 
   const isDyslexiaActive = isDyslexiaFont;
   const isBigCursorActive = isBigCursor;
@@ -56,10 +65,22 @@ const AccessibilityMenu = ({ handleThemeChange, isDark }) => {
     toggleHighlight();
   };
 
+  const handleDarkModeToggle = (e) => {
+    e.stopPropagation();
+    toggleDarkMode();
+  };
+
+  const handleContrastToggle = (theme) => {
+    toggleContrastTheme(theme);
+  };
+
+  const handleResetContrast = () => {
+    resetContrastTheme();
+  };
+
   useEffect(() => {
     const loadVoices = () => {
       const availableVoices = getVoices();
-      console.log('Available Voices:', availableVoices);
       setVoices(availableVoices);
       if (availableVoices.length > 0) {
         setSelectedVoice(availableVoices[0]); // Set default voice
@@ -80,13 +101,8 @@ const AccessibilityMenu = ({ handleThemeChange, isDark }) => {
 
   const handleHighlightLinksToggle = (e) => {
     e.stopPropagation();
-    toggleHighlightLinks(); // Toggle link highlighting
+    toggleHighlightLinks();
   };
-
-  useEffect(() => {
-    // Debugging: Print the currently selected voice
-    console.log('Selected Voice:', selectedVoice);
-  }, [selectedVoice]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -94,7 +110,6 @@ const AccessibilityMenu = ({ handleThemeChange, isDark }) => {
         setIsMenuOpen(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -117,6 +132,7 @@ const AccessibilityMenu = ({ handleThemeChange, isDark }) => {
 
       {isMenuOpen && (
         <div className="accessibility-features-groups">
+          <div className={styles.heroContent}>Content Adjustments</div>
           <div className="accessibility-features">
             <button
               className={`accessibility-feature-button ${isDyslexiaActive ? 'active' : ''}`}
@@ -135,11 +151,22 @@ const AccessibilityMenu = ({ handleThemeChange, isDark }) => {
             </button>
 
             <button
-              className={`accessibility-feature-button ${highlightLinks ? 'active' : ''}`} // New button
+              className={`accessibility-feature-button ${highlightLinks ? 'active' : ''}`}
               onClick={handleHighlightLinksToggle}
             >
               <FaLink />
               <div className={styles.buttonText}>Highlight Links</div>
+            </button>
+          </div>
+
+          <div className={styles.heroContent}>Color Adjustments</div>
+          <div className="accessibility-features">
+            <button
+              className={`accessibility-feature-button ${isDark ? 'active' : ''}`}
+              onClick={handleDarkModeToggle}
+            >
+              <IoMoon />
+              <div className={styles.buttonText}>Dark Mode</div>
             </button>
 
             <button
@@ -151,13 +178,53 @@ const AccessibilityMenu = ({ handleThemeChange, isDark }) => {
             </button>
 
             <button
-              className={`accessibility-feature-button ${isDark ? 'active' : ''}`}
-              onClick={handleThemeChange}
+              className={`accessibility-feature-button ${isContrastExpanded ? 'active' : ''}`}
+              onClick={toggleContrast} // Toggle theme options
             >
-              <IoMoon />
-              <div className={styles.buttonText}>Dark Mode</div>
+              <FaAdjust />
+              <div className={styles.buttonText}>Contrast</div>
             </button>
           </div>
+
+          {isContrastExpanded && (
+            <div className="contrast-themes">
+              <button
+                className={`contrast-theme-button  ${isDark ? 'active' : ''} ${contrastTheme === 'default' ? 'active' : ''}`}
+                onClick={handleResetContrast}
+              >
+                <FaAdjust />
+                <div className={styles.buttonText}>None</div>
+              </button>
+              <button
+                className={`contrast-theme-button ${contrastTheme === 'high-contrast' ? 'active' : ''}`}
+                onClick={() => handleContrastToggle('high-contrast')}
+              >
+                <FaAdjust />
+                <div className={styles.buttonText}>High Contrast</div>
+              </button>
+              <button
+                className={`contrast-theme-button ${contrastTheme === 'cyan-on-black' ? 'active' : ''}`}
+                onClick={() => handleContrastToggle('cyan-on-black')}
+              >
+                <FaAdjust />
+                <div className={styles.buttonText}>Cyan on Black</div>
+              </button>
+              <button
+                className={`contrast-theme-button ${contrastTheme === 'yellow-on-black' ? 'active' : ''}`}
+                onClick={() => handleContrastToggle('yellow-on-black')}
+              >
+                <FaAdjust />
+                <div className={styles.buttonText}>Yellow on Black</div>
+              </button>
+              <button
+                className={`contrast-theme-button ${contrastTheme === 'green-on-black' ? 'active' : ''}`}
+                onClick={() => handleContrastToggle('green-on-black')}
+              >
+                <FaAdjust />
+                <div className={styles.buttonText}>Green on Black</div>
+              </button>
+            </div>
+          )}
 
           <div className="screen-reader-section">
 

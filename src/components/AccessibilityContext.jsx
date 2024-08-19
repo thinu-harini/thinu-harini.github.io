@@ -1,11 +1,12 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
+import useLocalStorage from 'use-local-storage';
 
 const AccessibilityContext = createContext();
 
 export const AccessibilityProvider = ({ children }) => {
   const [isDyslexiaFont, setIsDyslexiaFont] = useState(false);
-  const [isBigCursor, setIsBigCursor] = useState(false); // New state for big cursor
+  const [isBigCursor, setIsBigCursor] = useState(false);
 
   const [synth, setSynth] = useState(window.speechSynthesis);
   const [currentUtterance, setCurrentUtterance] = useState(null);
@@ -16,10 +17,15 @@ export const AccessibilityProvider = ({ children }) => {
   const [isPaused, setIsPaused] = useState(false);
   const [isScreenReaderExpanded, setIsScreenReaderExpanded] = useState(false);
   const [selectedVoice, setSelectedVoice] = useState(null);
-  const location = useLocation();
+  const [highlightLinks, setHighlightLinks] = useState(false);
 
   const [isDesaturated, setIsDesaturated] = useState(false);
-  const [highlightLinks, setHighlightLinks] = useState(false);
+  const [isHighContrast, setIsHighContrast] = useState(false);
+  const [contrastTheme, setContrastTheme] = useState('default');
+
+  const location = useLocation();
+
+  const [isDark, setIsDark] = useLocalStorage('isDark', window.matchMedia("(prefers-color-scheme: dark)").matches);
 
   const toggleDyslexiaFont = () => {
     setIsDyslexiaFont(prev => !prev);
@@ -218,12 +224,11 @@ export const AccessibilityProvider = ({ children }) => {
   }, [isDesaturated]);
 
   //highlight links
-  // Toggle link highlighting
+
   const toggleHighlightLinks = () => {
     setHighlightLinks(prev => !prev);
   };
 
-  // Apply link highlighting
   useEffect(() => {
     const links = document.querySelectorAll('a');
     if (highlightLinks) {
@@ -231,7 +236,97 @@ export const AccessibilityProvider = ({ children }) => {
     } else {
       links.forEach(link => link.classList.remove('highlight-link'));
     }
-  }, [highlightLinks]);
+
+    return () => {
+      // Cleanup function to ensure highlights are cleared when the component unmounts or when highlightLinks changes
+      const highlightedLinks = document.querySelectorAll('.highlight-link');
+      highlightedLinks.forEach(link => link.classList.remove('highlight-link'));
+    };
+  }, [highlightLinks, location]);
+
+
+  // Contrasts themes
+
+  // Disable dark mode when high contrast is enabled
+  useEffect(() => {
+    if (contrastTheme !== 'default') {
+      setIsDark(false);
+    }
+  }, [contrastTheme]);
+
+  // Effect to handle contrast themes
+  useEffect(() => {
+    // Remove dark mode and contrast theme classes
+    document.body.classList.remove('dark', 'high-contrast', 'cyan-on-black', 'yellow-on-black', 'green-on-black');
+
+    // Apply the active contrast theme
+    if (contrastTheme !== 'default') {
+      document.body.classList.add(contrastTheme);
+    } else if (isDark) {
+      document.body.classList.add('dark');
+    }
+  }, [isDark, contrastTheme]);
+
+  const toggleContrastTheme = (theme) => {
+    setContrastTheme(theme);
+    // Ensure dark mode is off when a contrast theme is selected
+    if (theme !== 'default') {
+      setIsDark(false);
+    }
+  };
+
+  const resetContrastTheme = () => {
+    setContrastTheme('default');
+    setIsDark(prev => {
+      if (!prev) {
+        return prev; // Keep dark mode if it was enabled
+      }
+      return prev; // Reset to dark mode
+    });
+  };
+
+  const toggleDarkMode = () => {
+    setIsDark(prev => !prev);
+    // Ensure contrast theme is removed when dark mode is enabled
+    if (!isDark) {
+      setContrastTheme('default');
+    }
+  };
+
+  //handle dark mode and contrast themes
+
+  // useEffect(() => {
+  //   document.body.className = ''; // Clear previous classes
+  //   switch (contrastTheme) {
+  //     case 'high-contrast':
+  //       document.body.classList.add('high-contrast');
+  //       break;
+  //     case 'cyan-on-black':
+  //       document.body.classList.add('cyan-on-black');
+  //       break;
+  //     case 'yellow-on-black':
+  //       document.body.classList.add('yellow-on-black');
+  //       break;
+  //     case 'green-on-black':
+  //       document.body.classList.add('green-on-black');
+  //       break;
+  //     default:
+  //       // Default or no contrast theme
+  //       break;
+  //   }
+  // }, [contrastTheme]);
+
+  useEffect(() => {
+    const handleThemeChangeEvent = () => {
+      if (contrastTheme) {
+        setContrastTheme(false); // Disable high contrast mode on theme change
+      }
+    };
+    document.addEventListener('themeChange', handleThemeChangeEvent);
+    return () => {
+      document.removeEventListener('themeChange', handleThemeChangeEvent);
+    };
+  }, [contrastTheme]);
 
   return (
     <AccessibilityContext.Provider value={{
@@ -255,6 +350,13 @@ export const AccessibilityProvider = ({ children }) => {
       toggleDesaturation,
       highlightLinks,
       toggleHighlightLinks,
+      isHighContrast,
+      // toggleHighContrast,
+      isDark,
+      toggleDarkMode,
+      contrastTheme,
+      toggleContrastTheme,
+      resetContrastTheme,
     }}>
       {children}
     </AccessibilityContext.Provider>
