@@ -73,6 +73,7 @@ const Navbar = ({ handleThemeChange, isDark }) => {
               // toggleBigCursor={toggleBigCursor}
               handleThemeChange={handleThemeChange}
               isDark={isDark}
+
             />
             <ThemeSwitcher handleThemeChange={handleThemeChange} isDark={isDark} />
             <MusicPlayer />

@@ -22,7 +22,7 @@ const ProjectCard = ({
 }) => {
   return (
     <div className='project-card'>
-      <div className='relative w-full h-64 md:h-56'>
+      <div className='relative w-full h-64 md:h-56 image-container'>
         <img
           src={image}
           alt={alt}

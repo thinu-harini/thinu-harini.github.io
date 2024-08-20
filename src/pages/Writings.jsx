@@ -15,7 +15,7 @@ const WritingCard = ({
 }) => {
   return (
     <div className='project-card md:w-[360px] w-full'>
-      <div className='relative w-full h-[230px]'>
+      <div className='relative w-full h-[230px] image-container'>
         <img
           src={image}
           alt={alt}

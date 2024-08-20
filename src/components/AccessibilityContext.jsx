@@ -20,8 +20,12 @@ export const AccessibilityProvider = ({ children }) => {
   const [highlightLinks, setHighlightLinks] = useState(false);
 
   const [isDesaturated, setIsDesaturated] = useState(false);
-  const [isHighContrast, setIsHighContrast] = useState(false);
   const [contrastTheme, setContrastTheme] = useState('default');
+  const [areImagesHidden, setAreImagesHidden] = useState(false);
+  const [isReadingGuideEnabled, setIsReadingGuideEnabled] = useState(false);
+  const [guidePosition, setGuidePosition] = useState({ top: 0, left: 0 });
+  const [isReadingMaskEnabled, setIsReadingMaskEnabled] = useState(false);
+  const [maskDimensions, setMaskDimensions] = useState({ x: 0, y: 0, width: 300, height: 200 });
 
   const location = useLocation();
 
@@ -34,6 +38,7 @@ export const AccessibilityProvider = ({ children }) => {
   const toggleBigCursor = () => {
     setIsBigCursor(prev => !prev);
   };
+
 
   // Screen Reader
 
@@ -293,29 +298,6 @@ export const AccessibilityProvider = ({ children }) => {
     }
   };
 
-  //handle dark mode and contrast themes
-
-  // useEffect(() => {
-  //   document.body.className = ''; // Clear previous classes
-  //   switch (contrastTheme) {
-  //     case 'high-contrast':
-  //       document.body.classList.add('high-contrast');
-  //       break;
-  //     case 'cyan-on-black':
-  //       document.body.classList.add('cyan-on-black');
-  //       break;
-  //     case 'yellow-on-black':
-  //       document.body.classList.add('yellow-on-black');
-  //       break;
-  //     case 'green-on-black':
-  //       document.body.classList.add('green-on-black');
-  //       break;
-  //     default:
-  //       // Default or no contrast theme
-  //       break;
-  //   }
-  // }, [contrastTheme]);
-
   useEffect(() => {
     const handleThemeChangeEvent = () => {
       if (contrastTheme) {
@@ -327,6 +309,36 @@ export const AccessibilityProvider = ({ children }) => {
       document.removeEventListener('themeChange', handleThemeChangeEvent);
     };
   }, [contrastTheme]);
+
+  // Hide images
+
+  useEffect(() => {
+    if (areImagesHidden) {
+      document.body.classList.add('hide-images');
+    } else {
+      document.body.classList.remove('hide-images');
+    }
+  }, [areImagesHidden]);
+
+  // Handler to toggle the "Hide Images" feature
+  const toggleHideImages = () => {
+    setAreImagesHidden(prev => !prev);
+  };
+
+  // Toggle Reading Guide
+  const toggleReadingGuide = () => {
+    setIsReadingGuideEnabled(prev => !prev);
+  };
+
+  // Update guide position
+  const updateGuidePosition = (x, y) => {
+    setGuidePosition({ top: y, left: x });
+  };
+
+  // Reading Mask
+
+  const toggleReadingMask = () => setIsReadingMaskEnabled(prev => !prev);
+  const updateMaskDimensions = (dimensions) => setMaskDimensions(dimensions);
 
   return (
     <AccessibilityContext.Provider value={{
@@ -350,13 +362,21 @@ export const AccessibilityProvider = ({ children }) => {
       toggleDesaturation,
       highlightLinks,
       toggleHighlightLinks,
-      isHighContrast,
-      // toggleHighContrast,
       isDark,
       toggleDarkMode,
       contrastTheme,
       toggleContrastTheme,
       resetContrastTheme,
+      areImagesHidden,
+      toggleHideImages,
+      isReadingGuideEnabled,
+      toggleReadingGuide,
+      guidePosition,
+      updateGuidePosition,
+      isReadingMaskEnabled,
+      toggleReadingMask,
+      maskDimensions,
+      updateMaskDimensions,
     }}>
       {children}
     </AccessibilityContext.Provider>

@@ -14,7 +14,7 @@ const Groome = () => {
     { id: 'project-overview', title: 'Project Overview' },
     { id: 'problem', title: 'Exploring The Problem' },
     { id: 'design-process', title: 'Design Process' },
-    { id: 'iterations-iterations', title: 'Design Iterations' }
+    { id: 'design-iterations', title: 'Design Iterations' }
   ];
   const { startReadingFromElement } = useAccessibility();
 

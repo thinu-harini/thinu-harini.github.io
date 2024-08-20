@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useAccessibility } from './AccessibilityContext';
 import { IoAccessibility, IoClose, IoMoon } from "react-icons/io5";
 import { PiCursorFill } from "react-icons/pi";
-import { FaAdjust, FaBookReader, FaHighlighter, FaLink, FaPause, FaPlay } from 'react-icons/fa';
+import { FaAdjust, FaBookReader, FaHighlighter, FaICursor, FaLink, FaPause, FaPlay } from 'react-icons/fa';
 import { RiUserVoiceFill } from 'react-icons/ri';
 import { styles } from '../styles';
-import { MdOutlineInvertColors } from 'react-icons/md';
+import { MdImageNotSupported, MdInsertPageBreak, MdOutlineInvertColors } from 'react-icons/md';
 
 const AccessibilityMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,6 +13,7 @@ const AccessibilityMenu = () => {
   const menuRef = useRef(null);
   const [voices, setVoices] = useState([]);
   const [selectedVoice, setSelectedVoice] = useState(null);
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
 
   const {
     isDyslexiaFont,
@@ -32,8 +33,6 @@ const AccessibilityMenu = () => {
     setIsScreenReaderExpanded,
     highlightLinks,
     toggleHighlightLinks,
-    isHighContrast,
-    toggleHighContrast,
     isDark,
     toggleDarkMode,
     isDesaturated,
@@ -41,6 +40,13 @@ const AccessibilityMenu = () => {
     contrastTheme,
     toggleContrastTheme,
     resetContrastTheme,
+    areImagesHidden,
+    toggleHideImages,
+    isReadingGuideEnabled,
+    toggleReadingGuide,
+    isReadingMaskEnabled,
+    toggleReadingMask,
+    maskDimensions,
   } = useAccessibility();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -105,6 +111,20 @@ const AccessibilityMenu = () => {
   };
 
   useEffect(() => {
+    const handleMouseMove = (event) => {
+      if (isReadingMaskEnabled) {
+        setCursorPosition({ x: event.clientX, y: event.clientY });
+      }
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, [isReadingMaskEnabled]);
+
+  // minimize menu on clicking outside
+  useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setIsMenuOpen(false);
@@ -118,6 +138,7 @@ const AccessibilityMenu = () => {
 
   return (
     <div id='accessibility-menu' ref={menuRef}>
+
       <button
         className={`accessibility-menu-button ${isMenuOpen ? 'open' : ''}`}
         onClick={toggleMenu}
@@ -157,6 +178,32 @@ const AccessibilityMenu = () => {
               <FaLink />
               <div className={styles.buttonText}>Highlight Links</div>
             </button>
+
+            <button
+              className={`accessibility-feature-button ${isReadingGuideEnabled ? 'active' : ''}`}
+              onClick={toggleReadingGuide}
+            >
+              <MdInsertPageBreak />
+              <div className="button-text">Reading Guide</div>
+            </button>
+
+            <button
+              className={`accessibility-feature-button ${isReadingMaskEnabled ? 'active' : ''}`}
+              onClick={toggleReadingMask}
+            >
+              <FaAdjust />
+              <div className={styles.buttonText}>Reading Mask</div>
+            </button>
+
+
+            <button
+              className={`accessibility-feature-button ${areImagesHidden ? 'active' : ''}`}
+              onClick={toggleHideImages}
+            >
+              <MdImageNotSupported />
+              <div className={styles.buttonText}>Hide Images</div>
+            </button>
+
           </div>
 
           <div className={styles.heroContent}>Color Adjustments</div>
@@ -287,6 +334,34 @@ const AccessibilityMenu = () => {
           </div>
         </div>
       )}
+
+      {/* Reading Mask Overlay */}
+      {isReadingMaskEnabled && (
+        <div className="reading-mask" style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          pointerEvents: 'none',
+          zIndex: 10000
+        }}>
+          <div className="mask-window" style={{
+            position: 'absolute',
+            top: cursorPosition.y - maskDimensions.height / 2,
+            left: 0,
+            width: '100%',
+            height: maskDimensions.height,
+            backgroundColor: 'transparent',
+            border: '2px solid #fff',
+            pointerEvents: 'none',
+            boxSizing: 'border-box',
+            zIndex: 10001
+          }}></div>
+        </div>
+      )}
+
     </div>
   );
 };

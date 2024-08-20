@@ -10,6 +10,7 @@ import Projects from './pages/Projects';
 import Writings from './pages/Writings';
 import Contact from './pages/Contact';
 import { Groome } from './pages';
+import ReadingGuide from './components/ReadingGuide';
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -24,6 +25,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <AccessibilityProvider>
+        <ReadingGuide />
         <div data-theme={isDark ? 'dark' : ''} className='bg relative z-0'>
           {loading ? (
             <SplashScreen setLoading={setLoading} />
