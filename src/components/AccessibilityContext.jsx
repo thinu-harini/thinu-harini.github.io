@@ -20,12 +20,16 @@ export const AccessibilityProvider = ({ children }) => {
   const [highlightLinks, setHighlightLinks] = useState(false);
 
   const [isDesaturated, setIsDesaturated] = useState(false);
-  const [contrastTheme, setContrastTheme] = useState('default');
   const [areImagesHidden, setAreImagesHidden] = useState(false);
   const [isReadingGuideEnabled, setIsReadingGuideEnabled] = useState(false);
   const [guidePosition, setGuidePosition] = useState({ top: 0, left: 0 });
   const [isReadingMaskEnabled, setIsReadingMaskEnabled] = useState(false);
   const [maskDimensions, setMaskDimensions] = useState({ x: 0, y: 0, width: 300, height: 200 });
+
+  const [contrastTheme, setContrastTheme] = useState('default');
+  const [currentTheme, setCurrentTheme] = useState('default');
+  const [previousThemes, setPreviousThemes] = useState({ isDark: false, contrastTheme: 'default' });
+  const [isReadMode, setIsReadMode] = useState(false);
 
   const location = useLocation();
 
@@ -217,6 +221,7 @@ export const AccessibilityProvider = ({ children }) => {
   // Toggle desaturation
   const toggleDesaturation = () => {
     setIsDesaturated(prev => !prev);
+    setIsContrastExpanded(false);
   };
 
   // Apply desaturation style conditionally
@@ -252,56 +257,54 @@ export const AccessibilityProvider = ({ children }) => {
 
   // Contrasts themes
 
-  // Disable dark mode when high contrast is enabled
+  // Effect to manage dark mode and contrast theme classes
   useEffect(() => {
-    if (contrastTheme !== 'default') {
-      setIsDark(false);
-    }
-  }, [contrastTheme]);
-
-  // Effect to handle contrast themes
-  useEffect(() => {
-    // Remove dark mode and contrast theme classes
+    // Remove previous theme classes
     document.body.classList.remove('dark', 'high-contrast', 'cyan-on-black', 'yellow-on-black', 'green-on-black');
 
-    // Apply the active contrast theme
+    // Apply the correct theme
     if (contrastTheme !== 'default') {
       document.body.classList.add(contrastTheme);
+      setIsDark(false); // Ensure dark mode is off when a contrast theme is applied
     } else if (isDark) {
       document.body.classList.add('dark');
     }
   }, [isDark, contrastTheme]);
 
+  // Effect to handle contrast themes
+  useEffect(() => {
+    if (contrastTheme !== 'default') {
+      setPreviousThemes({ isDark, contrastTheme });
+      setIsDark(false); // Disable dark mode if a contrast theme is applied
+    }
+  }, [contrastTheme]);
+
+  // Toggle contrast theme function
   const toggleContrastTheme = (theme) => {
     setContrastTheme(theme);
-    // Ensure dark mode is off when a contrast theme is selected
-    if (theme !== 'default') {
-      setIsDark(false);
-    }
   };
 
+  // Reset contrast theme to none
   const resetContrastTheme = () => {
     setContrastTheme('default');
-    setIsDark(prev => {
-      if (!prev) {
-        return prev; // Keep dark mode if it was enabled
-      }
-      return prev; // Reset to dark mode
-    });
-  };
-
-  const toggleDarkMode = () => {
-    setIsDark(prev => !prev);
-    // Ensure contrast theme is removed when dark mode is enabled
-    if (!isDark) {
-      setContrastTheme('default');
+    if (previousThemes.isDark) {
+      setIsDark(true); // Reapply previous dark mode if it was active
     }
   };
 
+  // Toggle dark mode function
+  const toggleDarkMode = () => {
+    setIsDark(prev => !prev);
+    if (!isDark) {
+      setContrastTheme('default'); // Ensure contrast theme is reset when dark mode is toggled on
+    }
+  };
+
+  //theme switcher clicked on contrast
   useEffect(() => {
     const handleThemeChangeEvent = () => {
       if (contrastTheme) {
-        setContrastTheme(false); // Disable high contrast mode on theme change
+        setContrastTheme('default'); // Disable contrast mode on theme change
       }
     };
     document.addEventListener('themeChange', handleThemeChangeEvent);
@@ -309,6 +312,19 @@ export const AccessibilityProvider = ({ children }) => {
       document.removeEventListener('themeChange', handleThemeChangeEvent);
     };
   }, [contrastTheme]);
+
+
+  // Handle contrast theme button clicks
+  const handleContrastToggle = (theme) => {
+    toggleContrastTheme(theme);
+  };
+
+  // Handle reset contrast button click
+  const handleResetContrast = () => {
+    resetContrastTheme();
+  };
+
+
 
   // Hide images
 
@@ -340,6 +356,46 @@ export const AccessibilityProvider = ({ children }) => {
   const toggleReadingMask = () => setIsReadingMaskEnabled(prev => !prev);
   const updateMaskDimensions = (dimensions) => setMaskDimensions(dimensions);
 
+  //Read Mode
+
+  useEffect(() => {
+    console.log('Read mode changed:', isReadMode);
+    console.log('Current themes:', { isDark, contrastTheme });
+    console.log('Previous themes:', previousThemes);
+    if (isReadMode) {
+      // Save the current themes and dark mode state
+      setPreviousThemes({
+        isDark,
+        contrastTheme,
+      });
+
+      // Remove all current themes and dark mode
+      document.body.classList.remove('dark', 'light-theme', 'sepia-theme', 'contrast-theme');
+      setIsDark(false); // Disable dark mode
+      setContrastTheme('default'); // Reset contrast theme
+
+      // Apply read mode specific themes
+      document.body.classList.add('read-mode', 'dark-theme'); // Apply read mode theme
+    } else {
+      // Remove read mode specific themes
+      document.body.classList.remove('read-mode', 'dark-theme', 'light-theme', 'sepia-theme', 'contrast-theme');
+
+      // Restore previous themes and dark mode state
+      if (previousThemes.isDark) {
+        document.body.classList.add('dark');
+        setIsDark(true);
+      }
+      if (previousThemes.contrastTheme && previousThemes.contrastTheme !== 'default') {
+        document.body.classList.add(previousThemes.contrastTheme);
+        setContrastTheme(previousThemes.contrastTheme);
+      } else {
+        setContrastTheme('default'); // Reset to default if not set
+      }
+    }
+  }, [isReadMode]);
+
+  const toggleReadMode = () => setIsReadMode(prev => !prev);
+
   return (
     <AccessibilityContext.Provider value={{
       isDyslexiaFont,
@@ -367,6 +423,8 @@ export const AccessibilityProvider = ({ children }) => {
       contrastTheme,
       toggleContrastTheme,
       resetContrastTheme,
+      handleContrastToggle,
+      handleResetContrast,
       areImagesHidden,
       toggleHideImages,
       isReadingGuideEnabled,
@@ -377,6 +435,8 @@ export const AccessibilityProvider = ({ children }) => {
       toggleReadingMask,
       maskDimensions,
       updateMaskDimensions,
+      isReadMode,
+      toggleReadMode,
     }}>
       {children}
     </AccessibilityContext.Provider>

@@ -50,7 +50,7 @@ const Navbar = ({ handleThemeChange, isDark }) => {
     <>
       <nav
         id="navbar"
-        className={`${styles.paddingX} ${styles.heroContent} w-full flex items-center py-4 fixed top-0 z-20 ${scrolled ? "nav-bg" : "bg-transparent"}`}
+        className={`navbar ${styles.paddingX} ${styles.heroContent} w-full flex items-center py-4 fixed top-0 z-20 ${scrolled ? "nav-bg" : "bg-transparent"}`}
         style={{ height: '90px' }}
       >
         <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
@@ -65,19 +65,9 @@ const Navbar = ({ handleThemeChange, isDark }) => {
           <div className='md:flex-row flex items-center gap-4'>
 
             {/* {ThemeSwitcher and MusicPlayer */}
-            <AccessibilityMenu
-              // toggleDyslexiaFont={toggleDyslexiaFont}
-              // zoomIn={zoomIn}
-              // zoomOut={zoomOut}
-              // toggleLargeFont={toggleLargeFont}
-              // toggleBigCursor={toggleBigCursor}
-              handleThemeChange={handleThemeChange}
-              isDark={isDark}
 
-            />
             <ThemeSwitcher handleThemeChange={handleThemeChange} isDark={isDark} />
             <MusicPlayer />
-
 
             {/* menu button */}
             <div className='menu-button md:hidden' onClick={toggleMenu}>

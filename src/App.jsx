@@ -11,6 +11,7 @@ import Writings from './pages/Writings';
 import Contact from './pages/Contact';
 import { Groome } from './pages';
 import ReadingGuide from './components/ReadingGuide';
+import AccessibilityMenu from './components/AccessibilityMenu';
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -20,6 +21,11 @@ const App = () => {
   const handleThemeChange = () => {
     setIsDark(!isDark);
     document.dispatchEvent(new Event('themeChange'));
+  };
+
+  const handleChangeTheme = (theme) => {
+    console.log('Theme changed to:', theme);
+    // Implement the logic to handle theme change if needed
   };
 
   return (
@@ -41,6 +47,7 @@ const App = () => {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/groome-case-study" element={<Groome />} />
               </Routes>
+              <AccessibilityMenu onChangeTheme={handleChangeTheme} />
             </div>
           )}
         </div>
