@@ -5,9 +5,7 @@ import { motion } from 'framer-motion';
 import { slideIn } from "../utils/motion";
 import { TypeAnimation } from 'react-type-animation';
 
-import { styles } from '../styles';
 import { SectionWrapper } from "../hoc";
-
 import { Canvas } from '@react-three/fiber'
 import CanvasLoader from './CanvasLoader';
 import HeroGirlModel from '../models/HeroGirl';
@@ -38,11 +36,11 @@ const Hero = () => {
         // variants={slideIn("up", "tween", 0.2, 1)}
         className={`left-div px-10 py-8 rounded-2xl md:h-auto h-auto`}
       >
-        <h1 className={`${styles.heroHeadText}`}>
+        <h1 className="hero-heading">
           Hi, <span className="highlight-text">Thinu</span> here
         </h1>
 
-        <p className={`${styles.heroSubText}`}>A&nbsp;
+        <p className="hero-subheading">A&nbsp;
           <TypeAnimation
             sequence={[
               'UX Researcher',
@@ -59,7 +57,7 @@ const Hero = () => {
           />
         </p>
 
-        <p className={`${styles.heroContent} mt-6`}>
+        <p className="hero-text mt-6">
           I am a UI/UX designer on a mission to level up experiences
           in the digital world with creative thinking and problem-solving
           characteristics.
@@ -67,7 +65,7 @@ const Hero = () => {
           the gap between user needs and business goals.
         </p>
 
-        <div className={`${styles.buttonText} flex-row items-start mt-6`}>
+        <div className="button-text flex-row items-start mt-6">
           <Link to="/contact" className="button mr-2">
             Contact
           </Link>
@@ -79,7 +77,7 @@ const Hero = () => {
         </div>
 
         <div className="items-center gap-4 flex mt-8 mb-0">
-          <p className={`${styles.heroContent}`}>
+          <p className="hero-text">
             Let's Connect :
           </p>
           <SocialIcons />

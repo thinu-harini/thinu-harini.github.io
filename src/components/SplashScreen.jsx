@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types'; // Import PropTypes for type-checking
 import { SplashAnimation } from './SplashAnimation';
-import { styles } from '../styles';
 
 const SplashScreen = ({ setLoading }) => {
   const [theme, setTheme] = useState('light');
@@ -75,7 +74,7 @@ const SplashScreen = ({ setLoading }) => {
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <SplashAnimation />
         <div style={{ margin: '10px 0' }}></div>
-        <p className={`${styles.splashScreenText}`}>
+        <p className="splashscreen-text">
           Loading{dots}
         </p>
       </div>

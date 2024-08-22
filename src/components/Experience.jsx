@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { styles } from '../styles';
 import { experiences, tabNamesForSmallScreens } from '../constants';
 import { SectionWrapper } from '../hoc';
 import { textVariant } from '../utils/motion';
 import { TbSquareRoundedArrowLeftFilled, TbSquareRoundedArrowRightFilled } from "react-icons/tb";
 import Footer from './Footer';
+
 const Experience = () => {
   const [activeTab, setActiveTab] = useState(0);
   const sliderRef = useRef(null);
@@ -91,11 +91,10 @@ const Experience = () => {
   return (
     <div>
       <motion.div variants={textVariant()}>
-        {/* <p className={styles.sectionSubText}>My Journey So Far</p> */}
-        <h1 className={styles.sectionHeadText}>Work Experience.</h1>
+        <h1 className="section-heading">Work Experience.</h1>
       </motion.div>
 
-      <div className={`${styles.buttonText} tabs mt-6 mb-6`}>
+      <div className="button-text tabs mt-6 mb-6">
         {isSmallScreen ? (
           tabNamesForSmallScreens.map((tabName, index) => (
             <div
@@ -138,11 +137,11 @@ const Experience = () => {
               className={`experience-card ${activeTab === index ? 'active' : ''}`}
               onClick={() => handleCardClick(index)}
             >
-              <h2 className={`${styles.contentHeadText}`}>
+              <h2 className="content-heading">
                 {experience.title}
               </h2>
 
-              <h3 className={`${styles.contentSubText}`}>
+              <h3 className="content-subheading">
                 {experience.company_name}
               </h3>
 
@@ -150,7 +149,7 @@ const Experience = () => {
                 {experience.points.map((point, index) => (
                   <li
                     key={index}
-                    className={`${styles.content}`}
+                    className="content-text"
                   >
                     <span className="experience_bullets-marker"></span>
                     <div>
@@ -161,7 +160,7 @@ const Experience = () => {
               </ul>
 
               <p
-                className={`${styles.content}`}
+                className={`content-text`}
                 style={{ fontWeight: '500', fontStyle: 'italic' }}
               >
                 {experience.date}

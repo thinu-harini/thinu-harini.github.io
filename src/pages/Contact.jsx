@@ -5,7 +5,6 @@ import emailjs from "@emailjs/browser";
 import Alert from '../components/Alert';
 import useAlert from '../hooks/useAlert';
 
-import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
 import { Canvas } from '@react-three/fiber';
 import CanvasLoader from "../components/CanvasLoader.jsx";
@@ -104,11 +103,10 @@ const Contact = () => {
         variants={textVariant()}
         className='sm:mt-12 mt-16'
       >
-        {/* <p className={`${styles.sectionSubText}`}>Get in touch</p> */}
-        <h1 className={`${styles.sectionHeadText}`}>Contact.</h1>
+        <h1 className="section-heading">Contact.</h1>
       </motion.div>
 
-      <div className={`motion-container xl:mt-0 mt-6 gap-10 overflow-hidden`}>
+      <div className="motion-container xl:mt-0 mt-6 gap-10 overflow-hidden">
         <motion.div
           className='contact-left-div'
         >
@@ -118,11 +116,11 @@ const Contact = () => {
             className='flex flex-col gap-8'
           >
             <label className='flex flex-col'>
-              <span className={`${styles.contactText} xl:mb-2 mb-2`}>Your Name</span>
+              <span className={`contact-text xl:mb-2 mb-2`}>Your Name</span>
               <input
                 type='text'
                 name='name'
-                className={`${styles.contactText} input-field`}
+                className="contact-text input-field"
                 placeholder='John Doe'
                 required
                 value={form.name}
@@ -133,11 +131,11 @@ const Contact = () => {
             </label>
 
             <label className='flex flex-col'>
-              <span className={`${styles.contactText} xl:mb-2 mb-2`}>Your email</span>
+              <span className="contact-text xl:mb-2 mb-2">Your email</span>
               <input
                 type='email'
                 name='email'
-                className={`${styles.contactText} input-field`}
+                className="contact-text input-field"
                 placeholder='john.doe@gmail.com'
                 required
                 value={form.email}
@@ -148,11 +146,11 @@ const Contact = () => {
             </label>
 
             <label className='flex flex-col'>
-              <span className={`${styles.contactText} xl:mb-2 mb-2`}>Your Message</span>
+              <span className="contact-text xl:mb-2 mb-2">Your Message</span>
               <textarea
                 rows={3}
                 name='message'
-                className={`${styles.contactText} input-field`}
+                className="contact-text input-field"
                 placeholder='Let me know how I can help you!'
                 required
                 value={form.message}
@@ -164,7 +162,7 @@ const Contact = () => {
 
             <button
               type='submit'
-              className={`${styles.buttonText} button w-fit`}
+              className="button-text button w-fit"
               disabled={isLoading}
               onFocus={handleFocus}
               onBlur={handleBlur}

@@ -19,7 +19,6 @@ export const AccessibilityProvider = ({ children }) => {
   const [selectedVoice, setSelectedVoice] = useState(null);
   const [highlightLinks, setHighlightLinks] = useState(false);
 
-  const [isDesaturated, setIsDesaturated] = useState(false);
   const [areImagesHidden, setAreImagesHidden] = useState(false);
   const [isReadingGuideEnabled, setIsReadingGuideEnabled] = useState(false);
   const [guidePosition, setGuidePosition] = useState({ top: 0, left: 0 });
@@ -27,7 +26,6 @@ export const AccessibilityProvider = ({ children }) => {
   const [maskDimensions, setMaskDimensions] = useState({ x: 0, y: 0, width: 300, height: 200 });
 
   const [contrastTheme, setContrastTheme] = useState('default');
-  const [currentTheme, setCurrentTheme] = useState('default');
   const [previousThemes, setPreviousThemes] = useState({ isDark: false, contrastTheme: 'default' });
   const [isReadMode, setIsReadMode] = useState(false);
 
@@ -218,21 +216,6 @@ export const AccessibilityProvider = ({ children }) => {
     }
   }, [isBigCursor]);
 
-  // Toggle desaturation
-  const toggleDesaturation = () => {
-    setIsDesaturated(prev => !prev);
-    setIsContrastExpanded(false);
-  };
-
-  // Apply desaturation style conditionally
-  useEffect(() => {
-    if (isDesaturated) {
-      document.body.classList.add('desaturated');
-    } else {
-      document.body.classList.remove('desaturated');
-    }
-  }, [isDesaturated]);
-
   //highlight links
 
   const toggleHighlightLinks = () => {
@@ -414,8 +397,6 @@ export const AccessibilityProvider = ({ children }) => {
       setVoice,
       getVoices,
       setIsScreenReaderExpanded,
-      isDesaturated,
-      toggleDesaturation,
       highlightLinks,
       toggleHighlightLinks,
       isDark,

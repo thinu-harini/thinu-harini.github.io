@@ -1,5 +1,4 @@
 import React from "react";
-import { styles } from "../styles";
 import { motion } from "framer-motion";
 import SocialIcons from './SocialIcons';
 import { FaAnglesUp } from "react-icons/fa6";
@@ -34,19 +33,19 @@ const Footer = () => {
         </motion.div>
       </div>
 
-      <div className={`flex flex-col items-center md:items-center`}>
-        <Link to="/contact" className={`${styles.buttonText} button`} >
+      <div className="flex flex-col items-center md:items-center">
+        <Link to="/contact" className="button-text button" >
           Contact
         </Link>
 
-        <div className={`flex flex-row gap-4 mt-8`}>
-          <p className={`${styles.heroContent}`}>Let's Connect :</p>
+        <div className="flex flex-row gap-4 mt-8">
+          <p className="hero-text">Let's Connect :</p>
           <SocialIcons />
         </div>
 
       </div>
 
-      <div className={`${styles.content} footer-content text-center mt-8`}>
+      <div className="content-text footer-content text-center mt-8">
         Designed and built by Thinu Harini <br />
         &#169; thinu-harini.github.io | All rights reserved
       </div>

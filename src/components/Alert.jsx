@@ -1,6 +1,5 @@
 import React from 'react'
 import { motion } from 'framer-motion';
-import { styles } from '../styles';
 
 const Alert = ({ type, hideAlert }) => {
   const bgColor = type === "danger" ? 'var(--danger-bg)' : 'var(--success-bg)';
@@ -25,13 +24,13 @@ const Alert = ({ type, hideAlert }) => {
         role='alert'
       >
 
-        <p className={`${styles.content} uppercase font-semibold`}
+        <p className="content-text uppercase font-semibold"
           style={{ color: 'var(--alert-text)' }}>
           {type === "danger" ? "Error!" : "Success"}
         </p>
 
         <p
-          className={`${styles.content}`}
+          className="content-text"
           style={{ color: 'var(--alert-text)', textAlign: 'center' }}
         >
           {type === "danger" ? (

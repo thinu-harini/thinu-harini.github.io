@@ -5,7 +5,6 @@ import { HexagonCanvas } from '../components';
 import wall from '../assets/wall5.svg';
 import roof from '../assets/roof.svg';
 import { Link } from 'react-router-dom';
-import { styles } from '../styles';
 
 const Home = ({ isDark }) => {
 
@@ -25,7 +24,7 @@ const Home = ({ isDark }) => {
         <Carousel />
 
         <div className='button-container'>
-          <Link to="/contact" className={`${styles.buttonText} button`} >
+          <Link to="/contact" className="button-text button">
             Contact
           </Link>
         </div>

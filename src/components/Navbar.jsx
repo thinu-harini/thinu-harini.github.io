@@ -9,7 +9,6 @@ import { IoClose } from "react-icons/io5";
 import { SvgLogo } from "./SvgLogo.jsx";
 import MusicPlayer from "./MusicPlayer.jsx";
 import ThemeSwitcher from './ThemeSwitcher.jsx';
-import AccessibilityMenu from './AccessibilityMenu.jsx';
 
 const Navbar = ({ handleThemeChange, isDark }) => {
   const [menuOpen, setMenuOpen] = useState(false); // manages the state of the dropdown menu (open/closed)
@@ -50,7 +49,7 @@ const Navbar = ({ handleThemeChange, isDark }) => {
     <>
       <nav
         id="navbar"
-        className={`navbar ${styles.paddingX} ${styles.heroContent} w-full flex items-center py-4 fixed top-0 z-20 ${scrolled ? "nav-bg" : "bg-transparent"}`}
+        className={`navbar ${styles.paddingX} hero-text w-full flex items-center py-4 fixed top-0 z-20 ${scrolled ? "nav-bg" : "bg-transparent"}`}
         style={{ height: '90px' }}
       >
         <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
@@ -97,7 +96,7 @@ const Navbar = ({ handleThemeChange, isDark }) => {
       <div
         id="nav-menu"
         ref={dropdownRef}
-        className={`menu ${menuOpen ? 'open' : ''} ${styles.heroContent}`}>
+        className={`menu ${menuOpen ? 'open' : ''} hero-text`}>
 
         <ul className="list-none">
           {menuLinks.map((nav) => (

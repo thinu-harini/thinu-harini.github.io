@@ -1,24 +1,46 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useAccessibility } from './AccessibilityContext';
-import { styles } from '../styles';
 import ReaderToolbar from './ReaderToolbar';
 
 import { IoAccessibility, IoClose, IoMoon, IoReader } from "react-icons/io5";
 import { PiCursorFill } from "react-icons/pi";
-import { FaAdjust, FaBookReader, FaHighlighter, FaLink, FaPause, FaPlay } from 'react-icons/fa';
+import { FaAdjust, FaBookReader, FaHighlighter, FaLandmark, FaLink, FaPause, FaPlay, FaTint } from 'react-icons/fa';
 import { RiUserVoiceFill } from 'react-icons/ri';
-import { MdImageNotSupported, MdInsertPageBreak, MdOutlineInvertColors } from 'react-icons/md';
+import { MdImageNotSupported, MdInsertPageBreak, MdOutlineInvertColors, MdOutlineTextDecrease, MdOutlineTextIncrease } from 'react-icons/md';
 import { GiRabbit, GiTortoise } from 'react-icons/gi';
+import { VscTextSize } from 'react-icons/vsc';
+import Magnifier from './Magnifier';
+import { HiDocumentMagnifyingGlass } from 'react-icons/hi2';
+
+const colorOptions = [
+  { name: 'Red', color: '#ff0000' },
+  { name: 'Green', color: '#4caf50' },
+  { name: 'Blue', color: '#3e64ff' },
+  { name: 'Yellow', color: '#fcd000' },
+  { name: 'Purple', color: '#9c27b0' },
+  { name: 'Gray', color: '#808080' },
+  { name: 'Black', color: '#000000' },
+  { name: 'White', color: '#ffffff' },
+];
 
 const AccessibilityMenu = ({ currentTheme }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('Orientation');
   const menuRef = useRef(null);
   const [isContrastExpanded, setIsContrastExpanded] = useState(false);
+  const [saturationMode, setSaturationMode] = useState(null);
+  const [landmarkColor, setLandmarkColor] = useState(null);
+  const [showColorOptions, setShowColorOptions] = useState(false);
+  const [isBlueFilterActive, setBlueFilterActive] = useState(false);
 
   const [voices, setVoices] = useState([]);
   const [selectedVoice, setSelectedVoice] = useState(null);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+  const [textScale, setTextScale] = useState(1); // Text scaling factor
+  const [lineHeightScale, setLineHeightScale] = useState(1); // Line height scaling factor
+  const [isBiggerText, setIsBiggerText] = useState(false);
+  const [activeButton, setActiveButton] = useState(null);
+  const [isMagnifierActive, setMagnifierActive] = useState(false);
 
   const {
     isDyslexiaFont,
@@ -40,8 +62,6 @@ const AccessibilityMenu = ({ currentTheme }) => {
     toggleHighlightLinks,
     isDark,
     toggleDarkMode,
-    isDesaturated,
-    toggleDesaturation,
     contrastTheme,
     toggleContrastTheme,
     resetContrastTheme,
@@ -58,17 +78,50 @@ const AccessibilityMenu = ({ currentTheme }) => {
   } = useAccessibility();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
   const toggleContrast = () => {
     setIsContrastExpanded(prevState => !prevState);
+    setShowColorOptions(false);
   };
 
   const isDyslexiaActive = isDyslexiaFont;
   const isBigCursorActive = isBigCursor;
-  const isDesaturatedActive = isDesaturated;
+
+  useEffect(() => {
+    document.documentElement.style.setProperty('--text-scale', textScale);
+    document.documentElement.style.setProperty('--line-height-scale', lineHeightScale);
+  }, [textScale, lineHeightScale]);
+
+  const handleIncreaseTextSize = () => {
+    setTextScale(prev => Math.min(prev + 0.1, 2));
+    setActiveButton('increase');
+  };
+
+  const handleDecreaseTextSize = () => {
+    setTextScale(prev => Math.max(prev - 0.1, 0.5));
+    setActiveButton('decrease');
+  };
+
+  const handleResetTextSize = () => {
+    setTextScale(1);
+    setLineHeightScale(1);
+    setActiveButton('reset');
+  };
+
+  const toggleBiggerText = () => {
+    setIsBiggerText(prev => {
+      const newSize = !prev;
+      setTextScale(newSize ? 1.5 : 1); // Set text scale to 1.5x or 1x
+      return newSize;
+    });
+  };
+
+  const toggleMagnifier = () => setMagnifierActive(!isMagnifierActive);
 
   const handleTabChange = (tab) => {
     if (tab !== 'Color') {
       setIsContrastExpanded(false); // Collapse contrast section when switching tabs
+      setShowColorOptions(false);
     }
     setActiveTab(tab);
   };
@@ -92,6 +145,7 @@ const AccessibilityMenu = ({ currentTheme }) => {
     e.stopPropagation();
     toggleDarkMode();
     setIsContrastExpanded(false); // Collapse contrast section
+    setShowColorOptions(false);
   };
 
   const handleContrastToggle = (theme) => {
@@ -101,6 +155,52 @@ const AccessibilityMenu = ({ currentTheme }) => {
   const handleResetContrast = () => {
     resetContrastTheme();
   };
+
+  useEffect(() => {
+    document.body.classList.remove('low-saturation', 'high-saturation', 'grayscale', 'blue-filter');
+
+    if (saturationMode === 'low') {
+      document.body.classList.add('low-saturation');
+    } else if (saturationMode === 'high') {
+      document.body.classList.add('high-saturation');
+    } else if (saturationMode === 'grayscale') {
+      document.body.classList.add('grayscale');
+    }
+
+    if (isBlueFilterActive) {
+      document.body.classList.add('blue-filter');
+    }
+
+    if (landmarkColor) {
+      document.body.style.setProperty('--landmark-color', landmarkColor);
+      document.body.classList.add('landmark-colors');
+    } else {
+      document.body.classList.remove('landmark-colors');
+    }
+  }, [saturationMode, isBlueFilterActive, landmarkColor]);
+
+  const toggleSaturationMode = (mode) => {
+    // Toggle the mode if it's already active; otherwise, set it to the new mode
+    setSaturationMode(prevMode => prevMode === mode ? null : mode);
+    setIsContrastExpanded(false); // Collapse contrast section
+    setShowColorOptions(false);
+  };
+
+  const toggleBlueFilter = () => {
+    setBlueFilterActive(prev => !prev);
+    setIsContrastExpanded(false); // Collapse contrast section
+    setShowColorOptions(false);
+  };
+
+  const handleColorSelect = (color) => {
+    setLandmarkColor(prevColor => prevColor === color ? null : color);
+  };
+
+  const toggleColorOptions = () => {
+    setShowColorOptions(prev => !prev);
+    setIsContrastExpanded(false); // Collapse contrast section
+  };
+
 
   useEffect(() => {
     const loadVoices = () => {
@@ -158,14 +258,14 @@ const AccessibilityMenu = ({ currentTheme }) => {
 
   const ProfileTab = () => (
     <div>
-      <div className={`ml-4 mt-4 ${styles.heroContent}`}>Accessiblity Profile</div>
+      <div className="hero-text ml-4 mt-4">Accessiblity Profile</div>
       <div className="accessibility-features">
         <button
           className={`${isDyslexiaActive ? 'active' : ''}`}
           onClick={toggleDyslexiaFont}
         >
           <FaBookReader />
-          <div className={styles.buttonText}>Dyslexia Friendly</div>
+          <div className="button-text">Dyslexia Friendly</div>
         </button>
       </div>
     </div>
@@ -173,15 +273,14 @@ const AccessibilityMenu = ({ currentTheme }) => {
 
   const OrientationTab = () => (
     <div>
-      <div className={`ml-4 mt-4 ${styles.heroContent}`}>Orientation Adjustments</div>
-
+      <div className="hero-text ml-4 mt-4">Orientation Adjustments</div>
       <div className="screen-reader-section">
         <button
           className={`screen-reader-button ${isReading ? 'active' : ''}`}
           onClick={handleScreenReaderToggle}
         >
           <RiUserVoiceFill />
-          <div className={styles.buttonText}>Screen Reader</div>
+          <div className="button-text">Screen Reader</div>
         </button>
 
         {isReading && (
@@ -194,12 +293,12 @@ const AccessibilityMenu = ({ currentTheme }) => {
                 {isPaused ? (
                   <div className='screen-reader-option-content'>
                     <FaPlay />
-                    <div className={styles.buttonText}>Resume</div>
+                    <div className="button-text">Resume</div>
                   </div>
                 ) : (
                   <div className='screen-reader-option-content'>
                     <FaPause />
-                    <div className={styles.buttonText}>Pause</div>
+                    <div className="button-text">Pause</div>
                   </div>
                 )}
               </button>
@@ -209,12 +308,12 @@ const AccessibilityMenu = ({ currentTheme }) => {
                 className={`screen-reader-option ${highlightEnabled ? 'active' : ''}`}
               >
                 <FaHighlighter />
-                <div className={styles.buttonText}>Highlight</div>
+                <div className="button-text">Highlight</div>
               </button>
             </div>
 
             <div className='rate-slider-container'>
-              <label htmlFor="rate-slider" className={styles.buttonText}>
+              <label htmlFor="rate-slider" className="button-text">
                 Playback Rate: {rate.toFixed(1)}
               </label>
               <div className='rate-slider-wrapper'>
@@ -233,9 +332,9 @@ const AccessibilityMenu = ({ currentTheme }) => {
               </div>
             </div>
 
-            <div className={styles.buttonText}>Voice</div>
+            <div className="button-text">Voice</div>
             <select
-              className={`${styles.buttonText} custom-select`}
+              className="button-text custom-select"
               onChange={handleVoiceChange}
               value={selectedVoice ? selectedVoice.name : ''}>
               {voices.map(voice => (
@@ -255,42 +354,50 @@ const AccessibilityMenu = ({ currentTheme }) => {
           onClick={toggleDyslexiaFont}
         >
           <FaBookReader />
-          <div className={styles.buttonText}>Dyslexia Friendly</div>
+          <div className="button-text">Dyslexia Friendly</div>
         </button>
         <button
           className={`${isBigCursorActive ? 'active' : ''}`}
           onClick={toggleBigCursor}
         >
           <PiCursorFill />
-          <div className={styles.buttonText}>Big Cursor</div>
+          <div className="button-text">Big Cursor</div>
         </button>
+        <button
+          className={`${isBiggerText ? 'active' : ''}`}
+          onClick={toggleBiggerText}
+        >
+          <VscTextSize />
+          <div className="button-text">Bigger Text</div>
+        </button>
+
         <button
           className={`${isReadMode ? 'active' : ''}`}
           onClick={toggleReadMode}
         >
           <IoReader />
-          <div className={styles.buttonText}>Read Mode</div>
+          <div className="button-text">Read Mode</div>
         </button>
         <button
           className={`${isReadingGuideEnabled ? 'active' : ''}`}
           onClick={toggleReadingGuide}
         >
           <MdInsertPageBreak />
-          <div className={styles.buttonText}>Reading Guide</div>
+          <div className="button-text">Reading Guide</div>
         </button>
         <button
           className={`${isReadingMaskEnabled ? 'active' : ''}`}
           onClick={toggleReadingMask}
         >
           <FaAdjust />
-          <div className={styles.buttonText}>Reading Mask</div>
+          <div className="button-text">Reading Mask</div>
         </button>
         <button
           className={`${areImagesHidden ? 'active' : ''}`}
           onClick={toggleHideImages}
         >
           <MdImageNotSupported />
-          <div className={styles.buttonText}>Hide Images</div>
+          <div className="button-text">Hide Images</div>
         </button>
       </div>
     </div >
@@ -298,22 +405,55 @@ const AccessibilityMenu = ({ currentTheme }) => {
 
   const ContentTab = () => (
     <div>
-      <div className={`ml-4 mt-4 ${styles.heroContent}`}>Content Adjustments</div>
+      <div className="hero-text ml-4 mt-4">Content Adjustments</div>
+      <div className="hero-text ml-4 mt-4">Text Size</div>
+      <div className="text-adjustment-section">
+        <div className='text-adjustment-options'>
+          <button
+            className={`text-adjustment-option ${activeButton === 'decrease' ? 'active' : ''}`}
+            onClick={handleDecreaseTextSize}
+          >
+            <MdOutlineTextDecrease />
+            <div className="button-text">Decrease</div>
+          </button>
+
+          <button
+            className={`text-adjustment-option ${activeButton === 'increase' ? 'active' : ''}`}
+            onClick={handleIncreaseTextSize}
+          >
+            <MdOutlineTextIncrease />
+            <div className="button-text">Increase</div>
+          </button>
+
+          <button
+            className={`text-adjustment-option ${activeButton === 'reset' ? 'active' : ''}`}
+            onClick={handleResetTextSize}
+          >
+            <div className="button-text">Reset</div>
+          </button>
+        </div >
+      </div >
       <div className="accessibility-features">
+        <button onClick={toggleMagnifier}
+          className={`${isMagnifierActive ? 'active' : ''}`}
+        >
+          <HiDocumentMagnifyingGlass />
+          <div className="button-text">Text Magnifier</div>
+        </button>
         <button
           className={`${highlightLinks ? 'active' : ''}`}
           onClick={handleHighlightLinksToggle}
         >
           <FaLink />
-          <div className={styles.buttonText}>Highlight Links</div>
+          <div className="button-text">Highlight Links</div>
         </button>
       </div>
-    </div>
+    </div >
   );
 
   const ColorTab = () => (
     <div>
-      <div className={`ml-4 mt-4 ${styles.heroContent}`}>Color Adjustments</div>
+      <div className="hero-text ml-4 mt-4">Color Adjustments</div>
       <div className="accessibility-features">
         <button
           className={`${isDark ? 'active' : ''} ${isReadMode ? 'disabled' : ''}`}
@@ -321,14 +461,35 @@ const AccessibilityMenu = ({ currentTheme }) => {
           disabled={isReadMode}
         >
           <IoMoon />
-          <div className={styles.buttonText}>Dark Mode</div>
+          <div className="button-text">Dark Mode</div>
         </button>
         <button
-          className={`${isDesaturatedActive ? 'active' : ''}`}
-          onClick={toggleDesaturation}
+          className={`${isBlueFilterActive ? 'active' : ''}`}
+          onClick={toggleBlueFilter}
+        >
+          <FaTint />
+          <div className="button-text">Blue Filter</div>
+        </button>
+        <button
+          className={`${saturationMode === 'low' ? 'active' : ''}`}
+          onClick={() => toggleSaturationMode('low')}
         >
           <MdOutlineInvertColors />
-          <div className={styles.buttonText}>Desaturation</div>
+          <div className="button-text">Low Saturation</div>
+        </button>
+        <button
+          className={`${saturationMode === 'high' ? 'active' : ''}`}
+          onClick={() => toggleSaturationMode('high')}
+        >
+          <MdOutlineInvertColors />
+          <div className="button-text">High Saturation</div>
+        </button>
+        <button
+          className={`${saturationMode === 'grayscale' ? 'active' : ''}`}
+          onClick={() => toggleSaturationMode('grayscale')}
+        >
+          <MdOutlineInvertColors />
+          <div className="button-text">Grayscale</div>
         </button>
         <button
           className={`${isContrastExpanded ? 'active' : ''} ${isReadMode ? 'disabled' : ''}`}
@@ -337,10 +498,10 @@ const AccessibilityMenu = ({ currentTheme }) => {
           disabled={isReadMode}
         >
           <FaAdjust />
-          <div className={styles.buttonText}>Contrast</div>
+          <div className="button-text">Contrast</div>
         </button>
-      </div>
 
+      </div>
       {isContrastExpanded && (
         <div className="contrast-themes">
           <button
@@ -348,38 +509,64 @@ const AccessibilityMenu = ({ currentTheme }) => {
             onClick={handleResetContrast}
           >
             <FaAdjust />
-            <div className={styles.buttonText}>None</div>
+            <div className="button-text">None</div>
           </button>
           <button
             className={`${contrastTheme === 'high-contrast' ? 'active' : ''}`}
             onClick={() => handleContrastToggle('high-contrast')}
           >
             <FaAdjust />
-            <div className={styles.buttonText}>High Contrast</div>
+            <div className="button-text">High Contrast</div>
           </button>
           <button
             className={`${contrastTheme === 'cyan-on-black' ? 'active' : ''}`}
             onClick={() => handleContrastToggle('cyan-on-black')}
           >
             <FaAdjust />
-            <div className={styles.buttonText}>Cyan on Black</div>
+            <div className="button-text">Cyan on Black</div>
           </button>
           <button
             className={`${contrastTheme === 'yellow-on-black' ? 'active' : ''}`}
             onClick={() => handleContrastToggle('yellow-on-black')}
           >
             <FaAdjust />
-            <div className={styles.buttonText}>Yellow on Black</div>
+            <div className="button-text">Yellow on Black</div>
           </button>
           <button
             className={`contrast-theme-button ${contrastTheme === 'green-on-black' ? 'active' : ''}`}
             onClick={() => handleContrastToggle('green-on-black')}
           >
             <FaAdjust />
-            <div className={styles.buttonText}>Green on Black</div>
+            <div className="button-text">Green on Black</div>
           </button>
         </div>
       )}
+      <div className="accessibility-features">
+        <button
+          className={`${showColorOptions ? 'active' : ''} ${landmarkColor ? 'active' : ''} ${isReadMode ? 'disabled' : ''}`}
+          onClick={isReadMode ? undefined : toggleColorOptions}
+          disabled={isReadMode}
+        >
+          <FaLandmark />
+          <div className="button-text">Landmark Colors</div>
+        </button>
+      </div>
+      {showColorOptions && (
+        <div className="color-options">
+          {colorOptions.map(option => (
+            <button
+              key={option.name}
+              style={{ backgroundColor: option.color }}
+              className={`color-option ${landmarkColor === option.color ? 'active' : ''}`}
+              onClick={() => handleColorSelect(option.color)}
+            >
+              {/* {option.name} */}
+            </button>
+          ))}
+        </div>
+      )}
+
+
 
     </div>
   );
@@ -399,31 +586,29 @@ const AccessibilityMenu = ({ currentTheme }) => {
         )}
       </button>
 
-
-
       {isMenuOpen && (
         <div className={`accessibility-menu ${isMenuOpen ? 'open' : ''}`}>
-          <div className={`accessibility-menu-heading ${styles.heroContent}`}>
+          <div className="accessibility-menu-heading hero-text">
             Accessibility Menu
           </div>
           <div className="accessibility-tabs">
             <button
-              className={activeTab === 'Orientation' ? 'active' : ''}
+              className={`button-text ${activeTab === 'Orientation' ? 'active' : ''}`}
               onClick={() => handleTabChange('Orientation')}>
               Orientation
             </button>
             <button
-              className={activeTab === 'Content' ? 'active' : ''}
+              className={`button-text ${activeTab === 'Content' ? 'active' : ''}`}
               onClick={() => handleTabChange('Content')}>
               Content
             </button>
             <button
-              className={activeTab === 'Color' ? 'active' : ''}
+              className={`button-text ${activeTab === 'Color' ? 'active' : ''}`}
               onClick={() => handleTabChange('Color')}>
               Color
             </button>
             <button
-              className={activeTab === 'Profile' ? 'active' : ''}
+              className={`button-text ${activeTab === 'Profile' ? 'active' : ''}`}
               onClick={() => handleTabChange('Profile')}>
               Profile
             </button>
@@ -481,6 +666,9 @@ const AccessibilityMenu = ({ currentTheme }) => {
           }}
         />
       )}
+
+      {/* Render the magnifier */}
+      {isMagnifierActive && <Magnifier isActive={isMagnifierActive} />}
     </div>
   );
 };

@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { textVariant } from "../utils/motion";
 import { Link } from 'react-router-dom';
-import { styles } from '../styles';
 import { projects } from '../constants';
 import { SectionWrapper } from '../hoc';
 
@@ -31,15 +30,15 @@ const ProjectCard = ({
       </div>
 
       <div className='mt-5'>
-        <h2 className={styles.contentHeadText}>{name}</h2>
-        <p className={styles.content}>{description}</p>
+        <h2 className="content-heading">{name}</h2>
+        <p className="content-text">{description}</p>
       </div>
 
       <div className='mt-4 flex flex-wrap gap-2'>
         {tags.map((tag) => (
           <p
             key={`${name}-${tag.name}`}
-            className={styles.content}
+            className="content-text"
             style={{ color: 'var(--content)', margin: 0 }}
           >
             #{tag.name}
@@ -96,8 +95,7 @@ const Projects = () => {
           variants={textVariant()}
           className='sm:mt-12 mt-16'
         >
-          {/* <p className={styles.sectionSubText}>My Work</p> */}
-          <h1 className={styles.sectionHeadText}>Projects.</h1>
+          <h1 className="section-heading">Projects.</h1>
         </motion.div>
 
         <div className='project-cards-container mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7'>

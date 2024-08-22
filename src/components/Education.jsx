@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-import { styles } from "../styles";
 import { textVariant } from "../utils/motion";
 import { SectionWrapper } from "../hoc";
 import Tech from './Tech';
@@ -12,8 +11,8 @@ const EducationInfo = ({ degree, place }) => {
     <div>
       <ul className='bullet mt-4'>
         <li>
-          <p className={`${styles.educationTopic}`}>{degree}</p>
-          <p className={`${styles.heroContent}`}>{place}</p>
+          <p className="education-heading">{degree}</p>
+          <p className="hero-text">{place}</p>
         </li>
       </ul>
     </div>
@@ -25,7 +24,7 @@ const Education = () => {
   return (
     <>
       <motion.div variants={textVariant()}>
-        <h1 className={`${styles.sectionHeadText}`}>Education.</h1>
+        <h1 className="section-heading">Education.</h1>
       </motion.div>
 
       <div>

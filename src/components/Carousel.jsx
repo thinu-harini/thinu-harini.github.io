@@ -6,7 +6,6 @@ import CanvasLoader from "./CanvasLoader.jsx";
 import HomeGirlModel from "../models/HomeGirl.jsx";
 import CarouselCard from '../components/CarouselCard';
 import { carouselItems } from "../constants";
-import { styles } from '../styles.js';
 
 const adjustGirlForScreenSize = () => {
   let screenScale = null;
@@ -249,13 +248,13 @@ const Carousel = () => {
 
         {messageVisible && (
           <>
-            <div className={`${styles.contentSubText} overlay-message desktop-message`}>
+            <div className="content-subheading overlay-message desktop-message">
               <p>
                 Scroll or use arrow keys to explore
               </p>
             </div>
 
-            <div className={`${styles.contentSubText} overlay-message mobile-message`}>
+            <div className="content-subheading overlay-message mobile-message">
               <p>
                 Swipe to explore
               </p>

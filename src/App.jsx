@@ -23,11 +23,6 @@ const App = () => {
     document.dispatchEvent(new Event('themeChange'));
   };
 
-  const handleChangeTheme = (theme) => {
-    console.log('Theme changed to:', theme);
-    // Implement the logic to handle theme change if needed
-  };
-
   return (
     <BrowserRouter>
       <AccessibilityProvider>
@@ -47,7 +42,7 @@ const App = () => {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/groome-case-study" element={<Groome />} />
               </Routes>
-              <AccessibilityMenu onChangeTheme={handleChangeTheme} />
+              <AccessibilityMenu />
             </div>
           )}
         </div>

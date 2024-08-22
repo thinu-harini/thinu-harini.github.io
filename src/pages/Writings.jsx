@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { textVariant } from "../utils/motion";
-import { styles } from '../styles';
 import { writings } from '../constants';
 import { SectionWrapper } from '../hoc';
 import { Footer } from '../components';
@@ -24,15 +23,15 @@ const WritingCard = ({
       </div>
 
       <div className='mt-5'>
-        <h2 className={styles.contentHeadText}>{name}</h2>
-        <p className={styles.content}>{description}</p>
+        <h2 className="content-heading">{name}</h2>
+        <p className="content-text">{description}</p>
       </div>
 
       <div className='mt-4 flex flex-wrap gap-2'>
         {tags.map((tag) => (
           <p
             key={`${name}-${tag.name}`}
-            className={styles.content}
+            className="content-text"
             style={{ color: 'var(--content)', margin: 0 }}
           >
             #{tag.name}
@@ -53,7 +52,7 @@ const Writings = () => {
         variants={textVariant()}
         className='sm:mt-12 mt-16'
       >
-        <h1 className={styles.sectionHeadText}>Writings.</h1>
+        <h1 className="section-heading">Writings.</h1>
       </motion.div>
 
       <div className='mt-10 flex flex-wrap gap-7'>
