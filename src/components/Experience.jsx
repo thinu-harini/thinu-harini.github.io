@@ -149,7 +149,7 @@ const Experience = () => {
                 {experience.points.map((point, index) => (
                   <li
                     key={index}
-                    className="content-text"
+                    className="content-text mt-4"
                   >
                     <span className="experience_bullets-marker"></span>
                     <div>
@@ -160,7 +160,7 @@ const Experience = () => {
               </ul>
 
               <p
-                className={`content-text`}
+                className="content-text mt-4"
                 style={{ fontWeight: '500', fontStyle: 'italic' }}
               >
                 {experience.date}

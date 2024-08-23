@@ -9,7 +9,7 @@ import About from './pages/About';
 import Projects from './pages/Projects';
 import Writings from './pages/Writings';
 import Contact from './pages/Contact';
-import { Groome } from './pages';
+import { Groome, Ichatcs } from './pages';
 import ReadingGuide from './components/ReadingGuide';
 import AccessibilityMenu from './components/AccessibilityMenu';
 
@@ -41,6 +41,7 @@ const App = () => {
                 <Route path="/writings" element={<Writings />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/groome-case-study" element={<Groome />} />
+                <Route path="/ichatcs-case-study" element={<Ichatcs />} />
               </Routes>
               <AccessibilityMenu />
             </div>

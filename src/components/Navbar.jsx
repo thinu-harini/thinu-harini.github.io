@@ -61,7 +61,7 @@ const Navbar = ({ handleThemeChange, isDark }) => {
             <SvgLogo className='w-28 h-auto' />
           </Link>
 
-          <div className='md:flex-row flex items-center gap-4'>
+          <div className='nav-button-container'>
 
             {/* {ThemeSwitcher and MusicPlayer */}
 

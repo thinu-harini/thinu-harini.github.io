@@ -24,13 +24,13 @@ const Alert = ({ type, hideAlert }) => {
         role='alert'
       >
 
-        <p className="content-text uppercase font-semibold"
+        <p className="content-text mt-4 uppercase font-semibold"
           style={{ color: 'var(--alert-text)' }}>
           {type === "danger" ? "Error!" : "Success"}
         </p>
 
         <p
-          className="content-text"
+          className="content-text mt-4"
           style={{ color: 'var(--alert-text)', textAlign: 'center' }}
         >
           {type === "danger" ? (

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { FaMapMarkedAlt, FaTimes } from 'react-icons/fa';
 
-const Minimap = ({ contentRef }) => {
+const Minimap = ({ contentRef, isVisible, onToggle }) => {
   const minimapRef = useRef(null);
   const minimapSizeRef = useRef(null);
   const viewerRef = useRef(null);
@@ -121,22 +122,39 @@ const Minimap = ({ contentRef }) => {
   };
 
   return (
-    <div
-      className="minimap__container"
-      ref={minimapRef}
-      onClick={handleMinimapClick}
-    >
-      <div className="minimap__size" ref={minimapSizeRef}></div>
+    <div>
       <div
-        className="minimap__viewer"
-        ref={viewerRef}
-        onMouseDown={handleMouseDown}
-        style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
-      ></div>
-      <iframe className="minimap__content" ref={minimapContentRef}></iframe>
+        className={`minimap-container ${isVisible ? 'visible' : 'hidden'}`}
+        ref={minimapRef}
+        onClick={handleMinimapClick}
+      >
+        <div className="minimap-size" ref={minimapSizeRef}></div>
+        <div
+          className="minimap-viewer"
+          ref={viewerRef}
+          onMouseDown={handleMouseDown}
+          style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+        ></div>
+        <iframe className="minimap-content" ref={minimapContentRef}></iframe>
+      </div>
+      <button
+        onClick={onToggle}
+        className="minimap-toggle-button"
+        aria-label="Toggle Minimap Visibility"
+      >
+        {isVisible ?
+          <div className='minimap-toggle-button-content w-[140px]'>
+            <FaMapMarkedAlt />
+            <h3 className="button-text font-semibold">Minimap</h3>
+          </div>
+          :
+          <div className='minimap-toggle-button-content'>
+            <FaMapMarkedAlt />
+          </div>
+        }
+      </button>
     </div>
   );
 };
 
 export default Minimap;
-

@@ -22,7 +22,7 @@ const ProgressBar = () => {
 
   return (
     <div className="progress-bar">
-      <div className="progress-bar__indicator" style={{ width: `${scrollProgress}%` }}></div>
+      <div className="progress-bar-indicator" style={{ width: `${scrollProgress}%` }}></div>
     </div>
   );
 };

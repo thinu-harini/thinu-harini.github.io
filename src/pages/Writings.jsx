@@ -24,14 +24,14 @@ const WritingCard = ({
 
       <div className='mt-5'>
         <h2 className="content-heading">{name}</h2>
-        <p className="content-text">{description}</p>
+        <p className="content-text mt-2">{description}</p>
       </div>
 
       <div className='mt-4 flex flex-wrap gap-2'>
         {tags.map((tag) => (
           <p
             key={`${name}-${tag.name}`}
-            className="content-text"
+            className="content-text mt-2"
             style={{ color: 'var(--content)', margin: 0 }}
           >
             #{tag.name}

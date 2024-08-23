@@ -190,6 +190,7 @@ export const projects = [
     ],
     image: ichatcs,
     alt: "iChatCS project thumbnail",
+    case_study_link: "/ichatcs-case-study",
   },
   {
     name: "Event Planning System",

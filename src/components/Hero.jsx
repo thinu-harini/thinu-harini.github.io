@@ -66,7 +66,7 @@ const Hero = () => {
         </p>
 
         <div className="button-text flex-row items-start mt-6">
-          <Link to="/contact" className="button mr-2">
+          <Link to="/contact" className="button mr-2 mb-2">
             Contact
           </Link>
 
@@ -76,7 +76,7 @@ const Hero = () => {
           {/* <Tech /> */}
         </div>
 
-        <div className="items-center gap-4 flex mt-8 mb-0">
+        <div className="flex flex-wrap items-center gap-4 mt-4 mb-0">
           <p className="hero-text">
             Let's Connect :
           </p>
