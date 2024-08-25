@@ -49,8 +49,7 @@ const Navbar = ({ handleThemeChange, isDark }) => {
     <>
       <nav
         id="navbar"
-        className={`navbar ${styles.paddingX} hero-text w-full flex items-center py-4 fixed top-0 z-20 ${scrolled ? "nav-bg" : "bg-transparent"}`}
-        style={{ height: '90px' }}
+        className={`navbar ${styles.paddingX} hero-text ${scrolled ? "nav-bg" : "bg-transparent"}`}
       >
         <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
           <Link

@@ -1,16 +1,17 @@
-
 import React, { useRef, useState } from "react";
 import { SectionWrapper } from "../hoc";
-import NavPane from "../components/NavigationPane";
-import Minimap from "../components/Minimap";
 import ProgressBar from "../components/ProgressBar";
 import { useAccessibility } from "../components/AccessibilityContext";
+import Toolbar from "../components/Toolbar";
+import useSearch from '../hooks/useSearch';
 
 const Groome = () => {
   const { startReadingFromElement } = useAccessibility();
-  const [contentMarginLeft, setContentMarginLeft] = useState(0);
   const contentRef = useRef(null);
-  const [isMinimapVisible, setIsMinimapVisible] = useState(true);
+  const [contentMarginLeft, setContentMarginLeft] = useState(0);
+
+  // Use the custom hook
+  const { searchQuery, searchResults, currentResultIndex, handleSearch, handleNavigate, highlightText, isSearchBarVisible, toggleSearchBarVisibility } = useSearch();
 
   const sections = [
     { id: 'project-overview', title: 'Project Overview' },
@@ -23,20 +24,26 @@ const Groome = () => {
     setContentMarginLeft(navWidth);
   };
 
-  const toggleMinimapVisibility = () => {
-    setIsMinimapVisible(prev => !prev);
+  const toggleNavPane = (navWidth) => {
+    setContentMarginLeft(navWidth);
   };
+
   return (
     <div style={{ marginLeft: `${contentMarginLeft}vw`, transition: 'margin-left 0.3s ease' }}>
 
       <ProgressBar />
-      <NavPane sections={sections} onResize={handleResize} />
 
-      {/* <Minimap contentRef={contentRef} mode="proportional" /> */}
-      <Minimap
+      <Toolbar
+        sections={sections}
+        onResize={handleResize}
+        onToggleNavPane={toggleNavPane}
         contentRef={contentRef}
-        isVisible={isMinimapVisible}
-        onToggle={toggleMinimapVisibility}
+        onSearch={handleSearch}
+        onNavigate={handleNavigate}
+        currentIndex={currentResultIndex}
+        totalResults={searchResults.length}
+        isSearchBarVisible={isSearchBarVisible}
+        toggleSearchBarVisibility={toggleSearchBarVisibility}
       />
 
       <div ref={contentRef} >
@@ -87,7 +94,7 @@ const Groome = () => {
         <div className="mt-10" id="project-overview" onClick={() => startReadingFromElement('project-overview')}>
           <h2 className="casestudy-heading">Project overview</h2>
           <p className="casestudy-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            {highlightText("Lorem ipsum dolor sit amet, lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")}
           </p>
         </div>
 
@@ -122,7 +129,7 @@ const Groome = () => {
           </p>
         </div>
 
-        {/* 
+        {/*
         <div className="mt-10">
           <p className={`casestudy-text}`}>Next Project</p>
           <p className={`casestudy-text}`}>Link to next project</p>
@@ -133,4 +140,3 @@ const Groome = () => {
 };
 
 export default SectionWrapper(Groome, "Groome");
-
