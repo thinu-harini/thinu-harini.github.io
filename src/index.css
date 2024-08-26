@@ -99,6 +99,7 @@
   --reading-guide: var(--red);
   --magnifier-background-rgba: rgba(255, 255, 255, 0.8);
   --glow-hover: none;
+  --menu-bg-rgba: rgba(229, 231, 255, 0.1);
 }
 
 /* Dark theme styles */
@@ -154,6 +155,7 @@
   --reading-guide: var(--yellow);
   --magnifier-background-rgba: rgba(10, 10, 12, 0.8);
   --glow-hover: #3f0fff;
+  --menu-bg-rgba: rgba(15, 19, 44, 0.6);
 }
 
 .text-scalable {
@@ -697,8 +699,10 @@ body {
   padding-left: 40px;
   padding-right: 40px;
   padding-bottom: 40px;
-  background-color: var(--menu-bg);
-  box-shadow: 0 40px 40px rgba(9, 10, 13, 0.5);
+  background: var(--menu-bg-rgba);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 6px 20px rgba(9, 10, 13, 0.5);
+  /* background-color: var(--menu-bg);
   /* Allow scrolling if content exceeds height */
   overflow-y: auto;
   z-index: 15;
@@ -1928,6 +1932,63 @@ body {
   }
 
   .glow-button.active .glow-icon {
+    color: var(--accent);
+  }
+}
+
+/* search bar close button */
+
+@media (min-width: 992px) {
+  .glow-close-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: none;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 4px;
+  }
+
+  .glow-close-button .glow-close-icon {
+    color: #51557A;
+    font-size: 30px;
+  }
+
+  .glow-close-button:hover .glow-close-icon {
+    color: var(--accent);
+    filter: drop-shadow(0 0 8px var(--glow-hover));
+    scale: 1.1;
+    transition: filter 0.1s ease;
+  }
+
+  .glow-close-button.active .glow-close-icon {
+    color: var(--accent);
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 991px) {
+  .glow-close-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: none;
+    border: none;
+    border-radius: 50px;
+    padding: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .glow-close-button .glow-close-icon {
+    color: #51557A;
+    font-size: 28px;
+  }
+
+  .glow-close-button.active .glow-close-icon {
     color: var(--accent);
   }
 }
