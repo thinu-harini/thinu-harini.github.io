@@ -1783,8 +1783,7 @@ body {
   height: auto;
   padding: 4px 16px;
   margin-right: 8px;
-  position: fixed;
-  top: 100px;
+  z-index: 1;
 }
 
 .search-bar input {
@@ -1879,9 +1878,9 @@ body {
     transform: translateY(0);
   }
 
-  /* .toolbar-search-active {
+  .toolbar-search-active {
     top: 110px;
-  } */
+  }
 }
 
 .glow-button {

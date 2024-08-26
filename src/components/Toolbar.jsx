@@ -340,7 +340,15 @@ const Toolbar = ({ sections, onResize, onToggleNavPane, contentRef, onSearch, on
           </>
         )}
 
-
+        {isSearchBarVisible && (
+          <SearchBar
+            onSearch={onSearch}
+            onNavigate={onNavigate}
+            currentIndex={currentIndex}
+            totalResults={totalResults}
+            isVisible={isSearchBarVisible}
+          />
+        )}
         <button
           onClick={handleSearchBarToggle}
           className={`glow-button ${isSearchBarVisible ? 'active' : ''}`}
@@ -353,16 +361,6 @@ const Toolbar = ({ sections, onResize, onToggleNavPane, contentRef, onSearch, on
           )}
         </button>
       </div>
-
-      {isSearchBarVisible && (
-        <SearchBar
-          onSearch={onSearch}
-          onNavigate={onNavigate}
-          currentIndex={currentIndex}
-          totalResults={totalResults}
-          isVisible={isSearchBarVisible}
-        />
-      )}
 
       {isNavPaneVisible && (
         <NavPane sections={sections} onResize={handleResize} width={navPaneWidth} />
