@@ -11,7 +11,7 @@ const GradientMapMarkedAlt = (props) => (
   >
     <defs>
       <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" style={{ stopColor: '#9335ff', stopOpacity: 1 }} />
+        <stop offset="0%" style={{ stopColor: '#4d62fe', stopOpacity: 1 }} />
         <stop offset="100%" style={{ stopColor: '#7d8dff', stopOpacity: 1 }} />
       </linearGradient>
     </defs>

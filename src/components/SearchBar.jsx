@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
-import { FaAngleDown, FaAngleUp, FaChevronDown, FaChevronUp } from 'react-icons/fa';
-import { TbSquareRoundedChevronDownFilled, TbSquareRoundedChevronUpFilled } from 'react-icons/tb';
+import React, { useState, useEffect, useRef } from 'react';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
-const SearchBar = ({ onSearch, onNavigate, currentIndex, totalResults }) => {
+const SearchBar = ({ onSearch, onNavigate, currentIndex, totalResults, isVisible }) => {
   const [query, setQuery] = useState('');
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (isVisible && inputRef.current) {
+      inputRef.current.focus(); // Focus on input when search bar is visible
+    }
+  }, [isVisible]);
 
   const handleChange = (e) => {
     setQuery(e.target.value);
@@ -13,6 +19,7 @@ const SearchBar = ({ onSearch, onNavigate, currentIndex, totalResults }) => {
   return (
     <div className='search-bar'>
       <input
+        ref={inputRef}
         type="text"
         value={query}
         onChange={handleChange}

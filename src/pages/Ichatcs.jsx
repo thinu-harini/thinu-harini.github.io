@@ -4,6 +4,7 @@ import ProgressBar from "../components/ProgressBar";
 import { useAccessibility } from "../components/AccessibilityContext";
 import Toolbar from "../components/Toolbar";
 import useSearch from '../hooks/useSearch';
+import IchatcsCover from '../assets/projects/ichatcs.png';
 
 const Ichatcs = () => {
   const { startReadingFromElement } = useAccessibility();
@@ -54,7 +55,7 @@ const Ichatcs = () => {
         <p className="content-subheading mb-10">A Booking and Team Management Platform</p>
 
         <img
-          src='src/assets/projects/Ichatcs.png'
+          src={IchatcsCover}
           alt='project_image'
           className='w-full h-auto object-cover rounded-2xl'
         />
