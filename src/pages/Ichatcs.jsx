@@ -48,7 +48,7 @@ const Ichatcs = () => {
       />
 
       <div ref={contentRef} >
-        <div className='sm:mt-12 mt-32'>
+        <div className='sm:mt-12 mt-24'>
           <h1 className="section-heading">Ichatcs</h1>
         </div>
 

@@ -1872,6 +1872,7 @@ body {
     padding: 6px 16px;
     max-width: 90vw;
     left: 18px;
+    max-height: 60px;
   }
 
   .toolbar-hidden {
@@ -1880,6 +1881,10 @@ body {
 
   .toolbar-visible {
     transform: translateY(0);
+  }
+
+  .toolbar-search-active {
+    top: 110px;
   }
 }
 
