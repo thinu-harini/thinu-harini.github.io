@@ -11,7 +11,6 @@ const Toolbar = ({ sections, onResize, onToggleNavPane, contentRef, onSearch, on
   const [navPaneWidth, setNavPaneWidth] = useState(20);
   const [isMinimapVisible, setIsMinimapVisible] = useState(true);
   const [isToolbarVisible, setIsToolbarVisible] = useState(true);
-  const [isSearchBarActive, setIsSearchBarActive] = useState(isSearchBarVisible); // Track search bar visibility
   const lastScrollTop = useRef(0);
 
   useEffect(() => {
