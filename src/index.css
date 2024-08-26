@@ -1879,7 +1879,7 @@ body {
   }
 
   .toolbar-search-active {
-    top: 110px;
+    top: 30vh;
   }
 }
 
