@@ -1772,10 +1772,6 @@ body {
 
 /* Search Bar */
 
-.search-button:hover {
-  background-color: var(--accent-light);
-}
-
 .search-bar {
   display: flex;
   align-items: center;
@@ -1785,10 +1781,10 @@ body {
   border-radius: 200px;
   width: 300px;
   height: auto;
-  top: 160px;
   padding: 4px 16px;
   margin-right: 8px;
-  z-index: 100;
+  position: fixed;
+  top: 100px;
 }
 
 .search-bar input {
@@ -1883,9 +1879,9 @@ body {
     transform: translateY(0);
   }
 
-  .toolbar-search-active {
+  /* .toolbar-search-active {
     top: 110px;
-  }
+  } */
 }
 
 .glow-button {
@@ -1901,7 +1897,6 @@ body {
   margin-left: 10px;
   margin-right: 10px;
 }
-
 
 .glow-button .glow-icon {
   color: #51557A;
