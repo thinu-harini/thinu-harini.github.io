@@ -4,6 +4,9 @@ import { textVariant } from "../utils/motion";
 import { writings } from '../constants';
 import { SectionWrapper } from '../hoc';
 import { Footer } from '../components';
+import ProgressBar from '../components/ProgressBar';
+import { useAccessibility } from '../components/AccessibilityContext';
+import '../assets/styles/Projects.css';
 
 const WritingCard = ({
   name,
@@ -12,55 +15,97 @@ const WritingCard = ({
   tags,
   image,
 }) => {
+  const { isReadMode } = useAccessibility();
+
   return (
-    <div className='project-card md:w-[360px] w-full'>
-      <div className='relative w-full h-[230px] image-container'>
-        <img
-          src={image}
-          alt={alt}
-          className='w-full h-full object-cover rounded-2xl'
-        />
-      </div>
+    <div className={`${isReadMode ? 'read-mode' : ''}`}>
+      {isReadMode ? (
+        <div className="read-mode-content">
+          <h2>{name}</h2>
+          <img
+            src={image}
+            alt={alt}
+            className='w-full h-full object-cover rounded-2xl'
+          />
+          <p>{description}</p>
+          <div className='mt-4 gap-2'>
+            {tags.map((tag) => (
+              <p
+                key={`${name}-${tag.name}`}
+                className="mt-2"
+                style={{ color: 'var(--content)', margin: 0 }}
+              >
+                #{tag.name}
+              </p>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className='project-card readable'>
+            <div className='image-container relative w-full h-64 md:h-56'>
+              <img
+                src={image}
+                alt={alt}
+                className='w-full h-full object-cover rounded-2xl'
+              />
+            </div>
 
-      <div className='mt-5'>
-        <h2 className="content-heading">{name}</h2>
-        <p className="content-text mt-2">{description}</p>
-      </div>
+            <div className='mt-5'>
+              <h2 className="content-heading">{name}</h2>
+              <p className="content-text mt-2">{description}</p>
+            </div>
 
-      <div className='mt-4 flex flex-wrap gap-2'>
-        {tags.map((tag) => (
-          <p
-            key={`${name}-${tag.name}`}
-            className="content-text mt-2"
-            style={{ color: 'var(--content)', margin: 0 }}
-          >
-            #{tag.name}
-          </p>
-        ))}
+            <div className='mt-4 flex flex-wrap gap-2'>
+              {tags.map((tag) => (
+                <p
+                  key={`${name}-${tag.name}`}
+                  className="content-text mt-2"
+                  style={{ color: 'var(--content)', margin: 0 }}
+                >
+                  #{tag.name}
+                </p>
+              ))}
 
-      </div>
+            </div>
 
-    </div >
+          </div >
+        </>
+      )}
+    </div>
   );
 };
 
 const Writings = () => {
+  const { isReadMode } = useAccessibility();
 
   return (
     <>
-      <motion.div
-        variants={textVariant()}
-        className='sm:mt-12 mt-16'
-      >
-        <h1 className="section-heading">Writings.</h1>
-      </motion.div>
+      {isReadMode ? (
+        <div className="read-mode-content">
+          <h1>Writings.</h1>
+          {writings.map((writing, index) => (
+            <WritingCard key={`writing-${index}`} {...writing} />
+          ))}
+        </div>
+      ) : (
+        <div>
+          <ProgressBar />
+          <motion.div
+            variants={textVariant()}
+            className='sm:mt-12 mt-16'
+          >
+            <h1 className="section-heading readable">Writings.</h1>
+          </motion.div>
 
-      <div className='mt-10 flex flex-wrap gap-7'>
-        {writings.map((writing, index) => (
-          <WritingCard key={`writing-${index}`} {...writing} />
-        ))}
-      </div>
-      <Footer />
+          <div className='project-cards-container'>
+            {writings.map((writing, index) => (
+              <WritingCard key={`writing-${index}`} {...writing} />
+            ))}
+          </div>
+          <Footer />
+        </div>
+      )}
     </>
   );
 };

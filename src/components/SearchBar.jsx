@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import '../assets/styles/SearchBar.css';
 
 const SearchBar = ({ onSearch, onNavigate, currentIndex, totalResults, isVisible }) => {
   const [query, setQuery] = useState('');

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import '../assets/styles/Minimap.css';
 
 const Minimap = ({ contentRef, isVisible }) => {
   const minimapRef = useRef(null);

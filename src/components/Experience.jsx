@@ -5,16 +5,19 @@ import { SectionWrapper } from '../hoc';
 import { textVariant } from '../utils/motion';
 import { TbSquareRoundedArrowLeftFilled, TbSquareRoundedArrowRightFilled } from "react-icons/tb";
 import Footer from './Footer';
+import { useAccessibility } from './AccessibilityContext';
+import '../assets/styles/Experience.css';
 
 const Experience = () => {
   const [activeTab, setActiveTab] = useState(0);
   const sliderRef = useRef(null);
   const touchStartX = useRef(null);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const { isReadMode } = useAccessibility();
 
   useEffect(() => {
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 992);
+      setIsSmallScreen(window.innerWidth < 993);
     };
 
     window.addEventListener('resize', handleResize);
@@ -68,7 +71,7 @@ const Experience = () => {
       const cardWidth = sliderRef.current.querySelector('.experience-card').offsetWidth;
       let scrollLeft;
 
-      if (window.innerWidth < 992) {
+      if (window.innerWidth < 993) {
         scrollLeft = index * cardWidth;
       } else {
         const marginWidth = 40;
@@ -90,119 +93,148 @@ const Experience = () => {
 
   return (
     <div>
-      <motion.div variants={textVariant()}>
-        <h1 className="section-heading">Work Experience.</h1>
-      </motion.div>
+      {isReadMode ? (
+        <div className="read-mode-content">
 
-      <div className="button-text tabs mt-6 mb-6">
-        {isSmallScreen ? (
-          tabNamesForSmallScreens.map((tabName, index) => (
-            <div
-              key={index}
-              className={`tab ${activeTab === index ? 'active' : ''}`}
-              onClick={() => {
-                setActiveTab(index);
-                scrollToCard(index);
-              }}
-            >
-              {tabName}
-            </div>
-          ))
-        ) : (
-          experiences.map((experience, index) => (
-            <div
-              key={index}
-              className={`tab ${activeTab === index ? 'active' : ''}`}
-              onClick={() => {
-                setActiveTab(index);
-                scrollToCard(index);
-              }}
-            >
-              {experience.tab_name}
-            </div>
-          ))
-        )}
-      </div>
-
-      <div
-        className='experience-slider-container relative overflow-hidden'
-        ref={sliderRef}
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-      >
-        <div className='experience-slider'>
+          <h1 className="readable">Experience.</h1>
           {experiences.map((experience, index) => (
-            <motion.div
+            <div
+              className="readable"
               key={index}
-              className={`experience-card ${activeTab === index ? 'active' : ''}`}
-              onClick={() => handleCardClick(index)}
             >
-              <h2 className="content-heading">
-                {experience.title}
-              </h2>
-
-              <h3 className="content-subheading">
-                {experience.company_name}
-              </h3>
-
-              <ul className='experience_bullets'>
+              <h2>{experience.title}</h2>
+              <h3>{experience.company_name}</h3>
+              <p>{experience.date}</p>
+              <ul>
                 {experience.points.map((point, index) => (
-                  <li
-                    key={index}
-                    className="content-text mt-4"
-                  >
-                    <span className="experience_bullets-marker"></span>
-                    <div>
+                  <li key={index}>
+                    <p>
                       {point}
-                    </div>
+                    </p>
                   </li>
                 ))}
               </ul>
-
-              <p
-                className="content-text mt-4"
-                style={{ fontWeight: '500', fontStyle: 'italic' }}
-              >
-                {experience.date}
-              </p>
-            </motion.div>
+            </div>
           ))}
         </div>
-      </div>
 
-      {/* Arrow buttons */}
-      <button
-        className="arrow-icon absolute left-4"
-        style={{ top: '40%' }}
-        onClick={handlePrevCard}
-        disabled={activeTab === 0}
-        aria-label="Previous Slide"
-      >
-        <TbSquareRoundedArrowLeftFilled />
-      </button>
+      ) : (
+        <>
+          <motion.div variants={textVariant()}>
+            <h1 className="section-heading readable">Work Experience.</h1>
+          </motion.div>
 
-      <button
-        className="arrow-icon absolute right-4"
-        style={{ top: '40%' }}
-        onClick={handleNextCard}
-        disabled={activeTab === experiences.length - 1}
-        aria-label="Next Slide"
-      >
-        <TbSquareRoundedArrowRightFilled />
-      </button>
+          <div className="button-text tabs mt-6 mb-6">
+            {isSmallScreen ? (
+              tabNamesForSmallScreens.map((tabName, index) => (
+                <div
+                  key={index}
+                  className={`tab ${activeTab === index ? 'active' : ''}`}
+                  onClick={() => {
+                    setActiveTab(index);
+                    scrollToCard(index);
+                  }}
+                >
+                  {tabName}
+                </div>
+              ))
+            ) : (
+              experiences.map((experience, index) => (
+                <div
+                  key={index}
+                  className={`tab ${activeTab === index ? 'active' : ''}`}
+                  onClick={() => {
+                    setActiveTab(index);
+                    scrollToCard(index);
+                  }}
+                >
+                  {experience.tab_name}
+                </div>
+              ))
+            )}
+          </div>
 
-      {/* Carousel Indicator */}
-      <div className="carousel-indicator">
-        {experiences.map((experience, index) => (
           <div
-            key={index}
-            className={`indicator-line ${activeTab === index ? 'active' : ''}`}
-            onClick={() => handleCardClick(index)}
-          />
-        ))}
-      </div>
-      <Footer />
-    </div>
+            className='experience-slider-container relative overflow-hidden'
+            ref={sliderRef}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
+            <div className='experience-slider'>
+              {experiences.map((experience, index) => (
+                <motion.div
+                  key={index}
+                  className={`experience-card ${activeTab === index ? 'active' : ''} readable`}
+                  onClick={() => handleCardClick(index)}
+                >
+                  <h2 className="content-heading">
+                    {experience.title}
+                  </h2>
+
+                  <h3 className="content-subheading">
+                    {experience.company_name}
+                  </h3>
+
+                  <ul className='experience_bullets'>
+                    {experience.points.map((point, index) => (
+                      <li
+                        key={index}
+                        className="content-text mt-4"
+                      >
+                        <span className="experience_bullets-marker"></span>
+                        <div>
+                          {point}
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <p
+                    className="content-text mt-4"
+                    style={{ fontWeight: '500', fontStyle: 'italic' }}
+                  >
+                    {experience.date}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Arrow buttons */}
+          <button
+            className="arrow-icon absolute left-4"
+            style={{ top: '40%' }}
+            onClick={handlePrevCard}
+            disabled={activeTab === 0}
+            aria-label="Previous Slide"
+          >
+            <TbSquareRoundedArrowLeftFilled />
+          </button>
+
+          <button
+            className="arrow-icon absolute right-4"
+            style={{ top: '40%' }}
+            onClick={handleNextCard}
+            disabled={activeTab === experiences.length - 1}
+            aria-label="Next Slide"
+          >
+            <TbSquareRoundedArrowRightFilled />
+          </button>
+
+          {/* Carousel Indicator */}
+          <div className="carousel-indicator">
+            {experiences.map((experience, index) => (
+              <div
+                key={index}
+                className={`indicator-line ${activeTab === index ? 'active' : ''}`}
+                onClick={() => handleCardClick(index)}
+              />
+            ))}
+          </div>
+          <Footer />
+        </>
+      )}
+    </div >
   );
 };
 

@@ -1,0 +1,62 @@
+.day-bg {
+  /* background: linear-gradient(to bottom, #ffde96, #fda4d3, #a890ff, #819fff, #819fff, #819fff, #819fff); */
+  background: linear-gradient(to bottom, #ffffff, #819fff, #819fff);
+  overflow: hidden;
+  transition: background-color 500ms ease-in-out;
+}
+
+.cloud {
+  /* position: absolute; */
+  top: 50%;
+  height: auto;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.cloud1 {
+  animation: moveCloud1 20s linear infinite alternate;
+  left: 0;
+  width: 600px;
+}
+
+.cloud2 {
+  animation: moveCloud2 25s linear infinite alternate;
+  right: 0;
+  width: 700px;
+}
+
+.cloud3 {
+  animation: moveCloud1 23s linear infinite alternate;
+  left: 0;
+  width: 600px;
+}
+
+.cloud4 {
+  animation: moveCloud2 28s linear infinite alternate;
+  right: 0;
+  width: 700px;
+}
+
+@keyframes moveCloud1 {
+  from {
+    transform: translateX(-30vw);
+    /* Start from the right edge of the viewport */
+  }
+
+  to {
+    transform: translateX(100vw);
+    /* Move cloud2 to the left edge of the viewport */
+  }
+}
+
+@keyframes moveCloud2 {
+  from {
+    transform: translateX(100vw);
+    /* Start from the right edge of the viewport */
+  }
+
+  to {
+    transform: translateX(-30vw);
+    /* Move cloud2 to the left edge of the viewport */
+  }
+}

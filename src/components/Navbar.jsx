@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { styles } from '../styles';
 import { navLinks, menuLinks } from '../constants';
 import SocialIcons from './SocialIcons';
+import '../assets/styles/Navbar.css';
+import { styles } from '../styles';
 
 import { HiMenu } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
@@ -68,11 +69,15 @@ const Navbar = ({ handleThemeChange, isDark }) => {
             <MusicPlayer />
 
             {/* menu button */}
-            <div className='menu-button md:hidden' onClick={toggleMenu}>
+            <div className='floating-button md:hidden'
+              onClick={toggleMenu}
+              aria-expanded={menuOpen}
+              aria-controls="nav-menu"
+            >
               {menuOpen ? (
-                <IoClose className="menu-icon" />
+                <IoClose size={28} />
               ) : (
-                <HiMenu className="menu-icon" />
+                <HiMenu size={28} />
               )}
             </div>
           </div>
@@ -95,7 +100,9 @@ const Navbar = ({ handleThemeChange, isDark }) => {
       <div
         id="nav-menu"
         ref={dropdownRef}
-        className={`menu ${menuOpen ? 'open' : ''} hero-text`}>
+        className={`menu ${menuOpen ? 'open' : ''} hero-text md:hidden`}
+        role="dialog"
+        aria-hidden={!menuOpen}>
 
         <ul className="list-none">
           {menuLinks.map((nav) => (

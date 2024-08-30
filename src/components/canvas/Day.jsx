@@ -41,6 +41,7 @@
 
 import React from 'react';
 import cloud from '/src/assets/cloud.png';
+import '../../assets/styles/Day.css';
 
 const DayCanvas = () => {
   return (

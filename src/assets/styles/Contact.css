@@ -1,0 +1,98 @@
+.contact-left-div {
+  background-color: var(--hero-background-rgba);
+  backdrop-filter: blur(10px);
+  flex: 1;
+  max-width: 60%;
+  padding: 2rem;
+  border-radius: 1rem;
+  border-width: 1px;
+  border-color: var(--card_border);
+  transition: background-color 500ms ease-in-out;
+}
+
+.contact-right-div {
+  max-width: 40%;
+  position: relative;
+}
+
+.input-field {
+  background-color: var(--field-bg);
+  padding: 1rem 1.5rem;
+  color: var(--head-text);
+  border-radius: 0.5rem;
+  border: none;
+  outline: none;
+  transition: background-color 500ms ease-in-out;
+}
+
+.input-field:focus {
+  outline: 2px solid var(--accent);
+}
+
+.input-field::placeholder {
+  color: var(--placeholder-text);
+  transition: color 500ms ease-in-out;
+}
+
+@media (min-width: 993px) {
+  .contact-left-div {
+    order: -1;
+  }
+
+  .contact-right-div {
+    order: 1;
+    max-height: 550px;
+  }
+}
+
+@media (max-width: 992px) {
+  .contact-left-div {
+    order: 1;
+    max-width: 100%;
+  }
+
+  .contact-right-div {
+    order: 2;
+    max-height: 550px;
+    max-width: 100%;
+    position: relative;
+  }
+
+  .alert {
+    order: 3;
+  }
+}
+
+.alert-link {
+  color: var(--black);
+  text-decoration: underline;
+  font-style: italic;
+  display: block;
+  /* appear on a new line */
+}
+
+.alert-link:hover {
+  color: var(--content);
+}
+
+.alert-link:active {
+  color: var(--accent);
+}
+
+.alert-button {
+  padding: 12px 24px;
+  background-color: var(--white);
+  color: var(--alert-button-text);
+  font-weight: bold;
+  border-radius: 6px;
+  box-shadow: var(--button-shadow);
+  transition: background-color 100ms ease-in-out;
+}
+
+.alert-button:hover {
+  background-color: var(--alert-button-hover);
+}
+
+.alert-button:active {
+  background-color: var(--alert-button-active);
+}

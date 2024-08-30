@@ -22,15 +22,15 @@ const MusicPlayer = () => {
 
   return (
     <button
-      className="music-button"
+      className="floating-button"
       onClick={() => setIsPlayingMusic(!isPlayingMusic)}
       aria-label={isPlayingMusic ? "Mute music" : "Play music"}
       title={isPlayingMusic ? "Mute music" : "Play music"}
     >
       {isPlayingMusic ? (
-        <MdMusicOff />
+        <MdMusicOff size={28} />
       ) : (
-        <MdMusicNote />
+        <MdMusicNote size={28} />
       )}
     </button>
   );

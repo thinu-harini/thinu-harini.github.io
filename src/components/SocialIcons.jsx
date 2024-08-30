@@ -5,14 +5,14 @@ import { IoMail } from "react-icons/io5";
 
 const SocialIcons = () => {
   return (
-    <div className="social-icons">
+    <div className="icon-button-container">
       <a
         href="https://www.linkedin.com/in/thinu-harini/"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="LinkedIn Profile"
         title="LinkedIn Profile"
-        className="social-icon"
+        className="icon-button"
       >
         <FaLinkedin />
       </a>
@@ -22,7 +22,7 @@ const SocialIcons = () => {
         rel="noopener noreferrer"
         aria-label="Dribbble Profile"
         title="Dribbble Profile"
-        className="social-icon"
+        className="icon-button"
       >
         <PiDribbbleLogoFill />
       </a>
@@ -32,7 +32,7 @@ const SocialIcons = () => {
         rel="noopener noreferrer"
         aria-label="Behance Profile"
         title="Behance Profile"
-        className="social-icon"
+         className="icon-button"
       >
         <FaBehanceSquare />
       </a> */}
@@ -42,7 +42,7 @@ const SocialIcons = () => {
         rel="noopener noreferrer"
         aria-label="Medium Profile"
         title="Medium Profile"
-        className="social-icon"
+          className="icon-button"
       >
         <FaMediumM />
       </a> */}
@@ -52,7 +52,7 @@ const SocialIcons = () => {
         rel="noopener noreferrer"
         aria-label="Email"
         title="Email"
-        className="social-icon"
+        className="icon-button"
       >
         <IoMail />
       </a>

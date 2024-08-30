@@ -5,12 +5,12 @@ import { FaSun } from "react-icons/fa6";
 const ThemeSwitcher = ({ isDark, handleThemeChange }) => {
   return (
     <button
-      className="theme-switch"
+      className="floating-button"
       onClick={handleThemeChange}
       aria-label="Toggle dark mode"
     >
-      <IoMoon className={`icon ${isDark ? 'hidden' : ''}`} />
-      <FaSun className={`icon ${isDark ? '' : 'hidden'}`} />
+      <IoMoon className={`icon ${isDark ? 'hidden' : ''}`} size={26} />
+      <FaSun className={`icon ${isDark ? '' : 'hidden'}`} size={26} />
     </button>
   );
 };

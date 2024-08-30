@@ -1,0 +1,34 @@
+.motion-container {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 993px) {
+  .motion-container {
+    flex-direction: row;
+  }
+}
+
+.left-div {
+  background-color: var(--hero-background-rgba);
+  backdrop-filter: blur(4px);
+  transition: background-color 500ms ease-in-out;
+  max-width: 65%;
+  padding: 40px 32px;
+}
+
+.right-div {
+  max-width: 35%;
+}
+
+@media (max-width: 992px) {
+  .left-div {
+    order: 1;
+    max-width: 100%;
+  }
+
+  .right-div {
+    order: -1;
+    max-width: 100%;
+  }
+}

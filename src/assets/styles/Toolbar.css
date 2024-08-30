@@ -1,0 +1,87 @@
+.toolbar {
+  background: var(--secondary);
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  padding: 12px 32px;
+  width: auto;
+  border-radius: 120px;
+  box-shadow: -2px -2px 3px rgb(125, 141, 255), 3px 3px 3px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  bottom: 18px;
+  left: 18px;
+  z-index: 100;
+  transition: transform 0.3s ease;
+  gap: 32px;
+}
+
+@media screen and (max-width: 767px) {
+  .toolbar {
+    max-width: 75vw;
+    padding: 6px 12px;
+    gap: 2px;
+  }
+}
+
+.toolbar-hidden {
+  transform: translateY(150%);
+}
+
+.toolbar-visible {
+  transform: translateY(0);
+}
+
+@media (min-width: 993px) {
+  .searchbar-close-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: none;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 4px;
+  }
+
+  .searchbar-close-button .glow-close-icon {
+    color: var(--white);
+    font-size: 30px;
+  }
+
+  .searchbar-close-button:hover .glow-close-icon {
+    color: var(--accent);
+    filter: drop-shadow(0 0 8px var(--glow-hover));
+    scale: 1.1;
+    transition: filter 0.1s ease;
+  }
+
+  .searchbar-close-button.active .glow-close-icon {
+    color: var(--accent);
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 992px) {
+  .searchbar-close-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: none;
+    border: none;
+    border-radius: 50px;
+    padding: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .searchbar-close-button .glow-close-icon {
+    color: #51557A;
+    font-size: 28px;
+  }
+
+  .searchbar-close-button.active .glow-close-icon {
+    color: var(--accent);
+  }
+}

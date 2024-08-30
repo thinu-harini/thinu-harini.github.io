@@ -7,9 +7,9 @@ import useSearch from '../hooks/useSearch';
 import GroomeCover from '../assets/projects/groome.png';
 
 const Groome = () => {
-  const { startReadingFromElement } = useAccessibility();
   const contentRef = useRef(null);
   const [contentMarginLeft, setContentMarginLeft] = useState(0);
+  const { isScreenReaderActive } = useAccessibility();
 
   // Use the custom hook
   const { searchQuery, searchResults, currentResultIndex, handleSearch, handleNavigate, highlightText, isSearchBarVisible, toggleSearchBarVisibility } = useSearch();
@@ -48,11 +48,11 @@ const Groome = () => {
       />
 
       <div ref={contentRef} >
-        <div className='sm:mt-12 mt-24'>
+        <div className='sm:mt-12 mt-24 readable'>
           <h1 className="section-heading">Groome</h1>
         </div>
 
-        <p className="content-subheading mb-6">A Booking and Team Management Platform</p>
+        <p className="content-subheading mb-6 readable">A Booking and Team Management Platform</p>
 
         <img
           src={GroomeCover}
@@ -82,7 +82,7 @@ const Groome = () => {
             </Link>
           </div> */}
 
-        <div className="xl:mt-12 lg:mt-12 md:mt-12">
+        <div className="xl:mt-12 lg:mt-12 md:mt-12 readable">
           <p className="casestudy-text">
             <span style={{ fontWeight: 'bold' }}>Roles & Responsibilities:</span> User Research, UX design, UI design
           </p>
@@ -92,14 +92,14 @@ const Groome = () => {
           </p>
         </div>
 
-        <div className="mt-10" id="project-overview" onClick={() => startReadingFromElement('project-overview')}>
+        <div className="mt-10 readable" id="project-overview">
           <h2 className="casestudy-heading">Project overview</h2>
           <p className="casestudy-text">
             {highlightText("Lorem ipsum dolor sit amet, lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")}
           </p>
         </div>
 
-        <div className="mt-10" id="problem" onClick={() => startReadingFromElement('problem')}>
+        <div className="mt-10 readable" id="problem">
           <h2 className="casestudy-heading">Exploring The Problem</h2>
           <h3 className="casestudy-subheading square-before">Project Scope</h3>
           <p className="casestudy-text">
@@ -111,7 +111,7 @@ const Groome = () => {
           </p>
         </div>
 
-        <div className="mt-10" id="design-process" onClick={() => startReadingFromElement('design-process')}>
+        <div className="mt-10 readable" id="design-process">
           <h2 className="casestudy-heading">Design Process</h2>
           <h3 className="casestudy-subheading square-before">Stakeholder Interviews</h3>
           <p className="casestudy-text">
@@ -123,7 +123,7 @@ const Groome = () => {
           </p>
         </div>
 
-        <div className="mt-10" id="design-iterations" onClick={() => startReadingFromElement('design-iterations')}>
+        <div className="mt-10 readable" id="design-iterations">
           <h3 className="casestudy-heading">Design Iterations</h3>
           <p className="casestudy-text">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -141,3 +141,4 @@ const Groome = () => {
 };
 
 export default SectionWrapper(Groome, "Groome");
+

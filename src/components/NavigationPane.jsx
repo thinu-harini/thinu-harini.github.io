@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-scroll';
 import Resizer from './Resizer';
 import { MdOutlineDragIndicator } from 'react-icons/md';
-import { IoIosArrowBack } from 'react-icons/io';
+import '../assets/styles/NavigationPane.css';
 
 const NavPane = ({ sections = [], onResize, width }) => {
   const [navWidth, setNavWidth] = useState(width || 20);

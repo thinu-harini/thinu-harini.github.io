@@ -66,18 +66,18 @@
 //           <>
 //             <button
 //               onClick={toggleNavPaneVisibility}
-//               className={`glow-button ${isNavPaneVisible ? 'active' : ''}`}
+//               className={`icon-button ${isNavPaneVisible ? 'active' : ''}`}
 //               aria-label={isNavPaneVisible ? 'Hide Navigation' : 'Show Navigation'}
 //             >
-//               <IoLayers className="glow-icon" />
+//               <IoLayers className="icon-button-icon" />
 //             </button>
 
 //             <button
 //               onClick={toggleMinimapVisibility}
-//               className={`glow-button ${isMinimapVisible ? 'active' : ''}`}
+//               className={`icon-button ${isMinimapVisible ? 'active' : ''}`}
 //               aria-label={isMinimapVisible ? 'Hide Minimap' : 'Show Minimap'}
 //             >
-//               <FaMapMarkedAlt className="glow-icon" />
+//               <FaMapMarkedAlt className="icon-button-icon" />
 //             </button>
 //           </>
 //         )}
@@ -93,15 +93,15 @@
 //         )}
 //         <button
 //           onClick={handleSearchBarToggle}
-//           className={`glow-button ${isSearchBarVisible ? 'active' : ''}`}
+//           className={`icon-button ${isSearchBarVisible ? 'active' : ''}`}
 //           aria-label={isSearchBarVisible ? 'Hide Search Bar' : 'Show Search Bar'}
 //         >
 //           {/* {isSearchBarVisible ? (
-//             <IoClose className="glow-icon" />
+//             <IoClose className="icon-button-icon" />
 //           ) : (
-//             <BiSolidSearchAlt2 className="glow-icon" />
+//             <BiSolidSearchAlt2 className="icon-button-icon" />
 //           )} */}
-//           <BiSolidSearchAlt2 className="glow-icon" />
+//           <BiSolidSearchAlt2 className="icon-button-icon" />
 //         </button>
 //       </div>
 
@@ -128,6 +128,7 @@ import SearchBar from '../components/SearchBar';
 import { IoClose, IoLayers } from 'react-icons/io5';
 import { FaMapMarkedAlt } from 'react-icons/fa';
 import { BiSolidSearchAlt2 } from 'react-icons/bi';
+import '../assets/styles/Toolbar.css';
 
 const Toolbar = ({ sections, onResize, onToggleNavPane, contentRef, onSearch, onNavigate, currentIndex, totalResults, isSearchBarVisible, toggleSearchBarVisibility }) => {
   const [isNavPaneVisible, setIsNavPaneVisible] = useState(false);
@@ -193,26 +194,26 @@ const Toolbar = ({ sections, onResize, onToggleNavPane, contentRef, onSearch, on
           <>
             <button
               onClick={toggleNavPaneVisibility}
-              className={`glow-button ${isNavPaneVisible ? 'active' : ''}`}
+              className={`icon-button ${isNavPaneVisible ? 'active' : ''}`}
               aria-label={isNavPaneVisible ? 'Hide Navigation' : 'Show Navigation'}
             >
-              <IoLayers className="glow-icon" />
+              <IoLayers />
             </button>
 
             <button
               onClick={toggleMinimapVisibility}
-              className={`glow-button ${isMinimapVisible ? 'active' : ''}`}
+              className={`icon-button ${isMinimapVisible ? 'active' : ''}`}
               aria-label={isMinimapVisible ? 'Hide Minimap' : 'Show Minimap'}
             >
-              <FaMapMarkedAlt className="glow-icon" />
+              <FaMapMarkedAlt />
             </button>
 
             <button
               onClick={handleSearchBarToggle}
-              className={`glow-button ${isSearchBarVisible ? 'active' : ''}`}
+              className={`icon-button ${isSearchBarVisible ? 'active' : ''}`}
               aria-label={isSearchBarVisible ? 'Hide Search Bar' : 'Show Search Bar'}
             >
-              <BiSolidSearchAlt2 className="glow-icon" />
+              <BiSolidSearchAlt2 />
             </button>
           </>
         )}
@@ -231,7 +232,7 @@ const Toolbar = ({ sections, onResize, onToggleNavPane, contentRef, onSearch, on
         {isSearchBarVisible && (
           <button
             onClick={handleSearchBarToggle}
-            className={`glow-close-button ${isSearchBarVisible ? 'active' : ''}`}
+            className={`searchbar-close-button ${isSearchBarVisible ? 'active' : ''}`}
             aria-label={isSearchBarVisible ? 'Hide Search Bar' : 'Show Search Bar'}
           >
             <IoClose className="glow-close-icon" />

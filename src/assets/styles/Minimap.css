@@ -1,0 +1,48 @@
+.minimap-container {
+  position: fixed;
+  top: 100px;
+  right: 12px;
+  max-height: 70vh;
+  max-width: 8vw;
+  width: 140px;
+  z-index: 10;
+  background-color: #fff;
+  box-shadow: -2px 2px 4px var(--gray-100);
+  overflow: hidden;
+}
+
+.minimap-size {
+  position: relative;
+  z-index: 5;
+  /* border: 2px solid rgb(144, 0, 0); */
+}
+
+.minimap-viewer {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  z-index: 10;
+  background-color: #414b9a49;
+  /* border: 1px solid #00023c9a; */
+}
+
+.minimap-content {
+  position: absolute;
+  padding: 60px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  transform-origin: 0 0;
+  pointer-events: none;
+  /* Prevent interaction with iframe */
+}
+
+@media (max-width: 992px) {
+  .minimap-container {
+    max-width: 15vw;
+  }
+}

@@ -1,0 +1,45 @@
+.project-cards-container {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 28px;
+}
+
+@media (min-width: 640px) {
+
+  .project-cards-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+
+  .project-cards-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.project-card {
+  background-color: var(--secondary);
+  padding: 1.25rem;
+  border-radius: 1rem;
+  border-width: 1px;
+  border-color: var(--card_border);
+  width: 100%;
+  transition: background-color 500ms ease-in-out;
+  cursor: url('src/assets/pointer.png'), pointer;
+}
+
+.big-cursor .project-card {
+  cursor: url('src/assets/big_pointer.png'), pointer;
+}
+
+@media (min-width: 993px) {
+  .project-card:hover {
+    transform: scale(1.05);
+    transform: translateY(-15px);
+    transition: transform 300ms ease-out;
+    box-shadow: 0 2px 15px var(--card-hover-shadow);
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+  }
+}

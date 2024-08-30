@@ -1,6 +1,7 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
+import React, { createContext, useState, useEffect, useRef, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import useLocalStorage from 'use-local-storage';
+import '../assets/styles/AccessibilityMenu.css';
 
 const AccessibilityContext = createContext();
 
@@ -8,17 +9,7 @@ export const AccessibilityProvider = ({ children }) => {
   const [isDyslexiaFont, setIsDyslexiaFont] = useState(false);
   const [isBigCursor, setIsBigCursor] = useState(false);
 
-  const [synth, setSynth] = useState(window.speechSynthesis);
-  const [currentUtterance, setCurrentUtterance] = useState(null);
-  const [isReading, setIsReading] = useState(false); // Track reading status
-  const [rate, setRate] = useState(1); // Default rate
-  const [highlightEnabled, setHighlightEnabled] = useState(true);
-  const [textToRead, setTextToRead] = useState('');
-  const [isPaused, setIsPaused] = useState(false);
-  const [isScreenReaderExpanded, setIsScreenReaderExpanded] = useState(false);
-  const [selectedVoice, setSelectedVoice] = useState(null);
   const [highlightLinks, setHighlightLinks] = useState(false);
-
   const [areImagesHidden, setAreImagesHidden] = useState(false);
   const [isReadingGuideEnabled, setIsReadingGuideEnabled] = useState(false);
   const [guidePosition, setGuidePosition] = useState({ top: 0, left: 0 });
@@ -28,10 +19,238 @@ export const AccessibilityProvider = ({ children }) => {
   const [contrastTheme, setContrastTheme] = useState('default');
   const [previousThemes, setPreviousThemes] = useState({ isDark: false, contrastTheme: 'default' });
   const [isReadMode, setIsReadMode] = useState(false);
+  const [currentFont, setCurrentFont] = useState('sans-serif');
+
+  const [isScreenReaderActive, setIsScreenReaderActive] = useState(false);
+  const [textElements, setTextElements] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [areHighlightsVisible, setAreHighlightsVisible] = useState(true);
+  const [isPaused, setIsPaused] = useState(false);
+  const [rate, setRate] = useState(1);
+  const [selectedVoice, setSelectedVoice] = useState(null);
+  const utteranceRef = useRef(null);
+  const timeoutRef = useRef(null);
 
   const location = useLocation();
 
   const [isDark, setIsDark] = useLocalStorage('isDark', window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+  //screen reader
+
+  // Fetch available voices
+  useEffect(() => {
+    const updateVoices = () => {
+      const voices = window.speechSynthesis.getVoices();
+      if (voices.length > 0) {
+        setSelectedVoice(voices[0]);
+      }
+    };
+
+    updateVoices();
+    window.speechSynthesis.onvoiceschanged = updateVoices;
+
+    return () => {
+      window.speechSynthesis.onvoiceschanged = null;
+    };
+  }, []);
+
+  const toggleScreenReader = () => {
+    if (isScreenReaderActive) {
+      window.speechSynthesis.cancel();
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+      textElements.forEach(el => el.classList.remove('screen-read-highlight'));
+    } else {
+      setCurrentIndex(0);
+      setTextElements(Array.from(document.querySelectorAll('.readable')));
+    }
+    setIsScreenReaderActive(prev => !prev);
+  };
+
+  const togglePauseResume = () => {
+    if (isPaused) {
+      window.speechSynthesis.resume();
+      setIsPaused(false);
+    } else {
+      window.speechSynthesis.pause();
+      setIsPaused(true);
+    }
+  };
+
+  useEffect(() => {
+    const handlePause = () => setIsPaused(true);
+    const handleResume = () => setIsPaused(false);
+
+    window.speechSynthesis.onpause = handlePause;
+    window.speechSynthesis.onresume = handleResume;
+
+    return () => {
+      window.speechSynthesis.onpause = null;
+      window.speechSynthesis.onresume = null;
+    };
+  }, []);
+
+
+  const toggleHighlightVisibility = () => {
+    setAreHighlightsVisible(prev => !prev);
+  };
+
+  const moveToNextElement = () => {
+    setCurrentIndex(prev => {
+      const newIndex = Math.min(prev + 1, textElements.length - 1);
+      if (newIndex !== prev) {
+        return newIndex;
+      }
+      return prev;
+    });
+  };
+
+  const moveToPreviousElement = () => {
+    setCurrentIndex(prev => {
+      const newIndex = Math.max(prev - 1, 0);
+      if (newIndex !== prev) {
+        return newIndex;
+      }
+      return prev;
+    });
+  };
+
+  const setSpeechRate = (newRate) => {
+    setRate(newRate);
+    if (utteranceRef.current) {
+      utteranceRef.current.rate = newRate;
+    }
+  };
+
+  const setVoice = (voice) => {
+    setSelectedVoice(voice);
+    if (utteranceRef.current) {
+      utteranceRef.current.voice = voice;
+    }
+  };
+
+  const speakText = (index) => {
+    if (index >= textElements.length) {
+      // Speak the "screen reader ended" announcement after finishing reading all elements
+      const endUtterance = new SpeechSynthesisUtterance("Screen reader ended.");
+      endUtterance.rate = rate;
+      if (selectedVoice) {
+        endUtterance.voice = selectedVoice;
+      }
+      endUtterance.onend = () => {
+        // Reset screen reader state after announcement
+        setIsScreenReaderActive(false);
+      };
+      window.speechSynthesis.speak(endUtterance);
+      return;
+    }
+
+    // Announce when the screen reader starts
+    if (index === 0) {
+      const startUtterance = new SpeechSynthesisUtterance("Screen reader started.");
+      startUtterance.rate = rate;
+      if (selectedVoice) {
+        startUtterance.voice = selectedVoice;
+      }
+      window.speechSynthesis.speak(startUtterance);
+    }
+
+    const textToRead = textElements[index].innerText;
+    const utterance = new SpeechSynthesisUtterance(textToRead);
+    utterance.rate = rate;
+    if (selectedVoice) {
+      utterance.voice = selectedVoice;
+    }
+    utteranceRef.current = utterance;
+
+    utterance.onstart = () => {
+      textElements.forEach((el, i) => {
+        if (i === index) {
+          if (areHighlightsVisible) {
+            el.classList.add('screen-read-highlight');
+          } else {
+            el.classList.remove('screen-read-highlight');
+          }
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          el.classList.remove('screen-read-highlight');
+        }
+      });
+    };
+
+    utterance.onend = () => {
+      if (textElements[index]) {
+        textElements[index].classList.remove('screen-read-highlight');
+      }
+
+      if (isScreenReaderActive && currentIndex < textElements.length - 1) {
+        timeoutRef.current = setTimeout(() => moveToNextElement(), 300);
+      } else {
+        // Ensure the "screen reader ended" announcement is added to the queue
+        const endUtterance = new SpeechSynthesisUtterance("Screen reader ended.");
+        endUtterance.rate = rate;
+        if (selectedVoice) {
+          endUtterance.voice = selectedVoice;
+        }
+        endUtterance.onend = () => {
+          // Reset screen reader state after announcement
+          setIsScreenReaderActive(false);
+        };
+        window.speechSynthesis.speak(endUtterance);
+      }
+    };
+
+    // Resume speech if it was paused
+    if (isPaused) {
+      window.speechSynthesis.resume();
+      setIsPaused(false);
+    }
+
+    window.speechSynthesis.speak(utterance);
+  };
+
+  useEffect(() => {
+    if (isScreenReaderActive) {
+      speakText(currentIndex);
+    } else {
+      window.speechSynthesis.cancel();
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+      textElements.forEach(el => el.classList.remove('screen-read-highlight'));
+    }
+
+    return () => {
+      window.speechSynthesis.cancel();
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+      if (utteranceRef.current) {
+        utteranceRef.current.onend = null;
+        utteranceRef.current.onstart = null;
+      }
+      textElements.forEach(el => el.classList.remove('screen-read-highlight'));
+    };
+  }, [isScreenReaderActive, currentIndex, rate, selectedVoice]);
+
+  useEffect(() => {
+    if (textElements[currentIndex]) {
+      textElements[currentIndex].classList.toggle('screen-read-highlight', areHighlightsVisible);
+    }
+  }, [areHighlightsVisible, textElements, currentIndex]);
+
+  // Stop screen reader on route change
+  useEffect(() => {
+    if (isScreenReaderActive) {
+      window.speechSynthesis.cancel();
+      setIsScreenReaderActive(false);
+      textElements.forEach(el => el.classList.remove('screen-read-highlight'));
+    }
+  }, [location]);
 
   const toggleDyslexiaFont = () => {
     setIsDyslexiaFont(prev => !prev);
@@ -40,163 +259,6 @@ export const AccessibilityProvider = ({ children }) => {
   const toggleBigCursor = () => {
     setIsBigCursor(prev => !prev);
   };
-
-
-  // Screen Reader
-
-  // Helper function to get text excluding specific elements
-  const getFilteredText = () => {
-    const bodyText = document.body.innerText;
-    const excludedElements = ['navbar', 'footer', 'nav-menu', 'accessibility-menu'];
-
-    let filteredText = bodyText;
-
-    excludedElements.forEach(id => {
-      const element = document.getElementById(id);
-      if (element) {
-        const elementText = element.innerText;
-        filteredText = filteredText.replace(elementText, '');
-      }
-    });
-
-    return filteredText;
-  };
-
-  const announceMessage = (message) => {
-    if (synth) {
-      const announcement = new SpeechSynthesisUtterance(message);
-      announcement.rate = rate; // Use the current rate
-      announcement.voice = selectedVoice;
-      synth.speak(announcement);
-    }
-  };
-
-  const startReading = (text, rateOverride = 1) => {
-    if (synth) {
-      if (!isReading) {
-        announceMessage('Screen Reader Enabled. You can click on the area you want to be read');
-      }
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.rate = rateOverride;
-      utterance.voice = selectedVoice;
-      utterance.onend = () => setIsReading(false);
-      synth.speak(utterance);
-      setCurrentUtterance(utterance);
-      setTextToRead(text);
-      setIsReading(true);
-      setIsPaused(false);
-    }
-  };
-
-  const stopReading = () => {
-    if (synth) {
-      synth.cancel();
-      setCurrentUtterance(null);
-      setIsReading(false);
-      setIsPaused(false);
-      clearHighlight();
-    }
-  };
-
-  const togglePauseResume = () => {
-    if (isReading) {
-      if (isPaused) {
-        synth.resume();
-        setIsPaused(false);
-      } else {
-        synth.pause();
-        setIsPaused(true);
-      }
-    }
-  };
-
-  const adjustRate = (newRate) => {
-    setRate(newRate);
-    if (synth.speaking) {
-      synth.cancel();
-      const text = getFilteredText();
-      announceMessage('Playback rate adjusted.');
-      startReading(text, newRate); // Directly restart reading
-    } else {
-      announceMessage('Playback rate adjusted.');
-    }
-  };
-
-  const startReadingFromElement = (elementId) => {
-    if (!isReading) {
-      return;
-    }
-    clearHighlight(); // Clear previous highlights
-    highlightElement(elementId); // Highlight the new element
-    if (synth) {
-      const element = document.getElementById(elementId);
-      if (element) {
-        const text = element.innerText;
-        if (currentUtterance) synth.cancel(); // Stop any ongoing speech
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.rate = rate;
-        synth.speak(utterance);
-        setCurrentUtterance(utterance);
-        setIsReading(true);
-      }
-    }
-  };
-
-  // highlight option
-  const highlightElement = (elementId) => {
-    if (highlightEnabled) {
-      const element = document.getElementById(elementId);
-      if (element) {
-        element.classList.add('highlight');
-      }
-    }
-  };
-
-  const clearHighlight = () => {
-    const highlightedElements = document.querySelectorAll('.highlight');
-    highlightedElements.forEach(el => el.classList.remove('highlight'));
-  };
-
-  const getVoices = () => {
-    return synth.getVoices();
-  };
-
-  const setVoice = (voice) => {
-    if (voice && synth) {
-      if (currentUtterance) {
-        synth.cancel(); // Cancel current speech
-      }
-      const utterance = new SpeechSynthesisUtterance(textToRead); // Use the current text
-      utterance.voice = voice;
-      utterance.rate = rate; // Apply the current rate
-      utterance.onend = () => setIsReading(false);
-      synth.speak(utterance);
-      setCurrentUtterance(utterance);
-    }
-  };
-
-  //Toggle reading
-  const toggleReading = () => {
-    if (isReading) {
-      stopReading(); // Stop reading
-    } else {
-      startReading(getFilteredText()); // Start reading
-    }
-  };
-
-  // Toggle Highlight
-  const toggleHighlight = () => {
-    setHighlightEnabled(prev => !prev);
-    if (!highlightEnabled) {
-      clearHighlight(); // Ensure highlight is cleared if turning off
-    }
-  };
-
-  // Cleanup on component unmount or when navigating away
-  useEffect(() => {
-    stopReading();
-    setIsScreenReaderExpanded(false);
-  }, [location]);
 
   //Dyslexia friendly
   useEffect(() => {
@@ -307,8 +369,6 @@ export const AccessibilityProvider = ({ children }) => {
     resetContrastTheme();
   };
 
-
-
   // Hide images
 
   useEffect(() => {
@@ -341,29 +401,63 @@ export const AccessibilityProvider = ({ children }) => {
 
   //Read Mode
 
+  // useEffect(() => {
+  //   console.log('Read mode changed:', isReadMode);
+  //   console.log('Current themes:', { isDark, contrastTheme });
+  //   console.log('Previous themes:', previousThemes);
+  //   if (isReadMode) {
+  //     // Save the current themes and dark mode state
+  //     setPreviousThemes({
+  //       isDark,
+  //       contrastTheme,
+  //     });
+
+  //     // Remove all current themes and dark mode
+  //     document.body.classList.remove('dark', 'light-theme', 'sepia-theme', 'contrast-theme');
+  //     setIsDark(false); // Disable dark mode
+  //     setContrastTheme('default'); // Reset contrast theme
+
+  //     // Apply read mode specific themes
+  //     document.body.classList.add('read-mode', 'dark-theme'); // Apply read mode theme
+  //   } else {
+  //     // Remove read mode specific themes
+  //     document.body.classList.remove('read-mode', 'dark-theme', 'light-theme', 'sepia-theme', 'contrast-theme');
+
+  //     // Restore previous themes and dark mode state
+  //     if (previousThemes.isDark) {
+  //       document.body.classList.add('dark');
+  //       setIsDark(true);
+  //     }
+  //     if (previousThemes.contrastTheme && previousThemes.contrastTheme !== 'default') {
+  //       document.body.classList.add(previousThemes.contrastTheme);
+  //       setContrastTheme(previousThemes.contrastTheme);
+  //     } else {
+  //       setContrastTheme('default'); // Reset to default if not set
+  //     }
+  //   }
+  // }, [isReadMode]);
+
   useEffect(() => {
     console.log('Read mode changed:', isReadMode);
     console.log('Current themes:', { isDark, contrastTheme });
     console.log('Previous themes:', previousThemes);
+
     if (isReadMode) {
-      // Save the current themes and dark mode state
-      setPreviousThemes({
-        isDark,
-        contrastTheme,
-      });
+      setPreviousThemes({ isDark, contrastTheme });
 
-      // Remove all current themes and dark mode
       document.body.classList.remove('dark', 'light-theme', 'sepia-theme', 'contrast-theme');
-      setIsDark(false); // Disable dark mode
-      setContrastTheme('default'); // Reset contrast theme
+      setIsDark(false);
+      setContrastTheme('default');
 
-      // Apply read mode specific themes
-      document.body.classList.add('read-mode', 'dark-theme'); // Apply read mode theme
+      document.body.classList.add('read-mode', 'dark-theme');
+      if (isDyslexiaFont) {
+        document.body.classList.add('dyslexia-font');
+      } else {
+        document.body.classList.remove('dyslexia-font');
+      }
     } else {
-      // Remove read mode specific themes
-      document.body.classList.remove('read-mode', 'dark-theme', 'light-theme', 'sepia-theme', 'contrast-theme');
+      document.body.classList.remove('read-mode', 'dark-theme', 'light-theme', 'sepia-theme', 'contrast-theme', 'dyslexia-font');
 
-      // Restore previous themes and dark mode state
       if (previousThemes.isDark) {
         document.body.classList.add('dark');
         setIsDark(true);
@@ -372,31 +466,41 @@ export const AccessibilityProvider = ({ children }) => {
         document.body.classList.add(previousThemes.contrastTheme);
         setContrastTheme(previousThemes.contrastTheme);
       } else {
-        setContrastTheme('default'); // Reset to default if not set
+        setContrastTheme('default');
       }
     }
-  }, [isReadMode]);
+
+    document.body.classList.add(currentFont);
+  }, [isReadMode, currentFont, isDyslexiaFont]);
+
+  const changeFont = (font) => {
+    setCurrentFont(font);
+    document.body.classList.remove('sans-serif', 'serif', 'monospace');
+    document.body.classList.add(font);
+  };
 
   const toggleReadMode = () => setIsReadMode(prev => !prev);
 
   return (
     <AccessibilityContext.Provider value={{
+      isScreenReaderActive,
+      toggleScreenReader,
+      moveToNextElement,
+      moveToPreviousElement,
+      toggleHighlightVisibility,
+      areHighlightsVisible,
+      togglePauseResume,
+      isPaused,
+      setSpeechRate,
+      rate,
+      setVoice,
+      selectedVoice,
+      voices: window.speechSynthesis.getVoices(),
+
       isDyslexiaFont,
       toggleDyslexiaFont,
       isBigCursor,
       toggleBigCursor,
-      isReading,
-      toggleReading,
-      isPaused,
-      togglePauseResume,
-      rate,
-      adjustRate,
-      startReadingFromElement,
-      toggleHighlight,
-      highlightEnabled,
-      setVoice,
-      getVoices,
-      setIsScreenReaderExpanded,
       highlightLinks,
       toggleHighlightLinks,
       isDark,
@@ -418,6 +522,8 @@ export const AccessibilityProvider = ({ children }) => {
       updateMaskDimensions,
       isReadMode,
       toggleReadMode,
+      currentFont,
+      changeFont,
     }}>
       {children}
     </AccessibilityContext.Provider>
@@ -425,3 +531,7 @@ export const AccessibilityProvider = ({ children }) => {
 };
 
 export const useAccessibility = () => useContext(AccessibilityContext);
+
+
+
+

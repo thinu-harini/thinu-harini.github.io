@@ -10,6 +10,7 @@ import { Canvas } from '@react-three/fiber';
 import CanvasLoader from "../components/CanvasLoader.jsx";
 import ContactGirlModel from "../models/ContactGirl.jsx";
 import { textVariant } from "../utils/motion.js";
+import '../assets/styles/Contact.css';
 
 const Contact = () => {
 
