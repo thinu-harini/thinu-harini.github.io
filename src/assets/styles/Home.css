@@ -65,9 +65,10 @@
 @media (max-width: 992px) {
   .button-container {
     position: absolute;
-    bottom: 50px;
-    left: 50%;
-    transform: translate(-50%, 50%);
+    left: 18px;
+    bottom: 18px;
+    /* left: 50%; */
+    /* transform: translate(-50%, 50%); */
     z-index: 4;
   }
 }

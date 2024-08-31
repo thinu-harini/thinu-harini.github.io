@@ -2,23 +2,31 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--secondary-dark);
+  background-color: var(--primary);
+  box-shadow: -2px -2px 3px rgb(125, 141, 255), 3px 3px 3px rgba(0, 0, 0, 0.2);
   color: var(--head-text);
-  border-radius: 200px;
-  width: 300px;
+  border-radius: 8px;
+  width: 500px;
   height: auto;
-  padding: 4px 16px;
-  margin-right: 8px;
-  z-index: 1;
+  padding: 4px;
+  z-index: 100;
+  gap: 4px;
+  padding: 10px 12px;
+  position: fixed;
+  bottom: 18px;
+  transform: translate(-50%, 0);
+  left: 50%;
 }
 
 .search-bar input {
-  background-color: transparent;
+  background-color: var(--secondary);
   border: none;
+  border-radius: 8px;
+  padding: 14px;
   color: var(--head-text);
   font-size: 16px;
   outline: none;
-  width: 70%;
+  width: 60%;
   font-weight: 500;
 }
 
@@ -26,6 +34,8 @@
   font-size: 16px;
   color: var(--accent-dark);
   font-weight: 500;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .search-controls {
@@ -39,7 +49,7 @@
   outline: none;
   display: flex;
   align-items: center;
-  border-radius: 100px;
+  border-radius: 8px;
   color: var(--head-text);
   background-color: none;
   cursor: url('src/assets/cursor.png'), auto;
@@ -61,4 +71,39 @@
 
 .search-bar button:disabled {
   color: #9ca3af;
+}
+
+
+@media (max-width: 992px) {
+  .search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--secondary);
+    box-shadow: -2px -2px 3px rgb(17, 18, 27), 3px 3px 3px rgba(0, 0, 0, 0.2);
+    color: var(--head-text);
+    border-radius: 8px;
+    width: 300px;
+    height: 60px;
+    padding: 4px;
+    z-index: 100;
+    gap: 4px;
+    padding: 10px 12px;
+    position: fixed;
+    top: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .search-bar input {
+    background-color: var(--secondary-dark);
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    color: var(--head-text);
+    font-size: 16px;
+    outline: none;
+    width: 60%;
+    font-weight: 500;
+  }
 }

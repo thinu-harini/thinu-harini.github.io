@@ -123,6 +123,7 @@ import { Footer } from '../components';
 import ProgressBar from '../components/ProgressBar';
 import { useAccessibility } from '../components/AccessibilityContext';
 import '../assets/styles/Projects.css';
+import ScrollButton from '../components/ScrollButton';
 
 const ProjectCard = ({
   name,
@@ -136,7 +137,7 @@ const ProjectCard = ({
   const { isReadMode } = useAccessibility(); // Access read mode state
 
   return (
-    <div className={`${isReadMode ? 'read-mode' : ''}`}>
+    <div className={`project-card ${isReadMode ? 'read-mode' : ''}`}>
       {
         isReadMode ? (
           <div className="read-mode-content" >
@@ -144,10 +145,10 @@ const ProjectCard = ({
             <img
               src={image}
               alt={alt}
-              className='w-full h-full object-cover rounded-2xl'
+              className='w-full h-full object-cover rounded-2xl mt-4 mb-4'
             />
             <p>{description}</p>
-            <div className='mt-4 gap-2'>
+            <div className='mt-2 gap-2'>
               {tags.map((tag) => (
                 <p
                   key={`${name}-${tag.name}`}
@@ -162,7 +163,7 @@ const ProjectCard = ({
           </div >
         ) : (
           <>
-            <div className='project-card readable'>
+            <div className='readable'>
               <div className='image-container relative w-full h-64 md:h-56'>
                 <img
                   src={image}
@@ -189,13 +190,13 @@ const ProjectCard = ({
 
               </div>
 
-              <div className='flex gap-1 mt-2 justify-end'>
+              <div className='flex md:gap-1 gap-2 justify-end'>
 
                 {/* conditionally render links */}
                 {case_study_link && (
                   <Link
                     to={case_study_link}
-                    className='icon-button'
+                    className='icon-button icon-button-padding'
                     aria-label='View case study'
                     title='Case Study'
                   >
@@ -206,7 +207,7 @@ const ProjectCard = ({
                 {dribbble_link && (
                   <Link
                     to={dribbble_link}
-                    className='icon-button'
+                    className='icon-button icon-button-padding'
                     aria-label='View prototype'
                     title='Dribbble shots'
                   >
@@ -241,6 +242,7 @@ const Projects = () => {
         </div>
       ) : (
         <div>
+          <ScrollButton />
           <ProgressBar />
           <div>
             <motion.div
@@ -264,3 +266,4 @@ const Projects = () => {
 };
 
 export default SectionWrapper(Projects, "projects")
+

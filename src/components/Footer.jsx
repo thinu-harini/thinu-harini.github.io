@@ -16,7 +16,7 @@ const Footer = () => {
   return (
     <div id="footer" className="footer">
 
-      <div className='scroll-up-button relative bottom-6 flex justify-center items-center py-6' style={{ left: '50%', transform: 'translateX(-50%)', cursor: 'pointer' }}>
+      {/* <div className='scroll-up-button relative bottom-6 flex justify-center items-center py-6' style={{ left: '50%', transform: 'translateX(-50%)', cursor: 'pointer' }}>
         <motion.div
           animate={{
             y: [0, 24, 0]
@@ -31,7 +31,7 @@ const Footer = () => {
         >
           <FaAnglesUp size={32} />
         </motion.div>
-      </div>
+      </div> */}
 
       <div className="flex flex-col items-center md:items-center">
         <Link to="/contact" className="button-text button" >

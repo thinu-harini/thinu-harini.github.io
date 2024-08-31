@@ -1,166 +1,40 @@
-// import React, { useEffect, useRef, useState } from 'react';
-// import Minimap from "../components/Minimap";
-// import NavPane from "../components/NavigationPane";
-// import SearchBar from '../components/SearchBar';
-// import { IoClose, IoLayers } from 'react-icons/io5';
-// import { FaMapMarkedAlt, FaTimes } from 'react-icons/fa';
-// import { BiSolidSearchAlt2 } from 'react-icons/bi';
-
-// const Toolbar = ({ sections, onResize, onToggleNavPane, contentRef, onSearch, onNavigate, currentIndex, totalResults, isSearchBarVisible, toggleSearchBarVisibility }) => {
-//   const [isNavPaneVisible, setIsNavPaneVisible] = useState(false);
-//   const [navPaneWidth, setNavPaneWidth] = useState(20);
-//   const [isMinimapVisible, setIsMinimapVisible] = useState(true);
-//   const [isToolbarVisible, setIsToolbarVisible] = useState(true);
-//   const lastScrollTop = useRef(0);
-
-//   useEffect(() => {
-//     const handleScroll = () => {
-//       const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-//       if (isSearchBarVisible) {
-//         // If search bar is visible, don't hide the toolbar
-//         setIsToolbarVisible(true);
-//       } else {
-//         if (currentScrollTop > lastScrollTop.current) {
-//           // Scrolling down
-//           setIsToolbarVisible(false);
-//         } else {
-//           // Scrolling up
-//           setIsToolbarVisible(true);
-//         }
-//       }
-
-//       lastScrollTop.current = currentScrollTop <= 0 ? 0 : currentScrollTop; // For Mobile or negative scrolling
-//     };
-
-//     window.addEventListener('scroll', handleScroll);
-
-//     return () => window.removeEventListener('scroll', handleScroll);
-//   }, [isSearchBarVisible]); // Depend on isSearchBarVisible to update on change
-
-//   const toggleNavPaneVisibility = () => {
-//     setIsNavPaneVisible(prev => {
-//       const newVisibility = !prev;
-//       onToggleNavPane(newVisibility ? navPaneWidth : 0);
-//       return newVisibility;
-//     });
-//   };
-
-//   const handleResize = (width) => {
-//     setNavPaneWidth(width);
-//     onResize(width);
-//   };
-
-//   const toggleMinimapVisibility = () => {
-//     setIsMinimapVisible(prev => !prev);
-//   };
-
-//   const handleSearchBarToggle = () => {
-//     toggleSearchBarVisibility();
-//   };
-
-//   return (
-//     <div>
-//       <div className={`toolbar ${isToolbarVisible ? 'toolbar-visible' : 'toolbar-hidden'}`}>
-//         {!isSearchBarVisible && (
-//           <>
-//             <button
-//               onClick={toggleNavPaneVisibility}
-//               className={`icon-button ${isNavPaneVisible ? 'active' : ''}`}
-//               aria-label={isNavPaneVisible ? 'Hide Navigation' : 'Show Navigation'}
-//             >
-//               <IoLayers className="icon-button-icon" />
-//             </button>
-
-//             <button
-//               onClick={toggleMinimapVisibility}
-//               className={`icon-button ${isMinimapVisible ? 'active' : ''}`}
-//               aria-label={isMinimapVisible ? 'Hide Minimap' : 'Show Minimap'}
-//             >
-//               <FaMapMarkedAlt className="icon-button-icon" />
-//             </button>
-//           </>
-//         )}
-
-//         {isSearchBarVisible && (
-//           <SearchBar
-//             onSearch={onSearch}
-//             onNavigate={onNavigate}
-//             currentIndex={currentIndex}
-//             totalResults={totalResults}
-//             isVisible={isSearchBarVisible} // Pass visibility state to SearchBar
-//           />
-//         )}
-//         <button
-//           onClick={handleSearchBarToggle}
-//           className={`icon-button ${isSearchBarVisible ? 'active' : ''}`}
-//           aria-label={isSearchBarVisible ? 'Hide Search Bar' : 'Show Search Bar'}
-//         >
-//           {/* {isSearchBarVisible ? (
-//             <IoClose className="icon-button-icon" />
-//           ) : (
-//             <BiSolidSearchAlt2 className="icon-button-icon" />
-//           )} */}
-//           <BiSolidSearchAlt2 className="icon-button-icon" />
-//         </button>
-//       </div>
-
-//       {isNavPaneVisible && (
-//         <NavPane sections={sections} onResize={handleResize} width={navPaneWidth} />
-//       )}
-
-//       {isMinimapVisible && (
-//         <Minimap
-//           contentRef={contentRef}
-//           isVisible={isMinimapVisible}
-//           onToggle={toggleMinimapVisibility}
-//         />
-//       )}
-//     </div>
-//   );
-// };
-
-// export default Toolbar;
 import React, { useEffect, useRef, useState } from 'react';
 import Minimap from "../components/Minimap";
 import NavPane from "../components/NavigationPane";
 import SearchBar from '../components/SearchBar';
-import { IoClose, IoLayers } from 'react-icons/io5';
-import { FaMapMarkedAlt } from 'react-icons/fa';
+import ProgressBar from './ProgressBar';
+import { IoLayers } from 'react-icons/io5';
+import { FaGlasses, FaMapMarkedAlt } from 'react-icons/fa';
 import { BiSolidSearchAlt2 } from 'react-icons/bi';
+import { GiLifeBar } from 'react-icons/gi';
 import '../assets/styles/Toolbar.css';
 
-const Toolbar = ({ sections, onResize, onToggleNavPane, contentRef, onSearch, onNavigate, currentIndex, totalResults, isSearchBarVisible, toggleSearchBarVisibility }) => {
+const Toolbar = ({ sections, onResize, onToggleNavPane, contentRef, onSearch, onNavigate, currentIndex, totalResults }) => {
+  const [isToolbarVisible, setIsToolbarVisible] = useState(false);
   const [isNavPaneVisible, setIsNavPaneVisible] = useState(false);
   const [navPaneWidth, setNavPaneWidth] = useState(20);
-  const [isMinimapVisible, setIsMinimapVisible] = useState(true);
-  const [isToolbarVisible, setIsToolbarVisible] = useState(true);
-  const lastScrollTop = useRef(0);
+  const [isMinimapVisible, setIsMinimapVisible] = useState(false);
+  const [isSearchBarVisible, setIsSearchBarVisible] = useState(false);
+  const [isProgressBarVisible, setIsProgressBarVisible] = useState(true);
 
+  const toolbarRef = useRef(null);
+  const toolbarButtonRef = useRef(null);
+
+  // Handle clicks outside the toolbar
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-      if (isSearchBarVisible) {
-        // If search bar is visible, don't hide the toolbar
-        setIsToolbarVisible(true);
-      } else {
-        if (currentScrollTop > lastScrollTop.current) {
-          // Scrolling down
-          setIsToolbarVisible(false);
-        } else {
-          // Scrolling up
-          setIsToolbarVisible(true);
-        }
+    function handleClickOutside(event) {
+      if (toolbarRef.current && !toolbarRef.current.contains(event.target) && !toolbarButtonRef.current.contains(event.target)) {
+        setIsToolbarVisible(false);
       }
+    }
 
-      lastScrollTop.current = currentScrollTop <= 0 ? 0 : currentScrollTop; // For Mobile or negative scrolling
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isSearchBarVisible]);
+    if (isToolbarVisible) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }
+  }, [isToolbarVisible]);
 
   const toggleNavPaneVisibility = () => {
     setIsNavPaneVisible(prev => {
@@ -179,67 +53,72 @@ const Toolbar = ({ sections, onResize, onToggleNavPane, contentRef, onSearch, on
     setIsMinimapVisible(prev => !prev);
   };
 
-  const handleSearchBarToggle = () => {
-    toggleSearchBarVisibility();
+  const toggleSearchBarVisibility = () => {
+    setIsSearchBarVisible(prev => !prev);
   };
 
   const handleSearchBarClose = () => {
-    toggleSearchBarVisibility();
+    setIsSearchBarVisible(false);
+  };
+
+  const toggleProgressBarVisibility = () => {
+    setIsProgressBarVisible(prev => !prev);
+  };
+
+  const toggleToolbarVisibility = () => {
+    setIsToolbarVisible(prev => !prev);
   };
 
   return (
     <div>
-      <div className={`toolbar ${isToolbarVisible ? 'toolbar-visible' : 'toolbar-hidden'}`}>
-        {!isSearchBarVisible && (
-          <>
-            <button
-              onClick={toggleNavPaneVisibility}
-              className={`icon-button ${isNavPaneVisible ? 'active' : ''}`}
-              aria-label={isNavPaneVisible ? 'Hide Navigation' : 'Show Navigation'}
-            >
-              <IoLayers />
-            </button>
+      <button
+        ref={toolbarButtonRef}
+        onClick={toggleToolbarVisibility}
+        className="toolbar-button"
+        aria-label={isToolbarVisible ? 'Hide Toolbar' : 'Show Toolbar'}
+      >
+        <FaGlasses />
+      </button>
 
-            <button
-              onClick={toggleMinimapVisibility}
-              className={`icon-button ${isMinimapVisible ? 'active' : ''}`}
-              aria-label={isMinimapVisible ? 'Hide Minimap' : 'Show Minimap'}
-            >
-              <FaMapMarkedAlt />
-            </button>
-
-            <button
-              onClick={handleSearchBarToggle}
-              className={`icon-button ${isSearchBarVisible ? 'active' : ''}`}
-              aria-label={isSearchBarVisible ? 'Hide Search Bar' : 'Show Search Bar'}
-            >
-              <BiSolidSearchAlt2 />
-            </button>
-          </>
-        )}
-
-        {isSearchBarVisible && (
-          <SearchBar
-            onSearch={onSearch}
-            onNavigate={onNavigate}
-            currentIndex={currentIndex}
-            totalResults={totalResults}
-            isVisible={isSearchBarVisible}
-            onClose={handleSearchBarClose} // Pass the close handler
-          />
-        )}
-
-        {isSearchBarVisible && (
+      {isToolbarVisible && (
+        <div ref={toolbarRef} className="toolbar">
           <button
-            onClick={handleSearchBarToggle}
-            className={`searchbar-close-button ${isSearchBarVisible ? 'active' : ''}`}
+            onClick={toggleNavPaneVisibility}
+            className={`toolbar-option ${isNavPaneVisible ? 'active' : ''}`}
+            aria-label={isNavPaneVisible ? 'Hide Navigation' : 'Show Navigation'}
+          >
+            <IoLayers />
+            <div className="button-text ml-2">Navigation Pane</div>
+          </button>
+
+          <button
+            onClick={toggleMinimapVisibility}
+            className={`toolbar-option ${isMinimapVisible ? 'active' : ''}`}
+            aria-label={isMinimapVisible ? 'Hide Minimap' : 'Show Minimap'}
+          >
+            <FaMapMarkedAlt />
+            <div className="button-text ml-2">Minimap</div>
+          </button>
+
+          <button
+            onClick={toggleSearchBarVisibility}
+            className={`toolbar-option ${isSearchBarVisible ? 'active' : ''}`}
             aria-label={isSearchBarVisible ? 'Hide Search Bar' : 'Show Search Bar'}
           >
-            <IoClose className="glow-close-icon" />
+            <BiSolidSearchAlt2 />
+            <div className="button-text ml-2">Search Bar</div>
           </button>
-        )}
 
-      </div>
+          <button
+            onClick={toggleProgressBarVisibility}
+            className={`toolbar-option ${isProgressBarVisible ? 'active' : ''}`}
+            aria-label={isProgressBarVisible ? 'Hide Progress Bar' : 'Show Progress Bar'}
+          >
+            <GiLifeBar />
+            <div className="button-text ml-2">Progress Bar</div>
+          </button>
+        </div>
+      )}
 
       {isNavPaneVisible && (
         <NavPane sections={sections} onResize={handleResize} width={navPaneWidth} />
@@ -251,6 +130,21 @@ const Toolbar = ({ sections, onResize, onToggleNavPane, contentRef, onSearch, on
           isVisible={isMinimapVisible}
           onToggle={toggleMinimapVisibility}
         />
+      )}
+
+      {isSearchBarVisible && (
+        <SearchBar
+          onSearch={onSearch}
+          onNavigate={onNavigate}
+          currentIndex={currentIndex}
+          totalResults={totalResults}
+          isVisible={isSearchBarVisible}
+          onClose={handleSearchBarClose}
+        />
+      )}
+
+      {isProgressBarVisible && (
+        <ProgressBar />
       )}
     </div>
   );

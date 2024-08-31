@@ -16,7 +16,7 @@
 }
 
 .input-field {
-  background-color: var(--field-bg);
+  background-color: var(--input-field-bg);
   padding: 1rem 1.5rem;
   color: var(--head-text);
   border-radius: 0.5rem;

@@ -7,6 +7,7 @@ import { Footer } from '../components';
 import ProgressBar from '../components/ProgressBar';
 import { useAccessibility } from '../components/AccessibilityContext';
 import '../assets/styles/Projects.css';
+import ScrollButton from '../components/ScrollButton';
 
 const WritingCard = ({
   name,
@@ -90,6 +91,7 @@ const Writings = () => {
         </div>
       ) : (
         <div>
+          <ScrollButton />
           <ProgressBar />
           <motion.div
             variants={textVariant()}

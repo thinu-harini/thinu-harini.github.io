@@ -1,16 +1,16 @@
 import React, { useRef, useState } from "react";
 import { SectionWrapper } from "../hoc";
-import ProgressBar from "../components/ProgressBar";
 import Toolbar from "../components/Toolbar";
 import useSearch from '../hooks/useSearch';
 import IchatcsCover from '../assets/projects/ichatcs.png';
+import ScrollButton from "../components/ScrollButton";
 
 const Ichatcs = () => {
   const contentRef = useRef(null);
   const [contentMarginLeft, setContentMarginLeft] = useState(0);
 
   // Use the custom hook
-  const { searchQuery, searchResults, currentResultIndex, handleSearch, handleNavigate, highlightText, isSearchBarVisible, toggleSearchBarVisibility } = useSearch();
+  const { searchQuery, searchResults, currentResultIndex, handleSearch, handleNavigate, highlightText } = useSearch();
 
   const sections = [
     { id: 'project-overview', title: 'Project Overview' },
@@ -31,7 +31,7 @@ const Ichatcs = () => {
     <div
       style={{ marginLeft: `${contentMarginLeft}vw`, transition: 'margin-left 0.3s ease' }}
     >
-      <ProgressBar />
+      <ScrollButton />
       <Toolbar
         sections={sections}
         onResize={handleResize}
@@ -41,8 +41,6 @@ const Ichatcs = () => {
         onNavigate={handleNavigate}
         currentIndex={currentResultIndex}
         totalResults={searchResults.length}
-        isSearchBarVisible={isSearchBarVisible}
-        toggleSearchBarVisibility={toggleSearchBarVisibility}
       />
 
       <div ref={contentRef} >

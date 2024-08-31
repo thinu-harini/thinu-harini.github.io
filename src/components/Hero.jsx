@@ -120,7 +120,7 @@ const Hero = () => {
             </motion.div>
 
             <motion.div
-              variants={slideIn("up", "tween", 0.8, 1)}
+              // variants={slideIn("up", "tween", 0.8, 1)}
               className={`right-div xl:flex-1 xl:h-auto md:h-[600px] h-[450px]`}
             >
               <Canvas

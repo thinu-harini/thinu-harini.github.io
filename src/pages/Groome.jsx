@@ -1,18 +1,19 @@
 import React, { useRef, useState } from "react";
 import { SectionWrapper } from "../hoc";
-import ProgressBar from "../components/ProgressBar";
 import { useAccessibility } from "../components/AccessibilityContext";
 import Toolbar from "../components/Toolbar";
 import useSearch from '../hooks/useSearch';
 import GroomeCover from '../assets/projects/groome.png';
+import ScrollButton from "../components/ScrollButton";
 
 const Groome = () => {
+
   const contentRef = useRef(null);
   const [contentMarginLeft, setContentMarginLeft] = useState(0);
   const { isScreenReaderActive } = useAccessibility();
 
   // Use the custom hook
-  const { searchQuery, searchResults, currentResultIndex, handleSearch, handleNavigate, highlightText, isSearchBarVisible, toggleSearchBarVisibility } = useSearch();
+  const { searchQuery, searchResults, currentResultIndex, handleSearch, handleNavigate, highlightText } = useSearch();
 
   const sections = [
     { id: 'project-overview', title: 'Project Overview' },
@@ -32,7 +33,7 @@ const Groome = () => {
   return (
     <div style={{ marginLeft: `${contentMarginLeft}vw`, transition: 'margin-left 0.3s ease' }}>
 
-      <ProgressBar />
+      <ScrollButton />
 
       <Toolbar
         sections={sections}
@@ -43,8 +44,6 @@ const Groome = () => {
         onNavigate={handleNavigate}
         currentIndex={currentResultIndex}
         totalResults={searchResults.length}
-        isSearchBarVisible={isSearchBarVisible}
-        toggleSearchBarVisibility={toggleSearchBarVisibility}
       />
 
       <div ref={contentRef} >
