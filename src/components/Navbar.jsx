@@ -12,9 +12,9 @@ import MusicPlayer from "./MusicPlayer.jsx";
 import ThemeSwitcher from './ThemeSwitcher.jsx';
 
 const Navbar = ({ handleThemeChange, isDark }) => {
-  const [menuOpen, setMenuOpen] = useState(false); // manages the state of the dropdown menu (open/closed)
-  const [scrolled, setScrolled] = useState(false); // determines if the page has been scrolled down
-  const dropdownRef = useRef(null); // detects outside clicks of dropdown menu
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const navMenuRef = useRef(null);
   const location = useLocation();
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
@@ -25,7 +25,7 @@ const Navbar = ({ handleThemeChange, isDark }) => {
 
     // Closes the dropdown menu if a click occurs outside of it
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      if (navMenuRef.current && !navMenuRef.current.contains(event.target)) {
         setMenuOpen(false);
       }
     };
@@ -63,7 +63,7 @@ const Navbar = ({ handleThemeChange, isDark }) => {
 
           <div className='nav-button-container'>
 
-            {/* {ThemeSwitcher and MusicPlayer */}
+            {/* buttons on navbar */}
 
             <ThemeSwitcher handleThemeChange={handleThemeChange} isDark={isDark} />
             <MusicPlayer />
@@ -99,7 +99,7 @@ const Navbar = ({ handleThemeChange, isDark }) => {
       {/* Small devices - side menu */}
       <div
         id="nav-menu"
-        ref={dropdownRef}
+        ref={navMenuRef}
         className={`menu ${menuOpen ? 'open' : ''} hero-text md:hidden`}
         role="dialog"
         aria-hidden={!menuOpen}>

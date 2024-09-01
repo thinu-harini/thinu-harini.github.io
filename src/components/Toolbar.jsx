@@ -36,6 +36,12 @@ const Toolbar = ({ sections, onResize, onToggleNavPane, contentRef, onSearch, on
     }
   }, [isToolbarVisible]);
 
+  // Close the toolbar when input is detected
+  const handleInputChange = () => {
+    setIsToolbarVisible(false);
+  };
+
+
   const toggleNavPaneVisibility = () => {
     setIsNavPaneVisible(prev => {
       const newVisibility = !prev;
@@ -55,10 +61,13 @@ const Toolbar = ({ sections, onResize, onToggleNavPane, contentRef, onSearch, on
 
   const toggleSearchBarVisibility = () => {
     setIsSearchBarVisible(prev => !prev);
+    onSearch('');
   };
 
+  // Clear search results when search bar is closed
   const handleSearchBarClose = () => {
     setIsSearchBarVisible(false);
+    onSearch('');
   };
 
   const toggleProgressBarVisibility = () => {
@@ -70,7 +79,7 @@ const Toolbar = ({ sections, onResize, onToggleNavPane, contentRef, onSearch, on
   };
 
   return (
-    <div>
+    <div className='toolbar'>
       <button
         ref={toolbarButtonRef}
         onClick={toggleToolbarVisibility}
@@ -81,14 +90,14 @@ const Toolbar = ({ sections, onResize, onToggleNavPane, contentRef, onSearch, on
       </button>
 
       {isToolbarVisible && (
-        <div ref={toolbarRef} className="toolbar">
+        <div ref={toolbarRef} className="toolbar-menu">
           <button
             onClick={toggleNavPaneVisibility}
             className={`toolbar-option ${isNavPaneVisible ? 'active' : ''}`}
             aria-label={isNavPaneVisible ? 'Hide Navigation' : 'Show Navigation'}
           >
             <IoLayers />
-            <div className="button-text ml-2">Navigation Pane</div>
+            <div className="button-text ml-2">Navigation</div>
           </button>
 
           <button
@@ -140,6 +149,7 @@ const Toolbar = ({ sections, onResize, onToggleNavPane, contentRef, onSearch, on
           totalResults={totalResults}
           isVisible={isSearchBarVisible}
           onClose={handleSearchBarClose}
+          onInput={handleInputChange}
         />
       )}
 
@@ -151,3 +161,4 @@ const Toolbar = ({ sections, onResize, onToggleNavPane, contentRef, onSearch, on
 };
 
 export default Toolbar;
+

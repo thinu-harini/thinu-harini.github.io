@@ -82,7 +82,7 @@
   --hero-background-rgba: rgba(220, 220, 255, 0.6);
   --menu-bg: rgba(229, 231, 255, 0.8);
   --menu-header-bg: var(--gray-100);
-  --input-field-bg: var(--primary-dark);
+  --input-field-bg: var(--primary);
   --card_border: transparent;
   --card-hover-shadow: var(--gray-100);
   --shadow: var(--gray-200);
@@ -134,7 +134,7 @@
   --hero-background-rgba: rgba(49, 55, 90, 0.5);
   --menu-bg: rgba(15, 19, 44, 0.6);
   --menu-header-bg: var(--gray-100);
-  --input-field-bg: var(--primary-dark);
+  --input-field-bg: var(--primary);
   --card_border: var(--accent);
   --card-hover-shadow: var(--accent-light);
   --shadow: var(--black);
@@ -966,15 +966,6 @@ body.read-mode.dyslexia-font {
   font-family: 'OpenDyslexic', sans-serif;
 }
 
-/* Default font size for read mode */
-
-body.read-mode h1 {
-  font-weight: 600;
-}
-
-body.read-mode h2 {
-  font-weight: 500;
-}
 
 /* Base text size */
 body.read-mode h1,
@@ -984,7 +975,7 @@ body.read-mode p {
   transition: font-size 0.3s ease;
 }
 
-/* Small text size */
+/* font size-14 */
 body.read-mode.font-size-14 h1 {
   font-size: 24px;
 }
@@ -1001,7 +992,7 @@ body.read-mode.font-size-14 p {
   font-size: 14px;
 }
 
-/* Medium text size (default) */
+/* font size-18 (default) */
 body.read-mode.font-size-18 h1 {
   font-size: 32px;
 }
@@ -1018,7 +1009,7 @@ body.read-mode.font-size-18 p {
   font-size: 18px;
 }
 
-/* Large text size */
+/* font size-22 */
 body.read-mode.font-size-22 h1 {
   font-size: 40px;
 }
@@ -1028,44 +1019,117 @@ body.read-mode.font-size-22 h2 {
 }
 
 body.read-mode.font-size-22 h3 {
-  font-size: 26px;
+  font-size: 24px;
 }
 
 body.read-mode.font-size-22 p {
   font-size: 22px;
 }
 
-/* Font weight classes */
-body.read-mode.font-weight-400 h1 {
+/* font size-26 */
+body.read-mode.font-size-26 h1 {
+  font-size: 48px;
+}
+
+body.read-mode.font-size-26 h2 {
+  font-size: 36px;
+}
+
+body.read-mode.font-size-26 h3 {
+  font-size: 28px;
+}
+
+body.read-mode.font-size-26 p {
+  font-size: 26px;
+}
+
+/* font size-30 */
+body.read-mode.font-size-30 h1 {
+  font-size: 56px;
+}
+
+body.read-mode.font-size-30 h2 {
+  font-size: 42px;
+}
+
+body.read-mode.font-size-30 h3 {
+  font-size: 32px;
+}
+
+body.read-mode.font-size-30 p {
+  font-size: 30px;
+}
+
+/* font size-34 */
+body.read-mode.font-size-34 h1 {
+  font-size: 64px;
+}
+
+body.read-mode.font-size-34 h2 {
+  font-size: 48px;
+}
+
+body.read-mode.font-size-34 h3 {
+  font-size: 36px;
+}
+
+body.read-mode.font-size-34 p {
+  font-size: 34px;
+}
+
+/* font size-38 */
+body.read-mode.font-size-38 h1 {
+  font-size: 72px;
+}
+
+body.read-mode.font-size-38 h2 {
+  font-size: 54px;
+}
+
+body.read-mode.font-size-38 h3 {
+  font-size: 40px;
+}
+
+body.read-mode.font-size-38 p {
+  font-size: 38px;
+}
+
+/* --Font weight classes-- */
+
+/* Default font weights in read mode */
+body.read-mode.font-weight-default h1 {
+  font-weight: 600;
+
+}
+
+body.read-mode.font-weight-default h2,
+body.read-mode.font-weight-default h3,
+body.read-mode.font-weight-default p {
   font-weight: 400;
 }
 
-body.read-mode.font-weight-400 h2 {
+/* Regular font weight */
+body.read-mode.font-weight-regular h1,
+body.read-mode.font-weight-regular h2,
+body.read-mode.font-weight-regular h3,
+body.read-mode.font-weight-regular p {
   font-weight: 400;
 }
 
-body.read-mode.font-weight-400 h3 {
-  font-weight: 400;
-}
-
-body.read-mode.font-weight-400 p {
-  font-weight: 400;
-}
-
-body.read-mode.font-weight-700 h1 {
+/* Bold font weight */
+body.read-mode.font-weight-bold h1,
+body.read-mode.font-weight-bold h2,
+body.read-mode.font-weight-bold h3,
+body.read-mode.font-weight-bold p {
   font-weight: 700;
 }
 
-body.read-mode.font-weight-700 h2 {
-  font-weight: 700;
-}
-
-body.read-mode.font-weight-700 h3 {
-  font-weight: 700;
-}
-
-body.read-mode.font-weight-700 p {
-  font-weight: 700;
+/* Bolder font weight */
+body.read-mode.font-weight-bolder h1,
+body.read-mode.font-weight-bolder h2,
+body.read-mode.font-weight-bolder h3,
+body.read-mode.font-weight-bolder p {
+  font-weight: 900;
 }
 
 /* Layout adjustment */
@@ -1102,9 +1166,10 @@ body.read-mode.text-align-justify p {
 }
 
 /* Word spacing classes */
+
+/* Default word spacing */
 body.read-mode {
   --word-spacing: 0px;
-  /* Default word spacing */
 }
 
 body.read-mode p,
@@ -1198,9 +1263,7 @@ body.read-mode.line-height-5 {
 .read-mode .navbar,
 .read-mode .footer,
 .read-mode .toolbar,
-.read-mode .navigation-pane,
-.read-mode .minimap-container,
-.read-mode .progress-bar,
+.read-mode .scroll-button-container,
 .read-mode .square-before {
   display: none !important;
 }
@@ -1260,6 +1323,7 @@ body.read-mode.line-height-5 {
   transition: none;
   box-shadow: none;
 }
+
 
 /* Read mode themes  */
 
@@ -1444,11 +1508,12 @@ body.read-mode.line-height-5 {
   --accent: #fff200;
   --primary: #000000;
   --secondary: #1C1B22;
-  --secondary-dark: #454228;
+  --secondary-dark: #606060;
   --tertiary: #9891ff;
 
-  --white: #ffffff;
 
+  --white: #ffffff;
+  --primary-dark: #0f0f0f;
   --logo-text: var(--primary);
   --logo-text-stroke: var(--primary);
   --logo-bg: var(--primary);
@@ -1887,4 +1952,53 @@ body.read-mode.line-height-5 {
       -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.5),
       -2.6em 0em 0 0em rgba(255, 255, 255, 0.7), -1.8em -1.8em 0 0em #ffffff;
   }
+}
+
+
+
+/* Basic styles for the range input */
+
+input[type="range"] {
+  width: 100%;
+  height: 10px;
+  background: #fff;
+  border-radius: 5px;
+  outline: none;
+  transition: opacity .15s ease-in-out;
+}
+
+.read-mode .reset-button {
+  background-color: var(--tertiary);
+  color: var(--primary);
+  padding: 8px 18px;
+  border-radius: 4px;
+}
+
+.read-mode .reset-button:hover {
+  background-color: var(--tertiary);
+  color: black;
+  padding: 8px 18px;
+  border-radius: 4px;
+}
+
+
+.read-mode .advanced-toggle-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  padding: 10px 10px 10px 0;
+  text-align: left;
+}
+
+.read-mode .advanced-toggle-button:hover {
+  background-color: var(--secondary-dark);
+}
+
+.read-mode .advanced-toggle-button.active {
+  background-color: var(--secondary-dark);
+  color: var(--tertiary);
+  padding: 10px 10px 10px 10px;
+  text-align: left;
 }

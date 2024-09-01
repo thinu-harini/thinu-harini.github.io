@@ -28,7 +28,8 @@ const colorOptions = [
 const AccessibilityMenu = ({ currentTheme }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('Orientation');
-  const menuRef = useRef(null);
+  const accessibilityMenuRef = useRef(null);
+
   const [isContrastExpanded, setIsContrastExpanded] = useState(false);
   const [saturationMode, setSaturationMode] = useState(null);
   const [landmarkColor, setLandmarkColor] = useState(null);
@@ -45,7 +46,6 @@ const AccessibilityMenu = ({ currentTheme }) => {
   const [isMagnifierActive, setMagnifierActive] = useState(false);
 
   const {
-
     isScreenReaderActive,
     toggleScreenReader,
     moveToNextElement,
@@ -87,6 +87,9 @@ const AccessibilityMenu = ({ currentTheme }) => {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
+  // Function to close the accessibility menu
+  const closeMenu = () => setIsMenuOpen(false);
+
   const toggleContrast = () => {
     setIsContrastExpanded(prevState => !prevState);
     setShowColorOptions(false);
@@ -99,6 +102,14 @@ const AccessibilityMenu = ({ currentTheme }) => {
     document.documentElement.style.setProperty('--text-scale', textScale);
     document.documentElement.style.setProperty('--line-height-scale', lineHeightScale);
   }, [textScale, lineHeightScale]);
+
+  const handleTabChange = (tab) => {
+    if (tab !== 'Color') {
+      setIsContrastExpanded(false); // Collapse contrast section when switching tabs
+      setShowColorOptions(false);
+    }
+    setActiveTab(tab);
+  };
 
   const handleIncreaseTextSize = () => {
     setTextScale(prev => Math.min(prev + 0.1, 2));
@@ -125,14 +136,6 @@ const AccessibilityMenu = ({ currentTheme }) => {
   };
 
   const toggleMagnifier = () => setMagnifierActive(!isMagnifierActive);
-
-  const handleTabChange = (tab) => {
-    if (tab !== 'Color') {
-      setIsContrastExpanded(false); // Collapse contrast section when switching tabs
-      setShowColorOptions(false);
-    }
-    setActiveTab(tab);
-  };
 
   const handleDarkModeToggle = (e) => {
     e.stopPropagation();
@@ -199,6 +202,42 @@ const AccessibilityMenu = ({ currentTheme }) => {
     toggleHighlightLinks();
   };
 
+  // read mode font size change
+  // const changeFontSize = (action) => {
+  //   const bodyClassList = document.body.classList;
+  //   bodyClassList.remove(...bodyClassList.value.match(/font-size-\d+/) || []);
+  //   switch (action) {
+  //     case 'increase':
+  //       bodyClassList.add('font-size-22');
+  //       break;
+  //     case 'decrease':
+  //       bodyClassList.add('font-size-14');
+  //       break;
+  //     case 'reset':
+  //     default:
+  //       bodyClassList.add('font-size-18');
+  //       break;
+  //   }
+  // };
+
+  // read mode font weight change
+  // const changeFontWeight = (weight) => {
+  //   const bodyClassList = document.body.classList;
+  //   bodyClassList.remove(...bodyClassList.value.match(/font-weight-\d+/) || []);
+  //   bodyClassList.add(`font-weight-${weight}`);
+  // };
+
+  const handleRateChange = (event) => {
+    setSpeechRate(parseFloat(event.target.value));
+  };
+
+  const handleVoiceChange = (event) => {
+    const selected = voices.find(voice => voice.name === event.target.value);
+    if (selected) {
+      setVoice(selected);
+    }
+  };
+
   // Reading mask
   useEffect(() => {
     const handleMouseMove = (event) => {
@@ -216,7 +255,7 @@ const AccessibilityMenu = ({ currentTheme }) => {
   // minimize menu on clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
+      if (accessibilityMenuRef.current && !accessibilityMenuRef.current.contains(event.target)) {
         setIsMenuOpen(false);
       }
     };
@@ -225,42 +264,6 @@ const AccessibilityMenu = ({ currentTheme }) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
-
-  // read mode font size change
-  const changeFontSize = (action) => {
-    const bodyClassList = document.body.classList;
-    bodyClassList.remove(...bodyClassList.value.match(/font-size-\d+/) || []);
-    switch (action) {
-      case 'increase':
-        bodyClassList.add('font-size-22');
-        break;
-      case 'decrease':
-        bodyClassList.add('font-size-14');
-        break;
-      case 'reset':
-      default:
-        bodyClassList.add('font-size-18');
-        break;
-    }
-  };
-
-  // read mode font weight change
-  const changeFontWeight = (weight) => {
-    const bodyClassList = document.body.classList;
-    bodyClassList.remove(...bodyClassList.value.match(/font-weight-\d+/) || []);
-    bodyClassList.add(`font-weight-${weight}`);
-  };
-
-  const handleRateChange = (event) => {
-    setSpeechRate(parseFloat(event.target.value));
-  };
-
-  const handleVoiceChange = (event) => {
-    const selected = voices.find(voice => voice.name === event.target.value);
-    if (selected) {
-      setVoice(selected);
-    }
-  };
 
   const ProfileTab = () => (
     <div>
@@ -604,9 +607,8 @@ const AccessibilityMenu = ({ currentTheme }) => {
     </div>
   );
 
-
   return (
-    <div id='accessibility-menu' ref={menuRef}>
+    <div id='accessibility-menu' ref={accessibilityMenuRef}>
       <button
         className={`accessibility-menu-button ${isMenuOpen ? 'open' : ''}`}
         onClick={toggleMenu}
@@ -699,9 +701,10 @@ const AccessibilityMenu = ({ currentTheme }) => {
             // Add the new theme class
             document.body.classList.add(theme);
           }}
-          onChangeFontSize={(action) => changeFontSize(action)}
-          onChangeFontWeight={(weight) => changeFontWeight(weight)}
-          onChangeFont={(font) => changeFont(font)}
+          // onChangeFontSize={(action) => changeFontSize(action)}
+          // onChangeFontWeight={(weight) => changeFontWeight(weight)}
+          // onChangeFont={(font) => changeFont(font)}
+          closeAccessibilityMenu={closeMenu}
         />
       )}
 

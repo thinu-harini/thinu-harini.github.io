@@ -401,42 +401,6 @@ export const AccessibilityProvider = ({ children }) => {
 
   //Read Mode
 
-  // useEffect(() => {
-  //   console.log('Read mode changed:', isReadMode);
-  //   console.log('Current themes:', { isDark, contrastTheme });
-  //   console.log('Previous themes:', previousThemes);
-  //   if (isReadMode) {
-  //     // Save the current themes and dark mode state
-  //     setPreviousThemes({
-  //       isDark,
-  //       contrastTheme,
-  //     });
-
-  //     // Remove all current themes and dark mode
-  //     document.body.classList.remove('dark', 'light-theme', 'sepia-theme', 'contrast-theme');
-  //     setIsDark(false); // Disable dark mode
-  //     setContrastTheme('default'); // Reset contrast theme
-
-  //     // Apply read mode specific themes
-  //     document.body.classList.add('read-mode', 'dark-theme'); // Apply read mode theme
-  //   } else {
-  //     // Remove read mode specific themes
-  //     document.body.classList.remove('read-mode', 'dark-theme', 'light-theme', 'sepia-theme', 'contrast-theme');
-
-  //     // Restore previous themes and dark mode state
-  //     if (previousThemes.isDark) {
-  //       document.body.classList.add('dark');
-  //       setIsDark(true);
-  //     }
-  //     if (previousThemes.contrastTheme && previousThemes.contrastTheme !== 'default') {
-  //       document.body.classList.add(previousThemes.contrastTheme);
-  //       setContrastTheme(previousThemes.contrastTheme);
-  //     } else {
-  //       setContrastTheme('default'); // Reset to default if not set
-  //     }
-  //   }
-  // }, [isReadMode]);
-
   useEffect(() => {
     console.log('Read mode changed:', isReadMode);
     console.log('Current themes:', { isDark, contrastTheme });
@@ -445,7 +409,7 @@ export const AccessibilityProvider = ({ children }) => {
     if (isReadMode) {
       setPreviousThemes({ isDark, contrastTheme });
 
-      document.body.classList.remove('dark', 'light-theme', 'sepia-theme', 'contrast-theme');
+      document.body.classList.remove('dark-theme', 'light-theme', 'sepia-theme', 'contrast-theme');
       setIsDark(false);
       setContrastTheme('default');
 

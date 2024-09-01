@@ -36,7 +36,8 @@ const Hero = () => {
     <div>
       {isReadMode ? (
         <div className="read-mode-content readable">
-          <h1>Hi, Thinu here</h1>
+          <h1>About</h1>
+          <h2>Hi, Thinu here</h2>
           <p>
             I am a UI/UX designer on a mission to level up experiences
             in the digital world with creative thinking and problem-solving
@@ -50,7 +51,7 @@ const Hero = () => {
             download="cv_thinu_premachandra.pdf"
             target="_blank"
           >
-            Download my résumé
+            <p>Download my résumé</p>
           </a>
           <p>Let's Connect :</p>
           <a
@@ -58,7 +59,7 @@ const Hero = () => {
             href="https://dribbble.com/thinu_harini"
             target="_blank"
           >
-            Dribbble
+            <p>Dribbble</p>
           </a>
         </div>
       ) : (

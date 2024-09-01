@@ -1,32 +1,61 @@
-import React, { useState, useEffect } from 'react';
-import '../assets/styles/ReaderToolbar.css';
+import React, { useState, useEffect, useRef } from 'react';
 import { useAccessibility } from './AccessibilityContext';
-import { IoIosColorPalette } from 'react-icons/io';
-import { FaPlus } from 'react-icons/fa';
-import { TiMinus } from 'react-icons/ti';
+import { IoIosArrowDown, IoIosArrowUp, IoIosColorPalette } from 'react-icons/io';
 import { IoClose, IoText } from 'react-icons/io5';
 import { PiTextAlignCenterBold, PiTextAlignJustifyBold, PiTextAlignLeftBold, PiTextAlignRightBold } from 'react-icons/pi';
-import { RiAddFill, RiSubtractFill } from 'react-icons/ri';
+import '../assets/styles/ReaderToolbar.css';
+import { MdOutlineSpaceBar, MdOutlineTextFields } from 'react-icons/md';
+import { CgFontSpacing } from 'react-icons/cg';
+import { AiOutlineColumnWidth } from 'react-icons/ai';
+import { generateTicks } from '../utils/sliderUtils';
+import { TbLineHeight } from 'react-icons/tb';
 
-const FONT_SIZE_STEPS = [14, 18, 22];
-const FONT_WEIGHTS = { regular: 400, bold: 700 };
+const FONT_SIZE_CLASSES = [
+  'font-size-14',
+  'font-size-18', // Default
+  'font-size-22',
+  'font-size-26',
+  'font-size-30',
+  'font-size-34',
+  'font-size-38'
+];
+
+const FONT_WEIGHTS = {
+  default: 'default',
+  regular: 'regular',
+  bold: 'bold',
+  bolder: 'bolder',
+};
 const FONT_FAMILIES = ['sans-serif', 'serif', 'monospace'];
 const TEXT_ALIGNMENTS = ['left', 'center', 'right', 'justify'];
-const WORD_SPACING_STEPS = [0, 2, 4, 6, 8]; // Define your word spacing steps
-const LETTER_SPACING_STEPS = [0, 1, 2, 3, 4]; // Define your letter spacing steps
-const LINE_SPACING_STEPS = [1, 2, 3, 4, 5]; // line height values
+const WORD_SPACING_STEPS = [0, 2, 4, 6, 8];
+const LETTER_SPACING_STEPS = [0, 1, 2, 3, 4];
+const LINE_SPACING_STEPS = [1, 2, 3, 4, 5];
 
-const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme }) => {
-  const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false);
-  const [isContentAdjustmentOpen, setIsContentAdjustmentOpen] = useState(false);
+const DEFAULT_VALUES = {
+  fontSizeIndex: 1,
+  fontWeight: FONT_WEIGHTS.default,
+  contentWidth: 75,
+  textAlignment: 'left',
+  wordSpacingIndex: 0,
+  letterSpacingIndex: 0,
+  lineSpacingIndex: 1
+};
 
-  const [fontSizeIndex, setFontSizeIndex] = useState(1);
-  const [fontWeight, setFontWeight] = useState(FONT_WEIGHTS.regular);
-  const [contentWidth, setContentWidth] = useState(100);
-  const [textAlignment, setTextAlignment] = useState('left');
-  const [wordSpacingIndex, setWordSpacingIndex] = useState(0); // Default index
-  const [letterSpacingIndex, setLetterSpacingIndex] = useState(0); // Default index
-  const [lineSpacingIndex, setLineSpacingIndex] = useState(1); // Default line height
+const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, closeAccessibilityMenu }) => {
+
+  const [activeMenu, setActiveMenu] = useState(null);
+  const readerToolbarRef = useRef(null);
+
+  const [fontSizeIndex, setFontSizeIndex] = useState(DEFAULT_VALUES.fontSizeIndex);
+  const [fontWeight, setFontWeight] = useState(DEFAULT_VALUES.fontWeight);
+  const [contentWidth, setContentWidth] = useState(DEFAULT_VALUES.contentWidth);
+  const [textAlignment, setTextAlignment] = useState(DEFAULT_VALUES.textAlignment);
+  const [wordSpacingIndex, setWordSpacingIndex] = useState(DEFAULT_VALUES.wordSpacingIndex);
+  const [letterSpacingIndex, setLetterSpacingIndex] = useState(DEFAULT_VALUES.letterSpacingIndex);
+  const [lineSpacingIndex, setLineSpacingIndex] = useState(DEFAULT_VALUES.lineSpacingIndex);
+  const [hasChanges, setHasChanges] = useState(false);
+  const [showAdvanced, setShowAdvanced] = useState(false);
 
   const { currentFont, changeFont, isDyslexiaFont, toggleDyslexiaFont } = useAccessibility();
 
@@ -34,9 +63,9 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme }) => 
     if (!isReadMode) return;
 
     const bodyClassList = document.body.classList;
-    bodyClassList.remove('font-size-14', 'font-size-18', 'font-size-22');
-    bodyClassList.add(`font-size-${FONT_SIZE_STEPS[fontSizeIndex]}`);
-    bodyClassList.remove(...bodyClassList.value.match(/font-weight-\d+/) || []);
+    FONT_SIZE_CLASSES.forEach(cls => bodyClassList.remove(`${cls}`));
+    bodyClassList.add(`${FONT_SIZE_CLASSES[fontSizeIndex]}`);
+    Object.values(FONT_WEIGHTS).forEach(weight => bodyClassList.remove(`font-weight-${weight}`));
     bodyClassList.add(`font-weight-${fontWeight}`);
     bodyClassList.remove(...bodyClassList.value.match(/letter-spacing-\d+/) || []);
     bodyClassList.add(`letter-spacing-${LETTER_SPACING_STEPS[letterSpacingIndex]}`);
@@ -44,25 +73,73 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme }) => 
     bodyClassList.add(`line-height-${LINE_SPACING_STEPS[lineSpacingIndex]}`);
   }, [fontSizeIndex, fontWeight, letterSpacingIndex, lineSpacingIndex, isReadMode]);
 
-  const toggleThemeMenu = () => setIsThemeMenuOpen(!isThemeMenuOpen);
-  const toggleContentAdjustment = () => setIsContentAdjustmentOpen(!isContentAdjustmentOpen);
+  // reset all 
+  const resetAllSettings = () => {
+    setFontSizeIndex(DEFAULT_VALUES.fontSizeIndex);
+    setFontWeight(DEFAULT_VALUES.fontWeight);
+    setContentWidth(DEFAULT_VALUES.contentWidth);
+    setTextAlignment(DEFAULT_VALUES.textAlignment);
+    setWordSpacingIndex(DEFAULT_VALUES.wordSpacingIndex);
+    setLetterSpacingIndex(DEFAULT_VALUES.letterSpacingIndex);
+    setLineSpacingIndex(DEFAULT_VALUES.lineSpacingIndex);
 
-  const increaseTextSize = () => {
-    setFontSizeIndex(prevIndex => Math.min(prevIndex + 1, FONT_SIZE_STEPS.length - 1));
+    // Apply the default classes and styles
+    const bodyClassList = document.body.classList;
+    bodyClassList.remove(...FONT_SIZE_CLASSES.map(cls => `${cls}`));
+    bodyClassList.add(FONT_SIZE_CLASSES[DEFAULT_VALUES.fontSizeIndex]);
+
+    bodyClassList.remove(...Object.values(FONT_WEIGHTS).map(weight => `font-weight-${weight}`));
+    bodyClassList.add(`font-weight-${DEFAULT_VALUES.fontWeight}`);
+
+    bodyClassList.remove(...bodyClassList.value.match(/letter-spacing-\d+/) || []);
+    bodyClassList.add(`letter-spacing-${LETTER_SPACING_STEPS[DEFAULT_VALUES.letterSpacingIndex]}`);
+
+    bodyClassList.remove(...bodyClassList.value.match(/line-height-\d+/) || []);
+    bodyClassList.add(`line-height-${LINE_SPACING_STEPS[DEFAULT_VALUES.lineSpacingIndex]}`);
+
+    document.documentElement.style.setProperty('--read-mode-content-width', `${DEFAULT_VALUES.contentWidth}vw`);
+
+    // Update the changes state
+    setHasChanges(false);
   };
 
-  const decreaseTextSize = () => {
-    setFontSizeIndex(prevIndex => Math.max(prevIndex - 1, 0));
+
+  //reset button appear if changes occured
+  const checkForChanges = () => {
+    setHasChanges(
+      fontSizeIndex !== DEFAULT_VALUES.fontSizeIndex ||
+      fontWeight !== DEFAULT_VALUES.fontWeight ||
+      contentWidth !== DEFAULT_VALUES.contentWidth ||
+      textAlignment !== DEFAULT_VALUES.textAlignment ||
+      wordSpacingIndex !== DEFAULT_VALUES.wordSpacingIndex ||
+      letterSpacingIndex !== DEFAULT_VALUES.letterSpacingIndex ||
+      lineSpacingIndex !== DEFAULT_VALUES.lineSpacingIndex
+    );
   };
 
-  const resetTextSize = () => setFontSizeIndex(1);
+  // Using useEffect to check for changes whenever settings are updated
+  useEffect(() => {
+    checkForChanges();
+  }, [fontSizeIndex, fontWeight, contentWidth, textAlignment, wordSpacingIndex, letterSpacingIndex, lineSpacingIndex]);
+
+  const handleMenuToggle = (menu) => {
+    setActiveMenu((prevMenu) => (prevMenu === menu ? null : menu));
+  };
+
+  const toggleThemeMenu = () => handleMenuToggle('theme');
+  const toggleContentAdjustment = () => handleMenuToggle('content');
+
+  const handleAdvancedToggle = () => {
+    setShowAdvanced(!showAdvanced);
+  };
+
+  const handleFontSizeChange = (e) => {
+    setFontSizeIndex(Number(e.target.value));
+  };
 
   const handleFontWeightChange = (e) => {
-    const newWeightLabel = e.target.value;
-    const newWeight = FONT_WEIGHTS[newWeightLabel];
+    const newWeight = e.target.value;
     setFontWeight(newWeight);
-    document.body.classList.remove(...document.body.classList.value.match(/font-weight-\d+/) || []);
-    document.body.classList.add(`font-weight-${newWeight}`);
   };
 
   const handleFontFamilyChange = (e) => {
@@ -103,9 +180,38 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme }) => 
     document.documentElement.style.setProperty('--read-mode-content-width', `${newWidth}vw`);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (readerToolbarRef.current && !readerToolbarRef.current.contains(event.target)) {
+        setActiveMenu(null); // Close all menus when clicking outside
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+
+  useEffect(() => {
+    if (activeMenu === 'content') {
+      console.log('Generating ticks for content menu...');
+      // generateTicks('font-size-slider', FONT_SIZE_CLASSES.length, FONT_SIZE_CLASSES.map(f => f.replace('font-size-', '')));
+      // generateTicks('word-spacing-slider', WORD_SPACING_STEPS.length, WORD_SPACING_STEPS);
+      generateTicks('font-size-slider', FONT_SIZE_CLASSES.length);
+      generateTicks('word-spacing-slider', WORD_SPACING_STEPS.length);
+      generateTicks('letter-spacing-slider', LETTER_SPACING_STEPS.length);
+      // generateTicks('width-slider', 46, Array.from({ length: 46 }, (_, i) => i + 30 + '%'));
+      generateTicks('line-spacing-slider', LINE_SPACING_STEPS.length);
+    }
+  }, [activeMenu]);
+
+
+
   return (
     isReadMode && (
-      <div className="reader-toolbar">
+      <div className="reader-toolbar" ref={readerToolbarRef} onClick={closeAccessibilityMenu}>
         <button onClick={onClose} aria-label="Close Reader View">
           <IoClose />
         </button>
@@ -113,41 +219,61 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme }) => 
         <button
           onClick={toggleContentAdjustment}
           aria-label="Font"
-          className={isContentAdjustmentOpen ? 'active' : ''}
+          className={activeMenu === 'content' ? 'active' : ''}
         >
           <IoText />
         </button>
 
-        {isContentAdjustmentOpen && (
+        <button
+          onClick={toggleThemeMenu}
+          aria-label="Theme"
+          className={activeMenu === 'theme' ? 'active' : ''}
+        >
+          <IoIosColorPalette />
+        </button>
+
+        {activeMenu === 'content' && (
+
           <div className="content-adjustment-menu">
-            <h2 className='mb-2'>Text</h2>
-            <p className='mt-2'>Text Size</p>
-            <div className="content-adjustment-option">
-              <button
-                onClick={increaseTextSize}
-                aria-label="Increase Text Size"
-              >
-                <RiAddFill />
-              </button>
+            <div className='heading'>
+              <div className="content-heading">Text</div>
+              {hasChanges && (
+                <button
+                  onClick={resetAllSettings}
+                  aria-label="Reset All Settings"
+                  className="reset-button"
+                >
+                  <div className="button-text">Reset All</div>
+                </button>
+              )}
+            </div>
 
-              <button
-                onClick={decreaseTextSize}
-                aria-label="Decrease Text Size"
-              >
-                <RiSubtractFill />
-              </button>
+            {/* <h2 className='mb-4'>Text</h2> */}
 
-              <button
-                onClick={resetTextSize}
-                aria-label="Reset Text Size"
-              >
-                <div className="button-text">Reset</div>
-              </button>
+            <div className="education-heading">Text Size</div>
+            <div className="slider-container">
+              <MdOutlineTextFields size={32} />
+              <div className="slider-adjustment">
+                <input
+                  id="font-size-slider"
+                  type="range"
+                  min="0"
+                  max={FONT_SIZE_CLASSES.length - 1}
+                  step="1"
+                  value={fontSizeIndex}
+                  onChange={handleFontSizeChange}
+                  aria-label="Font Size"
+                />
+                <div className="ticks-container" id="font-size-slider-ticks"></div>
+                {/* <span>
+                  {FONT_SIZE_CLASSES[fontSizeIndex].replace('font-size-', '')}px
+                </span> */}
+              </div>
             </div>
 
             <div className="content-adjustment-option">
-              <div className='mt-2'>
-                <p>Font Family</p>
+              <div>
+                <div className="education-heading">Font Family</div>
                 <select
                   value={currentFont}
                   onChange={handleFontFamilyChange}
@@ -161,33 +287,15 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme }) => 
                 </select>
               </div>
 
-              <div className='mt-2'>
-                <p>Font Weight</p>
+              <div>
+                <div className="education-heading">Font Weight</div>
                 {/* <div className="content-adjustment-option"> */}
-                <select
-                  value={Object.keys(FONT_WEIGHTS).find(key => FONT_WEIGHTS[key] === fontWeight)}
-                  onChange={handleFontWeightChange}
-                  aria-label="Font Weight"
-                >
-                  <option value="regular">Regular</option>
-                  <option value="bold">Bold</option>
+                <select value={fontWeight} onChange={handleFontWeightChange}>
+                  <option value={FONT_WEIGHTS.default}>Default</option>
+                  <option value={FONT_WEIGHTS.regular}>Regular</option>
+                  <option value={FONT_WEIGHTS.bold}>Bold</option>
+                  <option value={FONT_WEIGHTS.bolder}>Bolder</option>
                 </select>
-
-                {/* <button
-                onClick={() => changeFontWeight(0)}
-                className={fontWeightIndex === 0 ? 'active' : ''}
-                aria-label="Font Weight 400"
-              >
-                <div className="button-text">Regular</div>
-              </button>
-              <button
-                onClick={() => changeFontWeight(1)}
-                className={fontWeightIndex === 1 ? 'active' : ''}
-                aria-label="Font Weight 700"
-              >
-                <div className="button-text">Bold</div>
-              </button> */}
-
               </div>
             </div>
 
@@ -198,45 +306,64 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme }) => 
                 aria-label="Dyslexia Font"
               >
                 {isDyslexiaFont ?
-                  <p>Dyslexia On</p>
+                  <div className="education-heading">Dyslexia On</div>
                   :
-                  <p>Dyslexia Off</p>
+                  <div className="education-heading">Dyslexia Off</div>
                 }
               </button>
             </div>
 
-            <h2 className='mt-4 mb-2'>Advanced</h2>
-            {/* <p>Word Spacing</p> */}
-            <div className="width-adjustment">
-              <label htmlFor="width-adjustment-slider"><p>Word Spacing:</p></label>
-              <input
-                id="word-spacing-slider"
-                type="range"
-                min="0"
-                max={WORD_SPACING_STEPS.length - 1}
-                value={wordSpacingIndex}
-                onChange={handleWordSpacingChange}
-              />
-              <span>{WORD_SPACING_STEPS[wordSpacingIndex]}px</span>
+            <button
+              onClick={handleAdvancedToggle}
+              className={`advanced-toggle-button ${showAdvanced ? 'active' : ''}`}
+            >
+              <div className="content-heading">Advanced</div>
+              {showAdvanced ? <IoIosArrowUp /> : <IoIosArrowDown />}
+            </button>
+
+            {showAdvanced && (
+              <>
+                <div className="education-heading">Word Spacing</div>
+                <div className="slider-container">
+                  <MdOutlineSpaceBar size={32} />
+                  <div className="slider-adjustment">
+                    <input
+                      id="word-spacing-slider"
+                      type="range"
+                      min="0"
+                      max={WORD_SPACING_STEPS.length - 1}
+                      value={wordSpacingIndex}
+                      onChange={handleWordSpacingChange}
+                    />
+                    <div className="ticks-container" id="word-spacing-slider-ticks"></div>
+                    {/* <span>{WORD_SPACING_STEPS[wordSpacingIndex]}px</span> */}
+                  </div>
+                </div>
+
+                <div className="education-heading">Character Spacing</div>
+                <div className="slider-container">
+                  <CgFontSpacing size={32} />
+                  <div className="slider-adjustment">
+                    <input
+                      id="letter-spacing-slider"
+                      type="range"
+                      min="0"
+                      max={LETTER_SPACING_STEPS.length - 1}
+                      value={letterSpacingIndex}
+                      onChange={handleLetterSpacingChange}
+                    />
+                    <div className="ticks-container" id="letter-spacing-slider-ticks"></div>
+                    {/* <span>{LETTER_SPACING_STEPS[letterSpacingIndex]}px</span> */}
+                  </div>
+                </div>
+              </>
+            )}
+
+            <div className="horizontal-line-container">
+              <div className="horizontal-line"></div>
             </div>
-
-            {/* <p>Character Spacing</p> */}
-            <div className="width-adjustment">
-              <label htmlFor="width-adjustment-slider"><p>Character Spacing:</p></label>
-              <input
-                id="letter-spacing-slider"
-                type="range"
-                min="0"
-                max={LETTER_SPACING_STEPS.length - 1}
-                value={letterSpacingIndex}
-                onChange={handleLetterSpacingChange}
-              />
-              <span>{LETTER_SPACING_STEPS[letterSpacingIndex]}px</span>
-            </div>
-
-            <h2 className='mt-4 mb-2'>Layout</h2>
-
-            <p>Text Alignment</p>
+            <div className="content-heading mt-4 mb-4">Layout</div>
+            <div className="education-heading">Text Alignment</div>
             <div className="content-adjustment-option">
               {TEXT_ALIGNMENTS.map(alignment => (
                 <button
@@ -253,75 +380,76 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme }) => 
               ))}
             </div>
 
-            {/* <p>Content Width</p> */}
-            <div className="width-adjustment">
-              <label htmlFor="width-slider"><p>Content Width:</p></label>
-              <input
-                id="width-slider"
-                type="range"
-                min="30"
-                max="75"
-                value={contentWidth}
-                onChange={handleWidthChange}
-              />
-              {/* <span>{contentWidth}%</span> */}
+            <div className="education-heading">Content Width</div>
+            <div className="slider-container">
+              <AiOutlineColumnWidth size={32} />
+              <div className="slider-adjustment">
+                <input
+                  id="width-slider"
+                  type="range"
+                  min="30"
+                  max="75"
+                  value={contentWidth}
+                  onChange={handleWidthChange}
+                />
+                {/* <div className="ticks-container" id="width-slider-ticks"></div> */}
+                {/* <span>{contentWidth}%</span> */}
+              </div>
             </div>
 
-            {/* <p>Line Spacing</p> */}
-            <div className="width-adjustment">
-              <label htmlFor="width-slider"><p>Line Spacing:</p></label>
-              <input
-                id="line-spacing-slider"
-                type="range"
-                min="0"
-                max={LINE_SPACING_STEPS.length - 1}
-                value={lineSpacingIndex}
-                onChange={handleLineSpacingChange}
-              />
-              <span>{LINE_SPACING_STEPS[lineSpacingIndex]}</span>
+            <div className="education-heading">Line Spacing</div>
+            <div className="slider-container">
+              <TbLineHeight size={32} />
+              <div className="slider-adjustment">
+                <input
+                  id="line-spacing-slider"
+                  type="range"
+                  min="0"
+                  max={LINE_SPACING_STEPS.length - 1}
+                  value={lineSpacingIndex}
+                  onChange={handleLineSpacingChange}
+                />
+                <div className="ticks-container" id="line-spacing-slider-ticks"></div>
+                {/* <span>{LINE_SPACING_STEPS[lineSpacingIndex]}</span> */}
+              </div>
             </div>
+
           </div>
         )}
 
-        <button
-          onClick={toggleThemeMenu}
-          aria-label="Theme"
-          className={isThemeMenuOpen ? 'active' : ''}
-        >
-          <IoIosColorPalette />
-        </button>
-        {isThemeMenuOpen && (
-          <div className="theme-menu">
-            <button
-              onClick={() => onChangeTheme('light-theme')}
-              className={currentTheme === 'light-theme' ? 'active' : ''}
-              aria-label="Light Mode"
-            >
-              <div className="button-text">Light Mode</div>
-            </button>
-            <button
-              onClick={() => onChangeTheme('dark-theme')}
-              className={currentTheme === 'dark-theme' ? 'active' : ''}
-              aria-label="Dark Mode"
-            >
-              <div className="button-text">Dark Mode</div>
-            </button>
-            <button
-              onClick={() => onChangeTheme('sepia-theme')}
-              className={currentTheme === 'sepia-theme' ? 'active' : ''}
-              aria-label="Sepia Mode"
-            >
-              <div className="button-text">Sepia Mode</div>
-            </button>
-            <button
-              onClick={() => onChangeTheme('contrast-theme')}
-              className={currentTheme === 'contrast-theme' ? 'active' : ''}
-              aria-label="Contrast Mode"
-            >
-              <div className="button-text">Contrast Mode</div>
-            </button>
-          </div>
-        )}
+        {
+          activeMenu === 'theme' && (
+            <div className="theme-menu">
+              <button
+                onClick={() => onChangeTheme('light-theme')}
+                className={`light-button ${currentTheme === 'light-theme' ? 'active' : ''}`}
+                aria-label="Light Mode"
+              >
+                <div className="button-text">Light Mode</div>
+              </button>
+              <button
+                onClick={() => onChangeTheme('dark-theme')}
+                className={`dark-button ${currentTheme === 'dark-theme' ? 'active' : ''}`}
+                aria-label="Dark Mode"
+              >
+                <div className="button-text">Dark Mode</div>
+              </button>
+              <button
+                onClick={() => onChangeTheme('sepia-theme')}
+                className={`sepia-button ${currentTheme === 'sepia-theme' ? 'active' : ''}`}
+                aria-label="Sepia Mode"
+              >
+                <div className="button-text">Sepia Mode</div>
+              </button>
+              <button
+                onClick={() => onChangeTheme('contrast-theme')}
+                className={`contrast-button ${currentTheme === 'contrast-theme' ? 'active' : ''}`}
+                aria-label="Contrast Mode"
+              >
+                <div className="button-text">Contrast Mode</div>
+              </button>
+            </div>
+          )}
       </div >
     )
   );

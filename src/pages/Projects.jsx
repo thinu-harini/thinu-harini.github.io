@@ -229,7 +229,7 @@ const ProjectCard = ({
 };
 
 const Projects = () => {
-  const { isReadMode } = useAccessibility(); // Access read mode state
+  const { isReadMode } = useAccessibility();
 
   return (
     <>

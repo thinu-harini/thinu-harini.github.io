@@ -3,7 +3,7 @@ import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
 import '../assets/styles/SearchBar.css';
 
-const SearchBar = ({ onSearch, onNavigate, currentIndex, totalResults, isVisible, onClose }) => {
+const SearchBar = ({ onSearch, onNavigate, currentIndex, totalResults, isVisible, onClose, onInput }) => {
   const [query, setQuery] = useState('');
   const inputRef = useRef(null);
 
@@ -14,8 +14,23 @@ const SearchBar = ({ onSearch, onNavigate, currentIndex, totalResults, isVisible
   }, [isVisible]);
 
   const handleChange = (e) => {
-    setQuery(e.target.value);
-    onSearch(e.target.value);
+    // setQuery(e.target.value);
+    // onSearch(e.target.value);
+
+    const value = e.target.value;
+    setQuery(value);
+
+    // Call onSearch only if the query length is 2 or more characters
+    if (value.length >= 2) {
+      onSearch(value);
+    } else {
+      // Optionally clear results if query length is less than 2
+      onSearch('');
+    }
+
+    if (onInput) {
+      onInput(); // Notify parent when input changes
+    }
   };
 
   const handleCloseClick = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { NightCanvas, DayCanvas } from '../components/canvas';
 import Carousel from '../components/Carousel';
-import { HexagonCanvas } from '../components';
+import { HexagonCanvas, SocialIcons } from '../components';
 import wall from '../assets/wall5.svg';
 import roof from '../assets/roof.svg';
 import { Link, useNavigate } from 'react-router-dom';
@@ -57,11 +57,13 @@ const Home = ({ isDark }) => {
               <div className="home-content">
                 <Carousel />
 
-                <div className='button-container'>
+                {/* <div className='home-button-container'>
                   <Link to="/contact" className="button-text button">
                     Contact
                   </Link>
-                </div>
+
+                  <SocialIcons />
+                </div> */}
 
               </div>
 

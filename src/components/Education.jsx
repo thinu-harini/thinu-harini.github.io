@@ -28,26 +28,18 @@ const EducationInfo = ({ degree, place }) => {
 };
 
 const Education = () => {
+  const { isReadMode } = useAccessibility();
 
   return (
     <>
-      <div>
-        <motion.div variants={textVariant()}>
-          <h1
-            className="section-heading readable"
-            id="education-heading"
-          >
-            Education
-          </h1>
-        </motion.div>
-
-        <div>
-
+      {isReadMode ? (
+        <div className="read-mode-content">
+          <h1>Education.</h1>
           {education.map((edu, index) => (
             <div
               key={`education-${index}`}
               id={`education-${index}`}
-              className="education-section readable"
+              className="readable"
             >
               <EducationInfo
                 degree={edu.degree}
@@ -56,7 +48,34 @@ const Education = () => {
             </div>
           ))}
         </div>
-      </div>
+      ) : (
+        <div>
+          <motion.div variants={textVariant()}>
+            <h1
+              className="section-heading readable"
+              id="education-heading"
+            >
+              Education
+            </h1>
+          </motion.div>
+
+          <div>
+
+            {education.map((edu, index) => (
+              <div
+                key={`education-${index}`}
+                id={`education-${index}`}
+                className="education-section readable"
+              >
+                <EducationInfo
+                  degree={edu.degree}
+                  place={edu.place}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </>
   );
 };
