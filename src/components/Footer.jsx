@@ -1,10 +1,10 @@
 import React from "react";
-import { motion } from "framer-motion";
 import SocialIcons from './SocialIcons';
-import { FaAnglesUp } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { useAccessibility } from "./AccessibilityContext";
 
 const Footer = () => {
+  const { isTooltipMode } = useAccessibility();
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -17,7 +17,7 @@ const Footer = () => {
     <div id="footer" className="footer">
 
       <div className="flex flex-col items-center md:items-center">
-        <Link to="/contact" className="button-text button" >
+        <Link to="/contact" className="button-text button" data-tooltip={isTooltipMode ? 'Go to contact page' : null}>
           Contact
         </Link>
 

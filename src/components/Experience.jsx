@@ -7,6 +7,7 @@ import { TbSquareRoundedArrowLeftFilled, TbSquareRoundedArrowRightFilled } from 
 import Footer from './Footer';
 import { useAccessibility } from './AccessibilityContext';
 import '../assets/styles/Experience.css';
+import Tooltip from './Tooltip';
 
 const Experience = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -208,7 +209,7 @@ const Experience = () => {
             disabled={activeTab === 0}
             aria-label="Previous Slide"
           >
-            <TbSquareRoundedArrowLeftFilled />
+            <TbSquareRoundedArrowLeftFilled data-tooltip="Switch theme" />
           </button>
 
           <button
@@ -218,7 +219,7 @@ const Experience = () => {
             disabled={activeTab === experiences.length - 1}
             aria-label="Next Slide"
           >
-            <TbSquareRoundedArrowRightFilled />
+            <TbSquareRoundedArrowRightFilled data-tooltip="Switch theme" />
           </button>
 
           {/* Carousel Indicator */}
@@ -234,6 +235,7 @@ const Experience = () => {
           <Footer />
         </>
       )}
+      <Tooltip />
     </div >
   );
 };

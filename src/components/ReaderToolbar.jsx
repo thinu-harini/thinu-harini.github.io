@@ -3,12 +3,12 @@ import { useAccessibility } from './AccessibilityContext';
 import { IoIosArrowDown, IoIosArrowUp, IoIosColorPalette } from 'react-icons/io';
 import { IoClose, IoText } from 'react-icons/io5';
 import { PiTextAlignCenterBold, PiTextAlignJustifyBold, PiTextAlignLeftBold, PiTextAlignRightBold } from 'react-icons/pi';
-import '../assets/styles/ReaderToolbar.css';
 import { MdOutlineSpaceBar, MdOutlineTextFields } from 'react-icons/md';
 import { CgFontSpacing } from 'react-icons/cg';
 import { AiOutlineColumnWidth } from 'react-icons/ai';
 import { generateTicks } from '../utils/sliderUtils';
 import { TbLineHeight } from 'react-icons/tb';
+import '../assets/styles/ReaderToolbar.css';
 
 const FONT_SIZE_CLASSES = [
   'font-size-14',
@@ -251,7 +251,7 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, close
             {/* <h2 className='mb-4'>Text</h2> */}
 
             <div className="education-heading">Text Size</div>
-            <div className="slider-container">
+            <div className="slider-wrapper mt-4 mb-7">
               <MdOutlineTextFields size={32} />
               <div className="slider-adjustment">
                 <input
@@ -263,6 +263,7 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, close
                   value={fontSizeIndex}
                   onChange={handleFontSizeChange}
                   aria-label="Font Size"
+                  className="slider"
                 />
                 <div className="ticks-container" id="font-size-slider-ticks"></div>
                 {/* <span>
@@ -324,7 +325,7 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, close
             {showAdvanced && (
               <>
                 <div className="education-heading">Word Spacing</div>
-                <div className="slider-container">
+                <div className="slider-wrapper mt-4 mb-7">
                   <MdOutlineSpaceBar size={32} />
                   <div className="slider-adjustment">
                     <input
@@ -334,6 +335,7 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, close
                       max={WORD_SPACING_STEPS.length - 1}
                       value={wordSpacingIndex}
                       onChange={handleWordSpacingChange}
+                      className="slider"
                     />
                     <div className="ticks-container" id="word-spacing-slider-ticks"></div>
                     {/* <span>{WORD_SPACING_STEPS[wordSpacingIndex]}px</span> */}
@@ -341,7 +343,7 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, close
                 </div>
 
                 <div className="education-heading">Character Spacing</div>
-                <div className="slider-container">
+                <div className="slider-wrapper mt-4 mb-7">
                   <CgFontSpacing size={32} />
                   <div className="slider-adjustment">
                     <input
@@ -351,6 +353,7 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, close
                       max={LETTER_SPACING_STEPS.length - 1}
                       value={letterSpacingIndex}
                       onChange={handleLetterSpacingChange}
+                      className="slider"
                     />
                     <div className="ticks-container" id="letter-spacing-slider-ticks"></div>
                     {/* <span>{LETTER_SPACING_STEPS[letterSpacingIndex]}px</span> */}
@@ -381,7 +384,7 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, close
             </div>
 
             <div className="education-heading">Content Width</div>
-            <div className="slider-container">
+            <div className="slider-wrapper mt-4 mb-7">
               <AiOutlineColumnWidth size={32} />
               <div className="slider-adjustment">
                 <input
@@ -391,6 +394,7 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, close
                   max="75"
                   value={contentWidth}
                   onChange={handleWidthChange}
+                  className="slider"
                 />
                 {/* <div className="ticks-container" id="width-slider-ticks"></div> */}
                 {/* <span>{contentWidth}%</span> */}
@@ -398,7 +402,7 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, close
             </div>
 
             <div className="education-heading">Line Spacing</div>
-            <div className="slider-container">
+            <div className="slider-wrapper mt-4 mb-7">
               <TbLineHeight size={32} />
               <div className="slider-adjustment">
                 <input
@@ -408,6 +412,7 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, close
                   max={LINE_SPACING_STEPS.length - 1}
                   value={lineSpacingIndex}
                   onChange={handleLineSpacingChange}
+                  className="slider"
                 />
                 <div className="ticks-container" id="line-spacing-slider-ticks"></div>
                 {/* <span>{LINE_SPACING_STEPS[lineSpacingIndex]}</span> */}

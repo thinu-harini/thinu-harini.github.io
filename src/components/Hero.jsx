@@ -14,7 +14,7 @@ import { useAccessibility } from './AccessibilityContext';
 import '../assets/styles/Hero.css';
 
 const Hero = () => {
-  const { isReadMode } = useAccessibility();
+  const { isReadMode, isTooltipMode } = useAccessibility();
   const adjustGirlForScreenSize = () => {
     let screenScale = null;
     let screenPosition = null;
@@ -101,11 +101,16 @@ const Hero = () => {
                 </p>
 
                 <div className="button-text flex-row items-start mt-6">
-                  <Link to="/contact" className="button mr-2 mb-2">
+                  <Link to="/contact" className="button mr-2 mb-2" data-tooltip={isTooltipMode ? 'Go to contact page' : null}>
                     Contact
                   </Link>
 
-                  <a className="button" href="https://drive.google.com/file/d/1RYFG573_ciYfX3PbBi4RoAHWWK94Jp-B/view?usp=sharing" download="cv_thinu_premachandra.pdf" target="_blank">
+                  <a
+                    className="button"
+                    href="https://drive.google.com/file/d/1RYFG573_ciYfX3PbBi4RoAHWWK94Jp-B/view?usp=sharing" download="cv_thinu_premachandra.pdf"
+                    target="_blank"
+                    data-tooltip={isTooltipMode ? 'Download my résumé' : null}
+                  >
                     Résumé
                   </a>
                   {/* <Tech /> */}

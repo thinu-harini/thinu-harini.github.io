@@ -7,12 +7,16 @@ import { IoAccessibility, IoClose, IoMoon, IoReader } from "react-icons/io5";
 import { PiCursorFill } from "react-icons/pi";
 import { FaAdjust, FaArrowLeft, FaArrowRight, FaBookReader, FaHighlighter, FaLandmark, FaLink, FaPause, FaPlay, FaTint } from 'react-icons/fa';
 import { RiUserVoiceFill } from 'react-icons/ri';
-import { MdImageNotSupported, MdInsertPageBreak, MdOutlineInvertColors, MdOutlineTextDecrease, MdOutlineTextIncrease } from 'react-icons/md';
-import { GiRabbit, GiTortoise } from 'react-icons/gi';
+import { MdImageNotSupported, MdInsertPageBreak, MdOutlineInvertColors, MdOutlineSpaceBar, MdOutlineTextDecrease, MdOutlineTextFields, MdOutlineTextIncrease } from 'react-icons/md';
+import { GiMovementSensor, GiRabbit, GiTortoise, GiWhiteBook } from 'react-icons/gi';
 import { VscTextSize } from 'react-icons/vsc';
 import Magnifier from './Magnifier';
 import { HiDocumentMagnifyingGlass } from 'react-icons/hi2';
 import { FaBackwardStep, FaForwardStep } from 'react-icons/fa6';
+import { TbLineHeight } from 'react-icons/tb';
+import Dictionary from './Dictionary';
+import { CgFontSpacing } from 'react-icons/cg';
+import Tooltip from './Tooltip';
 
 const colorOptions = [
   { name: 'Red', color: '#ff0000' },
@@ -36,53 +40,45 @@ const AccessibilityMenu = ({ currentTheme }) => {
   const [showColorOptions, setShowColorOptions] = useState(false);
   const [isBlueFilterActive, setBlueFilterActive] = useState(false);
 
-  // const [voices, setVoices] = useState([]);
-  // const [selectedVoice, setSelectedVoice] = useState(null);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-  const [textScale, setTextScale] = useState(1); // Text scaling factor
-  const [lineHeightScale, setLineHeightScale] = useState(1); // Line height scaling factor
+
   const [isBiggerText, setIsBiggerText] = useState(false);
-  const [activeButton, setActiveButton] = useState(null);
   const [isMagnifierActive, setMagnifierActive] = useState(false);
 
   const {
-    isScreenReaderActive,
-    toggleScreenReader,
+    textScale, setTextScale,
+    lineHeightScale, setLineHeightScale,
+    wordSpacingScale, setWordSpacingScale,
+    charSpacingScale, setCharSpacingScale,
+    textAlign, setTextAlign,
+    fontFamily, setFontFamily,
+
+    isScreenReaderActive, toggleScreenReader,
     moveToNextElement,
     moveToPreviousElement,
-    toggleHighlightVisibility,
-    areHighlightsVisible,
-    togglePauseResume,
-    isPaused,
-    setSpeechRate,
-    rate,
-    setVoice,
-    voices,
+    areHighlightsVisible, toggleHighlightVisibility,
+    isPaused, togglePauseResume,
+    rate, setSpeechRate,
+    voices, setVoice,
     selectedVoice,
 
-    isDyslexiaFont,
-    toggleDyslexiaFont,
-    isBigCursor,
-    toggleBigCursor,
+    isDyslexiaFont, toggleDyslexiaFont,
+    isBigCursor, toggleBigCursor,
 
-    highlightLinks,
-    toggleHighlightLinks,
-    isDark,
-    toggleDarkMode,
-    contrastTheme,
-    toggleContrastTheme,
+    highlightLinks, toggleHighlightLinks,
+    isDark, toggleDarkMode,
+    contrastTheme, toggleContrastTheme,
     resetContrastTheme,
-    areImagesHidden,
-    toggleHideImages,
-    isReadingGuideEnabled,
-    toggleReadingGuide,
-    isReadingMaskEnabled,
-    toggleReadingMask,
+    areImagesHidden, toggleHideImages,
+    isReadingGuideEnabled, toggleReadingGuide,
+    isReadingMaskEnabled, toggleReadingMask,
     maskDimensions,
-    isReadMode,
-    toggleReadMode,
-    currentFont,
-    changeFont,
+    isReadMode, toggleReadMode,
+
+    isAnimationsPaused, toggleAnimations,
+    isDictionaryMode, toggleDictionaryMode, setWord,
+    isTooltipMode, toggleTooltipMode,
+
   } = useAccessibility();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -101,7 +97,11 @@ const AccessibilityMenu = ({ currentTheme }) => {
   useEffect(() => {
     document.documentElement.style.setProperty('--text-scale', textScale);
     document.documentElement.style.setProperty('--line-height-scale', lineHeightScale);
-  }, [textScale, lineHeightScale]);
+    document.documentElement.style.setProperty('--word-spacing-scale', wordSpacingScale);
+    document.documentElement.style.setProperty('--char-spacing-scale', charSpacingScale);
+    document.documentElement.style.setProperty('--text-align', textAlign);
+    document.documentElement.style.setProperty('--font-family', fontFamily);
+  }, [textScale, lineHeightScale, wordSpacingScale, charSpacingScale, textAlign, fontFamily]);
 
   const handleTabChange = (tab) => {
     if (tab !== 'Color') {
@@ -111,20 +111,53 @@ const AccessibilityMenu = ({ currentTheme }) => {
     setActiveTab(tab);
   };
 
-  const handleIncreaseTextSize = () => {
-    setTextScale(prev => Math.min(prev + 0.1, 2));
-    setActiveButton('increase');
+  const handleTextSizeChange = (event) => {
+    setTextScale(parseFloat(event.target.value));
   };
 
-  const handleDecreaseTextSize = () => {
-    setTextScale(prev => Math.max(prev - 0.1, 0.5));
-    setActiveButton('decrease');
+  const handleResetTextChanges = () => {
+    setTextScale(1);
+    setLineHeightScale(1);
+    setWordSpacingScale(0.1);
+    setCharSpacingScale(0.1);
+    setTextAlign('left');
+    setFontFamily('Poppins');
   };
 
   const handleResetTextSize = () => {
     setTextScale(1);
+  };
+
+  const handleLineHeightChange = (event) => {
+    setLineHeightScale(parseFloat(event.target.value));
+  };
+
+  const handleResetLineHeight = () => {
     setLineHeightScale(1);
-    setActiveButton('reset');
+  };
+
+  const handleWordSpacingChange = (event) => {
+    setWordSpacingScale(parseFloat(event.target.value));
+  };
+
+  const handleResetWordSpacing = () => {
+    setWordSpacingScale(0.1);
+  };
+
+  const handleCharSpacingChange = (event) => {
+    setCharSpacingScale(parseFloat(event.target.value));
+  };
+
+  const handleResetCharSpacing = () => {
+    setCharSpacingScale(1);
+  };
+
+  const handleAlignChange = (alignment) => {
+    setTextAlign(alignment);
+  };
+
+  const handleFontFamilyChange = (event) => {
+    setFontFamily(event.target.value);
   };
 
   const toggleBiggerText = () => {
@@ -202,31 +235,6 @@ const AccessibilityMenu = ({ currentTheme }) => {
     toggleHighlightLinks();
   };
 
-  // read mode font size change
-  // const changeFontSize = (action) => {
-  //   const bodyClassList = document.body.classList;
-  //   bodyClassList.remove(...bodyClassList.value.match(/font-size-\d+/) || []);
-  //   switch (action) {
-  //     case 'increase':
-  //       bodyClassList.add('font-size-22');
-  //       break;
-  //     case 'decrease':
-  //       bodyClassList.add('font-size-14');
-  //       break;
-  //     case 'reset':
-  //     default:
-  //       bodyClassList.add('font-size-18');
-  //       break;
-  //   }
-  // };
-
-  // read mode font weight change
-  // const changeFontWeight = (weight) => {
-  //   const bodyClassList = document.body.classList;
-  //   bodyClassList.remove(...bodyClassList.value.match(/font-weight-\d+/) || []);
-  //   bodyClassList.add(`font-weight-${weight}`);
-  // };
-
   const handleRateChange = (event) => {
     setSpeechRate(parseFloat(event.target.value));
   };
@@ -237,6 +245,30 @@ const AccessibilityMenu = ({ currentTheme }) => {
       setVoice(selected);
     }
   };
+
+  // Dictionary mode
+  // Function to handle text selection
+  const handleTextSelection = () => {
+    if (isDictionaryMode) {
+      const selectedText = window.getSelection().toString().trim();
+      if (selectedText) {
+        setWord(selectedText); // Update selected word in context
+      }
+    }
+  };
+
+  // Add or remove event listener based on dictionary mode
+  useEffect(() => {
+    if (isDictionaryMode) {
+      document.addEventListener('mouseup', handleTextSelection);
+    } else {
+      document.removeEventListener('mouseup', handleTextSelection);
+    }
+    return () => {
+      document.removeEventListener('mouseup', handleTextSelection);
+    };
+  }, [isDictionaryMode]);
+
 
   // Reading mask
   useEffect(() => {
@@ -267,14 +299,14 @@ const AccessibilityMenu = ({ currentTheme }) => {
 
   const ProfileTab = () => (
     <div>
-      <div className="hero-text ml-4 mt-4">Accessiblity Profile</div>
+      <div className="accessibility-heading ml-4 mt-4">Accessiblity Profile</div>
       <div className="accessibility-features">
         <button
           className={`${isDyslexiaActive ? 'active' : ''}`}
           onClick={toggleDyslexiaFont}
         >
-          <FaBookReader />
-          <div className="button-text">Dyslexia Friendly</div>
+          <FaBookReader size={20} />
+          Dyslexia Friendly
         </button>
       </div>
     </div>
@@ -282,14 +314,14 @@ const AccessibilityMenu = ({ currentTheme }) => {
 
   const OrientationTab = () => (
     <div>
-      <div className="hero-text ml-4 mt-4">Orientation Adjustments</div>
+      <div className="accessibility-heading ml-4 mt-4">Orientation Adjustments</div>
       <div className="screen-reader-section">
         <button
           className={`screen-reader-button ${isScreenReaderActive ? 'active' : ''}`}
           onClick={toggleScreenReader}
         >
-          <RiUserVoiceFill />
-          <div className="button-text">Screen Reader</div>
+          <RiUserVoiceFill size={20} />
+          Screen Reader
         </button>
 
         {isScreenReaderActive && (
@@ -299,23 +331,20 @@ const AccessibilityMenu = ({ currentTheme }) => {
                 onClick={moveToPreviousElement}
                 className="screen-reader-option"
                 aria-label="Previous Element">
-                <FaBackwardStep />
+                <FaBackwardStep size={20} />
               </button>
 
               <button
                 onClick={togglePauseResume}
                 className="screen-reader-option"
-              // className={`screen-reader-option ${isPaused ? 'active' : ''}`}
               >
                 {isPaused ? (
                   <div className='screen-reader-option-content'>
-                    <FaPlay />
-                    {/* <div className="button-text">Resume</div> */}
+                    <FaPlay size={20} />
                   </div>
                 ) : (
                   <div className='screen-reader-option-content'>
-                    <FaPause />
-                    {/* <div className="button-text">Pause</div> */}
+                    <FaPause size={20} />
                   </div>
                 )}
               </button>
@@ -324,25 +353,24 @@ const AccessibilityMenu = ({ currentTheme }) => {
                 onClick={moveToNextElement}
                 className="screen-reader-option"
                 aria-label="Next Element">
-                <FaForwardStep />
+                <FaForwardStep size={20} />
               </button>
 
               <button
                 onClick={toggleHighlightVisibility}
                 className={`screen-reader-option ${areHighlightsVisible ? 'active' : ''}`}
               >
-                {/* {areHighlightsVisible ? <FaEyeSlash /> : <FaEye />} */}
-                <FaHighlighter />
-                <div className="button-text">Highlight</div>
+                <FaHighlighter size={20} />
+                Highlight
               </button>
             </div>
 
-            <div className='rate-slider-container'>
-              <label htmlFor="rate-slider" className="button-text">
+            <div className='slider-container'>
+              <label htmlFor="slider-lable">
                 Playback Rate: {rate.toFixed(1)}
               </label>
-              <div className='rate-slider-wrapper'>
-                <GiTortoise className='size-8' />
+              <div className='slider-wrapper p-2'>
+                <GiTortoise size={32} />
                 <input
                   type="range"
                   id="rate-slider"
@@ -351,27 +379,16 @@ const AccessibilityMenu = ({ currentTheme }) => {
                   step="0.1"
                   value={rate}
                   onChange={handleRateChange}
-                  className="rate-slider"
+                  className="slider"
                 />
-                <GiRabbit className='size-8' />
+                <GiRabbit size={32} />
               </div>
             </div>
 
-            <div className="button-text">Voice</div>
-            {/* <select
-              className="button-text custom-select"
-              onChange={handleVoiceChange}
-              value={selectedVoice ? selectedVoice.name : ''}>
-              {voices.map(voice => (
-                <option key={voice.name} value={voice.name}>
-                  {voice.name}
-                </option>
-              ))}
-            </select> */}
-
+            Voice
             <select
               id="voices"
-              className="button-text custom-select"
+              className="custom-select"
               onChange={handleVoiceChange}
               value={selectedVoice ? selectedVoice.name : ''}>
               {voices.map(voice => (
@@ -389,99 +406,257 @@ const AccessibilityMenu = ({ currentTheme }) => {
           className={`${isReadMode ? 'active' : ''}`}
           onClick={toggleReadMode}
         >
-          <IoReader />
-          <div className="button-text">Read Mode</div>
+          <IoReader size={20} />
+          Read Mode
+        </button>
+        <button
+          className={`${isDictionaryMode ? 'active' : ''}`}
+          onClick={toggleDictionaryMode}
+        >
+          <GiWhiteBook size={20} />
+          Dictionary
         </button>
         <button
           className={`${isDyslexiaActive ? 'active' : ''}`}
           onClick={toggleDyslexiaFont}
         >
-          <FaBookReader />
-          <div className="button-text">Dyslexia Friendly</div>
+          <FaBookReader size={20} />
+          Dyslexia Friendly
         </button>
         <button
           className={`${isBiggerText ? 'active' : ''}`}
           onClick={toggleBiggerText}
         >
-          <VscTextSize />
-          <div className="button-text">Bigger Text</div>
+          <VscTextSize size={20} />
+          Bigger Text
         </button>
         <button
           className={`${isBigCursorActive ? 'active' : ''}`}
           onClick={toggleBigCursor}
         >
-          <PiCursorFill />
-          <div className="button-text">Big Cursor</div>
+          <PiCursorFill size={20} />
+          Big Cursor
         </button>
         <button
           className={`${isReadingGuideEnabled ? 'active' : ''}`}
           onClick={toggleReadingGuide}
         >
-          <MdInsertPageBreak />
-          <div className="button-text">Reading Guide</div>
+          <MdInsertPageBreak size={20} />
+          Reading Guide
         </button>
         <button
           className={`${isReadingMaskEnabled ? 'active' : ''}`}
           onClick={toggleReadingMask}
         >
-          <FaAdjust />
-          <div className="button-text">Reading Mask</div>
+          <FaAdjust size={20} />
+          Reading Mask
         </button>
         <button
           className={`${areImagesHidden ? 'active' : ''}`}
           onClick={toggleHideImages}
         >
-          <MdImageNotSupported />
-          <div className="button-text">Hide Images</div>
+          <MdImageNotSupported size={20} />
+          Hide Images
         </button>
+        {/* <button
+          onClick={toggleAnimations}
+          aria-label={isAnimationsPaused ? "Resume Animations" : "Pause Animations"}
+        >
+          <GiMovementSensor size={20} />
+        Pause Animation
+        </button> */}
       </div>
     </div >
   );
 
   const ContentTab = () => (
     <div>
-      <div className="hero-text ml-4 mt-4">Content Adjustments</div>
-      <div className="hero-text ml-4 mt-4">Text Size</div>
       <div className="text-adjustment-section">
-        <div className='text-adjustment-options'>
-          <button
-            className={`text-adjustment-option ${activeButton === 'decrease' ? 'active' : ''}`}
-            onClick={handleDecreaseTextSize}
-          >
-            <MdOutlineTextDecrease />
-            <div className="button-text">Decrease</div>
-          </button>
+        <div className="flex flex-row gap-4">
+          <div className="accessibility-heading">Content Adjustments</div>
 
           <button
-            className={`text-adjustment-option ${activeButton === 'increase' ? 'active' : ''}`}
-            onClick={handleIncreaseTextSize}
+            className='reset-button'
+            onClick={handleResetTextChanges}
           >
-            <MdOutlineTextIncrease />
-            <div className="button-text">Increase</div>
+            Reset All
           </button>
+        </div>
+        <div className='slider-container mb-2'>
+          <div className="slider-header">
+            <label htmlFor="slider-lable">
+              Text Size: {textScale.toFixed(1)}
+            </label>
+            <button
+              className='reset-button'
+              onClick={handleResetTextSize}
+            >
+              Reset
+            </button>
+          </div>
 
+          <div className='slider-wrapper p-2'>
+            <MdOutlineTextFields size={32} />
+            <input
+              type="range"
+              id="text-size-slider"
+              min="0.5"
+              max="2"
+              step="0.1"
+              value={textScale}
+              onChange={handleTextSizeChange}
+              className="slider"
+              aria-label="Adjust text size"
+            />
+          </div >
+        </div >
+
+        <div className='slider-container mb-2'>
+          <div className="slider-header">
+            <label htmlFor="slider-lable">
+              Line Spacing: {lineHeightScale.toFixed(1)}
+            </label>
+            <button
+              className='reset-button'
+              onClick={handleResetLineHeight}
+            >
+              Reset
+            </button>
+          </div>
+          <div className='slider-wrapper p-2'>
+            <TbLineHeight size={32} />
+            <input
+              type="range"
+              min="0.5"
+              max="2"
+              step="0.1"
+              value={lineHeightScale}
+              onChange={handleLineHeightChange}
+              className="slider"
+              aria-label="Adjust line height"
+            />
+          </div>
+        </div>
+
+
+        <div className='slider-container mb-2'>
+          <div className="slider-header">
+            <label htmlFor="slider-lable">
+              Word Spacing: {wordSpacingScale.toFixed(1)}
+            </label>
+            <button
+              className='reset-button'
+              onClick={handleResetWordSpacing}
+            >
+              Reset
+            </button>
+          </div>
+          <div className="slider-wrapper p-2">
+            <MdOutlineSpaceBar size={32} />
+            <input
+              type="range"
+              min="0.5"
+              max="2"
+              step="0.1"
+              value={wordSpacingScale}
+              onChange={handleWordSpacingChange}
+              className="slider"
+              aria-label="Adjust word spacing"
+            />
+          </div>
+        </div>
+
+        <div className='slider-container mb-2'>
+          <div className="slider-header">
+            <label htmlFor="slider-lable">
+              Character Spacing: {charSpacingScale.toFixed(1)}
+            </label>
+            <button
+              className='reset-button'
+              onClick={handleResetCharSpacing}
+            >
+              Reset
+            </button>
+          </div>
+          <div className='slider-wrapper p-2'>
+            <CgFontSpacing size={32} />
+            <input
+              type="range"
+              min="0.5"
+              max="2"
+              step="0.1"
+              value={charSpacingScale}
+              onChange={handleCharSpacingChange}
+              className="slider"
+              aria-label="Adjust character spacing"
+            />
+          </div>
+        </div>
+
+        {/* alignment  */}
+        <div className='text-adjustment-option'>
           <button
-            className={`text-adjustment-option ${activeButton === 'reset' ? 'active' : ''}`}
-            onClick={handleResetTextSize}
+            className={`text-adjustment-button ${textAlign === 'left' ? 'active' : ''}`}
+            onClick={() => handleAlignChange('left')}
           >
-            <div className="button-text">Reset</div>
+            Left
           </button>
+          <button
+            className={`text-adjustment-button ${textAlign === 'center' ? 'active' : ''}`}
+            onClick={() => handleAlignChange('center')}
+          >
+            Center
+          </button>
+          <button
+            className={`text-adjustment-button ${textAlign === 'right' ? 'active' : ''}`}
+            onClick={() => handleAlignChange('right')}
+          >
+            Right
+          </button>
+          <button
+            className={`text-adjustment-button ${textAlign === 'justify' ? 'active' : ''}`}
+            onClick={() => handleAlignChange('justify')}
+          >
+            Justify
+          </button>
+        </div>
 
+        <div className='text-adjustment-option'>
+          <select
+            value={fontFamily}
+            onChange={handleFontFamilyChange}
+            className="custom-select"
+            aria-label="Select font family"
+          >
+            <option value="Poppins">Poppins</option>
+            <option value="sans-serif">Sans Serif</option>
+            <option value="serif">Serif</option>
+            <option value="monospace">Monospace</option>
+          </select>
         </div >
       </div >
+
+
       <div className="accessibility-features">
         <button onClick={toggleMagnifier}
           className={`${isMagnifierActive ? 'active' : ''}`}
         >
-          <HiDocumentMagnifyingGlass />
-          <div className="button-text">Text Magnifier</div>
+          <HiDocumentMagnifyingGlass size={20} />
+          Text Magnifier
         </button>
         <button
           className={`${highlightLinks ? 'active' : ''}`}
           onClick={handleHighlightLinksToggle}
         >
-          <FaLink />
-          <div className="button-text">Highlight Links</div>
+          <FaLink size={20} />
+          Highlight Links
+        </button>
+        <button
+          className={`${isTooltipMode ? 'active' : ''}`} // 
+          onClick={toggleTooltipMode}
+        >
+          <HiDocumentMagnifyingGlass size={20} />
+          Tooltips
         </button>
       </div>
     </div >
@@ -489,43 +664,43 @@ const AccessibilityMenu = ({ currentTheme }) => {
 
   const ColorTab = () => (
     <div>
-      <div className="hero-text ml-4 mt-4">Color Adjustments</div>
+      <div className="accessibility-heading ml-4 mt-4">Color Adjustments</div>
       <div className="accessibility-features">
         <button
           className={`${isDark ? 'active' : ''} ${isReadMode ? 'disabled' : ''}`}
           onClick={isReadMode ? undefined : handleDarkModeToggle}
           disabled={isReadMode}
         >
-          <IoMoon />
-          <div className="button-text">Dark Mode</div>
+          <IoMoon size={20} />
+          Dark Mode
         </button>
         <button
           className={`${isBlueFilterActive ? 'active' : ''}`}
           onClick={toggleBlueFilter}
         >
-          <FaTint />
-          <div className="button-text">Blue Filter</div>
+          <FaTint size={20} />
+          Blue Filter
         </button>
         <button
           className={`${saturationMode === 'low' ? 'active' : ''}`}
           onClick={() => toggleSaturationMode('low')}
         >
-          <MdOutlineInvertColors />
-          <div className="button-text">Low Saturation</div>
+          <MdOutlineInvertColors size={20} />
+          Low Saturation
         </button>
         <button
           className={`${saturationMode === 'high' ? 'active' : ''}`}
           onClick={() => toggleSaturationMode('high')}
         >
-          <MdOutlineInvertColors />
-          <div className="button-text">High Saturation</div>
+          <MdOutlineInvertColors size={20} />
+          High Saturation
         </button>
         <button
           className={`${saturationMode === 'grayscale' ? 'active' : ''}`}
           onClick={() => toggleSaturationMode('grayscale')}
         >
-          <MdOutlineInvertColors />
-          <div className="button-text">Grayscale</div>
+          <MdOutlineInvertColors size={20} />
+          Grayscale
         </button>
         <button
           className={`${isContrastExpanded ? 'active' : ''} ${isReadMode ? 'disabled' : ''}`}
@@ -533,8 +708,8 @@ const AccessibilityMenu = ({ currentTheme }) => {
           aria-label="Toggle Contrast Themes"
           disabled={isReadMode}
         >
-          <FaAdjust />
-          <div className="button-text">Contrast</div>
+          <FaAdjust size={20} />
+          Contrast
         </button>
 
       </div>
@@ -544,36 +719,36 @@ const AccessibilityMenu = ({ currentTheme }) => {
             className={`${isDark ? 'active' : ''} ${contrastTheme === 'default' ? 'active' : ''}`}
             onClick={handleResetContrast}
           >
-            <FaAdjust />
-            <div className="button-text">None</div>
+            <FaAdjust size={20} />
+            None
           </button>
           <button
             className={`${contrastTheme === 'high-contrast' ? 'active' : ''}`}
             onClick={() => handleContrastToggle('high-contrast')}
           >
-            <FaAdjust />
-            <div className="button-text">High Contrast</div>
+            <FaAdjust size={20} />
+            High Contrast
           </button>
           <button
             className={`${contrastTheme === 'cyan-on-black' ? 'active' : ''}`}
             onClick={() => handleContrastToggle('cyan-on-black')}
           >
-            <FaAdjust />
-            <div className="button-text">Cyan on Black</div>
+            <FaAdjust size={20} />
+            Cyan on Black
           </button>
           <button
             className={`${contrastTheme === 'yellow-on-black' ? 'active' : ''}`}
             onClick={() => handleContrastToggle('yellow-on-black')}
           >
-            <FaAdjust />
-            <div className="button-text">Yellow on Black</div>
+            <FaAdjust size={20} />
+            Yellow on Black
           </button>
           <button
             className={`contrast-theme-button ${contrastTheme === 'green-on-black' ? 'active' : ''}`}
             onClick={() => handleContrastToggle('green-on-black')}
           >
-            <FaAdjust />
-            <div className="button-text">Green on Black</div>
+            <FaAdjust size={20} />
+            Green on Black
           </button>
         </div>
       )}
@@ -583,8 +758,8 @@ const AccessibilityMenu = ({ currentTheme }) => {
           onClick={isReadMode ? undefined : toggleColorOptions}
           disabled={isReadMode}
         >
-          <FaLandmark />
-          <div className="button-text">Landmark Colors</div>
+          <FaLandmark size={20} />
+          Landmark Colors
         </button>
       </div>
       {showColorOptions && (
@@ -623,27 +798,27 @@ const AccessibilityMenu = ({ currentTheme }) => {
 
       {isMenuOpen && (
         <div className={`accessibility-menu ${isMenuOpen ? 'open' : ''}`}>
-          <div className="accessibility-menu-heading button-text">
+          <div className="accessibility-menu-heading">
             Accessibility Menu
           </div>
           <div className="accessibility-tabs">
             <button
-              className={`button-text ${activeTab === 'Orientation' ? 'active' : ''}`}
+              className={`${activeTab === 'Orientation' ? 'active' : ''}`}
               onClick={() => handleTabChange('Orientation')}>
               Orientation
             </button>
             <button
-              className={`button-text ${activeTab === 'Content' ? 'active' : ''}`}
+              className={`${activeTab === 'Content' ? 'active' : ''}`}
               onClick={() => handleTabChange('Content')}>
               Content
             </button>
             <button
-              className={`button-text ${activeTab === 'Color' ? 'active' : ''}`}
+              className={`${activeTab === 'Color' ? 'active' : ''}`}
               onClick={() => handleTabChange('Color')}>
               Color
             </button>
             <button
-              className={`button-text ${activeTab === 'Profile' ? 'active' : ''}`}
+              className={`${activeTab === 'Profile' ? 'active' : ''}`}
               onClick={() => handleTabChange('Profile')}>
               Profile
             </button>
@@ -710,6 +885,9 @@ const AccessibilityMenu = ({ currentTheme }) => {
 
       {/* Render the magnifier */}
       {isMagnifierActive && <Magnifier isActive={isMagnifierActive} />}
+
+      {isDictionaryMode && <Dictionary />}
+      <Tooltip />
     </div>
   );
 };

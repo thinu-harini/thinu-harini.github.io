@@ -20,6 +20,7 @@
     "@react-spring/three": "^9.7.3",
     "@react-three/drei": "^9.108.3",
     "@react-three/fiber": "^8.16.8",
+    "axios": "^1.7.7",
     "framer-motion": "^10.18.0",
     "gsap": "^3.12.5",
     "maath": "^0.10.8",

@@ -6,6 +6,13 @@ import '../assets/styles/AccessibilityMenu.css';
 const AccessibilityContext = createContext();
 
 export const AccessibilityProvider = ({ children }) => {
+  const [textScale, setTextScale] = useState(1); // Text scaling factor
+  const [lineHeightScale, setLineHeightScale] = useState(1); // Line height scaling factor
+  const [wordSpacingScale, setWordSpacingScale] = useState(0.1);
+  const [charSpacingScale, setCharSpacingScale] = useState(0.1);
+  const [textAlign, setTextAlign] = useState('left');
+  const [fontFamily, setFontFamily] = useState('Poppins');
+
   const [isDyslexiaFont, setIsDyslexiaFont] = useState(false);
   const [isBigCursor, setIsBigCursor] = useState(false);
 
@@ -30,6 +37,11 @@ export const AccessibilityProvider = ({ children }) => {
   const [selectedVoice, setSelectedVoice] = useState(null);
   const utteranceRef = useRef(null);
   const timeoutRef = useRef(null);
+
+  const [isAnimationsPaused, setIsAnimationsPaused] = useState(false);
+  const [isDictionaryMode, setIsDictionaryMode] = useState(false);
+  const [selectedWord, setSelectedWord] = useState('');
+  const [isTooltipMode, setIsTooltipMode] = useState(false);
 
   const location = useLocation();
 
@@ -445,49 +457,70 @@ export const AccessibilityProvider = ({ children }) => {
 
   const toggleReadMode = () => setIsReadMode(prev => !prev);
 
+
+  const toggleAnimations = () => {
+    setIsAnimationsPaused(prev => !prev);
+    document.documentElement.style.setProperty('--animations-paused', !isAnimationsPaused ? 'paused' : 'running');
+  };
+
+  const toggleDictionaryMode = () => {
+    setIsDictionaryMode(prev => {
+      if (!prev) {
+        // Reset selected word when turning off dictionary mode
+        setSelectedWord('');
+      }
+      return !prev;
+    });
+    console.log('Dictionary mode toggled:', !isDictionaryMode); // Debugging
+  };
+
+  const toggleTooltipMode = () => {
+    setIsTooltipMode(prev => !prev);
+    console.log('Tooltip mode toggled:', !isTooltipMode); // Debugging
+  };
+
   return (
     <AccessibilityContext.Provider value={{
-      isScreenReaderActive,
-      toggleScreenReader,
+      textScale, setTextScale,
+      lineHeightScale, setLineHeightScale,
+      wordSpacingScale, setWordSpacingScale,
+      charSpacingScale, setCharSpacingScale,
+      textAlign, setTextAlign,
+      fontFamily, setFontFamily,
+
+      isScreenReaderActive, toggleScreenReader,
       moveToNextElement,
       moveToPreviousElement,
-      toggleHighlightVisibility,
-      areHighlightsVisible,
-      togglePauseResume,
-      isPaused,
+      areHighlightsVisible, toggleHighlightVisibility,
+      isPaused, togglePauseResume,
       setSpeechRate,
       rate,
       setVoice,
       selectedVoice,
       voices: window.speechSynthesis.getVoices(),
 
-      isDyslexiaFont,
-      toggleDyslexiaFont,
-      isBigCursor,
-      toggleBigCursor,
-      highlightLinks,
-      toggleHighlightLinks,
-      isDark,
-      toggleDarkMode,
-      contrastTheme,
-      toggleContrastTheme,
+      isDyslexiaFont, toggleDyslexiaFont,
+      isBigCursor, toggleBigCursor,
+      highlightLinks, toggleHighlightLinks,
+      isDark, toggleDarkMode,
+      contrastTheme, toggleContrastTheme,
       resetContrastTheme,
       handleContrastToggle,
       handleResetContrast,
-      areImagesHidden,
-      toggleHideImages,
-      isReadingGuideEnabled,
-      toggleReadingGuide,
-      guidePosition,
-      updateGuidePosition,
-      isReadingMaskEnabled,
-      toggleReadingMask,
-      maskDimensions,
-      updateMaskDimensions,
-      isReadMode,
-      toggleReadMode,
-      currentFont,
-      changeFont,
+      areImagesHidden, toggleHideImages,
+      isReadingGuideEnabled, toggleReadingGuide,
+      guidePosition, updateGuidePosition,
+      isReadingMaskEnabled, toggleReadingMask,
+      maskDimensions, updateMaskDimensions,
+
+      isReadMode, toggleReadMode,
+      currentFont, changeFont,
+
+      isAnimationsPaused, toggleAnimations,
+      isDictionaryMode, toggleDictionaryMode,
+      selectedWord, setSelectedWord,
+      setWord: setSelectedWord,
+      isTooltipMode, toggleTooltipMode,
     }}>
       {children}
     </AccessibilityContext.Provider>

@@ -24,7 +24,7 @@ const SocialIcons = () => {
         title="Dribbble Profile"
         className="icon-button"
       >
-        <PiDribbbleLogoFill />
+        <PiDribbbleLogoFill data-tooltip="Go to homepage" />
       </a>
 
       {/* <a href="https://www.behance.net/"
