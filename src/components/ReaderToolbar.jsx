@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useAccessibility } from './AccessibilityContext';
 import { IoIosArrowDown, IoIosArrowUp, IoIosColorPalette } from 'react-icons/io';
 import { IoClose, IoText } from 'react-icons/io5';
 import { PiTextAlignCenterBold, PiTextAlignJustifyBold, PiTextAlignLeftBold, PiTextAlignRightBold } from 'react-icons/pi';
@@ -12,14 +11,13 @@ import '../assets/styles/ReaderToolbar.css';
 
 const FONT_SIZE_CLASSES = [
   'font-size-14',
-  'font-size-18', // Default
+  'font-size-18',
   'font-size-22',
   'font-size-26',
   'font-size-30',
   'font-size-34',
   'font-size-38'
 ];
-
 const FONT_WEIGHTS = {
   default: 'default',
   regular: 'regular',
@@ -27,19 +25,20 @@ const FONT_WEIGHTS = {
   bolder: 'bolder',
 };
 const FONT_FAMILIES = ['sans-serif', 'serif', 'monospace'];
-const TEXT_ALIGNMENTS = ['left', 'center', 'right', 'justify'];
 const WORD_SPACING_STEPS = [0, 2, 4, 6, 8];
 const LETTER_SPACING_STEPS = [0, 1, 2, 3, 4];
 const LINE_SPACING_STEPS = [1, 2, 3, 4, 5];
+const TEXT_ALIGNMENTS = ['left', 'center', 'right', 'justify'];
 
 const DEFAULT_VALUES = {
   fontSizeIndex: 1,
   fontWeight: FONT_WEIGHTS.default,
-  contentWidth: 75,
-  textAlignment: 'left',
+  fontFamily: 'sans-serif',
   wordSpacingIndex: 0,
   letterSpacingIndex: 0,
-  lineSpacingIndex: 1
+  contentWidth: 75,
+  lineSpacingIndex: 1,
+  textAlignment: 'left'
 };
 
 const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, closeAccessibilityMenu }) => {
@@ -49,15 +48,15 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, close
 
   const [fontSizeIndex, setFontSizeIndex] = useState(DEFAULT_VALUES.fontSizeIndex);
   const [fontWeight, setFontWeight] = useState(DEFAULT_VALUES.fontWeight);
-  const [contentWidth, setContentWidth] = useState(DEFAULT_VALUES.contentWidth);
-  const [textAlignment, setTextAlignment] = useState(DEFAULT_VALUES.textAlignment);
+  const [fontFamily, setFontFamily] = useState(DEFAULT_VALUES.fontFamily);
   const [wordSpacingIndex, setWordSpacingIndex] = useState(DEFAULT_VALUES.wordSpacingIndex);
   const [letterSpacingIndex, setLetterSpacingIndex] = useState(DEFAULT_VALUES.letterSpacingIndex);
+  const [textAlignment, setTextAlignment] = useState(DEFAULT_VALUES.textAlignment);
+  const [contentWidth, setContentWidth] = useState(DEFAULT_VALUES.contentWidth);
   const [lineSpacingIndex, setLineSpacingIndex] = useState(DEFAULT_VALUES.lineSpacingIndex);
+
   const [hasChanges, setHasChanges] = useState(false);
   const [showAdvanced, setShowAdvanced] = useState(false);
-
-  const { currentFont, changeFont, isDyslexiaFont, toggleDyslexiaFont } = useAccessibility();
 
   useEffect(() => {
     if (!isReadMode) return;
@@ -67,11 +66,13 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, close
     bodyClassList.add(`${FONT_SIZE_CLASSES[fontSizeIndex]}`);
     Object.values(FONT_WEIGHTS).forEach(weight => bodyClassList.remove(`font-weight-${weight}`));
     bodyClassList.add(`font-weight-${fontWeight}`);
+    bodyClassList.remove(...FONT_FAMILIES.map(family => `font-family-${family}`));
+    bodyClassList.add(`font-family-${fontFamily}`);
     bodyClassList.remove(...bodyClassList.value.match(/letter-spacing-\d+/) || []);
     bodyClassList.add(`letter-spacing-${LETTER_SPACING_STEPS[letterSpacingIndex]}`);
     bodyClassList.remove(...bodyClassList.value.match(/line-height-\d+/) || []);
     bodyClassList.add(`line-height-${LINE_SPACING_STEPS[lineSpacingIndex]}`);
-  }, [fontSizeIndex, fontWeight, letterSpacingIndex, lineSpacingIndex, isReadMode]);
+  }, [fontSizeIndex, fontWeight, fontFamily, letterSpacingIndex, lineSpacingIndex, isReadMode]);
 
   // reset all 
   const resetAllSettings = () => {
@@ -82,6 +83,7 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, close
     setWordSpacingIndex(DEFAULT_VALUES.wordSpacingIndex);
     setLetterSpacingIndex(DEFAULT_VALUES.letterSpacingIndex);
     setLineSpacingIndex(DEFAULT_VALUES.lineSpacingIndex);
+    setFontFamily('sans-serif');
 
     // Apply the default classes and styles
     const bodyClassList = document.body.classList;
@@ -90,6 +92,9 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, close
 
     bodyClassList.remove(...Object.values(FONT_WEIGHTS).map(weight => `font-weight-${weight}`));
     bodyClassList.add(`font-weight-${DEFAULT_VALUES.fontWeight}`);
+
+    bodyClassList.remove(...FONT_FAMILIES.map(family => `font-family-${family}`));
+    bodyClassList.add(`font-family-${DEFAULT_VALUES.fontFamily}`); // Ensure default font family
 
     bodyClassList.remove(...bodyClassList.value.match(/letter-spacing-\d+/) || []);
     bodyClassList.add(`letter-spacing-${LETTER_SPACING_STEPS[DEFAULT_VALUES.letterSpacingIndex]}`);
@@ -102,7 +107,6 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, close
     // Update the changes state
     setHasChanges(false);
   };
-
 
   //reset button appear if changes occured
   const checkForChanges = () => {
@@ -140,11 +144,6 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, close
   const handleFontWeightChange = (e) => {
     const newWeight = e.target.value;
     setFontWeight(newWeight);
-  };
-
-  const handleFontFamilyChange = (e) => {
-    const newFont = e.target.value;
-    changeFont(newFont);
   };
 
   const handleTextAlignmentChange = (alignment) => {
@@ -212,9 +211,7 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, close
   return (
     isReadMode && (
       <div className="reader-toolbar" ref={readerToolbarRef} onClick={closeAccessibilityMenu}>
-        <button onClick={onClose} aria-label="Close Reader View">
-          <IoClose />
-        </button>
+
 
         <button
           onClick={toggleContentAdjustment}
@@ -232,11 +229,15 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, close
           <IoIosColorPalette />
         </button>
 
+        <button onClick={onClose} aria-label="Close Reader View">
+          <IoClose />
+        </button>
+
         {activeMenu === 'content' && (
 
           <div className="content-adjustment-menu">
             <div className='heading'>
-              <div className="content-heading">Text</div>
+              <div className="reader-toolbar-heading">Text</div>
               {hasChanges && (
                 <button
                   onClick={resetAllSettings}
@@ -250,7 +251,7 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, close
 
             {/* <h2 className='mb-4'>Text</h2> */}
 
-            <div className="education-heading">Text Size</div>
+            <div className="reader-toolbar-text">Text Size</div>
             <div className="slider-wrapper mt-4 mb-7">
               <MdOutlineTextFields size={32} />
               <div className="slider-adjustment">
@@ -266,30 +267,27 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, close
                   className="slider"
                 />
                 <div className="ticks-container" id="font-size-slider-ticks"></div>
-                {/* <span>
-                  {FONT_SIZE_CLASSES[fontSizeIndex].replace('font-size-', '')}px
-                </span> */}
               </div>
             </div>
 
             <div className="content-adjustment-option">
               <div>
-                <div className="education-heading">Font Family</div>
+                <div className="reader-toolbar-text">Font Family</div>
                 <select
-                  value={currentFont}
-                  onChange={handleFontFamilyChange}
+                  value={fontFamily}
+                  onChange={(e) => setFontFamily(e.target.value)}
                   aria-label="Font Family"
                 >
-                  {FONT_FAMILIES.map(font => (
-                    <option key={font} value={font}>
-                      {font.charAt(0).toUpperCase() + font.slice(1)}
+                  {FONT_FAMILIES.map((family) => (
+                    <option key={family} value={family}>
+                      {family.charAt(0).toUpperCase() + family.slice(1)}
                     </option>
                   ))}
                 </select>
               </div>
 
               <div>
-                <div className="education-heading">Font Weight</div>
+                <div className="reader-toolbar-text">Font Weight</div>
                 {/* <div className="content-adjustment-option"> */}
                 <select value={fontWeight} onChange={handleFontWeightChange}>
                   <option value={FONT_WEIGHTS.default}>Default</option>
@@ -300,31 +298,18 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, close
               </div>
             </div>
 
-            <div>
+            <div className="flex flex-row justify-between items-center">
+              <div className="reader-toolbar-heading">Advanced</div>
               <button
-                onClick={toggleDyslexiaFont}
-                className={isDyslexiaFont ? 'active' : ''}
-                aria-label="Dyslexia Font"
+                onClick={handleAdvancedToggle}
+                className={`advanced-toggle-button ${showAdvanced ? 'active' : ''}`}
               >
-                {isDyslexiaFont ?
-                  <div className="education-heading">Dyslexia On</div>
-                  :
-                  <div className="education-heading">Dyslexia Off</div>
-                }
+                {showAdvanced ? <IoIosArrowUp /> : <IoIosArrowDown />}
               </button>
             </div>
-
-            <button
-              onClick={handleAdvancedToggle}
-              className={`advanced-toggle-button ${showAdvanced ? 'active' : ''}`}
-            >
-              <div className="content-heading">Advanced</div>
-              {showAdvanced ? <IoIosArrowUp /> : <IoIosArrowDown />}
-            </button>
-
             {showAdvanced && (
               <>
-                <div className="education-heading">Word Spacing</div>
+                <div className="reader-toolbar-text">Word Spacing</div>
                 <div className="slider-wrapper mt-4 mb-7">
                   <MdOutlineSpaceBar size={32} />
                   <div className="slider-adjustment">
@@ -342,7 +327,7 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, close
                   </div>
                 </div>
 
-                <div className="education-heading">Character Spacing</div>
+                <div className="reader-toolbar-text">Character Spacing</div>
                 <div className="slider-wrapper mt-4 mb-7">
                   <CgFontSpacing size={32} />
                   <div className="slider-adjustment">
@@ -365,25 +350,9 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, close
             <div className="horizontal-line-container">
               <div className="horizontal-line"></div>
             </div>
-            <div className="content-heading mt-4 mb-4">Layout</div>
-            <div className="education-heading">Text Alignment</div>
-            <div className="content-adjustment-option">
-              {TEXT_ALIGNMENTS.map(alignment => (
-                <button
-                  key={alignment}
-                  onClick={() => handleTextAlignmentChange(alignment)}
-                  className={textAlignment === alignment ? 'active' : ''}
-                  aria-label={`Align Text ${alignment.charAt(0).toUpperCase() + alignment.slice(1)}`}
-                >
-                  {alignment === 'left' && <PiTextAlignLeftBold />}
-                  {alignment === 'center' && <PiTextAlignCenterBold />}
-                  {alignment === 'right' && <PiTextAlignRightBold />}
-                  {alignment === 'justify' && <PiTextAlignJustifyBold />}
-                </button>
-              ))}
-            </div>
+            <div className="reader-toolbar-heading mt-4 mb-4">Layout</div>
 
-            <div className="education-heading">Content Width</div>
+            <div className="reader-toolbar-text">Content Width</div>
             <div className="slider-wrapper mt-4 mb-7">
               <AiOutlineColumnWidth size={32} />
               <div className="slider-adjustment">
@@ -401,7 +370,7 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, close
               </div>
             </div>
 
-            <div className="education-heading">Line Spacing</div>
+            <div className="reader-toolbar-text">Line Spacing</div>
             <div className="slider-wrapper mt-4 mb-7">
               <TbLineHeight size={32} />
               <div className="slider-adjustment">
@@ -419,6 +388,23 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, close
               </div>
             </div>
 
+            <div className="reader-toolbar-text">Text Alignment</div>
+            <div className="content-adjustment-option">
+              {TEXT_ALIGNMENTS.map(alignment => (
+                <button
+                  key={alignment}
+                  onClick={() => handleTextAlignmentChange(alignment)}
+                  className={textAlignment === alignment ? 'active' : ''}
+                  aria-label={`Align Text ${alignment.charAt(0).toUpperCase() + alignment.slice(1)}`}
+                >
+                  {alignment === 'left' && <PiTextAlignLeftBold />}
+                  {alignment === 'center' && <PiTextAlignCenterBold />}
+                  {alignment === 'right' && <PiTextAlignRightBold />}
+                  {alignment === 'justify' && <PiTextAlignJustifyBold />}
+                </button>
+              ))}
+            </div>
+
           </div>
         )}
 
@@ -430,30 +416,30 @@ const ReaderToolbar = ({ isReadMode, onClose, currentTheme, onChangeTheme, close
                 className={`light-button ${currentTheme === 'light-theme' ? 'active' : ''}`}
                 aria-label="Light Mode"
               >
-                <div className="button-text">Light Mode</div>
+                Light
               </button>
               <button
                 onClick={() => onChangeTheme('dark-theme')}
                 className={`dark-button ${currentTheme === 'dark-theme' ? 'active' : ''}`}
                 aria-label="Dark Mode"
               >
-                <div className="button-text">Dark Mode</div>
+                Dark
               </button>
               <button
                 onClick={() => onChangeTheme('sepia-theme')}
                 className={`sepia-button ${currentTheme === 'sepia-theme' ? 'active' : ''}`}
                 aria-label="Sepia Mode"
               >
-                <div className="button-text">Sepia Mode</div>
+                Sepia
               </button>
               <button
                 onClick={() => onChangeTheme('contrast-theme')}
                 className={`contrast-button ${currentTheme === 'contrast-theme' ? 'active' : ''}`}
                 aria-label="Contrast Mode"
               >
-                <div className="button-text">Contrast Mode</div>
+                Contrast
               </button>
-            </div>
+            </div >
           )}
       </div >
     )

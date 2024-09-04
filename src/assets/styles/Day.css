@@ -1,6 +1,6 @@
 .day-bg {
-  /* background: linear-gradient(to bottom, #ffde96, #fda4d3, #a890ff, #819fff, #819fff, #819fff, #819fff); */
-  background: linear-gradient(to bottom, #ffffff, #819fff, #819fff);
+  background: linear-gradient(to top, #ffde96, #ffde96, #fda4d3, #a890ff, #819fff, #819fff, #fff);
+  /* background: linear-gradient(to bottom, #ffffff, #819fff, #819fff); */
   overflow: hidden;
   transition: background-color 500ms ease-in-out;
 }

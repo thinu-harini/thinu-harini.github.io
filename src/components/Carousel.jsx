@@ -248,13 +248,13 @@ const Carousel = () => {
 
         {messageVisible && (
           <>
-            <div className="content-subheading overlay-message desktop-message">
+            <div className="button-text overlay-message desktop-message">
               <p>
                 Scroll or use arrow keys to explore
               </p>
             </div>
 
-            <div className="content-subheading overlay-message mobile-message">
+            <div className="button-text overlay-message mobile-message">
               <p>
                 Swipe to explore
               </p>

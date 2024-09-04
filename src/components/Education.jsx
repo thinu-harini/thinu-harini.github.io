@@ -34,7 +34,7 @@ const Education = () => {
     <>
       {isReadMode ? (
         <div className="read-mode-content">
-          <h1>Education.</h1>
+          <h1 className="readable">Education.</h1>
           {education.map((edu, index) => (
             <div
               key={`education-${index}`}
@@ -51,10 +51,7 @@ const Education = () => {
       ) : (
         <div>
           <motion.div variants={textVariant()}>
-            <h1
-              className="section-heading readable"
-              id="education-heading"
-            >
+            <h1 className="section-heading readable">
               Education
             </h1>
           </motion.div>

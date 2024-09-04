@@ -4,7 +4,7 @@ import Toolbar from "../components/Toolbar";
 import useSearch from '../hooks/useSearch';
 import IchatcsCover from '../assets/projects/ichatcs.png';
 import ScrollButton from "../components/ScrollButton";
-
+import IchatcsCover2 from '../assets/projects/groome.png';
 const Ichatcs = () => {
   const contentRef = useRef(null);
   const [contentMarginLeft, setContentMarginLeft] = useState(0);
@@ -49,7 +49,7 @@ const Ichatcs = () => {
             <h1 className="section-heading">Ichatcs</h1>
           </div>
 
-          <p className="content-subheading mb-10 readable">A Booking and Team Management Platform</p>
+          {/* <p className="content-subheading mb-10 readable">A Booking and Team Management Platform</p> */}
 
           <img
             src={IchatcsCover}
@@ -91,6 +91,259 @@ const Ichatcs = () => {
             {highlightText("Lorem ipsum ipsum dd dolor sit amet, loremconsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")}
           </p>
         </div>
+
+
+        <div className="mt-10 readable" id="design-process">
+          <h2 className="casestudy-heading">Design Process</h2>
+          <h3 className="casestudy-subheading square-before">Stakeholder Interviews</h3>
+          <p className="casestudy-text">
+            {highlightText("lorem ipsum dolor sit amet, Lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")}
+          </p>
+          <h3 className="casestudy-subheading square-before">Userflows</h3>
+          <p className="casestudy-text">
+            {highlightText("Lorem ipsum dolor sit amet, lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem")}
+          </p>
+          <img
+            src={IchatcsCover2}
+            alt='project_image'
+            className='w-full h-auto object-cover rounded-2xl'
+          />
+        </div>  <div className="mt-10 readable" id="design-process">
+          <h2 className="casestudy-heading">Design Process</h2>
+          <h3 className="casestudy-subheading square-before">Stakeholder Interviews</h3>
+          <p className="casestudy-text">
+            {highlightText("lorem ipsum dolor sit amet, Lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")}
+          </p>
+          <h3 className="casestudy-subheading square-before">Userflows</h3>
+          <p className="casestudy-text">
+            {highlightText("Lorem ipsum dolor sit amet, lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem")}
+          </p>
+        </div>  <div className="mt-10 readable" id="design-process">
+          <h2 className="casestudy-heading">Design Process</h2>
+          <h3 className="casestudy-subheading square-before">Stakeholder Interviews</h3>
+          <p className="casestudy-text">
+            {highlightText("lorem ipsum dolor sit amet, Lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")}
+          </p>
+          <h3 className="casestudy-subheading square-before">Userflows</h3>
+          <p className="casestudy-text">
+            {highlightText("Lorem ipsum dolor sit amet, lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem")}
+          </p>
+        </div>  <div className="mt-10 readable" id="design-process">
+          <h2 className="casestudy-heading">Design Process</h2>
+          <h3 className="casestudy-subheading square-before">Stakeholder Interviews</h3>
+          <p className="casestudy-text">
+            {highlightText("lorem ipsum dolor sit amet, Lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")}
+          </p>
+          <h3 className="casestudy-subheading square-before">Userflows</h3>
+          <p className="casestudy-text">
+            {highlightText("Lorem ipsum dolor sit amet, lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem")}
+          </p>
+        </div>  <div className="mt-10 readable" id="design-process">
+          <h2 className="casestudy-heading">Design Process</h2>
+          <h3 className="casestudy-subheading square-before">Stakeholder Interviews</h3>
+          <p className="casestudy-text">
+            {highlightText("lorem ipsum dolor sit amet, Lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")}
+          </p>
+          <h3 className="casestudy-subheading square-before">Userflows</h3>
+          <p className="casestudy-text">
+            {highlightText("Lorem ipsum dolor sit amet, lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem")}
+          </p>
+        </div>  <div className="mt-10 readable" id="design-process">
+          <h2 className="casestudy-heading">Design Process</h2>
+          <h3 className="casestudy-subheading square-before">Stakeholder Interviews</h3>
+          <p className="casestudy-text">
+            {highlightText("lorem ipsum dolor sit amet, Lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")}
+          </p>
+          <h3 className="casestudy-subheading square-before">Userflows</h3>
+          <p className="casestudy-text">
+            {highlightText("Lorem ipsum dolor sit amet, lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem")}
+          </p>
+        </div>  <div className="mt-10 readable" id="design-process">
+          <h2 className="casestudy-heading">Design Process</h2>
+          <h3 className="casestudy-subheading square-before">Stakeholder Interviews</h3>
+          <p className="casestudy-text">
+            {highlightText("lorem ipsum dolor sit amet, Lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")}
+          </p>
+          <img
+            src={IchatcsCover}
+            alt='project_image'
+            className='w-full h-auto object-cover rounded-2xl'
+          />
+          <h3 className="casestudy-subheading square-before">Userflows</h3>
+          <p className="casestudy-text">
+            {highlightText("Lorem ipsum dolor sit amet, lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem")}
+          </p>
+        </div>  <div className="mt-10 readable" id="design-process">
+          <h2 className="casestudy-heading">Design Process</h2>
+          <h3 className="casestudy-subheading square-before">Stakeholder Interviews</h3>
+          <p className="casestudy-text">
+            {highlightText("lorem ipsum dolor sit amet, Lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")}
+          </p>
+          <h3 className="casestudy-subheading square-before">Userflows</h3>
+          <p className="casestudy-text">
+            {highlightText("Lorem ipsum dolor sit amet, lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem")}
+          </p>
+          <img
+            src={IchatcsCover2}
+            alt='project_image'
+            className='w-full h-auto object-cover rounded-2xl'
+          />
+        </div>  <div className="mt-10 readable" id="design-process">
+          <h2 className="casestudy-heading">Design Process</h2>
+          <h3 className="casestudy-subheading square-before">Stakeholder Interviews</h3>
+          <p className="casestudy-text">
+            {highlightText("lorem ipsum dolor sit amet, Lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")}
+          </p>
+          <h3 className="casestudy-subheading square-before">Userflows</h3>
+          <p className="casestudy-text">
+            {highlightText("Lorem ipsum dolor sit amet, lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem")}
+          </p>
+        </div>  <div className="mt-10 readable" id="design-process">
+          <h2 className="casestudy-heading">Design Process</h2>
+          <h3 className="casestudy-subheading square-before">Stakeholder Interviews</h3>
+          <p className="casestudy-text">
+            {highlightText("lorem ipsum dolor sit amet, Lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")}
+          </p>
+          <h3 className="casestudy-subheading square-before">Userflows</h3>
+          <p className="casestudy-text">
+            {highlightText("Lorem ipsum dolor sit amet, lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem")}
+          </p>
+        </div>  <div className="mt-10 readable" id="design-process">
+          <h2 className="casestudy-heading">Design Process</h2>
+          <h3 className="casestudy-subheading square-before">Stakeholder Interviews</h3>
+          <p className="casestudy-text">
+            {highlightText("lorem ipsum dolor sit amet, Lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")}
+          </p>
+          <img
+            src={IchatcsCover}
+            alt='project_image'
+            className='w-full h-auto object-cover rounded-2xl'
+          />
+          <h3 className="casestudy-subheading square-before">Userflows</h3>
+          <p className="casestudy-text">
+            {highlightText("Lorem ipsum dolor sit amet, lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem")}
+          </p>
+        </div>  <div className="mt-10 readable" id="design-process">
+          <h2 className="casestudy-heading">Design Process</h2>
+          <h3 className="casestudy-subheading square-before">Stakeholder Interviews</h3>
+          <p className="casestudy-text">
+            {highlightText("lorem ipsum dolor sit amet, Lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")}
+          </p>
+          <h3 className="casestudy-subheading square-before">Userflows</h3>
+          <p className="casestudy-text">
+            {highlightText("Lorem ipsum dolor sit amet, lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem")}
+          </p>
+        </div>  <div className="mt-10 readable" id="design-process">
+          <h2 className="casestudy-heading">Design Process</h2>
+          <h3 className="casestudy-subheading square-before">Stakeholder Interviews</h3>
+          <p className="casestudy-text">
+            {highlightText("lorem ipsum dolor sit amet, Lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")}
+          </p>
+          <h3 className="casestudy-subheading square-before">Userflows</h3>
+          <p className="casestudy-text">
+            {highlightText("Lorem ipsum dolor sit amet, lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem")}
+          </p>
+        </div>
+        <div className="mt-10 readable" id="design-process">
+          <h2 className="casestudy-heading">Design Process</h2>
+          <h3 className="casestudy-subheading square-before">Stakeholder Interviews</h3>
+          <p className="casestudy-text">
+            {highlightText("lorem ipsum dolor sit amet, Lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")}
+          </p>
+          <h3 className="casestudy-subheading square-before">Userflows</h3>
+          <p className="casestudy-text">
+            {highlightText("Lorem ipsum dolor sit amet, lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem")}
+          </p>
+        </div>
+        <div className="mt-10 readable" id="design-process">
+          <h2 className="casestudy-heading">Design Process</h2>
+          <h3 className="casestudy-subheading square-before">Stakeholder Interviews</h3>
+          <p className="casestudy-text">
+            {highlightText("lorem ipsum dolor sit amet, Lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")}
+          </p>
+          <h3 className="casestudy-subheading square-before">Userflows</h3>
+          <p className="casestudy-text">
+            {highlightText("Lorem ipsum dolor sit amet, lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem")}
+          </p>
+        </div>
+        <div className="mt-10 readable" id="design-process">
+          <h2 className="casestudy-heading">Design Process</h2>
+          <h3 className="casestudy-subheading square-before">Stakeholder Interviews</h3>
+          <p className="casestudy-text">
+            {highlightText("lorem ipsum dolor sit amet, Lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")}
+          </p>
+          <h3 className="casestudy-subheading square-before">Userflows</h3>
+          <p className="casestudy-text">
+            {highlightText("Lorem ipsum dolor sit amet, lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem")}
+          </p>
+        </div>
+        <div className="mt-10 readable" id="design-process">
+          <h2 className="casestudy-heading">Design Process</h2>
+          <h3 className="casestudy-subheading square-before">Stakeholder Interviews</h3>
+          <p className="casestudy-text">
+            {highlightText("lorem ipsum dolor sit amet, Lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")}
+          </p>
+          <h3 className="casestudy-subheading square-before">Userflows</h3>
+          <p className="casestudy-text">
+            {highlightText("Lorem ipsum dolor sit amet, lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem")}
+          </p>
+        </div>
+        <div className="mt-10 readable" id="design-process">
+          <h2 className="casestudy-heading">Design Process</h2>
+          <h3 className="casestudy-subheading square-before">Stakeholder Interviews</h3>
+          <p className="casestudy-text">
+            {highlightText("lorem ipsum dolor sit amet, Lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")}
+          </p>
+          <h3 className="casestudy-subheading square-before">Userflows</h3>
+          <p className="casestudy-text">
+            {highlightText("Lorem ipsum dolor sit amet, lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem")}
+          </p>
+        </div>
+        <div className="mt-10 readable" id="design-process">
+          <h2 className="casestudy-heading">Design Process</h2>
+          <h3 className="casestudy-subheading square-before">Stakeholder Interviews</h3>
+          <p className="casestudy-text">
+            {highlightText("lorem ipsum dolor sit amet, Lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")}
+          </p>
+          <h3 className="casestudy-subheading square-before">Userflows</h3>
+          <p className="casestudy-text">
+            {highlightText("Lorem ipsum dolor sit amet, lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem")}
+          </p>
+        </div>
+        <div className="mt-10 readable" id="design-process">
+          <h2 className="casestudy-heading">Design Process</h2>
+          <h3 className="casestudy-subheading square-before">Stakeholder Interviews</h3>
+          <p className="casestudy-text">
+            {highlightText("lorem ipsum dolor sit amet, Lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")}
+          </p>
+          <h3 className="casestudy-subheading square-before">Userflows</h3>
+          <p className="casestudy-text">
+            {highlightText("Lorem ipsum dolor sit amet, lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem")}
+          </p>
+        </div>
+        <div className="mt-10 readable" id="design-process">
+          <h2 className="casestudy-heading">Design Process</h2>
+          <h3 className="casestudy-subheading square-before">Stakeholder Interviews</h3>
+          <p className="casestudy-text">
+            {highlightText("lorem ipsum dolor sit amet, Lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")}
+          </p>
+          <h3 className="casestudy-subheading square-before">Userflows</h3>
+          <p className="casestudy-text">
+            {highlightText("Lorem ipsum dolor sit amet, lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem")}
+          </p>
+        </div>
+        <div className="mt-10 readable" id="design-process">
+          <h2 className="casestudy-heading">Design Process</h2>
+          <h3 className="casestudy-subheading square-before">Stakeholder Interviews</h3>
+          <p className="casestudy-text">
+            {highlightText("lorem ipsum dolor sit amet, Lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")}
+          </p>
+          <h3 className="casestudy-subheading square-before">Userflows</h3>
+          <p className="casestudy-text">
+            {highlightText("fffffLorem ipsum dolor sit amet, lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem")}
+          </p>
+        </div>
+
 
       </div>
     </div>

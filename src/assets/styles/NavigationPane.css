@@ -5,7 +5,7 @@
   left: 0;
   height: calc(100vh - 90px);
   transition: width 0.3s ease;
-  z-index: 1;
+  z-index: 10;
 }
 
 .navigation-pane-container.hidden {
@@ -56,11 +56,11 @@
 }
 
 .navigation-pane-content.active {
-  color: var(--alert-red);
+  color: var(--accent);
 }
 
 .navigation-pane-content:active {
-  color: var(--alert-red);
+  color: var(--accent);
 }
 
 .resizer-button {
@@ -76,5 +76,5 @@
   background-color: var(--gray-300);
   color: var(--white);
   cursor: ew-resize;
-  z-index: 20;
+  z-index: 3;
 }

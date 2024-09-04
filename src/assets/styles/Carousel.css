@@ -85,7 +85,7 @@
   text-align: left;
   padding: 20px;
   user-select: none;
-  z-index: 9;
+  z-index: 1;
 }
 
 .slide-content h1,
@@ -123,7 +123,7 @@
   cursor: url('src/assets/pointer.png'), pointer;
   bottom: 20px;
   right: 20px;
-  z-index: 10px;
+  z-index: 2px;
 }
 
 .big-cursor .carousel-slide-button {
@@ -138,31 +138,35 @@
 
 .overlay-message {
   position: fixed;
-  color: var(--white-400);
-  text-align: center;
+  color: var(--white);
   padding: 20px;
   font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;
-  z-index: 12;
+  z-index: 21;
   display: none;
+  align-items: center;
+  /* text-align: center; */
+  /* justify-content: center; */
+  justify-items: center;
   animation: slideInFromBottom 0.8s ease-in forwards;
 }
 
 @media (min-width: 993px) {
   .desktop-message {
     bottom: 10px;
-    width: 30%;
+    width: auto;
     display: block;
     background-color: #050027d8;
     border-radius: 8px;
+
   }
 }
 
 @media (max-width: 992px) {
   .mobile-message {
     top: 95px;
-    width: 80%;
+    width: auto;
     display: block;
   }
 }

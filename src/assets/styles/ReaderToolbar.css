@@ -9,48 +9,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 30;
-}
-
-/* Large devices: Reader Toolbar on the left side */
-@media (min-width: 993px) {
-  .reader-toolbar {
-    top: 40px;
-    left: 40px;
-    right: auto;
-    bottom: auto;
-    padding: 24px;
-  }
-
-  .reader-toolbar button {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-}
-
-/* Small devices: Reader Toolbar on top center */
-@media (max-width: 992px) {
-  .reader-toolbar {
-    top: 20px;
-    left: 50%;
-    flex-direction: row;
-    transform: translateX(-50%);
-    right: auto;
-    bottom: auto;
-    padding: 4px;
-    gap: 2px;
-  }
-
-  .reader-toolbar button {
-    margin-top: 6px;
-    margin-bottom: 6px;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
+  z-index: 8;
 }
 
 .reader-toolbar button {
@@ -63,6 +22,40 @@
   cursor: pointer;
 }
 
+/* Large devices: Reader Toolbar on the left side */
+@media (min-width: 993px) {
+  .reader-toolbar {
+    top: 40px;
+    right: 40px;
+    left: auto;
+    bottom: auto;
+    padding: 24px;
+  }
+
+  .reader-toolbar button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+/* Small devices: Reader Toolbar on top center */
+@media (max-width: 992px) {
+  .reader-toolbar {
+    bottom: 20px;
+    left: 50%;
+    flex-direction: row;
+    transform: translateX(-50%);
+    padding: 4px 16px;
+    gap: 2px;
+  }
+
+  .reader-toolbar button {
+    margin-top: 6px;
+    margin-bottom: 6px;
+  }
+}
+
+
 .reader-toolbar button:hover {
   color: var(--accent);
   background-color: var(--secondary);
@@ -74,16 +67,16 @@
   background-color: var(--secondary);
 }
 
-/* Themes buttons */
+/* Themes menu */
 
 .theme-menu {
   position: fixed;
-  top: 200px;
-  left: 140px;
+  top: 140px;
+  right: 140px;
   background-color: var(--secondary);
   border-radius: 6px;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
-  z-index: 40;
+  z-index: 7;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   padding: 10px;
@@ -92,12 +85,13 @@
 @media (max-width: 992px) {
   .theme-menu {
     position: absolute;
-    top: 80px;
+    top: -180px;
     left: 50%;
     transform: translate(-50%, 0);
-    width: 60vw;
+    width: calc(100vw - 20px);
+    max-width: 400px;
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     padding: 10px;
   }
 }
@@ -109,6 +103,10 @@
   margin: 8px;
   cursor: pointer;
   padding: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
 }
 
 @media (max-width: 992px) {
@@ -195,24 +193,19 @@
 
 .read-mode .contrast-button.active {
   background-color: #000;
-  color: #22d33f;
+  color: #fff200;
   border: 4px solid var(--tertiary);
 }
 
 
-
-
-
-/* Styles for content adjustoment menu */
-
+/* Styles for content adjustment menu */
 .content-adjustment-menu {
   position: fixed;
-  top: 140px;
-  left: 140px;
+  top: 75px;
+  right: 140px;
   background-color: var(--secondary);
   border-radius: 6px;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
-  z-index: 40;
   display: flex;
   flex-direction: column;
   padding: 30px;
@@ -222,22 +215,24 @@
   height: auto;
   max-height: calc(100vh - 180px);
   overflow-y: auto;
+  z-index: 6;
 }
 
 @media (max-width: 992px) {
   .content-adjustment-menu {
-    position: absolute;
-    top: 80px;
+    position: fixed;
+    top: -470px;
     left: 50%;
-    transform: translate(-50%, 0);
-    width: auto;
+    transform: translate(-50%);
+    width: 95vw;
     min-width: 300px;
-    max-width: 400px;
+    max-width: 500px;
     height: auto;
-    max-height: calc(100vh - 260px);
+    max-height: 450px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    margin-bottom: 100px;
   }
 }
 
@@ -253,7 +248,6 @@
 
 .content-adjustment-option>div {
   flex: 1;
-
 }
 
 @media (max-width: 992px) {
@@ -337,4 +331,18 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
+}
+
+.reader-toolbar-heading {
+  color: var(--sub-text);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 18px;
+}
+
+.reader-toolbar-text {
+  color: var(--sub-text);
+  font-weight: 500;
+  font-size: 18px;
 }

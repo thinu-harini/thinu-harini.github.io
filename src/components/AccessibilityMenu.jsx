@@ -1,22 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useAccessibility } from './AccessibilityContext';
 import ReaderToolbar from './ReaderToolbar';
+import Magnifier from './Magnifier';
+import Tooltip from './Tooltip';
+import Dictionary from './Dictionary';
 import '../assets/styles/AccessibilityMenu.css';
 
 import { IoAccessibility, IoClose, IoMoon, IoReader } from "react-icons/io5";
 import { PiCursorFill } from "react-icons/pi";
-import { FaAdjust, FaArrowLeft, FaArrowRight, FaBookReader, FaHighlighter, FaLandmark, FaLink, FaPause, FaPlay, FaTint } from 'react-icons/fa';
+import { FaAdjust, FaBookReader, FaHighlighter, FaLandmark, FaLink, FaPause, FaPlay, FaTint } from 'react-icons/fa';
 import { RiUserVoiceFill } from 'react-icons/ri';
-import { MdImageNotSupported, MdInsertPageBreak, MdOutlineInvertColors, MdOutlineSpaceBar, MdOutlineTextDecrease, MdOutlineTextFields, MdOutlineTextIncrease } from 'react-icons/md';
-import { GiMovementSensor, GiRabbit, GiTortoise, GiWhiteBook } from 'react-icons/gi';
+import { MdImageNotSupported, MdInsertPageBreak, MdOutlineInvertColors, MdOutlineSpaceBar, MdOutlineTextFields } from 'react-icons/md';
+import { GiRabbit, GiTortoise, GiWhiteBook } from 'react-icons/gi';
 import { VscTextSize } from 'react-icons/vsc';
-import Magnifier from './Magnifier';
 import { HiDocumentMagnifyingGlass } from 'react-icons/hi2';
 import { FaBackwardStep, FaForwardStep } from 'react-icons/fa6';
 import { TbLineHeight } from 'react-icons/tb';
-import Dictionary from './Dictionary';
 import { CgFontSpacing } from 'react-icons/cg';
-import Tooltip from './Tooltip';
+import { LuHeading1 } from 'react-icons/lu';
 
 const colorOptions = [
   { name: 'Red', color: '#ff0000' },
@@ -29,7 +30,7 @@ const colorOptions = [
   { name: 'White', color: '#ffffff' },
 ];
 
-const AccessibilityMenu = ({ currentTheme }) => {
+const AccessibilityMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('Orientation');
   const accessibilityMenuRef = useRef(null);
@@ -52,6 +53,7 @@ const AccessibilityMenu = ({ currentTheme }) => {
     charSpacingScale, setCharSpacingScale,
     textAlign, setTextAlign,
     fontFamily, setFontFamily,
+    isDyslexiaFont, toggleDyslexiaFont,
 
     isScreenReaderActive, toggleScreenReader,
     moveToNextElement,
@@ -62,10 +64,10 @@ const AccessibilityMenu = ({ currentTheme }) => {
     voices, setVoice,
     selectedVoice,
 
-    isDyslexiaFont, toggleDyslexiaFont,
     isBigCursor, toggleBigCursor,
 
     highlightLinks, toggleHighlightLinks,
+    isHighlightTitles, toggleHighlightTitles,
     isDark, toggleDarkMode,
     contrastTheme, toggleContrastTheme,
     resetContrastTheme,
@@ -73,7 +75,9 @@ const AccessibilityMenu = ({ currentTheme }) => {
     isReadingGuideEnabled, toggleReadingGuide,
     isReadingMaskEnabled, toggleReadingMask,
     maskDimensions,
+
     isReadMode, toggleReadMode,
+    currentReadModeTheme, setCurrentReadModeTheme,
 
     isAnimationsPaused, toggleAnimations,
     isDictionaryMode, toggleDictionaryMode, setWord,
@@ -91,17 +95,8 @@ const AccessibilityMenu = ({ currentTheme }) => {
     setShowColorOptions(false);
   };
 
-  const isDyslexiaActive = isDyslexiaFont;
+  // const isDyslexiaActive = isDyslexiaFont;
   const isBigCursorActive = isBigCursor;
-
-  useEffect(() => {
-    document.documentElement.style.setProperty('--text-scale', textScale);
-    document.documentElement.style.setProperty('--line-height-scale', lineHeightScale);
-    document.documentElement.style.setProperty('--word-spacing-scale', wordSpacingScale);
-    document.documentElement.style.setProperty('--char-spacing-scale', charSpacingScale);
-    document.documentElement.style.setProperty('--text-align', textAlign);
-    document.documentElement.style.setProperty('--font-family', fontFamily);
-  }, [textScale, lineHeightScale, wordSpacingScale, charSpacingScale, textAlign, fontFamily]);
 
   const handleTabChange = (tab) => {
     if (tab !== 'Color') {
@@ -157,6 +152,9 @@ const AccessibilityMenu = ({ currentTheme }) => {
   };
 
   const handleFontFamilyChange = (event) => {
+    if (isDyslexiaFont) {
+      toggleDyslexiaFont();
+    }
     setFontFamily(event.target.value);
   };
 
@@ -297,16 +295,57 @@ const AccessibilityMenu = ({ currentTheme }) => {
     };
   }, []);
 
+  const handleChangeTheme = (theme) => {
+    document.body.classList.remove('light-theme', 'dark-theme', 'sepia-theme', 'contrast-theme');
+    document.body.classList.add(theme);
+    setCurrentReadModeTheme(theme);
+  };
+
   const ProfileTab = () => (
     <div>
       <div className="accessibility-heading ml-4 mt-4">Accessiblity Profile</div>
-      <div className="accessibility-features">
+      <div className="profile-section">
         <button
-          className={`${isDyslexiaActive ? 'active' : ''}`}
+          className={`accessibility-profile ${isDyslexiaFont ? 'active' : ''}`}
           onClick={toggleDyslexiaFont}
         >
-          <FaBookReader size={20} />
+          {/* <FaWheelchair size={20} /> */}
+          Motor Impaired
+        </button>
+        <button
+          className={`accessibility-profile ${isDyslexiaFont ? 'active' : ''}`}
+          onClick={toggleDyslexiaFont}
+        >
+          {/* <FaBlind size={20} /> */}
+          Vision Impaired
+        </button>
+        <button
+          className={`accessibility-profile ${isDyslexiaFont ? 'active' : ''}`}
+          onClick={toggleDyslexiaFont}
+        >
+          {/* <FaBookReader size={20} /> */}
           Dyslexia Friendly
+        </button>
+        <button
+          className={`accessibility-profile ${isDyslexiaFont ? 'active' : ''}`}
+          onClick={toggleDyslexiaFont}
+        >
+          {/* <FaBookReader size={20} /> */}
+          ADHD Friendly
+        </button>
+        <button
+          className={`accessibility-profile ${isDyslexiaFont ? 'active' : ''}`}
+          onClick={toggleDyslexiaFont}
+        >
+          {/* <TbPuzzleFilled size={20} /> */}
+          Cognitivev & Learning
+        </button>
+        <button
+          className={`accessibility-profile ${isDyslexiaFont ? 'active' : ''}`}
+          onClick={toggleDyslexiaFont}
+        >
+          {/* <IoMdFlashOff size={20} /> */}
+          Seizure Safe
         </button>
       </div>
     </div>
@@ -417,7 +456,7 @@ const AccessibilityMenu = ({ currentTheme }) => {
           Dictionary
         </button>
         <button
-          className={`${isDyslexiaActive ? 'active' : ''}`}
+          className={`${isDyslexiaFont ? 'active' : ''}`}
           onClick={toggleDyslexiaFont}
         >
           <FaBookReader size={20} />
@@ -628,7 +667,7 @@ const AccessibilityMenu = ({ currentTheme }) => {
             className="custom-select"
             aria-label="Select font family"
           >
-            <option value="Poppins">Poppins</option>
+            <option value="Poppins">Poppins(Default)</option>
             <option value="sans-serif">Sans Serif</option>
             <option value="serif">Serif</option>
             <option value="monospace">Monospace</option>
@@ -650,6 +689,13 @@ const AccessibilityMenu = ({ currentTheme }) => {
         >
           <FaLink size={20} />
           Highlight Links
+        </button>
+        <button
+          className={`${isHighlightTitles ? 'active' : ''}`}
+          onClick={toggleHighlightTitles}
+        >
+          <LuHeading1 size={20} />
+          Highlight Titles
         </button>
         <button
           className={`${isTooltipMode ? 'active' : ''}`} // 
@@ -866,19 +912,17 @@ const AccessibilityMenu = ({ currentTheme }) => {
         <ReaderToolbar
           isReadMode={isReadMode}
           onClose={toggleReadMode}
-          currentTheme={currentTheme}
-          onChangeTheme={(theme) => {
-            // Ensure the previous theme is removed
-            const previousTheme = document.body.classList.value.match(/(?:^|\s)(\w+-theme)(?:\s|$)/);
-            if (previousTheme) {
-              document.body.classList.remove(previousTheme[1]);
-            }
-            // Add the new theme class
-            document.body.classList.add(theme);
-          }}
-          // onChangeFontSize={(action) => changeFontSize(action)}
-          // onChangeFontWeight={(weight) => changeFontWeight(weight)}
-          // onChangeFont={(font) => changeFont(font)}
+          currentTheme={currentReadModeTheme}
+          onChangeTheme={handleChangeTheme}
+          // onChangeTheme={(theme) => {
+          //   // Ensure the previous theme is removed
+          //   const previousTheme = document.body.classList.value.match(/(?:^|\s)(\w+-theme)(?:\s|$)/);
+          //   if (previousTheme) {
+          //     document.body.classList.remove(previousTheme[1]);
+          //   }
+          //   // Add the new theme class
+          //   document.body.classList.add(theme);
+          // }}
           closeAccessibilityMenu={closeMenu}
         />
       )}
@@ -893,7 +937,5 @@ const AccessibilityMenu = ({ currentTheme }) => {
 };
 
 export default AccessibilityMenu;
-
-
 
 

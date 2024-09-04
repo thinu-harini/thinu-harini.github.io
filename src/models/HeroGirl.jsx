@@ -4,7 +4,7 @@ Author: Thinu Harini
 Title: Girl
 */
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { useAnimations, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
@@ -14,9 +14,10 @@ import girlScene from '../assets/3d/girl.glb';
 const HeroGirlModel = ({ ...props }) => {
   const girlRef = useRef();
   const target = useRef(new THREE.Object3D());
+  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 992);
 
   // Access the camera and GL renderer from react-three-fiber
-  const { camera, gl, scene } = useThree();
+  const { camera, gl } = useThree();
 
   const { nodes, materials, animations } = useGLTF(girlScene);
   const { actions } = useAnimations(animations, girlRef);
@@ -47,10 +48,17 @@ const HeroGirlModel = ({ ...props }) => {
     return () => clearTimeout();
   }, [actions]);
 
-  const handleMouseMove = (event) => {
-    const screenWidth = window.innerWidth;
+  useEffect(() => {
+    const handleResize = () => {
+      setIsLargeScreen(window.innerWidth > 992);
+    };
 
-    if (screenWidth > 768) {
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const handleMouseMove = (event) => {
+    if (isLargeScreen) {
       const { clientX, clientY } = event;
 
       const canvasBounds = gl.domElement.getBoundingClientRect();
@@ -67,24 +75,30 @@ const HeroGirlModel = ({ ...props }) => {
 
       target.current.position.copy(intersection);
     } else {
-      // Setting a fixed position for smaller screens
+      // For smaller screens, set the head to a fixed position
       target.current.position.set(-1, 1, 5);
     }
   };
 
   useEffect(() => {
     window.addEventListener('mousemove', handleMouseMove);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [isLargeScreen]);
 
   useFrame(() => {
     if (girlRef.current) {
       const head = girlRef.current.getObjectByName('mixamorigHead');
       if (head) {
-        head.lookAt(target.current.position);
+        if (isLargeScreen) {
+          head.lookAt(target.current.position);
+        } else {
+          // Set fixed rotation for smaller screens
+          head.rotation.set(
+            THREE.MathUtils.degToRad(-20),
+            THREE.MathUtils.degToRad(-8),
+            THREE.MathUtils.degToRad(0)
+          );
+        }
       }
     }
   });

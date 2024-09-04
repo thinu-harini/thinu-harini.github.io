@@ -5,7 +5,7 @@
   max-height: 70vh;
   max-width: 8vw;
   width: 140px;
-  z-index: 10;
+  z-index: 12;
   background-color: #fff;
   box-shadow: -2px 2px 4px var(--gray-100);
   overflow: hidden;

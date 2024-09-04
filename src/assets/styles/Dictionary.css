@@ -8,7 +8,7 @@
   border-radius: 6px;
   padding: 16px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
+  z-index: 100;
   width: 500px;
   height: auto;
 }
@@ -27,7 +27,6 @@
 .dictionary-definition strong {
   font-weight: 600;
 }
-
 
 @media (max-width:992px) {
   .dictionary-popup {
@@ -60,12 +59,23 @@
   position: fixed;
   bottom: 16px;
   right: 16px;
-  z-index: 1001;
+  z-index: 101;
   padding: 8px;
   background-color: var(--accent);
   color: var(--black);
   border-radius: 56px;
   font-size: 24px;
+}
+
+.dictionary-message {
+  padding: 10px;
+}
+
+@media (max-width:992px) {
+  .dictionary-message {
+    padding: 1px;
+    margin-right: 80px;
+  }
 }
 
 .dictionary-loading {

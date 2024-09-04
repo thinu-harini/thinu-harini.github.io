@@ -12,14 +12,6 @@
 @tailwind utilities;
 
 :root {
-  --text-scale: 1;
-  --line-height-scale: 1;
-  --char-spacing-scale: 1;
-  --text-align: left;
-  --font-family: 'Poppins', sans-serif;
-  /* --font-family: "Poppins", sans-serif; */
-  /* --word-spacing-scale: 1; */
-  /* --char-spacing-scale: 1; */
   /* Color variables */
   --accent: #7d8dff;
   /* test this color for accent #8875FF, #4c4ffe */
@@ -93,9 +85,12 @@
   --shadow: #bdc0ce;
   --screen-reader-highlight: #d7dbfd;
   --reading-guide: var(--red);
-  --magnifier-background-rgba: rgba(255, 255, 255, 0.8);
+  --magnifier-background-rgba: rgba(255, 255, 255, 0.9);
   --progress-indicator: var(--gray-100);
   --progress-indicator-active: var(--accent-dark);
+  --highlight: #fff374;
+  --highlight-hover: #fec938;
+  --highlight-text: var(--black);
 }
 
 /* Dark theme styles */
@@ -167,14 +162,6 @@ body {
   margin: 0;
   line-height: inherit;
   cursor: url('src/assets/cursor.png'), auto;
-}
-
-.text-scalable {
-  transform: scale(var(--text-scale));
-  transform-origin: top left;
-  line-height: calc(1.5rem * var(--line-height-scale));
-  word-spacing: calc(0.1rem * var(--word-spacing-scale));
-
 }
 
 .hero-heading,
@@ -952,11 +939,6 @@ body {
   display: block;
 }
 
-/* Dyslexia font */
-
-.dyslexia-font {
-  font-family: 'OpenDyslexic', sans-serif;
-}
 
 /* Reading mode  */
 
@@ -965,16 +947,20 @@ body.read-mode {
   line-height: 1.6;
 }
 
-body.read-mode.sans-serif {
+/* Reading mode fotn families */
+body.read-mode.font-family-sans-serif {
   font-family: 'Arial', sans-serif;
+  /* font-family: sans-serif; */
 }
 
-body.read-mode.serif {
+body.read-mode.font-family-serif {
   font-family: 'Times New Roman', serif;
+  /* font-family: serif; */
 }
 
-body.read-mode.monospace {
+body.read-mode.font-family-monospace {
   font-family: 'Courier New', monospace;
+  /* font-family: monospace; */
 }
 
 body.read-mode.dyslexia-font {
@@ -983,10 +969,8 @@ body.read-mode.dyslexia-font {
 
 
 /* Base text size */
-body.read-mode h1,
-body.read-mode h2,
-body.read-mode h3,
-body.read-mode p {
+
+body.read-mode {
   transition: font-size 0.3s ease;
 }
 
@@ -1114,7 +1098,6 @@ body.read-mode.font-size-38 p {
 /* Default font weights in read mode */
 body.read-mode.font-weight-default h1 {
   font-weight: 600;
-
 }
 
 body.read-mode.font-weight-default h2,
@@ -1124,26 +1107,18 @@ body.read-mode.font-weight-default p {
 }
 
 /* Regular font weight */
-body.read-mode.font-weight-regular h1,
-body.read-mode.font-weight-regular h2,
-body.read-mode.font-weight-regular h3,
-body.read-mode.font-weight-regular p {
+
+body.read-mode.font-weight-regular {
   font-weight: 400;
 }
 
 /* Bold font weight */
-body.read-mode.font-weight-bold h1,
-body.read-mode.font-weight-bold h2,
-body.read-mode.font-weight-bold h3,
-body.read-mode.font-weight-bold p {
+body.read-mode.font-weight-bold {
   font-weight: 700;
 }
 
 /* Bolder font weight */
-body.read-mode.font-weight-bolder h1,
-body.read-mode.font-weight-bolder h2,
-body.read-mode.font-weight-bolder h3,
-body.read-mode.font-weight-bolder p {
+body.read-mode.font-weight-bolder {
   font-weight: 900;
 }
 
@@ -1155,28 +1130,19 @@ body.read-mode.font-weight-bolder p {
 }
 
 /* Text alignment classes */
-body.read-mode.text-align-left p,
-body.read-mode.text-align-left h1,
-body.read-mode.text-align-left h2,
-body.read-mode.text-align-left h3 {
+body.read-mode.text-align-left {
   text-align: left;
 }
 
-body.read-mode.text-align-center p,
-body.read-mode.text-align-center h1,
-body.read-mode.text-align-center h2,
-body.read-mode.text-align-center h3 {
+body.read-mode.text-align-center {
   text-align: center;
 }
 
-body.read-mode.text-align-right p,
-body.read-mode.text-align-right h1,
-body.read-mode.text-align-right h2,
-body.read-mode.text-align-right h3 {
+body.read-mode.text-align-right {
   text-align: right;
 }
 
-body.read-mode.text-align-justify p {
+body.read-mode.text-align-justify {
   text-align: justify;
 }
 
@@ -1187,10 +1153,7 @@ body.read-mode {
   --word-spacing: 0px;
 }
 
-body.read-mode p,
-body.read-mode h1,
-body.read-mode h2,
-body.read-mode h3 {
+body.read-mode {
   word-spacing: var(--word-spacing);
 }
 
@@ -1217,10 +1180,7 @@ body.read-mode {
   /* Default character spacing */
 }
 
-body.read-mode p,
-body.read-mode h1,
-body.read-mode h2,
-body.read-mode h3 {
+body.read-mode {
   letter-spacing: var(--letter-spacing);
 }
 
@@ -1247,10 +1207,7 @@ body.read-mode.letter-spacing-4 {
 
 /* Line spacing classes */
 
-body.read-mode p,
-body.read-mode h1,
-body.read-mode h2,
-body.read-mode h3 {
+body.read-mode {
   line-height: var(--line-height);
 }
 
@@ -1278,6 +1235,8 @@ body.read-mode.line-height-5 {
 .read-mode .navbar,
 .read-mode .footer,
 .read-mode .toolbar,
+/* .read-mode .accessibility-menu, */
+/* .read-mode .accessibility-menu-button, */
 .read-mode .scroll-button-container,
 .read-mode .square-before {
   display: none !important;
@@ -1996,15 +1955,12 @@ input[type="range"] {
   border-radius: 4px;
 }
 
-
 .read-mode .advanced-toggle-button {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  justify-content: right;
   align-items: center;
   background-color: transparent;
-  padding: 10px 10px 10px 0;
-  text-align: left;
+  padding: 10px;
+  border-radius: 4px;
 }
 
 .read-mode .advanced-toggle-button:hover {
@@ -2012,9 +1968,8 @@ input[type="range"] {
 }
 
 .read-mode .advanced-toggle-button.active {
-  background-color: var(--secondary-dark);
+  background-color: var(--primary);
   color: var(--tertiary);
-  padding: 10px 10px 10px 10px;
   text-align: left;
 }
 
@@ -2106,11 +2061,42 @@ input[type="range"] {
   color: white;
   padding: 8px;
   border-radius: 4px;
-  z-index: 1000;
+  z-index: 100;
   /* Ensure it's above other content */
 }
 
 .tooltip-container.show {
   visibility: visible;
   opacity: 1;
+}
+
+/* Basic styling for the select element */
+
+.custom-select {
+  width: 100%;
+  height: 48px;
+  padding: 8px;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  box-shadow: var(--button-shadow);
+  background-color: var(--secondary);
+  color: var(--content);
+  font-size: 16px;
+  cursor: url('src/assets/pointer.png'), pointer;
+}
+
+.big-cursor .custom-select {
+  cursor: url('src/assets/big_pointer.png'), pointer;
+}
+
+.custom-select:focus {
+  border: none;
+  outline: 2px solid var(--accent);
+}
+
+/* Styling for the selected option (in some browsers) */
+.custom-select option {
+  padding: 8px;
+  font-size: 16px;
 }

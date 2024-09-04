@@ -17,6 +17,7 @@ export const AccessibilityProvider = ({ children }) => {
   const [isBigCursor, setIsBigCursor] = useState(false);
 
   const [highlightLinks, setHighlightLinks] = useState(false);
+  const [isHighlightTitles, setIsHighlightTitles] = useState(false);
   const [areImagesHidden, setAreImagesHidden] = useState(false);
   const [isReadingGuideEnabled, setIsReadingGuideEnabled] = useState(false);
   const [guidePosition, setGuidePosition] = useState({ top: 0, left: 0 });
@@ -26,7 +27,7 @@ export const AccessibilityProvider = ({ children }) => {
   const [contrastTheme, setContrastTheme] = useState('default');
   const [previousThemes, setPreviousThemes] = useState({ isDark: false, contrastTheme: 'default' });
   const [isReadMode, setIsReadMode] = useState(false);
-  const [currentFont, setCurrentFont] = useState('sans-serif');
+  const [currentReadModeTheme, setCurrentReadModeTheme] = useState('default');
 
   const [isScreenReaderActive, setIsScreenReaderActive] = useState(false);
   const [textElements, setTextElements] = useState([]);
@@ -46,6 +47,7 @@ export const AccessibilityProvider = ({ children }) => {
   const location = useLocation();
 
   const [isDark, setIsDark] = useLocalStorage('isDark', window.matchMedia("(prefers-color-scheme: dark)").matches);
+
 
   //screen reader
 
@@ -264,24 +266,32 @@ export const AccessibilityProvider = ({ children }) => {
     }
   }, [location]);
 
+  //Content adjustment and Dyslexia friendly
+
+  useEffect(() => {
+    document.documentElement.style.setProperty('--text-scale', textScale);
+    document.documentElement.style.setProperty('--line-height-scale', lineHeightScale);
+    document.documentElement.style.setProperty('--word-spacing-scale', wordSpacingScale);
+    document.documentElement.style.setProperty('--char-spacing-scale', charSpacingScale);
+    document.documentElement.style.setProperty('--text-align', textAlign);
+
+    if (isDyslexiaFont) {
+      document.documentElement.style.setProperty('--font-family', 'OpenDyslexic');
+    } else {
+      document.documentElement.style.setProperty('--font-family', fontFamily);
+    }
+  }, [textScale, lineHeightScale, wordSpacingScale, charSpacingScale, textAlign, fontFamily, isDyslexiaFont]);
+
   const toggleDyslexiaFont = () => {
     setIsDyslexiaFont(prev => !prev);
   };
+
+  //big cursor
 
   const toggleBigCursor = () => {
     setIsBigCursor(prev => !prev);
   };
 
-  //Dyslexia friendly
-  useEffect(() => {
-    if (isDyslexiaFont) {
-      document.body.classList.add('dyslexia-font');
-    } else {
-      document.body.classList.remove('dyslexia-font');
-    }
-  }, [isDyslexiaFont]);
-
-  // Apply big cursor style conditionally
   useEffect(() => {
     if (isBigCursor) {
       document.body.classList.add('big-cursor');
@@ -311,6 +321,17 @@ export const AccessibilityProvider = ({ children }) => {
     };
   }, [highlightLinks, location]);
 
+  //highlight titles
+
+  useEffect(() => {
+    if (isHighlightTitles) {
+      document.body.classList.add('highlight-titles');
+    } else {
+      document.body.classList.remove('highlight-titles');
+    }
+  }, [isHighlightTitles]);
+
+  const toggleHighlightTitles = () => setIsHighlightTitles(prev => !prev);
 
   // Contrasts themes
 
@@ -414,10 +435,9 @@ export const AccessibilityProvider = ({ children }) => {
   //Read Mode
 
   useEffect(() => {
-    console.log('Read mode changed:', isReadMode);
-    console.log('Current themes:', { isDark, contrastTheme });
-    console.log('Previous themes:', previousThemes);
-
+    // console.log('Read mode changed:', isReadMode);
+    // console.log('Current themes:', { isDark, contrastTheme });
+    // console.log('Previous themes:', previousThemes);
     if (isReadMode) {
       setPreviousThemes({ isDark, contrastTheme });
 
@@ -426,13 +446,9 @@ export const AccessibilityProvider = ({ children }) => {
       setContrastTheme('default');
 
       document.body.classList.add('read-mode', 'dark-theme');
-      if (isDyslexiaFont) {
-        document.body.classList.add('dyslexia-font');
-      } else {
-        document.body.classList.remove('dyslexia-font');
-      }
+      setCurrentReadModeTheme('dark-theme');
     } else {
-      document.body.classList.remove('read-mode', 'dark-theme', 'light-theme', 'sepia-theme', 'contrast-theme', 'dyslexia-font');
+      document.body.classList.remove('read-mode', 'dark-theme', 'light-theme', 'sepia-theme', 'contrast-theme');
 
       if (previousThemes.isDark) {
         document.body.classList.add('dark');
@@ -444,16 +460,10 @@ export const AccessibilityProvider = ({ children }) => {
       } else {
         setContrastTheme('default');
       }
+      setCurrentReadModeTheme(previousThemes.contrastTheme || 'default');
     }
 
-    document.body.classList.add(currentFont);
-  }, [isReadMode, currentFont, isDyslexiaFont]);
-
-  const changeFont = (font) => {
-    setCurrentFont(font);
-    document.body.classList.remove('sans-serif', 'serif', 'monospace');
-    document.body.classList.add(font);
-  };
+  }, [isReadMode]);
 
   const toggleReadMode = () => setIsReadMode(prev => !prev);
 
@@ -471,12 +481,12 @@ export const AccessibilityProvider = ({ children }) => {
       }
       return !prev;
     });
-    console.log('Dictionary mode toggled:', !isDictionaryMode); // Debugging
+    // console.log('Dictionary mode toggled:', !isDictionaryMode); // Debugging
   };
 
   const toggleTooltipMode = () => {
     setIsTooltipMode(prev => !prev);
-    console.log('Tooltip mode toggled:', !isTooltipMode); // Debugging
+    // console.log('Tooltip mode toggled:', !isTooltipMode); // Debugging
   };
 
   return (
@@ -487,6 +497,9 @@ export const AccessibilityProvider = ({ children }) => {
       charSpacingScale, setCharSpacingScale,
       textAlign, setTextAlign,
       fontFamily, setFontFamily,
+
+      isDyslexiaFont, setIsDyslexiaFont,
+      toggleDyslexiaFont,
 
       isScreenReaderActive, toggleScreenReader,
       moveToNextElement,
@@ -499,9 +512,10 @@ export const AccessibilityProvider = ({ children }) => {
       selectedVoice,
       voices: window.speechSynthesis.getVoices(),
 
-      isDyslexiaFont, toggleDyslexiaFont,
       isBigCursor, toggleBigCursor,
       highlightLinks, toggleHighlightLinks,
+      isHighlightTitles, toggleHighlightTitles,
+
       isDark, toggleDarkMode,
       contrastTheme, toggleContrastTheme,
       resetContrastTheme,
@@ -514,13 +528,14 @@ export const AccessibilityProvider = ({ children }) => {
       maskDimensions, updateMaskDimensions,
 
       isReadMode, toggleReadMode,
-      currentFont, changeFont,
+      currentReadModeTheme, setCurrentReadModeTheme,
 
       isAnimationsPaused, toggleAnimations,
       isDictionaryMode, toggleDictionaryMode,
       selectedWord, setSelectedWord,
       setWord: setSelectedWord,
       isTooltipMode, toggleTooltipMode,
+
     }}>
       {children}
     </AccessibilityContext.Provider>
@@ -528,6 +543,11 @@ export const AccessibilityProvider = ({ children }) => {
 };
 
 export const useAccessibility = () => useContext(AccessibilityContext);
+
+
+
+
+
 
 
 
