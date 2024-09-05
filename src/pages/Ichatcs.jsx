@@ -43,7 +43,7 @@ const Ichatcs = () => {
         totalResults={searchResults.length}
       />
 
-      <div ref={contentRef} >
+      <div ref={contentRef} className="content" >
         <section data-section="1">
           <div className='sm:mt-12 mt-24 readable'>
             <h1 className="section-heading">Ichatcs</h1>
@@ -103,11 +103,6 @@ const Ichatcs = () => {
           <p className="casestudy-text">
             {highlightText("Lorem ipsum dolor sit amet, lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem")}
           </p>
-          <img
-            src={IchatcsCover2}
-            alt='project_image'
-            className='w-full h-auto object-cover rounded-2xl'
-          />
         </div>  <div className="mt-10 readable" id="design-process">
           <h2 className="casestudy-heading">Design Process</h2>
           <h3 className="casestudy-subheading square-before">Stakeholder Interviews</h3>
@@ -184,7 +179,7 @@ const Ichatcs = () => {
             {highlightText("Lorem ipsum dolor sit amet, lorem consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem")}
           </p>
           <img
-            src={IchatcsCover2}
+            src={IchatcsCover}
             alt='project_image'
             className='w-full h-auto object-cover rounded-2xl'
           />
@@ -351,4 +346,3 @@ const Ichatcs = () => {
 };
 
 export default SectionWrapper(Ichatcs, "Ichatcs");
-

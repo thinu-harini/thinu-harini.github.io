@@ -46,7 +46,7 @@ const Groome = () => {
         totalResults={searchResults.length}
       />
 
-      <div ref={contentRef} >
+      <div ref={contentRef} className="content">
         <div className='sm:mt-12 mt-24 readable'>
           <h1 className="section-heading">Groome</h1>
         </div>
@@ -56,8 +56,9 @@ const Groome = () => {
         <img
           src={GroomeCover}
           alt='project_image'
-          className='w-full h-auto object-cover rounded-2xl'
+          className='object-cover rounded-2xl'
         />
+
 
         {/* <img
         src={image}
@@ -128,6 +129,41 @@ const Groome = () => {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
         </div>
+
+
+
+        <div className="mt-10 readable" id="design-iterations">
+          <h3 className="casestudy-heading">Design Iterations</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>
+
+        <div className="mt-10 readable" id="design-iterations">
+          <h3 className="casestudy-heading">Design Iterations</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>
+        <div className="mt-10 readable" id="design-iterations">
+          <h3 className="casestudy-heading">Design Iterations</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>
+        <div className="mt-10 readable" id="design-iterations">
+          <h3 className="casestudy-heading">Design Iterations</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>
+        <div className="mt-10 readable" id="design-iterations">
+          <h3 className="casestudy-heading">Design Iterations</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>
+
 
         {/*
         <div className="mt-10">

@@ -1,48 +1,45 @@
-.minimap-container {
+/* Minimap.css */
+.minimap__container {
   position: fixed;
-  top: 100px;
-  right: 12px;
-  max-height: 70vh;
-  max-width: 8vw;
-  width: 140px;
-  z-index: 12;
-  background-color: #fff;
-  box-shadow: -2px 2px 4px var(--gray-100);
+  top: 90px;
+  right: 0;
+  max-height: 75vh;
+  min-width: 20px;
+  max-width: 140px;
+  z-index: 10;
   overflow: hidden;
+  height: auto;
+  box-shadow: 0 0 10px var(--shadow);
+  background-color: var(--primary);
 }
 
-.minimap-size {
+.minimap__size {
   position: relative;
   z-index: 5;
-  /* border: 2px solid rgb(144, 0, 0); */
+  border: 2px solid white;
 }
 
-.minimap-viewer {
-  position: absolute;
+.minimap__viewer {
   width: 100%;
+  position: absolute;
   top: 0;
   left: 0;
   transform-origin: 0 0;
-  z-index: 10;
-  background-color: #414b9a49;
-  /* border: 1px solid #00023c9a; */
+  z-index: 100;
+  background-color: #656fb349;
+  overflow-y: scroll;
+  cursor: move;
 }
 
-.minimap-content {
+.minimap__content {
   position: absolute;
-  padding: 60px;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: auto;
   z-index: -1;
   transform-origin: 0 0;
+  border: 1px solid white;
+  overflow: auto;
   pointer-events: none;
-  /* Prevent interaction with iframe */
-}
-
-@media (max-width: 992px) {
-  .minimap-container {
-    max-width: 15vw;
-  }
 }

@@ -829,7 +829,7 @@ const AccessibilityMenu = () => {
   );
 
   return (
-    <div id='accessibility-menu' ref={accessibilityMenuRef}>
+    <div className='accessibility-menu-container' id='accessibility-menu' ref={accessibilityMenuRef}>
       <button
         className={`accessibility-menu-button ${isMenuOpen ? 'open' : ''}`}
         onClick={toggleMenu}
