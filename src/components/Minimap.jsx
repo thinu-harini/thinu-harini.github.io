@@ -153,6 +153,7 @@
 
 
 import React, { useRef, useState, useEffect } from 'react';
+import { debounce } from 'lodash';
 import '../assets/styles/Minimap.css';
 
 const NAVBAR_HEIGHT = 90;
@@ -167,7 +168,7 @@ const Minimap = () => {
   const [startScrollY, setStartScrollY] = useState(0);
 
   useEffect(() => {
-    const getDimensions = () => {
+    const getDimensions = debounce(() => {
       const bodyWidth = document.body.clientWidth;
       const bodyHeight = document.body.clientHeight - NAVBAR_HEIGHT;
       const minimapHeight = minimapRef.current.clientHeight;
@@ -185,11 +186,11 @@ const Minimap = () => {
 
       viewerRef.current.style.paddingTop = `${(window.innerHeight - NAVBAR_HEIGHT) * scale}px`;
       minimapRef.current.style.paddingTop = `${bodyHeight * scale}px`;
-    };
+    }, 100);
 
-    const trackScroll = () => {
+    const trackScroll = debounce(() => {
       viewerRef.current.style.transform = `translateY(${(window.scrollY) * realScale}px)`;
-    };
+    }, 100);
 
     getDimensions();
     window.addEventListener('scroll', trackScroll);
