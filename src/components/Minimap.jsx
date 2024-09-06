@@ -152,163 +152,449 @@
 
 
 
-import React, { useRef, useState, useLayoutEffect, useEffect } from 'react';
-import '../assets/styles/Minimap.css';
+// import React, { useRef, useState, useLayoutEffect, useEffect } from 'react';
+// import '../assets/styles/Minimap.css';
 
-const NAVBAR_HEIGHT = 90;
+// const NAVBAR_HEIGHT = 90;
 
-const Minimap = () => {
-  const minimapRef = useRef(null);
-  const minimapContentRef = useRef(null);
-  const viewerRef = useRef(null);
-  const [realScale, setRealScale] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startY, setStartY] = useState(0);
-  const [startScrollY, setStartScrollY] = useState(0);
+// const Minimap = () => {
+//   const minimapRef = useRef(null);
+//   const minimapContentRef = useRef(null);
+//   const viewerRef = useRef(null);
+//   const [realScale, setRealScale] = useState(0);
+//   const [isDragging, setIsDragging] = useState(false);
+//   const [startY, setStartY] = useState(0);
+//   const [startScrollY, setStartScrollY] = useState(0);
 
-  useEffect(() => {
-    const getDimensions = () => {
-      const bodyWidth = document.body.clientWidth;
-      const bodyHeight = document.body.clientHeight - NAVBAR_HEIGHT;
-      const minimapHeight = minimapRef.current.clientHeight;
+//   useEffect(() => {
+//     const getDimensions = () => {
+//       const bodyWidth = document.body.clientWidth;
+//       const bodyHeight = document.body.clientHeight - NAVBAR_HEIGHT;
+//       const minimapHeight = minimapRef.current.clientHeight;
 
-      // Adjust realScale based on minimapHeight and bodyHeight
-      const scale = Math.min(minimapHeight / bodyHeight, 1); // Prevent scaling larger than 1
-      setRealScale(scale);
+//       // Adjust realScale based on minimapHeight and bodyHeight
+//       const scale = Math.min(minimapHeight / bodyHeight, 1); // Prevent scaling larger than 1
+//       setRealScale(scale);
 
-      minimapRef.current.style.width = '15%'; // Fixed width for the minimap container
+//       minimapRef.current.style.width = '15%'; // Fixed width for the minimap container
 
-      // Adjust content scaling
-      minimapContentRef.current.style.transform = `scale(${scale})`;
-      minimapContentRef.current.style.width = `${(100 / scale)}%`; // Adjust width based on scale
-      minimapContentRef.current.style.height = `${(100 / scale)}%`; // Adjust height based on scale
+//       // Adjust content scaling
+//       minimapContentRef.current.style.transform = `scale(${scale})`;
+//       minimapContentRef.current.style.width = `${(100 / scale)}%`; // Adjust width based on scale
+//       minimapContentRef.current.style.height = `${(100 / scale)}%`; // Adjust height based on scale
 
-      viewerRef.current.style.paddingTop = `${(window.innerHeight - NAVBAR_HEIGHT) * scale}px`;
-      minimapRef.current.style.paddingTop = `${bodyHeight * scale}px`;
-    };
+//       viewerRef.current.style.paddingTop = `${(window.innerHeight - NAVBAR_HEIGHT) * scale}px`;
+//       minimapRef.current.style.paddingTop = `${bodyHeight * scale}px`;
+//     };
 
-    const trackScroll = () => {
-      viewerRef.current.style.transform = `translateY(${(window.scrollY) * realScale}px)`;
-    };
+//     const trackScroll = () => {
+//       viewerRef.current.style.transform = `translateY(${(window.scrollY) * realScale}px)`;
+//     };
 
-    getDimensions();
-    window.addEventListener('scroll', trackScroll);
-    window.addEventListener('resize', getDimensions);
+//     getDimensions();
+//     window.addEventListener('scroll', trackScroll);
+//     window.addEventListener('resize', getDimensions);
 
-    return () => {
-      window.removeEventListener('scroll', trackScroll);
-      window.removeEventListener('resize', getDimensions);
-    };
-  }, [realScale]);
+//     return () => {
+//       window.removeEventListener('scroll', trackScroll);
+//       window.removeEventListener('resize', getDimensions);
+//     };
+//   }, [realScale]);
 
-  useEffect(() => {
+//   // useEffect(() => {
 
-    // const excludeElements = (html) => {
-    //   // Use a temporary DOM parser to manipulate the HTML string
-    //   const parser = new DOMParser();
-    //   const doc = parser.parseFromString(html, 'text/html');
+//   //   const html = document.documentElement.outerHTML.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
 
-    //   // Remove elements by class or ID
-    //   doc.querySelectorAll('.navbar, .toolbar, .scroll-button-container, .accessibility-menu-container').forEach(element => element.remove());
+//   //   const iframeDoc = minimapContentRef.current.contentWindow.document;
+//   //   iframeDoc.open();
+//   //   iframeDoc.write(html);
+//   //   iframeDoc.close();
+//   // }, []);
 
-    //   // Return the modified HTML
-    //   return doc.documentElement.outerHTML;
-    // };
+//   // useEffect(() => {
+//   //   const content = document.querySelector('.content').innerHTML;
+//   //   const iframeDoc = minimapContentRef.current.contentWindow.document;
+//   //   const iframeHead = iframeDoc.head;
+//   //   const iframeBody = iframeDoc.body;
 
-    const html = document.documentElement.outerHTML.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
-    // const modifiedHtml = excludeElements(html);
+//   //   // Injecting styles from main document
+//   //   const styleSheets = Array.from(document.styleSheets);
+//   //   styleSheets.forEach((styleSheet) => {
+//   //     try {
+//   //       if (styleSheet.href) {
+//   //         const link = iframeDoc.createElement('link');
+//   //         link.rel = 'stylesheet';
+//   //         link.href = './src/index.css';
+//   //         iframeHead.appendChild(link);
+//   //       } else {
+//   //         const style = iframeDoc.createElement('style');
+//   //         const rules = Array.from(styleSheet.cssRules || []);
+//   //         rules.forEach((rule) => {
+//   //           style.appendChild(iframeDoc.createTextNode(rule.cssText));
+//   //         });
+//   //         iframeHead.appendChild(style);
+//   //       }
+//   //     } catch (e) {
+//   //       console.warn('Unable to access stylesheet:', e);
+//   //     }
+//   //   });
 
-    const iframeDoc = minimapContentRef.current.contentWindow.document;
-    iframeDoc.open();
-    iframeDoc.write(html);
-    iframeDoc.close();
-  }, []);
+//   //   iframeDoc.open();
+//   //   iframeDoc.write(`
+//   //     <html>
+//   //       <head>
+//   //         <style>
+//   //           body { margin: 0;
+//   //            padding: 20;
+//   //            overflow: hidden;
+//   //            color:#fff;
+//   //            }
+//   //         </style>
+//   //       </head>
+//   //       <body>
+//   //         ${content}
+//   //       </body>
+//   //     </html>
+//   //   `);
+//   //   iframeDoc.close();
+//   // }, []);
 
-  // useLayoutEffect(() => {
-  //   const content = document.querySelector('.content');
-  //   if (content) {
-  //     const clonedContent = content.cloneNode(true);
+//   // useEffect(() => {
+//   //   // Get only the content, excluding unwanted elements like navbars, footers, etc.
+//   //   const content = document.querySelector('.content').innerHTML;
+//   //   const iframeDoc = minimapContentRef.current.contentWindow.document;
+//   //   iframeDoc.open();
+//   //   iframeDoc.write(`
+//   //     <html>
+//   //       <head>
+//   //         <style>
+//   //           body { margin: 0; padding: 10; overflow: hidden; }
+//   //         </style>
+//   //       </head>
+//   //       <body>
+//   //         ${content}
+//   //       </body>
+//   //     </html>
+//   //   `);
+//   //   iframeDoc.close();
+//   // }, []);
 
-  //     // Remove unnecessary elements
-  //     clonedContent.querySelectorAll('.toolbar, .scroll-button').forEach(el => el.remove());
 
-  //     // Apply styles to images
-  //     clonedContent.querySelectorAll('img').forEach(img => {
-  //       img.style.maxWidth = '100%'; // Ensure images fit within their container
-  //       img.style.height = 'auto';   // Maintain aspect ratio
-  //     });
+//   useEffect(() => {
 
-  //     const html = clonedContent.outerHTML.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
-  //     const iframeDoc = minimapContentRef.current.contentWindow.document;
-  //     iframeDoc.open();
-  //     iframeDoc.write(html);
-  //     iframeDoc.close();
-  //   } else {
-  //     console.error('Content element not found');
-  //   }
-  // }, []);
+//     const excludeElements = (html) => {
+//       // Use a temporary DOM parser to manipulate the HTML string
+//       const parser = new DOMParser();
+//       const doc = parser.parseFromString(html, 'text/html');
 
-  const handleMinimapClick = (event) => {
-    const minimap = minimapRef.current;
-    const clickX = event.clientX - minimap.getBoundingClientRect().left;
-    const clickY = event.clientY - minimap.getBoundingClientRect().top;
+//       // Remove elements by class or ID
+//       doc.querySelectorAll('.navbar, .toolbar, .scroll-button-container, .accessibility-menu-container').forEach(element => element.remove());
 
-    // Calculate the target scroll position
-    const bodyHeight = document.body.clientHeight - NAVBAR_HEIGHT;
-    const minimapHeight = minimap.clientHeight;
-    const targetScrollY = (clickY / minimapHeight) * bodyHeight;
+//       // Return the modified HTML
+//       return doc.documentElement.outerHTML;
+//     };
 
-    window.scrollTo({
-      top: targetScrollY,
-      behavior: 'smooth',
-    });
-  };
+//     const html = document.documentElement.outerHTML.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+//     const modifiedHtml = excludeElements(html);
 
-  const handleMouseDown = (event) => {
-    setIsDragging(true);
-    setStartY(event.clientY);
-    setStartScrollY(window.scrollY);
-    event.preventDefault(); // Prevent text selection during drag
-  };
+//     const iframeDoc = minimapContentRef.current.contentWindow.document;
+//     iframeDoc.open();
+//     iframeDoc.write(modifiedHtml);
+//     iframeDoc.close();
+//   }, []);
 
-  const handleMouseMove = (event) => {
-    if (isDragging) {
-      const deltaY = event.clientY - startY;
-      const bodyHeight = document.body.clientHeight - NAVBAR_HEIGHT;
-      const minimapHeight = minimapRef.current.clientHeight;
-      const newScrollY = startScrollY + (deltaY / minimapHeight) * bodyHeight;
+//   // useLayoutEffect(() => {
+//   //   const content = document.querySelector('.content');
+//   //   if (content) {
+//   //     const clonedContent = content.cloneNode(true);
 
-      window.scrollTo({
-        top: newScrollY,
-        behavior: 'smooth',
-      });
+//   //     // Remove unnecessary elements
+//   //     clonedContent.querySelectorAll('.toolbar, .scroll-button').forEach(el => el.remove());
 
-      // Update viewer position
-      viewerRef.current.style.transform = `translateY(${deltaY * realScale}px)`;
-    }
-  };
+//   //     // Apply styles to images
+//   //     clonedContent.querySelectorAll('img').forEach(img => {
+//   //       img.style.maxWidth = '100%'; // Ensure images fit within their container
+//   //       img.style.height = 'auto';   // Maintain aspect ratio
+//   //     });
 
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
+//   //     const html = clonedContent.outerHTML.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+//   //     const iframeDoc = minimapContentRef.current.contentWindow.document;
+//   //     iframeDoc.open();
+//   //     iframeDoc.write(html);
+//   //     iframeDoc.close();
+//   //   } else {
+//   //     console.error('Content element not found');
+//   //   }
+//   // }, []);
 
-  return (
-    <div className="minimap__container"
-      ref={minimapRef}
-      onClick={handleMinimapClick}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp} // Ensure dragging stops if the mouse leaves the window
-    >
-      <div className="minimap__size" />
-      <div className="minimap__viewer" ref={viewerRef} />
-      <iframe className="minimap__content" ref={minimapContentRef} title="Minimap" />
-    </div>
-  );
-};
+//   const handleMinimapClick = (event) => {
+//     const minimap = minimapRef.current;
+//     const clickX = event.clientX - minimap.getBoundingClientRect().left;
+//     const clickY = event.clientY - minimap.getBoundingClientRect().top;
 
-export default Minimap;
+//     // Calculate the target scroll position
+//     const bodyHeight = document.body.clientHeight - NAVBAR_HEIGHT;
+//     const minimapHeight = minimap.clientHeight;
+//     const targetScrollY = (clickY / minimapHeight) * bodyHeight;
+
+//     window.scrollTo({
+//       top: targetScrollY,
+//       behavior: 'smooth',
+//     });
+//   };
+
+//   const handleMouseDown = (event) => {
+//     setIsDragging(true);
+//     setStartY(event.clientY);
+//     setStartScrollY(window.scrollY);
+//     event.preventDefault(); // Prevent text selection during drag
+//   };
+
+//   const handleMouseMove = (event) => {
+//     if (isDragging) {
+//       const deltaY = event.clientY - startY;
+//       const bodyHeight = document.body.clientHeight - NAVBAR_HEIGHT;
+//       const minimapHeight = minimapRef.current.clientHeight;
+//       const newScrollY = startScrollY + (deltaY / minimapHeight) * bodyHeight;
+
+//       window.scrollTo({
+//         top: newScrollY,
+//         behavior: 'smooth',
+//       });
+
+//       // Update viewer position
+//       viewerRef.current.style.transform = `translateY(${deltaY * realScale}px)`;
+//     }
+//   };
+
+//   const handleMouseUp = () => {
+//     setIsDragging(false);
+//   };
+
+//   return (
+//     <div className="minimap__container"
+//       ref={minimapRef}
+//       onClick={handleMinimapClick}
+//       onMouseDown={handleMouseDown}
+//       onMouseMove={handleMouseMove}
+//       onMouseUp={handleMouseUp}
+//       onMouseLeave={handleMouseUp} // Ensure dragging stops if the mouse leaves the window
+//     >
+//       <div className="minimap__size" />
+//       <div className="minimap__viewer" ref={viewerRef} />
+//       <iframe className="minimap__content" ref={minimapContentRef} title="Minimap" />
+//     </div>
+//   );
+// };
+
+// export default Minimap;
+
+
+
+
+// import React, { useRef, useState, useLayoutEffect, useEffect } from 'react';
+// import '../assets/styles/Minimap.css'; // Your minimap-specific styles
+
+// const NAVBAR_HEIGHT = 90;
+
+// const Minimap = () => {
+//   const minimapRef = useRef(null);
+//   const minimapContentRef = useRef(null);
+//   const viewerRef = useRef(null);
+//   const [realScale, setRealScale] = useState(0);
+//   const [isDragging, setIsDragging] = useState(false);
+//   const [startY, setStartY] = useState(0);
+//   const [startScrollY, setStartScrollY] = useState(0);
+
+//   useEffect(() => {
+//     const getDimensions = () => {
+//       const bodyWidth = document.body.clientWidth;
+//       const bodyHeight = document.body.clientHeight - NAVBAR_HEIGHT;
+//       const minimapHeight = minimapRef.current.clientHeight;
+
+//       // Adjust realScale based on minimapHeight and bodyHeight
+//       const scale = Math.min(minimapHeight / bodyHeight, 1); // Prevent scaling larger than 1
+//       setRealScale(scale);
+
+//       minimapRef.current.style.width = '15%'; // Fixed width for the minimap container
+
+//       // Adjust content scaling
+//       minimapContentRef.current.style.transform = `scale(${scale})`;
+//       minimapContentRef.current.style.width = `${(100 / scale)}%`; // Adjust width based on scale
+//       minimapContentRef.current.style.height = `${(100 / scale)}%`; // Adjust height based on scale
+
+//       viewerRef.current.style.paddingTop = `${(window.innerHeight - NAVBAR_HEIGHT) * scale}px`;
+//       minimapRef.current.style.paddingTop = `${bodyHeight * scale}px`;
+//     };
+
+//     const trackScroll = () => {
+//       viewerRef.current.style.transform = `translateY(${(window.scrollY) * realScale}px)`;
+//     };
+
+//     getDimensions();
+//     window.addEventListener('scroll', trackScroll);
+//     window.addEventListener('resize', getDimensions);
+
+//     return () => {
+//       window.removeEventListener('scroll', trackScroll);
+//       window.removeEventListener('resize', getDimensions);
+//     };
+//   }, [realScale]);
+
+//   useEffect(() => {
+//     const updateIframeContent = () => {
+//       const content = document.querySelector('.content').innerHTML;
+//       const iframeDoc = minimapContentRef.current.contentWindow.document;
+//       iframeDoc.open();
+//       iframeDoc.write(`
+//       <html>
+//         <head>
+
+//           <style>
+//             body
+//             { margin: 0;
+//             padding: 20;
+//             overflow: hidden;
+//             color:#fff;
+//       }
+//             .casestudy-heading {
+//   color: var(--head-text);
+//   font-weight: bold;
+// }
+
+// .casestudy-subheading {
+//   color: var(--sub-text);
+//   font-weight: bold;
+//   margin-top: 16px;
+// }
+
+// .casestudy-text {
+//   color: var(--content);
+// }
+//     .casestudy-heading {
+//     --base-font-size: 36px;
+//     --base-line-height: 68px;
+//   }
+
+//   .casestudy-subheading {
+//     --base-font-size: 24px;
+//     --base-line-height: 68px;
+//   }
+
+//   .casestudy-text {
+//     --base-font-size: 16px;
+//     --base-line-height: 38px;
+//   }
+
+//           </style>
+//         </head>
+//         <body>
+//           ${content}
+//         </body>
+//       </html>
+//     `);
+//       iframeDoc.close();
+//     }
+
+//     updateIframeContent();
+
+//     // Listen for changes in the color mode and update iframe content
+//     const handleColorModeChange = () => {
+//       updateIframeContent();
+//     };
+
+//     window.addEventListener('color-mode-change', handleColorModeChange);
+
+//     return () => {
+//       window.removeEventListener('color-mode-change', handleColorModeChange);
+//     };
+//   }, []);
+
+//   const handleMinimapClick = (event) => {
+//     const minimap = minimapRef.current;
+//     const clickX = event.clientX - minimap.getBoundingClientRect().left;
+//     const clickY = event.clientY - minimap.getBoundingClientRect().top;
+
+//     // Calculate the target scroll position
+//     const bodyHeight = document.body.clientHeight - NAVBAR_HEIGHT;
+//     const minimapHeight = minimap.clientHeight;
+//     const targetScrollY = (clickY / minimapHeight) * bodyHeight;
+
+//     window.scrollTo({
+//       top: targetScrollY,
+//       behavior: 'smooth',
+//     });
+//   };
+
+//   const handleMouseDown = (event) => {
+//     setIsDragging(true);
+//     setStartY(event.clientY);
+//     setStartScrollY(window.scrollY);
+//     event.preventDefault(); // Prevent text selection during drag
+//   };
+
+//   const handleMouseMove = (event) => {
+//     if (isDragging) {
+//       const deltaY = event.clientY - startY;
+//       const bodyHeight = document.body.clientHeight - NAVBAR_HEIGHT;
+//       const minimapHeight = minimapRef.current.clientHeight;
+//       const newScrollY = startScrollY + (deltaY / minimapHeight) * bodyHeight;
+
+//       window.scrollTo({
+//         top: newScrollY,
+//         behavior: 'smooth',
+//       });
+
+//       // Update viewer position
+//       viewerRef.current.style.transform = `translateY(${deltaY * realScale}px)`;
+//     }
+//   };
+
+//   const handleMouseUp = () => {
+//     setIsDragging(false);
+//   };
+
+//   return (
+//     <div className="minimap__container"
+//       ref={minimapRef}
+//       onClick={handleMinimapClick}
+//       onMouseDown={handleMouseDown}
+//       onMouseMove={handleMouseMove}
+//       onMouseUp={handleMouseUp}
+//       onMouseLeave={handleMouseUp} // Ensure dragging stops if the mouse leaves the window
+//     >
+//       <div className="minimap__size" />
+//       <div className="minimap__viewer" ref={viewerRef} />
+//       <iframe className="minimap__content" ref={minimapContentRef} title="Minimap" />
+//     </div>
+//   );
+// };
+
+// export default Minimap;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -388,3 +674,147 @@ export default Minimap;
 // };
 
 // export default Minimap;
+
+
+
+
+
+
+
+
+
+
+
+
+
+import React, { useRef, useState, useEffect } from 'react';
+import '../assets/styles/Minimap.css';
+
+const NAVBAR_HEIGHT = 90;
+
+const Minimap = () => {
+  const minimapRef = useRef(null);
+  const minimapContentRef = useRef(null);
+  const viewerRef = useRef(null);
+  const [realScale, setRealScale] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startY, setStartY] = useState(0);
+  const [startScrollY, setStartScrollY] = useState(0);
+
+  useEffect(() => {
+    const getDimensions = () => {
+      const bodyWidth = document.body.clientWidth;
+      const bodyHeight = document.body.clientHeight - NAVBAR_HEIGHT;
+      const minimapHeight = minimapRef.current.clientHeight;
+
+      // Adjust realScale based on minimapHeight and bodyHeight
+      const scale = Math.min(minimapHeight / bodyHeight, 1); // Prevent scaling larger than 1
+      setRealScale(scale);
+
+      minimapRef.current.style.width = '15%'; // Fixed width for the minimap container
+
+      // Adjust content scaling
+      minimapContentRef.current.style.transform = `scale(${scale})`;
+      minimapContentRef.current.style.width = `${(100 / scale)}%`; // Adjust width based on scale
+      minimapContentRef.current.style.height = `${(100 / scale)}%`; // Adjust height based on scale
+
+      viewerRef.current.style.paddingTop = `${(window.innerHeight - NAVBAR_HEIGHT) * scale}px`;
+      minimapRef.current.style.paddingTop = `${bodyHeight * scale}px`;
+    };
+
+    const trackScroll = () => {
+      if (viewerRef.current) {
+        viewerRef.current.style.transform = `translateY(${(window.scrollY) * realScale}px)`;
+      }
+    };
+
+    getDimensions();
+    window.addEventListener('scroll', trackScroll);
+    window.addEventListener('resize', getDimensions);
+
+    return () => {
+      window.removeEventListener('scroll', trackScroll);
+      window.removeEventListener('resize', getDimensions);
+    };
+  }, [realScale]);
+
+  useEffect(() => {
+    const html = document.documentElement.outerHTML.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+
+    const iframeDoc = minimapContentRef.current.contentWindow.document;
+    iframeDoc.open();
+    iframeDoc.write(html);
+    iframeDoc.close();
+
+    const style = iframeDoc.createElement('style');
+    style.textContent = `
+    .navbar, .toolbar, .scroll-button-container, .accessibility-menu-container {
+      display: none !important;
+    }
+  `;
+    iframeDoc.head.appendChild(style);
+  }, []);
+
+
+  const handleMinimapClick = (event) => {
+    const minimap = minimapRef.current;
+    const clickX = event.clientX - minimap.getBoundingClientRect().left;
+    const clickY = event.clientY - minimap.getBoundingClientRect().top;
+
+    // Calculate the target scroll position
+    const bodyHeight = document.body.clientHeight - NAVBAR_HEIGHT;
+    const minimapHeight = minimap.clientHeight;
+    const targetScrollY = (clickY / minimapHeight) * bodyHeight;
+
+    window.scrollTo({
+      top: targetScrollY,
+      behavior: 'smooth',
+    });
+  };
+
+  const handleMouseDown = (event) => {
+    setIsDragging(true);
+    setStartY(event.clientY);
+    setStartScrollY(window.scrollY);
+    event.preventDefault(); // Prevent text selection during drag
+  };
+
+  const handleMouseMove = (event) => {
+    if (isDragging) {
+      const deltaY = event.clientY - startY;
+      const bodyHeight = document.body.clientHeight - NAVBAR_HEIGHT;
+      const minimapHeight = minimapRef.current.clientHeight;
+      const newScrollY = startScrollY + (deltaY / minimapHeight) * bodyHeight;
+
+      window.scrollTo({
+        top: newScrollY,
+        behavior: 'smooth',
+      });
+
+      // Update viewer position
+      viewerRef.current.style.transform = `translateY(${deltaY * realScale}px)`;
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  return (
+    <div className="minimap__container"
+      ref={minimapRef}
+      onClick={handleMinimapClick}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp} // Ensure dragging stops if the mouse leaves the window
+    >
+      <div className="minimap__size" />
+      <div className="minimap__viewer" ref={viewerRef} />
+      <iframe className="minimap__content" ref={minimapContentRef} title="Minimap" src="about:blank" />
+
+    </div>
+  );
+};
+
+export default Minimap;
