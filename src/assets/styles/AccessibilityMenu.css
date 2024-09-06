@@ -65,6 +65,7 @@
   transition: transform 0.3s ease-in-out;
   z-index: 9;
   border: 2px solid var(--accent);
+  padding-bottom: 16px;
 }
 
 @media (max-width: 992px) {
@@ -77,6 +78,7 @@
     border-radius: 20px 20px 0 0;
     border: none;
     border-top: 4px solid var(--accent);
+    padding-bottom: 80px;
   }
 }
 
@@ -131,8 +133,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
-  /* margin-bottom: 10px; */
-  padding: 16px;
+  padding: 16px 16px 0 16px;
 }
 
 .accessibility-features button {
@@ -304,13 +305,15 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 16px;
+  padding: 16px 16px 0 16px;
 }
 
 .text-adjustment-option {
   display: flex;
   flex-direction: row;
-  gap: 6px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
   width: 100%;
   justify-content: center;
   align-items: center;
@@ -322,13 +325,13 @@
   gap: 6px;
   align-items: center;
   justify-content: center;
-  background-color: var(--secondary);
+  background-color: var(--primary-dark);
   color: var(--content);
   outline: none;
   border: none;
-  box-shadow: var(--button-shadow);
+  /* box-shadow: var(--button-shadow); */
   border-radius: 6px;
-  padding: 17px;
+  padding: 16px;
   cursor: url('./assets/pointer.png'), pointer;
 }
 
@@ -337,7 +340,7 @@
 }
 
 .text-adjustment-button:hover {
-  background-color: var(--secondary-dark);
+  background-color: var(--primary);
 }
 
 .text-adjustment-button.active {
@@ -398,9 +401,15 @@
 
 .color-options {
   display: flex;
-  flex-direction: row;
-  gap: 16px;
-  padding: 0 16px 16px 16px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 16px 16px 16px 16px;
+  background-color: var(--secondary);
+  border-radius: 6px;
+  margin-left: 16px;
+  margin-right: 16px;
+  margin-top: 16px;
 }
 
 .color-option {
@@ -413,7 +422,7 @@
 }
 
 .color-option.active {
-  outline: 3px solid var(--head-text);
+  outline: 3px solid var(--accent);
 }
 
 .highlight-link {
@@ -469,7 +478,7 @@
   box-shadow: var(--button-shadow);
   border-radius: 6px;
   padding: 12px;
-  margin-bottom: 16px;
+  margin-top: 16px;
   cursor: url('./assets/pointer.png'), pointer;
 }
 
@@ -576,4 +585,18 @@
 
 .screen-read-underline {
   text-decoration: underline;
+}
+
+.accessibility-horizontal-line-container {
+  width: 50%;
+  margin-bottom: 16px;
+  transform: translateX(50%);
+  left: 50%;
+}
+
+.accessibility-horizontal-line {
+  height: 4px;
+  background-color: var(--secondary-dark);
+  flex: 1;
+  border-radius: 100px;
 }

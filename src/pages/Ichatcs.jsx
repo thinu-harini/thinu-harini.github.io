@@ -5,6 +5,7 @@ import useSearch from '../hooks/useSearch';
 import IchatcsCover from '../assets/projects/ichatcs.png';
 import ScrollButton from "../components/ScrollButton";
 import IchatcsCover2 from '../assets/projects/groome.png';
+import Minimap from "../components/Minimap";
 const Ichatcs = () => {
   const contentRef = useRef(null);
   const [contentMarginLeft, setContentMarginLeft] = useState(0);
@@ -41,6 +42,7 @@ const Ichatcs = () => {
         onNavigate={handleNavigate}
         currentIndex={currentResultIndex}
         totalResults={searchResults.length}
+        viewportHeight={window.innerHeight}
       />
 
       <div ref={contentRef} className="content" >

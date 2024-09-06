@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import { SectionWrapper } from "../hoc";
-import { useAccessibility } from "../components/AccessibilityContext";
 import Toolbar from "../components/Toolbar";
 import useSearch from '../hooks/useSearch';
 import GroomeCover from '../assets/projects/groome.png';
@@ -10,7 +9,6 @@ const Groome = () => {
 
   const contentRef = useRef(null);
   const [contentMarginLeft, setContentMarginLeft] = useState(0);
-  const { isScreenReaderActive } = useAccessibility();
 
   // Use the custom hook
   const { searchQuery, searchResults, currentResultIndex, handleSearch, handleNavigate, highlightText } = useSearch();
@@ -170,6 +168,397 @@ const Groome = () => {
           <p className={`casestudy-text}`}>Next Project</p>
           <p className={`casestudy-text}`}>Link to next project</p>
         </div> */}
+        <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>  <div className="mt-10 readable" id="problem">
+          <h2 className="casestudy-heading">Exploring The Problem</h2>
+          <h3 className="casestudy-subheading square-before">Project Scope</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <h3 className="casestudy-subheading square-before">Problem Statement</h3>
+          <p className="casestudy-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>
       </div>
     </div>
   );

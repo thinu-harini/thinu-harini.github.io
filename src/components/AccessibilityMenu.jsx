@@ -7,7 +7,7 @@ import Dictionary from './Dictionary';
 import '../assets/styles/AccessibilityMenu.css';
 
 import { IoAccessibility, IoClose, IoMoon, IoReader } from "react-icons/io5";
-import { PiCursorFill } from "react-icons/pi";
+import { PiCursorFill, PiTextAlignCenterBold, PiTextAlignJustifyBold, PiTextAlignLeftBold, PiTextAlignRightBold } from "react-icons/pi";
 import { FaAdjust, FaBookReader, FaHighlighter, FaLandmark, FaLink, FaPause, FaPlay, FaTint } from 'react-icons/fa';
 import { RiUserVoiceFill } from 'react-icons/ri';
 import { MdImageNotSupported, MdInsertPageBreak, MdOutlineInvertColors, MdOutlineSpaceBar, MdOutlineTextFields } from 'react-icons/md';
@@ -408,7 +408,7 @@ const AccessibilityMenu = () => {
               <label htmlFor="slider-lable">
                 Playback Rate: {rate.toFixed(1)}
               </label>
-              <div className='slider-wrapper p-2'>
+              <div className='slider-wrapper py-2'>
                 <GiTortoise size={32} />
                 <input
                   type="range"
@@ -424,18 +424,23 @@ const AccessibilityMenu = () => {
               </div>
             </div>
 
-            Voice
-            <select
-              id="voices"
-              className="custom-select"
-              onChange={handleVoiceChange}
-              value={selectedVoice ? selectedVoice.name : ''}>
-              {voices.map(voice => (
-                <option key={voice.name} value={voice.name}>
-                  {voice.name} ({voice.lang})
-                </option>
-              ))}
-            </select>
+            <div className='slider-container'>
+              <div className="mb-2">Voice:</div>
+              <select
+                id="voices"
+                className="custom-select mb-2"
+                onChange={handleVoiceChange}
+                value={selectedVoice ? selectedVoice.name : ''}>
+                {voices.map(voice => (
+                  <option key={voice.name} value={voice.name}>
+                    {voice.name} ({voice.lang})
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="accessibility-horizontal-line-container">
+              <div className="accessibility-horizontal-line"></div>
+            </div>
           </div>
         )
         }
@@ -511,9 +516,9 @@ const AccessibilityMenu = () => {
   const ContentTab = () => (
     <div>
       <div className="text-adjustment-section">
+
         <div className="flex flex-row gap-4">
           <div className="accessibility-heading">Content Adjustments</div>
-
           <button
             className='reset-button'
             onClick={handleResetTextChanges}
@@ -521,7 +526,9 @@ const AccessibilityMenu = () => {
             Reset All
           </button>
         </div>
-        <div className='slider-container mb-2'>
+
+        {/* Text size  */}
+        <div className='slider-container'>
           <div className="slider-header">
             <label htmlFor="slider-lable">
               Text Size: {textScale.toFixed(1)}
@@ -533,8 +540,7 @@ const AccessibilityMenu = () => {
               Reset
             </button>
           </div>
-
-          <div className='slider-wrapper p-2'>
+          <div className='slider-wrapper py-2'>
             <MdOutlineTextFields size={32} />
             <input
               type="range"
@@ -550,7 +556,8 @@ const AccessibilityMenu = () => {
           </div >
         </div >
 
-        <div className='slider-container mb-2'>
+        {/* Line spacing  */}
+        <div className='slider-container'>
           <div className="slider-header">
             <label htmlFor="slider-lable">
               Line Spacing: {lineHeightScale.toFixed(1)}
@@ -562,7 +569,7 @@ const AccessibilityMenu = () => {
               Reset
             </button>
           </div>
-          <div className='slider-wrapper p-2'>
+          <div className='slider-wrapper py-2'>
             <TbLineHeight size={32} />
             <input
               type="range"
@@ -577,8 +584,8 @@ const AccessibilityMenu = () => {
           </div>
         </div>
 
-
-        <div className='slider-container mb-2'>
+        {/* Word Spacing  */}
+        <div className='slider-container'>
           <div className="slider-header">
             <label htmlFor="slider-lable">
               Word Spacing: {wordSpacingScale.toFixed(1)}
@@ -590,7 +597,7 @@ const AccessibilityMenu = () => {
               Reset
             </button>
           </div>
-          <div className="slider-wrapper p-2">
+          <div className="slider-wrapper py-2">
             <MdOutlineSpaceBar size={32} />
             <input
               type="range"
@@ -605,7 +612,8 @@ const AccessibilityMenu = () => {
           </div>
         </div>
 
-        <div className='slider-container mb-2'>
+        {/* Character Spacing  */}
+        <div className='slider-container'>
           <div className="slider-header">
             <label htmlFor="slider-lable">
               Character Spacing: {charSpacingScale.toFixed(1)}
@@ -617,7 +625,7 @@ const AccessibilityMenu = () => {
               Reset
             </button>
           </div>
-          <div className='slider-wrapper p-2'>
+          <div className='slider-wrapper py-2'>
             <CgFontSpacing size={32} />
             <input
               type="range"
@@ -632,39 +640,44 @@ const AccessibilityMenu = () => {
           </div>
         </div>
 
-        {/* alignment  */}
-        <div className='text-adjustment-option'>
-          <button
-            className={`text-adjustment-button ${textAlign === 'left' ? 'active' : ''}`}
-            onClick={() => handleAlignChange('left')}
-          >
-            Left
-          </button>
-          <button
-            className={`text-adjustment-button ${textAlign === 'center' ? 'active' : ''}`}
-            onClick={() => handleAlignChange('center')}
-          >
-            Center
-          </button>
-          <button
-            className={`text-adjustment-button ${textAlign === 'right' ? 'active' : ''}`}
-            onClick={() => handleAlignChange('right')}
-          >
-            Right
-          </button>
-          <button
-            className={`text-adjustment-button ${textAlign === 'justify' ? 'active' : ''}`}
-            onClick={() => handleAlignChange('justify')}
-          >
-            Justify
-          </button>
+        {/* Alignment  */}
+        <div className='slider-container'>
+          <div className="mb-2">Text Alignment:</div>
+          <div className='text-adjustment-option mb-1'>
+            <button
+              className={`text-adjustment-button ${textAlign === 'left' ? 'active' : ''}`}
+              onClick={() => handleAlignChange('left')}
+            >
+              <PiTextAlignLeftBold size={20} />
+            </button>
+            <button
+              className={`text-adjustment-button ${textAlign === 'center' ? 'active' : ''}`}
+              onClick={() => handleAlignChange('center')}
+            >
+              <PiTextAlignCenterBold size={20} />
+            </button>
+            <button
+              className={`text-adjustment-button ${textAlign === 'right' ? 'active' : ''}`}
+              onClick={() => handleAlignChange('right')}
+            >
+              <PiTextAlignRightBold size={20} />
+            </button>
+            <button
+              className={`text-adjustment-button ${textAlign === 'justify' ? 'active' : ''}`}
+              onClick={() => handleAlignChange('justify')}
+            >
+              <PiTextAlignJustifyBold size={20} />
+            </button>
+          </div>
         </div>
 
-        <div className='text-adjustment-option'>
+        {/* Font family  */}
+        <div className='slider-container'>
+          <div className="mb-2">Font:</div>
           <select
             value={fontFamily}
             onChange={handleFontFamilyChange}
-            className="custom-select"
+            className="custom-select mb-1"
             aria-label="Select font family"
           >
             <option value="Poppins">Poppins(Default)</option>
@@ -674,7 +687,6 @@ const AccessibilityMenu = () => {
           </select>
         </div >
       </div >
-
 
       <div className="accessibility-features">
         <button onClick={toggleMagnifier}
@@ -712,6 +724,15 @@ const AccessibilityMenu = () => {
     <div>
       <div className="accessibility-heading ml-4 mt-4">Color Adjustments</div>
       <div className="accessibility-features">
+        {/* Blue filter */}
+        <button
+          className={`${isBlueFilterActive ? 'active' : ''}`}
+          onClick={toggleBlueFilter}
+        >
+          <FaTint size={20} />
+          Blue Filter
+        </button>
+        {/* Dark mode */}
         <button
           className={`${isDark ? 'active' : ''} ${isReadMode ? 'disabled' : ''}`}
           onClick={isReadMode ? undefined : handleDarkModeToggle}
@@ -720,34 +741,7 @@ const AccessibilityMenu = () => {
           <IoMoon size={20} />
           Dark Mode
         </button>
-        <button
-          className={`${isBlueFilterActive ? 'active' : ''}`}
-          onClick={toggleBlueFilter}
-        >
-          <FaTint size={20} />
-          Blue Filter
-        </button>
-        <button
-          className={`${saturationMode === 'low' ? 'active' : ''}`}
-          onClick={() => toggleSaturationMode('low')}
-        >
-          <MdOutlineInvertColors size={20} />
-          Low Saturation
-        </button>
-        <button
-          className={`${saturationMode === 'high' ? 'active' : ''}`}
-          onClick={() => toggleSaturationMode('high')}
-        >
-          <MdOutlineInvertColors size={20} />
-          High Saturation
-        </button>
-        <button
-          className={`${saturationMode === 'grayscale' ? 'active' : ''}`}
-          onClick={() => toggleSaturationMode('grayscale')}
-        >
-          <MdOutlineInvertColors size={20} />
-          Grayscale
-        </button>
+        {/* Contrast themes */}
         <button
           className={`${isContrastExpanded ? 'active' : ''} ${isReadMode ? 'disabled' : ''}`}
           onClick={isReadMode ? undefined : toggleContrast}
@@ -757,8 +751,16 @@ const AccessibilityMenu = () => {
           <FaAdjust size={20} />
           Contrast
         </button>
-
+        <button
+          className={`${showColorOptions ? 'active' : ''} ${landmarkColor ? 'active' : ''} ${isReadMode ? 'disabled' : ''}`}
+          onClick={isReadMode ? undefined : toggleColorOptions}
+          disabled={isReadMode}
+        >
+          <FaLandmark size={20} />
+          Landmark Colors
+        </button>
       </div>
+
       {isContrastExpanded && (
         <div className="contrast-themes">
           <button
@@ -798,16 +800,7 @@ const AccessibilityMenu = () => {
           </button>
         </div>
       )}
-      <div className="accessibility-features">
-        <button
-          className={`${showColorOptions ? 'active' : ''} ${landmarkColor ? 'active' : ''} ${isReadMode ? 'disabled' : ''}`}
-          onClick={isReadMode ? undefined : toggleColorOptions}
-          disabled={isReadMode}
-        >
-          <FaLandmark size={20} />
-          Landmark Colors
-        </button>
-      </div>
+
       {showColorOptions && (
         <div className="color-options">
           {colorOptions.map(option => (
@@ -823,8 +816,29 @@ const AccessibilityMenu = () => {
         </div>
       )}
 
-
-
+      <div className="accessibility-features">
+        <button
+          className={`${saturationMode === 'low' ? 'active' : ''}`}
+          onClick={() => toggleSaturationMode('low')}
+        >
+          <MdOutlineInvertColors size={20} />
+          Low Saturation
+        </button>
+        <button
+          className={`${saturationMode === 'high' ? 'active' : ''}`}
+          onClick={() => toggleSaturationMode('high')}
+        >
+          <MdOutlineInvertColors size={20} />
+          High Saturation
+        </button>
+        <button
+          className={`${saturationMode === 'grayscale' ? 'active' : ''}`}
+          onClick={() => toggleSaturationMode('grayscale')}
+        >
+          <MdOutlineInvertColors size={20} />
+          Grayscale
+        </button>
+      </div>
     </div>
   );
 
