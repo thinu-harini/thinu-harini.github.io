@@ -161,7 +161,7 @@ body {
   font-family: "Poppins", sans-serif;
   margin: 0;
   line-height: inherit;
-  cursor: url('src/assets/cursor.png'), auto;
+  cursor: url('./assets/cursor.png'), auto;
 }
 
 .hero-heading,
@@ -564,31 +564,31 @@ body {
 
 /* Custom cursors */
 .custom-pointer {
-  cursor: url('src/assets/pointer.png'), pointer;
+  cursor: url('./assets/pointer.png'), pointer;
 }
 
 .custom-grab {
-  cursor: url('src/assets/grab.png'), grab;
+  cursor: url('./assets/grab.png'), grab;
 }
 
 .custom-grabbing {
-  cursor: url('src/assets/grabbing.png'), grabbing;
+  cursor: url('./assets/grabbing.png'), grabbing;
 }
 
 .big-cursor .custom-pointer {
-  cursor: url('/src/assets/big_pointer.png'), pointer;
+  cursor: url('./assets/big_pointer.png'), pointer;
 }
 
 .big-cursor .custom-grab {
-  cursor: url('/src/assets/big_grab.png'), grab;
+  cursor: url('./assets/big_grab.png'), grab;
 }
 
 .big-cursor .custom-grabbing {
-  cursor: url('/src/assets/big_grabbing.png'), grabbing;
+  cursor: url('./assets/big_grabbing.png'), grabbing;
 }
 
 .big-cursor {
-  cursor: url('src/assets/big_cursor.png'), auto;
+  cursor: url('./assets/big_cursor.png'), auto;
 }
 
 .bg {
@@ -658,11 +658,11 @@ body {
   border-radius: 6px;
   box-shadow: var(--button-shadow);
   transition: background-color 100ms ease-in-out;
-  cursor: url('src/assets/pointer.png'), pointer;
+  cursor: url('./assets/pointer.png'), pointer;
 }
 
 .big-cursor .button {
-  cursor: url('src/assets/big_pointer.png'), pointer;
+  cursor: url('./assets/big_pointer.png'), pointer;
 }
 
 .button:hover {
@@ -687,7 +687,7 @@ body {
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   border: none;
   outline: none;
-  cursor: url('src/assets/pointer.png'), pointer;
+  cursor: url('./assets/pointer.png'), pointer;
   padding: 10px;
   color: var(--black);
   background-color: var(--accent);
@@ -719,7 +719,7 @@ body {
 }
 
 .big-cursor .floating-button {
-  cursor: url('src/assets/big_pointer.png'), pointer;
+  cursor: url('./assets/big_pointer.png'), pointer;
 }
 
 /* icon button styles  */
@@ -738,11 +738,11 @@ body {
     color: var(--icon-color);
     scale: 1;
     transition: all 0.3s ease;
-    cursor: url('src/assets/pointer.png'), pointer;
+    cursor: url('./assets/pointer.png'), pointer;
   }
 
   .big-cursor .icon-button {
-    cursor: url('src/assets/big_pointer.png'), pointer;
+    cursor: url('./assets/big_pointer.png'), pointer;
   }
 
   .icon-button:hover {
@@ -1244,7 +1244,7 @@ body.read-mode.line-height-5 {
 
 .read-mode .read-mode-link {
   color: var(--tertiary);
-  cursor: url('src/assets/big_pointer.png'), pointer;
+  cursor: url('./assets/big_pointer.png'), pointer;
 }
 
 /* Read mode accessibility menu  */
@@ -1991,11 +1991,11 @@ input[type="range"] {
 .rate-slider {
   flex: 1;
   width: auto;
-  cursor: url('src/assets/pointer.png'), pointer;
+  cursor: url('./assets/pointer.png'), pointer;
 }
 
 .big-cursor .rate-slider {
-  cursor: url('src/assets/big_pointer.png'), pointer;
+  cursor: url('./assets/big_pointer.png'), pointer;
 }
 
 .slider-wrapper {
@@ -2015,7 +2015,7 @@ input[type="range"] {
 
 .slider {
   flex: 1;
-  cursor: url('src/assets/pointer.png'), pointer;
+  cursor: url('./assets/pointer.png'), pointer;
 }
 
 /* --Ticks container-- */
@@ -2083,11 +2083,11 @@ input[type="range"] {
   background-color: var(--secondary);
   color: var(--content);
   font-size: 16px;
-  cursor: url('src/assets/pointer.png'), pointer;
+  cursor: url('./assets/pointer.png'), pointer;
 }
 
 .big-cursor .custom-select {
-  cursor: url('src/assets/big_pointer.png'), pointer;
+  cursor: url('./assets/big_pointer.png'), pointer;
 }
 
 .custom-select:focus {
