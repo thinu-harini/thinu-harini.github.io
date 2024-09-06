@@ -135,7 +135,7 @@ const Toolbar = ({ sections, onResize, onToggleNavPane, contentRef, onSearch, on
 
       {isMinimapVisible && (
         <Minimap
-          contentRef={contentRef}
+          // contentRef={contentRef}
           isVisible={isMinimapVisible}
           onToggle={toggleMinimapVisibility}
         />

@@ -153,7 +153,6 @@
 
 
 import React, { useRef, useState, useEffect } from 'react';
-import { debounce } from 'lodash';
 import '../assets/styles/Minimap.css';
 
 const NAVBAR_HEIGHT = 90;
@@ -168,7 +167,7 @@ const Minimap = () => {
   const [startScrollY, setStartScrollY] = useState(0);
 
   useEffect(() => {
-    const getDimensions = debounce(() => {
+    const getDimensions = () => {
       const bodyWidth = document.body.clientWidth;
       const bodyHeight = document.body.clientHeight - NAVBAR_HEIGHT;
       const minimapHeight = minimapRef.current.clientHeight;
@@ -186,11 +185,11 @@ const Minimap = () => {
 
       viewerRef.current.style.paddingTop = `${(window.innerHeight - NAVBAR_HEIGHT) * scale}px`;
       minimapRef.current.style.paddingTop = `${bodyHeight * scale}px`;
-    }, 100);
+    };
 
-    const trackScroll = debounce(() => {
+    const trackScroll = () => {
       viewerRef.current.style.transform = `translateY(${(window.scrollY) * realScale}px)`;
-    }, 100);
+    };
 
     getDimensions();
     window.addEventListener('scroll', trackScroll);
@@ -272,11 +271,11 @@ const Minimap = () => {
   return (
     <div className="minimap__container"
       ref={minimapRef}
-      onClick={handleMinimapClick}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp} // Ensure dragging stops if the mouse leaves the window
+    // onClick={handleMinimapClick}
+    // onMouseDown={handleMouseDown}
+    // onMouseMove={handleMouseMove}
+    // onMouseUp={handleMouseUp}
+    // onMouseLeave={handleMouseUp} // Ensure dragging stops if the mouse leaves the window
     >
       <div className="minimap__size" />
       <div className="minimap__viewer" ref={viewerRef} />
