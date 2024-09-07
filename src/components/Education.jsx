@@ -28,7 +28,7 @@ const EducationInfo = ({ degree, place }) => {
 };
 
 const Education = () => {
-  const { isReadMode } = useAccessibility();
+  const { isReadMode, contentWidth } = useAccessibility();
 
   return (
     <>
@@ -49,7 +49,12 @@ const Education = () => {
           ))}
         </div>
       ) : (
-        <div>
+        <div style={{
+          width: `${contentWidth}%`,
+          justifyContent: 'center',
+          margin: '0 auto',
+          transition: 'width 0.3s ease'
+        }}>
           <motion.div variants={textVariant()}>
             <h1 className="section-heading readable">
               Education

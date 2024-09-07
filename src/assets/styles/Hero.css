@@ -10,11 +10,7 @@
 }
 
 .left-div {
-  background-color: var(--hero-background-rgba);
-  backdrop-filter: blur(4px);
-  transition: background-color 500ms ease-in-out;
   max-width: 65%;
-  padding: 40px 32px;
 }
 
 .right-div {
@@ -31,4 +27,12 @@
     order: -1;
     max-width: 100%;
   }
+}
+
+.hero-board {
+  background-color: var(--hero-background-rgba);
+  backdrop-filter: blur(4px);
+  transition: background-color 500ms ease-in-out;
+  padding: 40px 32px;
+  border-radius: 16px;
 }

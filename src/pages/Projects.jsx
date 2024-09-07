@@ -164,7 +164,8 @@ const ProjectCard = ({
         ) : (
           <>
             <div className='readable'>
-              <div className='image-container relative w-full h-64 md:h-56'>
+              {/* <div className='image-container relative w-full h-64 md:h-56'> */}
+              <div className='image-container relative w-full'>
                 <img
                   src={image}
                   alt={alt}
@@ -229,7 +230,7 @@ const ProjectCard = ({
 };
 
 const Projects = () => {
-  const { isReadMode } = useAccessibility();
+  const { isReadMode, contentWidth } = useAccessibility();
 
   return (
     <>
@@ -241,7 +242,13 @@ const Projects = () => {
           ))}
         </div>
       ) : (
-        <div>
+        <div
+          style={{
+            width: `${contentWidth}%`,
+            justifyContent: 'center',
+            margin: '0 auto',
+            transition: 'width 0.3s ease'
+          }}>
           <ScrollButton />
           <ProgressBar />
           <div>

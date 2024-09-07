@@ -42,7 +42,7 @@ const Ichatcs = () => {
         onNavigate={handleNavigate}
         currentIndex={currentResultIndex}
         totalResults={searchResults.length}
-        viewportHeight={window.innerHeight}
+
       />
 
       <div ref={contentRef} className="content" >

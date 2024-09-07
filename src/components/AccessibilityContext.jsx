@@ -7,7 +7,8 @@ const AccessibilityContext = createContext();
 
 export const AccessibilityProvider = ({ children }) => {
   const [textScale, setTextScale] = useState(1); // Text scaling factor
-  const [lineHeightScale, setLineHeightScale] = useState(1); // Line height scaling factor
+  const [lineHeightScale, setLineHeightScale] = useState(1);
+  const [contentWidth, setContentWidth] = useState(100); // Default to 100% width
   const [wordSpacingScale, setWordSpacingScale] = useState(0.1);
   const [charSpacingScale, setCharSpacingScale] = useState(0.1);
   const [textAlign, setTextAlign] = useState('left');
@@ -493,6 +494,7 @@ export const AccessibilityProvider = ({ children }) => {
     <AccessibilityContext.Provider value={{
       textScale, setTextScale,
       lineHeightScale, setLineHeightScale,
+      contentWidth, setContentWidth,
       wordSpacingScale, setWordSpacingScale,
       charSpacingScale, setCharSpacingScale,
       textAlign, setTextAlign,

@@ -14,7 +14,7 @@ const Experience = () => {
   const sliderRef = useRef(null);
   const touchStartX = useRef(null);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const { isReadMode } = useAccessibility();
+  const { isReadMode, contentWidth } = useAccessibility();
 
   useEffect(() => {
     const handleResize = () => {
@@ -120,7 +120,13 @@ const Experience = () => {
         </div>
 
       ) : (
-        <>
+        <div
+          style={{
+            width: `${contentWidth}%`,
+            justifyContent: 'center',
+            margin: '0 auto',
+            transition: 'width 0.3s ease'
+          }}>
           <motion.div variants={textVariant()}>
             <h1 className="section-heading readable">Work Experience.</h1>
           </motion.div>
@@ -233,7 +239,7 @@ const Experience = () => {
             ))}
           </div>
           <Footer />
-        </>
+        </div>
       )}
       <Tooltip />
     </div >

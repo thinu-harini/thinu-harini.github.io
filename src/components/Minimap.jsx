@@ -152,6 +152,30 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // import React, { useRef, useState, useLayoutEffect, useEffect } from 'react';
 // import '../assets/styles/Minimap.css';
 
@@ -392,6 +416,24 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // import React, { useRef, useState, useLayoutEffect, useEffect } from 'react';
 // import '../assets/styles/Minimap.css'; // Your minimap-specific styles
 
@@ -599,87 +641,6 @@
 
 
 
-// import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
-// import '../assets/styles/Minimap.css';
-
-// const Minimap = () => {
-//   const minimapRef = useRef(null);
-//   const minimapContentRef = useRef(null);
-//   const viewerRef = useRef(null);
-//   const [realScale, setRealScale] = useState(0);
-
-//   useLayoutEffect(() => {
-//     const getDimensions = () => {
-//       const bodyWidth = document.body.clientWidth;
-//       const bodyHeight = document.body.clientHeight;
-//       const minimapHeight = minimapRef.current.clientHeight;
-
-//       const scale = minimapHeight / bodyHeight;
-//       setRealScale(scale);
-
-//       minimapRef.current.style.width = '15%'; // Adjust the width of the minimap
-//       minimapContentRef.current.style.transform = `scale(${scale})`;
-//       minimapContentRef.current.style.width = `${(100 / scale)}%`;
-//       minimapContentRef.current.style.height = `${(100 / scale)}%`;
-
-//       viewerRef.current.style.paddingTop = `${window.innerHeight * scale}px`;
-//       minimapRef.current.style.paddingTop = `${bodyHeight * scale}px`;
-//     };
-
-//     const trackScroll = () => {
-//       viewerRef.current.style.transform = `translateY(${window.scrollY * realScale}px)`;
-//     };
-
-//     getDimensions();
-//     window.addEventListener('scroll', trackScroll);
-//     window.addEventListener('resize', getDimensions);
-
-//     return () => {
-//       window.removeEventListener('scroll', trackScroll);
-//       window.removeEventListener('resize', getDimensions);
-//     };
-//   }, [realScale]);
-
-//   useLayoutEffect(() => {
-//     const content = document.querySelector('.content');
-//     if (content) {
-//       const clonedContent = content.cloneNode(true);
-
-//       // Remove unnecessary elements
-//       clonedContent.querySelectorAll('.toolbar, .scroll-button').forEach(el => el.remove());
-
-//       // Apply styles to images
-//       clonedContent.querySelectorAll('img').forEach(img => {
-//         img.style.maxWidth = '100%'; // Ensure images fit within their container
-//         img.style.height = 'auto';   // Maintain aspect ratio
-//       });
-
-//       const html = clonedContent.outerHTML.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
-//       const iframeDoc = minimapContentRef.current.contentWindow.document;
-//       iframeDoc.open();
-//       iframeDoc.write(html);
-//       iframeDoc.close();
-//     } else {
-//       console.error('Content element not found');
-//     }
-//   }, []);
-
-//   return (
-//     <div className="minimap__container" ref={minimapRef}>
-//       <div className="minimap__size" />
-//       <div className="minimap__viewer" ref={viewerRef} />
-//       <iframe className="minimap__content" ref={minimapContentRef} title="Minimap" />
-//     </div>
-//   );
-// };
-
-// export default Minimap;
-
-
-
-
-
-
 
 
 
@@ -817,6 +778,11 @@
 // };
 
 // export default Minimap;
+
+
+
+
+
 
 
 
@@ -994,6 +960,15 @@
 // };
 
 // export default Minimap;
+
+
+
+
+
+
+
+
+
 
 import React, { useRef, useState, useEffect, useLayoutEffect, useCallback } from 'react';
 import '../assets/styles/Minimap.css';

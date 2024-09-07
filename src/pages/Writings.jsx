@@ -78,7 +78,7 @@ const WritingCard = ({
 };
 
 const Writings = () => {
-  const { isReadMode } = useAccessibility();
+  const { isReadMode, contentWidth } = useAccessibility();
 
   return (
     <>
@@ -90,7 +90,13 @@ const Writings = () => {
           ))}
         </div>
       ) : (
-        <div>
+        <div
+          style={{
+            width: `${contentWidth}%`,
+            justifyContent: 'center',
+            margin: '0 auto',
+            transition: 'width 0.3s ease'
+          }}>
           <ScrollButton />
           <ProgressBar />
           <motion.div

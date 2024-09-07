@@ -1,16 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useAccessibility } from './AccessibilityContext';
 import ReaderToolbar from './ReaderToolbar';
 import Magnifier from './Magnifier';
 import Tooltip from './Tooltip';
 import Dictionary from './Dictionary';
+import useHeadings from '../hooks/useHeadings';
+import PageStructureMenu from './PageStructureMenu';
+import useLinks from '../hooks/useLinks';
 import '../assets/styles/AccessibilityMenu.css';
 
 import { IoAccessibility, IoClose, IoMoon, IoReader } from "react-icons/io5";
 import { PiCursorFill, PiTextAlignCenterBold, PiTextAlignJustifyBold, PiTextAlignLeftBold, PiTextAlignRightBold } from "react-icons/pi";
-import { FaAdjust, FaBookReader, FaHighlighter, FaLandmark, FaLink, FaPause, FaPlay, FaTint } from 'react-icons/fa';
+import { FaAdjust, FaBookReader, FaHighlighter, FaLandmark, FaLayerGroup, FaLink, FaPause, FaPlay, FaTint } from 'react-icons/fa';
 import { RiUserVoiceFill } from 'react-icons/ri';
-import { MdImageNotSupported, MdInsertPageBreak, MdOutlineInvertColors, MdOutlineSpaceBar, MdOutlineTextFields } from 'react-icons/md';
+import { MdImageNotSupported, MdInsertPageBreak, MdLiveHelp, MdOutlineInvertColors, MdOutlineSpaceBar, MdOutlineTextFields } from 'react-icons/md';
 import { GiRabbit, GiTortoise, GiWhiteBook } from 'react-icons/gi';
 import { VscTextSize } from 'react-icons/vsc';
 import { HiDocumentMagnifyingGlass } from 'react-icons/hi2';
@@ -18,13 +22,22 @@ import { FaBackwardStep, FaForwardStep } from 'react-icons/fa6';
 import { TbLineHeight } from 'react-icons/tb';
 import { CgFontSpacing } from 'react-icons/cg';
 import { LuHeading1 } from 'react-icons/lu';
+import { AiOutlineColumnWidth } from 'react-icons/ai';
+
+
 
 const colorOptions = [
+  { name: 'Pink', color: '#ff009d' },
   { name: 'Red', color: '#ff0000' },
-  { name: 'Green', color: '#4caf50' },
-  { name: 'Blue', color: '#3e64ff' },
+  { name: 'Orange', color: '#ff8300' },
   { name: 'Yellow', color: '#fcd000' },
-  { name: 'Purple', color: '#9c27b0' },
+  { name: 'Lime Green', color: '#7ecc49' },
+  { name: 'Green', color: '#299438' },
+  { name: 'Light Blue', color: '#96c3eb' },
+  { name: 'Blue', color: '#3e64ff' },
+  { name: 'Purple', color: '#af38eb' },
+  { name: 'Magenta', color: '#9c27b0' },
+  { name: 'Brown', color: '#9f6b53' },
   { name: 'Gray', color: '#808080' },
   { name: 'Black', color: '#000000' },
   { name: 'White', color: '#ffffff' },
@@ -43,12 +56,26 @@ const AccessibilityMenu = () => {
 
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
 
+  const [hasChanges, setHasChanges] = useState(false);
+  const [textSizeChanged, setTextSizeChanged] = useState(false);
+  const [lineHeightChanged, setLineHeightChanged] = useState(false);
+  const [contentWidthChanged, setContentWidthChanged] = useState(false);
+  const [wordSpacingChanged, setWordSpacingChanged] = useState(false);
+  const [charSpacingChanged, setCharSpacingChanged] = useState(false);
+  const [alignmentChanged, setAlignmentChanged] = useState(false);
+  const [fontFamilyChanged, setFontFamilyChanged] = useState(false);
+
   const [isBiggerText, setIsBiggerText] = useState(false);
   const [isMagnifierActive, setMagnifierActive] = useState(false);
+  const [isPageStructureMenuOpen, setIsPageStructureMenuOpen] = useState(false);
+  const headings = useHeadings();
+  const links = useLinks();
+  const location = useLocation();
 
   const {
     textScale, setTextScale,
     lineHeightScale, setLineHeightScale,
+    contentWidth, setContentWidth,
     wordSpacingScale, setWordSpacingScale,
     charSpacingScale, setCharSpacingScale,
     textAlign, setTextAlign,
@@ -106,49 +133,66 @@ const AccessibilityMenu = () => {
     setActiveTab(tab);
   };
 
+  // reset button for text changes
+
+  useEffect(() => {
+    // Update the hasChanges status based on individual change states
+    const anyChange = textSizeChanged || lineHeightChanged || contentWidthChanged || wordSpacingChanged || charSpacingChanged || alignmentChanged || fontFamilyChanged;
+    setHasChanges(anyChange);
+  }, [textSizeChanged, lineHeightChanged, contentWidthChanged, wordSpacingChanged, charSpacingChanged, alignmentChanged, fontFamilyChanged]);
+
   const handleTextSizeChange = (event) => {
     setTextScale(parseFloat(event.target.value));
-  };
-
-  const handleResetTextChanges = () => {
-    setTextScale(1);
-    setLineHeightScale(1);
-    setWordSpacingScale(0.1);
-    setCharSpacingScale(0.1);
-    setTextAlign('left');
-    setFontFamily('Poppins');
-  };
-
+    setTextSizeChanged(true);
+  }
   const handleResetTextSize = () => {
     setTextScale(1);
+    setTextSizeChanged(false);
   };
 
   const handleLineHeightChange = (event) => {
     setLineHeightScale(parseFloat(event.target.value));
+    setLineHeightChanged(true);
   };
 
   const handleResetLineHeight = () => {
     setLineHeightScale(1);
+    setLineHeightChanged(false);
+  };
+
+  const handleContentWidthChange = (event) => {
+    setContentWidth(parseFloat(event.target.value));
+    setContentWidthChanged(true);
+  };
+
+  const handleResetContentWidth = () => {
+    setContentWidth(100); // Reset to default value
+    setContentWidthChanged(false);
   };
 
   const handleWordSpacingChange = (event) => {
     setWordSpacingScale(parseFloat(event.target.value));
+    setWordSpacingChanged(true);
   };
 
   const handleResetWordSpacing = () => {
     setWordSpacingScale(0.1);
+    setWordSpacingChanged(false);
   };
 
   const handleCharSpacingChange = (event) => {
     setCharSpacingScale(parseFloat(event.target.value));
+    setCharSpacingChanged(true);
   };
 
   const handleResetCharSpacing = () => {
-    setCharSpacingScale(1);
+    setCharSpacingScale(0.1);
+    setCharSpacingChanged(false);
   };
 
   const handleAlignChange = (alignment) => {
     setTextAlign(alignment);
+    setAlignmentChanged(true);
   };
 
   const handleFontFamilyChange = (event) => {
@@ -156,6 +200,25 @@ const AccessibilityMenu = () => {
       toggleDyslexiaFont();
     }
     setFontFamily(event.target.value);
+    setFontFamilyChanged(true);
+  };
+
+  const handleResetTextChanges = () => {
+    setTextScale(1);
+    setLineHeightScale(1);
+    setContentWidth(100);
+    setWordSpacingScale(0.1);
+    setCharSpacingScale(0.1);
+    setTextAlign('left');
+    setFontFamily('Poppins');
+
+    setTextSizeChanged(false);
+    setLineHeightChanged(false);
+    setContentWidthChanged(false);
+    setWordSpacingChanged(false);
+    setCharSpacingChanged(false);
+    setAlignmentChanged(false);
+    setFontFamilyChanged(false);
   };
 
   const toggleBiggerText = () => {
@@ -300,6 +363,14 @@ const AccessibilityMenu = () => {
     document.body.classList.add(theme);
     setCurrentReadModeTheme(theme);
   };
+
+  //page structure
+  useEffect(() => {
+    setIsPageStructureMenuOpen(false);
+  }, [location]);
+
+  const togglePageStructureMenu = () => setIsPageStructureMenuOpen(!isPageStructureMenuOpen);
+
 
   const ProfileTab = () => (
     <div>
@@ -517,14 +588,16 @@ const AccessibilityMenu = () => {
     <div>
       <div className="text-adjustment-section">
 
-        <div className="flex flex-row gap-4">
+        <div className="flex flex-row items-center gap-4">
           <div className="accessibility-heading">Content Adjustments</div>
-          <button
-            className='reset-button'
-            onClick={handleResetTextChanges}
-          >
-            Reset All
-          </button>
+          {hasChanges && (
+            <button
+              className='reset-button'
+              onClick={handleResetTextChanges}
+            >
+              Reset All
+            </button>
+          )}
         </div>
 
         {/* Text size  */}
@@ -533,12 +606,14 @@ const AccessibilityMenu = () => {
             <label htmlFor="slider-lable">
               Text Size: {textScale.toFixed(1)}
             </label>
-            <button
-              className='reset-button'
-              onClick={handleResetTextSize}
-            >
-              Reset
-            </button>
+            {textSizeChanged && (
+              <button
+                className='reset-button'
+                onClick={handleResetTextSize}
+              >
+                Reset
+              </button>
+            )}
           </div>
           <div className='slider-wrapper py-2'>
             <MdOutlineTextFields size={32} />
@@ -562,12 +637,14 @@ const AccessibilityMenu = () => {
             <label htmlFor="slider-lable">
               Line Spacing: {lineHeightScale.toFixed(1)}
             </label>
-            <button
-              className='reset-button'
-              onClick={handleResetLineHeight}
-            >
-              Reset
-            </button>
+            {lineHeightChanged && (
+              <button
+                className='reset-button'
+                onClick={handleResetLineHeight}
+              >
+                Reset
+              </button>
+            )}
           </div>
           <div className='slider-wrapper py-2'>
             <TbLineHeight size={32} />
@@ -584,18 +661,51 @@ const AccessibilityMenu = () => {
           </div>
         </div>
 
+        {/* Content Width Adjustment */}
+        <div className='slider-container'>
+          <div className="slider-header">
+            <label htmlFor="width-slider">
+              Content Width: {contentWidth.toFixed(0)}%
+            </label>
+            {contentWidthChanged && (
+              <button
+                className='reset-button'
+                onClick={handleResetContentWidth}
+              >
+                Reset
+              </button>
+            )}
+          </div>
+          <div className='slider-wrapper py-2'>
+            <AiOutlineColumnWidth size={32} />
+            <input
+              type="range"
+              id="width-slider"
+              min="50"
+              max="100"
+              step="1"
+              value={contentWidth}
+              onChange={handleContentWidthChange}
+              className="slider"
+              aria-label="Adjust content width"
+            />
+          </div>
+        </div>
+
         {/* Word Spacing  */}
         <div className='slider-container'>
           <div className="slider-header">
             <label htmlFor="slider-lable">
               Word Spacing: {wordSpacingScale.toFixed(1)}
             </label>
-            <button
-              className='reset-button'
-              onClick={handleResetWordSpacing}
-            >
-              Reset
-            </button>
+            {wordSpacingChanged && (
+              <button
+                className='reset-button'
+                onClick={handleResetWordSpacing}
+              >
+                Reset
+              </button>
+            )}
           </div>
           <div className="slider-wrapper py-2">
             <MdOutlineSpaceBar size={32} />
@@ -618,12 +728,14 @@ const AccessibilityMenu = () => {
             <label htmlFor="slider-lable">
               Character Spacing: {charSpacingScale.toFixed(1)}
             </label>
-            <button
-              className='reset-button'
-              onClick={handleResetCharSpacing}
-            >
-              Reset
-            </button>
+            {charSpacingChanged && (
+              <button
+                className='reset-button'
+                onClick={handleResetCharSpacing}
+              >
+                Reset
+              </button>
+            )}
           </div>
           <div className='slider-wrapper py-2'>
             <CgFontSpacing size={32} />
@@ -695,6 +807,13 @@ const AccessibilityMenu = () => {
           <HiDocumentMagnifyingGlass size={20} />
           Text Magnifier
         </button>
+        {/* page structure */}
+        <button onClick={togglePageStructureMenu}
+          className={`${isPageStructureMenuOpen ? 'active' : ''}`} >
+          <FaLayerGroup size={20} />
+          Page Structure
+        </button>
+        {/* highlight links */}
         <button
           className={`${highlightLinks ? 'active' : ''}`}
           onClick={handleHighlightLinksToggle}
@@ -702,6 +821,7 @@ const AccessibilityMenu = () => {
           <FaLink size={20} />
           Highlight Links
         </button>
+        {/* highlight titles */}
         <button
           className={`${isHighlightTitles ? 'active' : ''}`}
           onClick={toggleHighlightTitles}
@@ -709,14 +829,16 @@ const AccessibilityMenu = () => {
           <LuHeading1 size={20} />
           Highlight Titles
         </button>
+        {/* tooltips */}
         <button
-          className={`${isTooltipMode ? 'active' : ''}`} // 
+          className={`${isTooltipMode ? 'active' : ''}`}
           onClick={toggleTooltipMode}
         >
-          <HiDocumentMagnifyingGlass size={20} />
+          <MdLiveHelp size={20} />
           Tooltips
         </button>
       </div>
+
     </div >
   );
 
@@ -946,6 +1068,14 @@ const AccessibilityMenu = () => {
 
       {isDictionaryMode && <Dictionary />}
       <Tooltip />
+
+      {isPageStructureMenuOpen && (
+        <PageStructureMenu
+          headings={headings}
+          links={links}
+          onClose={togglePageStructureMenu}
+        />
+      )}
     </div>
   );
 };
