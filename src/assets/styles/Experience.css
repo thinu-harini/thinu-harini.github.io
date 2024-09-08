@@ -44,8 +44,11 @@
   background-color: var(--secondary);
   padding: 2rem;
   border-radius: 1rem;
+  border: none;
   transition: background-color 500ms ease-in-out, transform 0.5s ease;
+  box-shadow: 2px 4px 8px var(--shadow), -2px -2px 8px var(--shadow);
   /* opacity: 0.5; */
+  /* scale: 0.95; */
   cursor: url('/assets/pointer.png'), pointer;
 }
 
@@ -62,7 +65,7 @@
   }
 
   .experience-card:hover {
-    box-shadow: 0 2px 15px var(--card-hover-shadow);
+    outline: 2px solid var(--accent);
   }
 
   .experience-card.active {
@@ -82,8 +85,7 @@
 }
 
 .experience-card.active {
-  border-width: 1px;
-  border-color: var(--card_border);
+  background-color: var(--secondary-dark);
 }
 
 .experience_bullets {

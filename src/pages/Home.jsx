@@ -66,10 +66,10 @@ const Home = ({ isDark }) => {
                 </div> */}
 
               </div>
-              {/* 
+
               <div className="hexagon-canvas">
                 <HexagonCanvas />
-              </div> */}
+              </div>
 
             </div>
           </>

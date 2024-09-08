@@ -2,10 +2,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--secondary);
-  box-shadow: -2px -2px 3px rgb(125, 141, 255), 3px 3px 3px rgba(0, 0, 0, 0.2);
+  background-color: var(--primary-dark);
+  /* box-shadow: -2px -2px 3px rgb(125, 141, 255), 3px 3px 3px rgba(0, 0, 0, 0.2); */
   color: var(--head-text);
+  border: 2px solid var(--accent);
   border-radius: 8px;
+  box-shadow: 2px 2px 6px var(--shadow);
   width: 500px;
   height: auto;
   padding: 4px;
@@ -19,7 +21,7 @@
 }
 
 .search-bar input {
-  background-color: var(--secondary-dark);
+  background-color: var(--secondary);
   border: none;
   border-radius: 8px;
   padding: 14px;

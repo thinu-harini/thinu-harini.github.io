@@ -8,6 +8,7 @@ import ProgressBar from '../components/ProgressBar';
 import { useAccessibility } from '../components/AccessibilityContext';
 import '../assets/styles/Projects.css';
 import ScrollButton from '../components/ScrollButton';
+import CipherText from '../components/CipherText';
 
 const WritingCard = ({
   name,
@@ -99,13 +100,15 @@ const Writings = () => {
           }}>
           <ScrollButton />
           <ProgressBar />
-          <motion.div
+          {/* <motion.div
             variants={textVariant()}
             className='sm:mt-12 mt-16'
           >
             <h1 className="section-heading readable">Writings.</h1>
-          </motion.div>
-
+          </motion.div> */}
+          <div className='sm:mt-12 mt-16'>
+            <CipherText text="Writings." />
+          </div>
           <div className='project-cards-container'>
             {writings.map((writing, index) => (
               <WritingCard key={`writing-${index}`} {...writing} />

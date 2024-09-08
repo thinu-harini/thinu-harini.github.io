@@ -24,7 +24,8 @@
   padding: 1.25rem;
   border-radius: 1rem;
   border-width: 1px;
-  border-color: var(--card_border);
+  border: none;
+  box-shadow: 2px 4px 8px var(--shadow), -2px -2px 8px var(--shadow);
   width: 100%;
   transition: background-color 500ms ease-in-out;
   cursor: url('/assets/pointer.png'), pointer;
@@ -36,11 +37,9 @@
 
 @media (min-width: 993px) {
   .project-card:hover {
-    transform: scale(1.05);
     transform: translateY(-15px);
     transition: transform 300ms ease-out;
-    box-shadow: 0 2px 15px var(--card-hover-shadow);
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+    outline: 2px solid var(--accent);
   }
 }
 

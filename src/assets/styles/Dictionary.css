@@ -6,8 +6,9 @@
   background: var(--primary-dark);
   color: var(--head-text);
   border-radius: 6px;
+  border: 2px solid var(--accent);
   padding: 16px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 6px var(--shadow);
   z-index: 100;
   width: 500px;
   height: auto;

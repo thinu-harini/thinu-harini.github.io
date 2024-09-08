@@ -13,18 +13,18 @@ import '../assets/styles/AccessibilityMenu.css';
 import { IoAccessibility, IoClose, IoMoon, IoReader } from "react-icons/io5";
 import { PiCursorFill, PiTextAlignCenterBold, PiTextAlignJustifyBold, PiTextAlignLeftBold, PiTextAlignRightBold } from "react-icons/pi";
 import { FaAdjust, FaBookReader, FaHighlighter, FaLandmark, FaLayerGroup, FaLink, FaPause, FaPlay, FaTint } from 'react-icons/fa';
-import { RiUserVoiceFill } from 'react-icons/ri';
+import { RiContrastDropFill, RiUserVoiceFill } from 'react-icons/ri';
 import { MdImageNotSupported, MdInsertPageBreak, MdLiveHelp, MdOutlineInvertColors, MdOutlineSpaceBar, MdOutlineTextFields } from 'react-icons/md';
 import { GiRabbit, GiTortoise, GiWhiteBook } from 'react-icons/gi';
-import { VscTextSize } from 'react-icons/vsc';
+import { VscColorMode, VscTextSize } from 'react-icons/vsc';
 import { HiDocumentMagnifyingGlass } from 'react-icons/hi2';
 import { FaBackwardStep, FaForwardStep } from 'react-icons/fa6';
 import { TbLineHeight } from 'react-icons/tb';
 import { CgFontSpacing } from 'react-icons/cg';
 import { LuHeading1 } from 'react-icons/lu';
 import { AiOutlineColumnWidth } from 'react-icons/ai';
-
-
+import text from '../assets/icons/text.png';
+import high_saturation from '../assets/icons/high_saturation.png';
 
 const colorOptions = [
   { name: 'Pink', color: '#ff009d' },
@@ -805,6 +805,7 @@ const AccessibilityMenu = () => {
           className={`${isMagnifierActive ? 'active' : ''}`}
         >
           <HiDocumentMagnifyingGlass size={20} />
+          {/* <img src={text} alt="text" style={{ width: '20px', height: '20px' }} /> */}
           Text Magnifier
         </button>
         {/* page structure */}
@@ -870,7 +871,7 @@ const AccessibilityMenu = () => {
           aria-label="Toggle Contrast Themes"
           disabled={isReadMode}
         >
-          <FaAdjust size={20} />
+          <RiContrastDropFill size={20} />
           Contrast
         </button>
         <button
@@ -943,21 +944,22 @@ const AccessibilityMenu = () => {
           className={`${saturationMode === 'low' ? 'active' : ''}`}
           onClick={() => toggleSaturationMode('low')}
         >
-          <MdOutlineInvertColors size={20} />
+          <VscColorMode size={20} className='low-saturation-icon' />
           Low Saturation
         </button>
         <button
           className={`${saturationMode === 'high' ? 'active' : ''}`}
           onClick={() => toggleSaturationMode('high')}
         >
-          <MdOutlineInvertColors size={20} />
+          <VscColorMode size={20} className='high-saturation-icon' />
+          {/* <img src={high_saturation} alt="high_saturation" style={{ width: '20px', height: '20px' }} /> */}
           High Saturation
         </button>
         <button
           className={`${saturationMode === 'grayscale' ? 'active' : ''}`}
           onClick={() => toggleSaturationMode('grayscale')}
         >
-          <MdOutlineInvertColors size={20} />
+          <VscColorMode size={20} className='grayscale-icon' />
           Grayscale
         </button>
       </div>

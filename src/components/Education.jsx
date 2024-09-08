@@ -4,6 +4,7 @@ import { textVariant } from "../utils/motion";
 import { SectionWrapper } from "../hoc";
 import { education } from "../constants";
 import { useAccessibility } from "./AccessibilityContext";
+import CipherText from "./CipherText";
 
 const EducationInfo = ({ degree, place }) => {
   const { isReadMode } = useAccessibility();
@@ -55,11 +56,14 @@ const Education = () => {
           margin: '0 auto',
           transition: 'width 0.3s ease'
         }}>
-          <motion.div variants={textVariant()}>
+          {/* <motion.div variants={textVariant()}>
             <h1 className="section-heading readable">
               Education
             </h1>
-          </motion.div>
+          </motion.div> */}
+          <div>
+            <CipherText text="Education." />
+          </div>
 
           <div>
 

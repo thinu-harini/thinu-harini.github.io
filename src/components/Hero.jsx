@@ -71,8 +71,6 @@ const Hero = () => {
             transition: 'width 0.3s ease'
           }}>
             <div className={`motion-container xl:mt-18 lg:mt-16 md:mt-10 gap-10 overflow-hidden`}>
-
-
               <motion.div
                 // variants={slideIn("up", "tween", 0.2, 1)}
                 className={`left-div md:h-auto h-auto`}
