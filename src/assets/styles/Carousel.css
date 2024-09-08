@@ -17,19 +17,19 @@
   position: relative;
   perspective: 1100px;
   transform-style: preserve-3d;
-  cursor: url('./assets/grab.png'), grab;
+  cursor: url('/assets/grab.png'), grab;
 }
 
 .big-cursor .carousel-stage {
-  cursor: url('./assets/big_grab.png'), grab;
+  cursor: url('/assets/big_grab.png'), grab;
 }
 
 .carousel-stage:active {
-  cursor: url('./assets/grabbing.png'), grabbing;
+  cursor: url('/assets/grabbing.png'), grabbing;
 }
 
 .big-cursor .carousel-stage:active {
-  cursor: url('./assets/big_grabbing.png'), grabbing;
+  cursor: url('/assets/big_grabbing.png'), grabbing;
 }
 
 .slide {
@@ -120,14 +120,14 @@
   color: var(--accent);
   border: solid 1px var(--accent);
   border-radius: 6px;
-  cursor: url('./assets/pointer.png'), pointer;
+  cursor: url('/assets/pointer.png'), pointer;
   bottom: 20px;
   right: 20px;
   z-index: 2px;
 }
 
 .big-cursor .carousel-slide-button {
-  cursor: url('./assets/big_pointer.png'), pointer;
+  cursor: url('/assets/big_pointer.png'), pointer;
 }
 
 .carousel-slide-button:hover {

@@ -6,7 +6,7 @@
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   border: none;
   outline: none;
-  cursor: url('./assets/pointer.png'), pointer;
+  cursor: url('/assets/pointer.png'), pointer;
   padding: 10px;
   color: var(--black);
   background-color: var(--accent);
@@ -42,7 +42,7 @@
 }
 
 .big-cursor .toolbar-button {
-  cursor: url('./assets/big_pointer.png'), pointer;
+  cursor: url('/assets/big_pointer.png'), pointer;
 }
 
 .toolbar-menu {

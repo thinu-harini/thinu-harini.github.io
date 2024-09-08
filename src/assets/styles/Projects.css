@@ -27,11 +27,11 @@
   border-color: var(--card_border);
   width: 100%;
   transition: background-color 500ms ease-in-out;
-  cursor: url('./assets/pointer.png'), pointer;
+  cursor: url('/assets/pointer.png'), pointer;
 }
 
 .big-cursor .project-card {
-  cursor: url('./assets/big_pointer.png'), pointer;
+  cursor: url('/assets/big_pointer.png'), pointer;
 }
 
 @media (min-width: 993px) {

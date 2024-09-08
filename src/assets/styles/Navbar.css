@@ -18,12 +18,12 @@
 
 .nav-title {
   font-weight: 500;
-  cursor: url('./assets/pointer.png'), pointer;
+  cursor: url('/assets/pointer.png'), pointer;
 }
 
 .nav-title:hover {
   color: var(--nav-text-hover);
-  cursor: url('./assets/pointer.png'), pointer;
+  cursor: url('/assets/pointer.png'), pointer;
 }
 
 .nav-title:active {
@@ -90,11 +90,11 @@
   height: auto;
   margin-top: 40px;
   font-weight: 500;
-  cursor: url('./assets/pointer.png'), pointer;
+  cursor: url('/assets/pointer.png'), pointer;
 }
 
 .big-cursor .menu .menu-content {
-  cursor: url('./assets/big_pointer.png'), pointer;
+  cursor: url('/assets/big_pointer.png'), pointer;
 }
 
 .menu-divider {
