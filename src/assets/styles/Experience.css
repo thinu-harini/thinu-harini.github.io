@@ -46,7 +46,6 @@
   border-radius: 1rem;
   border: none;
   transition: background-color 500ms ease-in-out, transform 0.5s ease;
-  box-shadow: 2px 4px 8px var(--shadow), -2px -2px 8px var(--shadow);
   /* opacity: 0.5; */
   /* scale: 0.95; */
   cursor: url('/assets/pointer.png'), pointer;
@@ -62,6 +61,7 @@
     width: calc(50% - 40px);
     /* two cards should be shown side by side */
     margin: 20px;
+    box-shadow: 2px 4px 8px var(--shadow), -2px -2px 8px var(--shadow);
   }
 
   .experience-card:hover {
