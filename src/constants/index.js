@@ -9,8 +9,6 @@ import {
   ichatcs,
   crowdfunding,
 
-  about_page,
-
 } from "../assets";
 
 export const navLinks = [
@@ -49,8 +47,6 @@ export const carouselItems = [
     title: "PROJECTS",
     subtitle: "This file contains projects done by the user",
     list: ["Groome", "SaproMart", "Project 3"],
-    // image: about_page,
-    // alt: "Groome project thumbnail",
     link: "/projects",
   },
 
@@ -62,14 +58,12 @@ export const carouselItems = [
   {
     title: "PROFILE",
     subtitle: "Details about user's skills, education and experience.",
-    image: about_page,
     alt: "Groome project thumbnail",
     link: "/about",
   },
   {
     title: "CONTACT",
     subtitle: "Contact user directly.",
-    image: about_page,
     alt: "Groome project thumbnail",
     link: "/contact",
   },

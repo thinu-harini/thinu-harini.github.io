@@ -26,11 +26,11 @@ const Contact = () => {
     let rotation = [-0.1, -0.2, 0];
 
     if (window.innerWidth < 768) {
-      screenScale = [3, 3, 3];
-      screenPosition = [0, -2.5, 0];
+      screenScale = [3.4, 3.4, 3.4];
+      screenPosition = [0, -2.6, 0.2];
     } else {
       screenScale = [4.4, 4.4, 4.4];
-      screenPosition = [0.55, -3.8, -4];
+      screenPosition = [0.55, -3.8, -3];
     }
     return [screenScale, screenPosition, rotation]
   }

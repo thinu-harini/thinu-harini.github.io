@@ -47,7 +47,7 @@ const Home = ({ isDark }) => {
               {isDark ? <NightCanvas /> : <DayCanvas />}
 
               <div className="roof-layer">
-                <img src={roof} alt="roof_image" className="roof-bg" />
+                {/* <img src={roof} alt="roof_image" className="roof-bg" /> */}
               </div>
 
               <div className="wall-layer">
@@ -67,9 +67,9 @@ const Home = ({ isDark }) => {
 
               </div>
 
-              {/* <div className="hexagon-canvas">
+              <div className="hexagon-canvas">
                 <HexagonCanvas />
-              </div> */}
+              </div>
 
             </div>
           </>

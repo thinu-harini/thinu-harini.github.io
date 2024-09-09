@@ -5,8 +5,7 @@
   max-width: 60%;
   padding: 2rem;
   border-radius: 1rem;
-  border-width: 1px;
-  border-color: var(--card_border);
+  border: none;
   transition: background-color 500ms ease-in-out;
 }
 

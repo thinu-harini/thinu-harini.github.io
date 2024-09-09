@@ -70,6 +70,16 @@ const HomeGirlModel = ({ modelRotationDirection, rotationDuration, ...props }) =
     }
   });
 
+  //scaling the head
+  useFrame(() => {
+    if (girlRef.current) {
+      const head = girlRef.current.getObjectByName('mixamorigHead');
+      if (head) {
+        head.scale.set(0.8, 0.8, 0.8);
+      }
+    }
+  });
+
   return (
     <group ref={girlRef} {...props} dispose={null}>
       <group name="Scene">

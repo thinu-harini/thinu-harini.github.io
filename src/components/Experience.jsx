@@ -8,7 +8,6 @@ import Footer from './Footer';
 import { useAccessibility } from './AccessibilityContext';
 import Tooltip from './Tooltip';
 import '../assets/styles/Experience.css';
-import CipherText from './CipherText';
 
 const Experience = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -128,13 +127,9 @@ const Experience = () => {
             margin: '0 auto',
             transition: 'width 0.3s ease'
           }}>
-          {/* <motion.div variants={textVariant()}>
-            <h1 className="section-heading readable">Work Experience.</h1>
-          </motion.div> */}
-          <div>
-            <CipherText text="Experience." />
-          </div>
-
+          <motion.div variants={textVariant()}>
+            <h1 className="section-heading readable">Experience.</h1>
+          </motion.div>
           <div className="button-text tabs mt-6 mb-6">
             {isSmallScreen ? (
               tabNamesForSmallScreens.map((tabName, index) => (

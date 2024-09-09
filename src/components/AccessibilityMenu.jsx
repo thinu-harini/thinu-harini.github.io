@@ -23,8 +23,6 @@ import { TbLineHeight } from 'react-icons/tb';
 import { CgFontSpacing } from 'react-icons/cg';
 import { LuHeading1 } from 'react-icons/lu';
 import { AiOutlineColumnWidth } from 'react-icons/ai';
-import text from '../assets/icons/text.png';
-import high_saturation from '../assets/icons/high_saturation.png';
 
 const colorOptions = [
   { name: 'Pink', color: '#ff009d' },

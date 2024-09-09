@@ -2086,19 +2086,3 @@ input[type="range"] {
   padding: 8px;
   font-size: 16px;
 }
-
-
-.scramble-text {
-  font-size: 2rem;
-  font-weight: bold;
-  letter-spacing: 0.1em;
-  overflow: hidden;
-  white-space: nowrap;
-  display: inline-block;
-  position: relative;
-}
-
-.scramble-text::after {
-  content: attr(data-text);
-  visibility: hidden;
-}

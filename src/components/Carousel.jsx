@@ -12,17 +12,18 @@ const adjustGirlForScreenSize = () => {
   let screenPosition = null;
   let rotation = [-0.1, -0.4, 0];
 
-  const aspectRatio = window.innerWidth / window.innerHeight;
+  // const aspectRatio = window.innerWidth / window.innerHeight;
 
   if (window.innerWidth < 768) {
     screenScale = [2.2, 2.2, 2.2];
-    screenPosition = [-0.1, -2.2, 1];
-  } else if (aspectRatio < 1.5) { //min 992
-    screenScale = [2.6, 2.6, 2.6];
-    screenPosition = [0.2, -3, -2];
+    screenPosition = [-0.3, -2, 2];
+    // (aspectRatio < 1.5)
+  } else if (window.innerWidth < 993) { //min 992
+    screenScale = [3.8, 3.8, 3.8];
+    screenPosition = [0.2, -3.7, -2];
   } else {
     screenScale = [4.2, 4.2, 4.2];
-    screenPosition = [0.5, -4, -3];
+    screenPosition = [0.3, -3.6, -2];
   }
   return [screenScale, screenPosition, rotation];
 };
@@ -246,7 +247,7 @@ const Carousel = () => {
           </Canvas>
         </div>
 
-        {messageVisible && (
+        {/* {messageVisible && (
           <>
             <div className="button-text overlay-message desktop-message">
               <p>
@@ -260,7 +261,7 @@ const Carousel = () => {
               </p>
             </div>
           </>
-        )}
+        )} */}
 
       </div>
     </div>

@@ -8,8 +8,6 @@ import groome from "./projects/groome.png";
 import ichatcs from "./projects/ichatcs.png";
 import crowdfunding from "./projects/crowdfunding.png";
 
-import about_page from "./home/about_page.png";
-
 export {
   css,
   figma,
@@ -20,7 +18,4 @@ export {
   groome,
   ichatcs,
   crowdfunding,
-
-  about_page,
-
 };

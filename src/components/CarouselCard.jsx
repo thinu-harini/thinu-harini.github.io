@@ -11,8 +11,8 @@ const CarouselCard = ({ title, subtitle, list, link }) => {
 
   return (
     <div className="slide-content readable">
-      <h1 className="content-heading mb-6">{title}</h1>
-      <h2 className="content-subheading mb-2">{subtitle}</h2>
+      <h1 className="carousel-title mb-6">{title}</h1>
+      <h2 className="carousel-subtitle mb-2">{subtitle}</h2>
 
       {list && list.length > 0 && (
         <ul className="item-list">
@@ -22,7 +22,7 @@ const CarouselCard = ({ title, subtitle, list, link }) => {
         </ul>
       )}
       <button onClick={handleButtonClick} className="carousel-slide-button">
-        <h2 className="content-subheading"> Navigate to {title} &gt;&gt; </h2>
+        <h2> Navigate to {title} &gt;&gt; </h2>
       </button>
     </div>
   );

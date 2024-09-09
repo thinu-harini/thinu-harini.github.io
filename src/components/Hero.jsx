@@ -21,11 +21,11 @@ const Hero = () => {
     let rotation = [-0.1, -0.1, 0];
 
     if (window.innerWidth < 768) {
-      screenScale = [2.5, 2.5, 2.5];
-      screenPosition = [0.1, -2.5, 0];
+      screenScale = [2.6, 2.6, 2.6];
+      screenPosition = [0.1, -2.6, 0.1];
     }
     else {
-      screenScale = [4, 4, 4];
+      screenScale = [4.4, 4.4, 4.4];
       screenPosition = [1, -3.8, -4];
     }
     return [screenScale, screenPosition, rotation]

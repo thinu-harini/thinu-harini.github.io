@@ -18,7 +18,7 @@ const HexagonCanvas = () => {
       spawnChance: 1,
       sparkChance: 0.1,
       sparkDist: 10,
-      sparkSize: 2,
+      sparkSize: 1,
       color: 'hsl(233, 100%, 75%)', //hue,saturation,lightness // 'hsl(200, 100%, 20%)',
       // color: '#7d8dff',(233, 100%, 75%)
       baseLight: 50, // base light for brightness
@@ -49,8 +49,8 @@ const HexagonCanvas = () => {
       ++tick;
       ctx.globalCompositeOperation = 'source-over';
       ctx.shadowBlur = 0;
-      ctx.fillStyle = opts.backgroundColor;
-      ctx.fillRect(0, 0, w, h);
+      // ctx.fillStyle = opts.backgroundColor;
+      // ctx.fillRect(0, 0, w, h);
       ctx.globalCompositeOperation = 'lighter';
 
       if (lines.length < opts.count && Math.random() < opts.spawnChance) lines.push(new Line());
@@ -123,15 +123,24 @@ const HexagonCanvas = () => {
 
     loop();
 
+    // const handleResize = () => {
+    //   w = canvas.width = window.innerWidth;
+    //   h = canvas.height = window.innerHeight;
+    //   ctx.fillStyle = opts.backgroundColor;
+    //   ctx.fillRect(0, 0, w, h);
+
+    //   opts.cx = w / 2;
+    //   opts.cy = h / 2;
+
+    //   dieX = w / 2 / opts.len;
+    //   dieY = h / 2 / opts.len;
+    // };
+
     const handleResize = () => {
       w = canvas.width = window.innerWidth;
       h = canvas.height = window.innerHeight;
-      ctx.fillStyle = opts.backgroundColor;
-      ctx.fillRect(0, 0, w, h);
-
       opts.cx = w / 2;
       opts.cy = h / 2;
-
       dieX = w / 2 / opts.len;
       dieY = h / 2 / opts.len;
     };
