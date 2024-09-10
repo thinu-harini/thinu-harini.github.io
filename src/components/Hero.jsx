@@ -1,19 +1,18 @@
+import React, { Suspense } from 'react';
 import { Link } from 'react-router-dom';
-import { Suspense } from 'react';
-import { motion } from 'framer-motion';
 
-import { slideIn } from "../utils/motion";
 import { TypeAnimation } from 'react-type-animation';
 
 import { SectionWrapper } from "../hoc";
 import { Canvas } from '@react-three/fiber'
 import CanvasLoader from './CanvasLoader';
-import HeroGirlModel from '../models/HeroGirl';
 import SocialIcons from './SocialIcons';
 import { useAccessibility } from './AccessibilityContext';
 import '../assets/styles/Hero.css';
 
-const Hero = () => {
+const Hero = React.memo(() => {
+
+  const HeroGirlModel = React.lazy(() => import('../models/HeroGirl'));
   const { isReadMode, isTooltipMode, contentWidth } = useAccessibility();
   const adjustGirlForScreenSize = () => {
     let screenScale = null;
@@ -63,111 +62,105 @@ const Hero = () => {
           </a>
         </div>
       ) : (
-        <>
-          <div style={{
-            width: `${contentWidth}%`,
-            justifyContent: 'center',
-            margin: '0 auto',
-            transition: 'width 0.3s ease'
-          }}>
-            <div className={`motion-container xl:mt-18 lg:mt-16 md:mt-10 gap-10 overflow-hidden`}>
-              <motion.div
-                // variants={slideIn("up", "tween", 0.2, 1)}
-                className={`left-div md:h-auto h-auto`}
-              >
-                <div className="hero-board" id="hero-left-content">
-                  <h1 className="hero-heading readable">
-                    Hi, <span className="hero-highlight-text">Thinu</span> here
-                  </h1>
 
-                  <p className="hero-subheading">A&nbsp;
-                    <TypeAnimation
-                      sequence={[
-                        'UX Researcher',
-                        1000, // wait 1s
-                        'UI Developer ',
-                        1000,
-                        'Creative Designer ',
-                        1000,
-                      ]}
-                      wrapper="span"
-                      speed={50}
-                      style={{ display: 'inline-block' }}
-                      repeat={Infinity}
-                    />
-                  </p>
+        <div style={{
+          width: `${contentWidth}%`,
+          justifyContent: 'center',
+          margin: '0 auto',
+          transition: 'width 0.3s ease'
+        }}>
+          <div className={`motion-container xl:mt-18 lg:mt-16 md:mt-10 gap-10 overflow-hidden`}>
+            <div className={`left-div md:h-auto h-auto`}>
+              <div className="hero-board" id="hero-left-content">
+                <h1 className="hero-heading readable">
+                  Hi, <span className="hero-highlight-text">Thinu</span> here
+                </h1>
 
-                  <p className="hero-text mt-6 readable">
-                    I am a UI/UX designer on a mission to level up experiences
-                    in the digital world with creative thinking and problem-solving
-                    characteristics.
-                    I play the missions creating seamless interactions that bridge
-                    the gap between user needs and business goals.
-                  </p>
+                <p className="hero-subheading">A&nbsp;
+                  <TypeAnimation
+                    sequence={[
+                      'UX Researcher',
+                      1000, // wait 1s
+                      'UI Developer ',
+                      1000,
+                      'Creative Designer ',
+                      1000,
+                    ]}
+                    wrapper="span"
+                    speed={50}
+                    style={{ display: 'inline-block' }}
+                    repeat={Infinity}
+                  />
+                </p>
 
-                  <div className="button-text flex-row items-start mt-6">
-                    <Link to="/contact" className="button mr-2 mb-2" data-tooltip={isTooltipMode ? 'Go to contact page' : null}>
-                      Contact
-                    </Link>
+                <p className="hero-text mt-6 readable">
+                  I am a UI/UX designer on a mission to level up experiences
+                  in the digital world with creative thinking and problem-solving
+                  characteristics.
+                  I play the missions creating seamless interactions that bridge
+                  the gap between user needs and business goals.
+                </p>
 
-                    <a
-                      className="button"
-                      href="https://drive.google.com/file/d/1RYFG573_ciYfX3PbBi4RoAHWWK94Jp-B/view?usp=sharing" download="cv_thinu_premachandra.pdf"
-                      target="_blank"
-                      data-tooltip={isTooltipMode ? 'Download my résumé' : null}
-                    >
-                      Résumé
-                    </a>
-                    {/* <Tech /> */}
-                  </div>
+                <div className="button-text flex-row items-start mt-6">
+                  <Link to="/contact" className="button mr-2 mb-2" data-tooltip={isTooltipMode ? 'Go to contact page' : null}>
+                    Contact
+                  </Link>
 
-                  <div className="flex flex-wrap items-center gap-4 mt-4 mb-0">
-                    <p className="hero-text">
-                      Let's Connect :
-                    </p>
-                    <SocialIcons />
-                  </div>
+                  <a
+                    className="button"
+                    href="https://drive.google.com/file/d/1RYFG573_ciYfX3PbBi4RoAHWWK94Jp-B/view?usp=sharing" download="cv_thinu_premachandra.pdf"
+                    target="_blank"
+                    data-tooltip={isTooltipMode ? 'Download my résumé' : null}
+                  >
+                    Résumé
+                  </a>
+                  {/* <Tech /> */}
                 </div>
-              </motion.div>
 
-              <motion.div
-                // variants={slideIn("up", "tween", 0.8, 1)}
-                // className={`right-div xl:flex-1 xl:h-auto md:h-[600px] h-[450px]`}
-                className={`right-div xl:flex-1 md:h-[560px] h-[450px]`}
+                <div className="flex flex-wrap items-center gap-4 mt-4 mb-0">
+                  <p className="hero-text">
+                    Let's Connect :
+                  </p>
+                  <SocialIcons />
+                </div>
+              </div>
+            </div>
+
+            <div
+              className={`right-div xl:flex-1 md:h-[560px] h-[450px]`}
+            >
+              <Canvas
+                className={`h-screen relative`}
+                camera={{ near: 0.1, far: 1000, fov: 45, position: [-1, 0, 7] }}
               >
-                <Canvas
-                  className={`h-screen relative`}
-                  camera={{ near: 0.1, far: 1000, fov: 45, position: [-1, 0, 7] }}
-                >
-                  <Suspense fallback={<CanvasLoader />}>
-                    <directionalLight position={[1, 1, 1]} intensity={2} />
-                    <ambientLight intensity={1} />
-                    <hemisphereLight
-                      skyColor='#b1e1ff'
-                      groundColor='#000000'
-                      intensity={1}
-                    />
-                    <pointLight position={[0, 0, 0]} intensity={1} />
+                <Suspense fallback={<CanvasLoader />}>
+                  <directionalLight position={[1, 1, 1]} intensity={2} />
+                  <ambientLight intensity={1} />
+                  <hemisphereLight
+                    skyColor='#b1e1ff'
+                    groundColor='#000000'
+                    intensity={1}
+                  />
+                  <pointLight position={[0, 0, 0]} intensity={1} />
 
-                    <HeroGirlModel
-                      scale={girlScale}
-                      position={girlPosition}
-                      rotation={girlRotation}
-                    // isRotating={isRotating}
-                    // setIsRotating={setIsRotating}
-                    // setCurrentStage={setCurrentStage}
-                    />
+                  <HeroGirlModel
+                    scale={girlScale}
+                    position={girlPosition}
+                    rotation={girlRotation}
+                  // isRotating={isRotating}
+                  // setIsRotating={setIsRotating}
+                  // setCurrentStage={setCurrentStage}
+                  />
 
-                  </Suspense>
+                </Suspense>
 
-                </Canvas>
-              </motion.div>
-            </div >
-          </div>
-        </>
+              </Canvas>
+            </div>
+          </div >
+        </div>
       )}
     </div >
   )
-}
+});
 
 export default SectionWrapper(Hero, "home");

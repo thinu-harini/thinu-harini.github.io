@@ -1,6 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { textVariant } from "../utils/motion";
 import { writings } from '../constants';
 import { SectionWrapper } from '../hoc';
 import { Footer } from '../components';
@@ -99,12 +97,9 @@ const Writings = () => {
           }}>
           <ScrollButton />
           <ProgressBar />
-          <motion.div
-            variants={textVariant()}
-            className='sm:mt-12 mt-16'
-          >
+          <div className='sm:mt-12 mt-16'>
             <h1 className="section-heading readable">Writings.</h1>
-          </motion.div>
+          </div>
           <div className='project-cards-container'>
             {writings.map((writing, index) => (
               <WritingCard key={`writing-${index}`} {...writing} />

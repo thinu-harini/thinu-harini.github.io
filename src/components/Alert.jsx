@@ -1,11 +1,10 @@
 import React from 'react'
-import { motion } from 'framer-motion';
 
 const Alert = ({ type, hideAlert }) => {
   const bgColor = type === "danger" ? 'var(--danger-bg)' : 'var(--success-bg)';
 
   return (
-    <motion.div
+    <div
       initial={{ y: '-5vh' }}
       animate={{ y: 0 }}
       exit={{ y: '-5vh' }}
@@ -49,7 +48,7 @@ const Alert = ({ type, hideAlert }) => {
         )}
 
       </div>
-    </motion.div>
+    </div>
   );
 };
 

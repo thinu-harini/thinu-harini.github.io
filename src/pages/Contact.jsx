@@ -1,5 +1,4 @@
 import { Suspense, useRef, useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 
 import Alert from '../components/Alert';
@@ -9,7 +8,6 @@ import { SectionWrapper } from "../hoc";
 import { Canvas } from '@react-three/fiber';
 import CanvasLoader from "../components/CanvasLoader.jsx";
 import ContactGirlModel from "../models/ContactGirl.jsx";
-import { textVariant } from "../utils/motion.js";
 import '../assets/styles/Contact.css';
 
 const Contact = () => {
@@ -100,17 +98,12 @@ const Contact = () => {
 
   return (
     <div>
-      <motion.div
-        variants={textVariant()}
-        className='sm:mt-12 mt-16'
-      >
+      <div className='sm:mt-12 mt-16' >
         <h1 className="section-heading">Contact.</h1>
-      </motion.div>
+      </div>
 
       <div className="motion-container xl:mt-0 mt-6 gap-10 overflow-hidden">
-        <motion.div
-          className='contact-left-div'
-        >
+        <div className='contact-left-div'>
           <form
             ref={formRef}
             onSubmit={handleSubmit}
@@ -172,9 +165,9 @@ const Contact = () => {
             </button>
 
           </form>
-        </motion.div>
+        </div>
 
-        <motion.div
+        <div
           className='contact-right-div xl:flex-1 xl:h-auto md:h-[550px] h-[350px]'
         >
           <Canvas
@@ -199,7 +192,7 @@ const Contact = () => {
               />
             </Suspense>
           </Canvas>
-        </motion.div>
+        </div>
 
         <div className="alert">
           {alert.show && <Alert {...alert} hideAlert={hideAlert} />}

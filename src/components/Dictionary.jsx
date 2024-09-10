@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAccessibility } from './AccessibilityContext';
-import '../assets/styles/Dictionary.css'; // Add your CSS styles here
 import { IoClose } from 'react-icons/io5';
+import '../assets/styles/Dictionary.css';
 
 const fetchDefinition = async (word) => {
   try {

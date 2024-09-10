@@ -1,11 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import { experiences, tabNamesForSmallScreens } from '../constants';
 import { SectionWrapper } from '../hoc';
-import { textVariant } from '../utils/motion';
+import { debounce } from 'lodash';
 import { TbSquareRoundedArrowLeftFilled, TbSquareRoundedArrowRightFilled } from "react-icons/tb";
-import Footer from './Footer';
 import { useAccessibility } from './AccessibilityContext';
+import Footer from './Footer';
 import Tooltip from './Tooltip';
 import '../assets/styles/Experience.css';
 
@@ -21,8 +20,8 @@ const Experience = () => {
       setIsSmallScreen(window.innerWidth < 993);
     };
 
-    window.addEventListener('resize', handleResize);
-    handleResize(); // Check initial screen size
+    window.addEventListener('resize', debounce(handleResize, 200));
+    handleResize();  // Check initial screen size
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
@@ -127,9 +126,8 @@ const Experience = () => {
             margin: '0 auto',
             transition: 'width 0.3s ease'
           }}>
-          <motion.div variants={textVariant()}>
-            <h1 className="section-heading readable">Experience.</h1>
-          </motion.div>
+
+          <h1 className="section-heading readable">Experience.</h1>
           <div className="button-text tabs mt-6 mb-6">
             {isSmallScreen ? (
               tabNamesForSmallScreens.map((tabName, index) => (
@@ -168,7 +166,7 @@ const Experience = () => {
           >
             <div className='experience-slider'>
               {experiences.map((experience, index) => (
-                <motion.div
+                <div
                   key={index}
                   className={`experience-card ${activeTab === index ? 'active' : ''} readable`}
                   onClick={() => handleCardClick(index)}
@@ -201,7 +199,7 @@ const Experience = () => {
                   >
                     {experience.date}
                   </p>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>

@@ -111,8 +111,6 @@
 
 
 import React from 'react';
-import { motion } from 'framer-motion';
-import { textVariant } from "../utils/motion";
 import { Link } from 'react-router-dom';
 import { projects } from '../constants';
 import { SectionWrapper } from '../hoc';
@@ -252,12 +250,9 @@ const Projects = () => {
           <ScrollButton />
           <ProgressBar />
           <div>
-            <motion.div
-              variants={textVariant()}
-              className='sm:mt-12 mt-16'
-            >
+            <div className='sm:mt-12 mt-16'>
               <h1 className="section-heading readable">Projects.</h1>
-            </motion.div>
+            </div>
             <div className='project-cards-container'>
               {projects.map((project, index) => (
                 <ProjectCard key={`project-${index}`} {...project} />

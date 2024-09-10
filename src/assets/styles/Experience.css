@@ -70,8 +70,10 @@
 
   .experience-card.active {
     /* transform: scale(1); */
+    background-color: var(--secondary-dark);
     z-index: 1;
   }
+
 }
 
 @media (max-width: 992px) {
@@ -82,10 +84,6 @@
     /* margin-right: 20px; */
     /* margin-left: 20px; */
   }
-}
-
-.experience-card.active {
-  background-color: var(--secondary-dark);
 }
 
 .experience_bullets {

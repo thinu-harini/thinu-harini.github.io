@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import '../assets/styles/ScrollButton.css';
-import { FaAngleDoubleDown, FaAngleDoubleUp } from 'react-icons/fa';
-import { motion } from "framer-motion";
-import { FaAnglesUp } from 'react-icons/fa6';
 import { GoDotFill } from 'react-icons/go';
 import { RiArrowDownDoubleLine, RiArrowUpDoubleLine } from 'react-icons/ri';
+import '../assets/styles/ScrollButton.css';
 
 const ScrollButton = () => {
   const [showScrollToTop, setShowScrollToTop] = useState(false);
@@ -64,7 +61,7 @@ const ScrollButton = () => {
               <RiArrowUpDoubleLine className='scroll-button-icon' />
             ) : (
               <div className="w-[35px] h-[74px] flex justify-center items-start p-2">
-                <motion.div
+                <div
                   animate={{
                     y: [16, 0, 16],
                     opacity: [1, 0, 0]
@@ -77,7 +74,7 @@ const ScrollButton = () => {
                   }}
                 >
                   <GoDotFill className='scroll-button-icon' />
-                </motion.div>
+                </div>
               </div>
             )}
           </div>
@@ -87,7 +84,7 @@ const ScrollButton = () => {
               <RiArrowDownDoubleLine className='scroll-button-icon' />
             ) : (
               <div className="w-[35px] h-[74px] flex justify-center items-start p-2">
-                <motion.div
+                <div
                   animate={{
                     y: [0, 16],
                     opacity: [1, 0]
@@ -100,7 +97,7 @@ const ScrollButton = () => {
                   }}
                 >
                   <GoDotFill className='scroll-button-icon' />
-                </motion.div>
+                </div>
               </div>
             )}
 

@@ -1,6 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { textVariant } from "../utils/motion";
 import { SectionWrapper } from "../hoc";
 import { education } from "../constants";
 import { useAccessibility } from "./AccessibilityContext";
@@ -55,13 +53,9 @@ const Education = () => {
           margin: '0 auto',
           transition: 'width 0.3s ease'
         }}>
-          <motion.div variants={textVariant()}>
-            <h1 className="section-heading readable">
-              Education
-            </h1>
-          </motion.div>
-          <div>
 
+          <h1 className="section-heading readable">Education</h1>
+          <div>
             {education.map((edu, index) => (
               <div
                 key={`education-${index}`}
