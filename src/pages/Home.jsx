@@ -1,9 +1,10 @@
 import React from 'react';
 import { NightCanvas, DayCanvas } from '../components/canvas';
 import Carousel from '../components/Carousel';
-import { HexagonCanvas, SocialIcons } from '../components';
-import wall from '../assets/wall5.svg';
-import roof from '../assets/roof.svg';
+import { SocialIcons } from '../components';
+import wall from '../assets/wall.png';
+import roof from '../assets/roof.png';
+import floor from '../assets/floor.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { carouselItems } from "../constants";
 import { useAccessibility } from '../components/AccessibilityContext';
@@ -46,13 +47,13 @@ const Home = ({ isDark }) => {
             <div className="home-container">
               {isDark ? <NightCanvas /> : <DayCanvas />}
 
-              <div className="roof-layer">
-                {/* <img src={roof} alt="roof_image" className="roof-bg" /> */}
-              </div>
-
               <div className="wall-layer">
                 <img src={wall} alt="wall_image" className="wall-bg" />
               </div>
+
+              {/* <div className="floor-layer">
+                <img src={floor} alt="floor_image" className="floor-bg" />
+              </div> */}
 
               <div className="home-content">
                 <Carousel />
@@ -66,11 +67,6 @@ const Home = ({ isDark }) => {
                 </div> */}
 
               </div>
-
-              <div className="hexagon-canvas">
-                <HexagonCanvas />
-              </div>
-
             </div>
           </>
         )}

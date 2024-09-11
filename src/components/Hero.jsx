@@ -9,6 +9,7 @@ import CanvasLoader from './CanvasLoader';
 import SocialIcons from './SocialIcons';
 import { useAccessibility } from './AccessibilityContext';
 import '../assets/styles/Hero.css';
+// import HeroGirlModel from "../models/HeroGirl.jsx";
 
 const Hero = React.memo(() => {
 
