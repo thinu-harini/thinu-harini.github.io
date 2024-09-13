@@ -173,17 +173,17 @@ const Contact = () => {
           <Canvas
             camera={{ near: 0.1, far: 1000, fov: 45, position: [-1, 0, 7] }}
           >
-            <directionalLight position={[1, 1, 1]} intensity={2} />
-            <ambientLight intensity={1} />
-            <hemisphereLight
-              skyColor='#b1e1ff'
-              groundColor='#000000'
-              intensity={0.5}
-            />
-            <pointLight position={[0, 0.5, 1]} intensity={0.5} />
-            <pointLight position={[-1, -2, 1]} intensity={1} />
-
             <Suspense fallback={<CanvasLoader />}>
+              <directionalLight position={[1, 1, 1]} intensity={2} />
+              <ambientLight intensity={1} />
+              <hemisphereLight
+                skyColor='#b1e1ff'
+                groundColor='#000000'
+                intensity={0.5}
+              />
+              <pointLight position={[0, 0.5, 1]} intensity={0.5} />
+              <pointLight position={[-1, -2, 1]} intensity={1} />
+
               <ContactGirlModel
                 currentAnimation={currentAnimation}
                 scale={girlScale}

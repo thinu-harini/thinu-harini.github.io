@@ -9,27 +9,19 @@ import CanvasLoader from './CanvasLoader';
 import SocialIcons from './SocialIcons';
 import { useAccessibility } from './AccessibilityContext';
 import '../assets/styles/Hero.css';
-// import HeroGirlModel from "../models/HeroGirl.jsx";
+import useScrollPosition from '../hooks/useScrollPosition';
+const HeroGirlModel = React.lazy(() => import('../models/HeroGirl'));
 
-const Hero = React.memo(() => {
-
-  const HeroGirlModel = React.lazy(() => import('../models/HeroGirl'));
+const Hero = () => {
   const { isReadMode, isTooltipMode, contentWidth } = useAccessibility();
-  const adjustGirlForScreenSize = () => {
-    let screenScale = null;
-    let screenPosition = null;
-    let rotation = [-0.1, -0.1, 0];
+  const isInView = useScrollPosition(200);
 
-    if (window.innerWidth < 768) {
-      screenScale = [2.6, 2.6, 2.6];
-      screenPosition = [0.1, -2.6, 0.1];
-    }
-    else {
-      screenScale = [4.4, 4.4, 4.4];
-      screenPosition = [1, -3.8, -4];
-    }
-    return [screenScale, screenPosition, rotation]
-  }
+  const adjustGirlForScreenSize = () => {
+    let screenScale = window.innerWidth < 768 ? [2.6, 2.6, 2.6] : [4.4, 4.4, 4.4];
+    let screenPosition = window.innerWidth < 768 ? [0.1, -2.6, 0.1] : [1, -3.8, -4];
+    return [screenScale, screenPosition, [-0.1, -0.1, 0]];
+  };
+
   const [girlScale, girlPosition, girlRotation] = adjustGirlForScreenSize();
 
   return (
@@ -148,6 +140,7 @@ const Hero = React.memo(() => {
                     scale={girlScale}
                     position={girlPosition}
                     rotation={girlRotation}
+                    isInView={isInView}
                   // isRotating={isRotating}
                   // setIsRotating={setIsRotating}
                   // setCurrentStage={setCurrentStage}
@@ -162,6 +155,6 @@ const Hero = React.memo(() => {
       )}
     </div >
   )
-});
+};
 
-export default SectionWrapper(Hero, "home");
+export default SectionWrapper(Hero, "hero");

@@ -11,19 +11,17 @@ import * as THREE from 'three';
 
 import girlScene from '../assets/3d/girl.glb';
 
-const HeroGirlModel = ({ ...props }) => {
+const HeroGirlModel = ({ isInView, ...props }) => {
   const girlRef = useRef();
   const target = useRef(new THREE.Object3D());
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 992);
 
-  // Access the camera and GL renderer from react-three-fiber
   const { camera, gl } = useThree();
-
   const { nodes, materials, animations } = useGLTF(girlScene);
   const { actions } = useAnimations(animations, girlRef);
 
   useEffect(() => {
-    const startWaveAnimation = () => {
+    if (isInView) {
       Object.values(actions).forEach((action) => {
         if (action) {
           action.stop();
@@ -34,19 +32,11 @@ const HeroGirlModel = ({ ...props }) => {
       if (waveAction) {
         waveAction.reset().play().setLoop(THREE.LoopOnce); // Set 'wave' animation to loop once
         waveAction.clampWhenFinished = true;
-
-        setTimeout(startWaveAnimation, 10000); // Schedule the next wave animation after 30 seconds
       } else {
         console.warn('Action "wave" not found in actions:', actions);
       }
-    };
-
-    // Start the initial wave animation
-    startWaveAnimation();
-
-    // Clean up the timeout on component unmount
-    return () => clearTimeout();
-  }, [actions]);
+    }
+  }, [isInView, actions]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -86,30 +76,18 @@ const HeroGirlModel = ({ ...props }) => {
   }, [isLargeScreen]);
 
   useFrame(() => {
-    if (girlRef.current) {
-      const head = girlRef.current.getObjectByName('mixamorigHead');
-      if (head) {
-        if (isLargeScreen) {
-          head.lookAt(target.current.position);
-        } else {
-          // Set fixed rotation for smaller screens
-          head.rotation.set(
-            THREE.MathUtils.degToRad(-20),
-            THREE.MathUtils.degToRad(-8),
-            THREE.MathUtils.degToRad(0)
-          );
-        }
+    const head = girlRef.current?.getObjectByName('mixamorigHead');
+    if (head) {
+      if (isLargeScreen) {
+        head.lookAt(target.current.position);
+      } else {
+        head.rotation.set(
+          THREE.MathUtils.degToRad(-20),
+          THREE.MathUtils.degToRad(-8),
+          THREE.MathUtils.degToRad(0)
+        );
       }
-    }
-  });
-
-  //scaling the head
-  useFrame(() => {
-    if (girlRef.current) {
-      const head = girlRef.current.getObjectByName('mixamorigHead');
-      if (head) {
-        head.scale.set(0.8, 0.8, 0.8);
-      }
+      head.scale.set(0.8, 0.8, 0.8);
     }
   });
 
