@@ -21,7 +21,7 @@
     "@react-three/drei": "^9.108.3",
     "@react-three/fiber": "^8.16.8",
     "axios": "^1.7.7",
-    "framer-motion": "^10.18.0",
+    "framer-motion": "^11.5.4",
     "gsap": "^3.12.5",
     "lodash": "^4.17.21",
     "maath": "^0.10.8",

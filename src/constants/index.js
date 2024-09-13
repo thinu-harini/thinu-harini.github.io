@@ -1,15 +1,16 @@
 import {
+  groome,
+  ichatcs,
+  crowdfunding,
+} from "../assets/projects";
+
+import {
   javascript,
   html,
   css,
   figma,
   adobexd,
-
-  groome,
-  ichatcs,
-  crowdfunding,
-
-} from "../assets";
+} from "../assets/tech";
 
 export const navLinks = [
   {
